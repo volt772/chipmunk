@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "759653986424",
+    "project_id": "chipmunk-7d74c",
+    "storage_bucket": "chipmunk-7d74c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759653986424:android:e440073a9631a13197fd8d",
+        "android_client_info": {
+          "package_name": "com.apx6.chipmunk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759653986424-6u2avg221u6u3pl2kouimj4bvved0vpf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXqjWF7FXMFnQV0AEBhGWVleH59OmyvYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759653986424-6u2avg221u6u3pl2kouimj4bvved0vpf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
