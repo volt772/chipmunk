@@ -1,7 +1,6 @@
 package com.apx6.samples
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.internal.runner.junit4.statement.UiThreadStatement
 import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
 import com.apx6.utils.TestCoroutineRule
 import com.apx6.utils.TestUtils
