@@ -22,8 +22,9 @@
         android:largeHeap="true"
         tools:targetApi="31">
         <activity
-            android:name="com.apx6.chipmunk.app.ui.MainActivity"
-            android:exported="true">
+            android:name="com.apx6.chipmunk.app.ui.DashBoardActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Chipmunk.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
