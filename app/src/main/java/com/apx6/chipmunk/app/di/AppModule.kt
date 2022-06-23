@@ -2,6 +2,8 @@ package com.apx6.chipmunk.app.di
 
 import android.app.Application
 import android.content.Context
+import com.apx6.chipmunk.app.crashlytics.CmCrashlytics
+import com.apx6.chipmunk.app.crashlytics.CmCrashlyticsImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,6 +18,10 @@ abstract class AppModule {
     @Binds
     @Singleton
     abstract fun bindContext(application: Application): Context
+
+    @Binds
+    @Singleton
+    abstract fun bindCrashlytics(impl: CmCrashlyticsImpl): CmCrashlytics
 
 //    @Binds
 //    @Singleton
@@ -101,9 +107,6 @@ abstract class AppModule {
 //    @Singleton
 //    abstract fun bindSupportRequestUtils(impl: MpdSupportRequestUtilsImpl): MpdSupportRequestUtils
 //
-//    @Binds
-//    @Singleton
-//    abstract fun bindCrashlytics(impl: MpCrashlyticsImpl): MpCrashlytics
 //
 //    @Binds
 //    @Singleton

@@ -25,7 +25,7 @@ ext.versions = [
         converterGson : '2.9.0',
         core_ktx_version : '1.6.0',
         dagger_hilt_version : '2.38.1',
-        firebase_analytics_ktx : '20.1.2',
+        firebase_analytics_ktx : '21.0.0',
         firebase_crashlytics : '18.2.9',
         firebase_config : '21.0.1',
         firebase_config_ktx : '21.0.1',
@@ -191,12 +191,19 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$versions.dagger_hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$versions.dagger_hilt_version"
 
+    /* Badge Count*/
+    implementation "me.leolin:ShortcutBadger:$versions.shortcutbadger_version"
+
     /* Firebase*/
     implementation platform("com.google.firebase:firebase-bom:$versions.firebase_bom")
     implementation "com.google.firebase:firebase-analytics-ktx"
-
-    /* Badge Count*/
-    implementation "me.leolin:ShortcutBadger:$versions.shortcutbadger_version"
+    implementation "com.google.firebase:firebase-core:$versions.firebase_core"
+    implementation "com.google.firebase:firebase-messaging:$versions.firebase_messaging"
+    implementation "com.google.firebase:firebase-config:$versions.firebase_config"
+    implementation "com.google.firebase:firebase-config-ktx:$versions.firebase_config_ktx"
+    implementation "com.google.firebase:firebase-analytics-ktx:$versions.firebase_analytics_ktx"
+    implementation "com.google.firebase:firebase-crashlytics:$versions.firebase_crashlytics"
+    implementation "com.android.volley:volley:$versions.volley"
 
     androidTestImplementation "junit:junit:$versions.junit_version"
     androidTestImplementation "android.arch.work:work-testing:$versions.work_testing"
