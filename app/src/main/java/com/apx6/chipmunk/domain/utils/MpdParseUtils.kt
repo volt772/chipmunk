@@ -1,5 +1,8 @@
 package com.apx6.chipmunk.domain.utils
 
+import com.apx6.chipmunk.domain.constants.CmdRemoteConfigParam
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+
 
 interface MpdParseUtils {
 
@@ -17,14 +20,10 @@ interface MpdParseUtils {
         obj: Any
     ): String
 
-//    fun <T> read(
-//        frc: FirebaseRemoteConfig,
-//        param: MpdRemoteConfigParam,
-//        returnType: Class<T>
-//    ): T?
-//
-//    fun toFcmIds(
-//        idsString: String?
-//    ): MpdFcmIds
+    fun <T> read(
+        frc: FirebaseRemoteConfig,
+        param: CmdRemoteConfigParam,
+        returnType: Class<T>
+    ): T?
 
 }
