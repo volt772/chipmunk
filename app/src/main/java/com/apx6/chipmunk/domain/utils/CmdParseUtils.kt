@@ -4,7 +4,7 @@ import com.apx6.chipmunk.domain.constants.CmdRemoteConfigParam
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 
 
-interface MpdParseUtils {
+interface CmdParseUtils {
 
     fun <T> toModel(
         jsonString: String,

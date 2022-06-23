@@ -8,9 +8,9 @@ import com.google.gson.reflect.TypeToken
 import javax.inject.Inject
 
 
-class MpdParseUtilsImpl @Inject constructor(
+class CmdParseUtilsImpl @Inject constructor(
 
-) : MpdParseUtils {
+) : CmdParseUtils {
 
     override fun <T> toModel(
         jsonString: String,
