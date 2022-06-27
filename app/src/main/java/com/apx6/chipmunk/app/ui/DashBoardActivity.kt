@@ -36,10 +36,51 @@ class DashBoardActivity : BaseActivity<ActivityCoreBinding>() {
                 .setAction("Action", null).show()
         }
 
+        binding.btnEmail.setOnClickListener {
+            // 사용자 정보 요청 (기본)
+            UserApiClient.instance.me { user, error ->
+                if (error != null) {
+                    println("probe :: auth : 사용자 정보 요청 실패 : $error")
+                }
+                else if (user != null) {
+                    println("probe :: auth : 사용자 정보 요청 성공 : user : ${user.kakaoAccount?.email}, name : ${user.kakaoAccount?.profile?.nickname}")
+//                    println("probe :: auth : 사용자 정보 요청 성공 : 회원번호: ${user.id}" +
+//                        "\n이메일: ${user.kakaoAccount?.email}" +
+//                        "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+//                        "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+                }
+            }
+        }
+
+        binding.btnLogout.setOnClickListener {
+            // 로그아웃
+            UserApiClient.instance.logout { error ->
+                if (error != null) {
+                    println("probe :: auth :: logout 실패 : $error")
+                }
+                else {
+                    println("probe :: auth :: logout 성공")
+                }
+            }
+        }
+
+        binding.btnDisconn.setOnClickListener {
+            // 연결 끊기
+            UserApiClient.instance.unlink { error ->
+                if (error != null) {
+                    println("probe :: auth :: disconn 실패 : $error")
+                }
+                else {
+                    println("probe :: auth :: disconn 성공")
+                }
+            }
+        }
+
         binding.btnKakaoLogin.setOnClickListener {
             if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
                 UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
                     if (error != null) {
+                        println("probe :: auth : instances : failed : $error")
 //                        Log.e(TAG, "카카오톡으로 로그인 실패", error)
 
                         // 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우,
@@ -51,6 +92,7 @@ class DashBoardActivity : BaseActivity<ActivityCoreBinding>() {
                         // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
                         UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                     } else if (token != null) {
+                        println("probe :: auth : instances : success : ${token.accessToken}")
 //                        Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
                     }
                 }
@@ -62,8 +104,10 @@ class DashBoardActivity : BaseActivity<ActivityCoreBinding>() {
 
     val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
+            println("probe :: auth : callback : failed : $error")
 //            Log.e(TAG, "카카오계정으로 로그인 실패", error)
         } else if (token != null) {
+            println("probe :: auth : callback : success : token : $token, accessToken : ${token.accessToken}")
 //            Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
         }
     }
