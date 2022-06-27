@@ -1,16 +1,21 @@
 package com.apx6.chipmunk.app.di
 
+import com.apx6.chipmunk.data.data_source.TaskDataSource
+import com.apx6.chipmunk.data.data_source.TaskDataSourceImpl
+import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-/**
- * PagingModule
- */
 
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class PagingModule {
+
+    @Binds
+    @Singleton
+    abstract fun bindTaskDataSource(impl: TaskDataSourceImpl): TaskDataSource
 
 //    @Binds
 //    @Singleton

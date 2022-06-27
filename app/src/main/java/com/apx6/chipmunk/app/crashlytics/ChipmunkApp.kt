@@ -1,7 +1,9 @@
-package com.apx6.chipmunk.app
+package com.apx6.chipmunk.app.crashlytics
 
 import android.app.Application
 import android.content.Context
+import com.apx6.chipmunk.R
+import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.HiltAndroidApp
 
 
@@ -14,6 +16,8 @@ class ChipmunkApp : Application() {
         super.onCreate()
 
         appContext = applicationContext
+
+        KakaoSdk.init(this, getString(R.string.kakao_app_key))
 
 //        crashlytics.collectionEnabled(!BuildConfig.DEBUG)
     }

@@ -8,6 +8,7 @@ import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivityCoreBinding
 import com.google.android.material.snackbar.Snackbar
+import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.AndroidEntryPoint
 
 

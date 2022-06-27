@@ -205,6 +205,8 @@ dependencies {
     implementation "com.google.firebase:firebase-crashlytics:$versions.firebase_crashlytics"
     implementation "com.android.volley:volley:$versions.volley"
 
+    implementation "com.kakao.sdk:v2-user:2.10.0"
+
     androidTestImplementation "junit:junit:$versions.junit_version"
     androidTestImplementation "android.arch.work:work-testing:$versions.work_testing"
     androidTestImplementation "androidx.arch.core:core-testing:$versions.core_testing_version"
