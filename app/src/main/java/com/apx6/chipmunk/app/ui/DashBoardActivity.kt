@@ -43,7 +43,8 @@ class DashBoardActivity : BaseActivity<ActivityCoreBinding>() {
                     println("probe :: auth : 사용자 정보 요청 실패 : $error")
                 }
                 else if (user != null) {
-                    println("probe :: auth : 사용자 정보 요청 성공 : user : ${user.kakaoAccount?.email}, name : ${user.kakaoAccount?.profile?.nickname}")
+                    println("probe :: auth : 사용자 : ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+//                    println("probe :: auth : 사용자 정보 요청 성공 : user : ${user.kakaoAccount?.email}, name : ${user.kakaoAccount?.profile?.nickname}")
 //                    println("probe :: auth : 사용자 정보 요청 성공 : 회원번호: ${user.id}" +
 //                        "\n이메일: ${user.kakaoAccount?.email}" +
 //                        "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
