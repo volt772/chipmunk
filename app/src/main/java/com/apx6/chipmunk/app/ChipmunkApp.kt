@@ -1,4 +1,4 @@
-package com.apx6.chipmunk.app.crashlytics
+package com.apx6.chipmunk.app
 
 import android.app.Application
 import android.content.Context

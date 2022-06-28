@@ -1,4 +1,4 @@
-package com.mailplug.albatross.app.di.network
+package com.apx6.chipmunk.app.di.network
 
 import dagger.Module
 import dagger.hilt.InstallIn
