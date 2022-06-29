@@ -8,11 +8,11 @@ buildscript {
         maven("https://devrepo.kakao.com/nexus/content/groups/public/")
     }
     dependencies {
-        classpath (Dependency.Dependencies.gradle)
-        classpath (Dependency.Dependencies.kotlinPlugin)
-        classpath (Dependency.Dependencies.hiltPlugin)
-        classpath (Dependency.Dependencies.gmsGoogleService)
-        classpath (Dependency.Dependencies.firebaseCrashlytics)
+        classpath (Dependencies.gradle)
+        classpath (Dependencies.kotlinPlugin)
+        classpath (Dependencies.hiltPlugin)
+        classpath (Dependencies.gmsGoogleService)
+        classpath (Dependencies.firebaseCrashlytics)
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

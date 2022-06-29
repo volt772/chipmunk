@@ -10,14 +10,14 @@ plugins {
 }
 
 android {
-    compileSdk = Dependency.Version.compileSdkVersion
+    compileSdk = Version.compileSdkVersion
 
     defaultConfig {
         applicationId = "com.apx6.chipmunk"
-        minSdk = Dependency.Version.minSdkVersion
-        targetSdk = Dependency.Version.targetSdkVersion
-        versionCode = Dependency.Version.versionCode
-        versionName = Dependency.Version.versionName
+        minSdk = Version.minSdkVersion
+        targetSdk = Version.targetSdkVersion
+        versionCode = Version.versionCode
+        versionName = Version.versionName
 
 //        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunner = "com.apx6.chipmunk.CustomTestRunner"
@@ -90,77 +90,77 @@ android {
 }
 
 configurations.all {
-    exclude(group = Dependency.Configs.group, module = Dependency.Configs.module)
+    exclude(group = Configs.group, module = Configs.module)
 }
 
 dependencies {
 
     /* Room*/
-    implementation(Dependency.Room.core)
-    implementation(Dependency.Room.rxJava2)
-    implementation(Dependency.Room.ktx)
-    kapt(Dependency.Room.compiler)
+    implementation(Room.core)
+    implementation(Room.rxJava2)
+    implementation(Room.ktx)
+    kapt(Room.compiler)
 
     /* Material*/
-    implementation(Dependency.Material.core)
+    implementation(Material.core)
 
     /* Retrofit*/
-    implementation(Dependency.Retrofit.core)
-    implementation(Dependency.Retrofit.converterGson)
-    implementation(Dependency.Retrofit.adapterRxJava)
-    implementation(Dependency.Retrofit.adapterRxJava2)
-    implementation(Dependency.Retrofit.loggingInterceptor)
+    implementation(Retrofit.core)
+    implementation(Retrofit.converterGson)
+    implementation(Retrofit.adapterRxJava)
+    implementation(Retrofit.adapterRxJava2)
+    implementation(Retrofit.loggingInterceptor)
 
     /* PreferenceManager*/
-    implementation(Dependency.PrefManager.ktx)
+    implementation(PrefManager.ktx)
 
     /* Glide*/
-    implementation(Dependency.Glide.core)
+    implementation(Glide.core)
 
     /* Joda time*/
-    implementation(Dependency.Joda.core)
+    implementation(Joda.core)
 
     /* Hilt*/
-    implementation(Dependency.Hilt.dagger)
-    kapt(Dependency.Hilt.compiler)
+    implementation(Hilt.dagger)
+    kapt(Hilt.compiler)
 
     /* Badge Count*/
-    implementation(Dependency.Badge.shortcutBadge)
+    implementation(Badge.shortcutBadge)
 
     /* Firebase*/
-    implementation(platform(Dependency.Firebase.bom))
-    implementation(Dependency.Firebase.analytics)
-    implementation(Dependency.Firebase.core)
-    implementation(Dependency.Firebase.messaging)
-    implementation(Dependency.Firebase.config)
-    implementation(Dependency.Firebase.configKtx)
-    implementation(Dependency.Firebase.analyticsKtx)
-    implementation(Dependency.Firebase.crashlytics)
-    implementation(Dependency.Firebase.volley)
+    implementation(platform(Firebase.bom))
+    implementation(Firebase.analytics)
+    implementation(Firebase.core)
+    implementation(Firebase.messaging)
+    implementation(Firebase.config)
+    implementation(Firebase.configKtx)
+    implementation(Firebase.analyticsKtx)
+    implementation(Firebase.crashlytics)
+    implementation(Firebase.volley)
 
     implementation(
-        group = Dependency.Kakao.Sdk.group,
-        name = Dependency.Kakao.Sdk.name,
-        version = Dependency.Kakao.Sdk.version
+        group = Kakao.Sdk.group,
+        name = Kakao.Sdk.name,
+        version = Kakao.Sdk.version
     )
-    implementation(Dependency.Kakao.user)
+    implementation(Kakao.user)
 
-    androidTestImplementation(Dependency.Test.jUnit)
-    androidTestImplementation(Dependency.Test.workTest)
-    androidTestImplementation(Dependency.Test.coreTest)
-    androidTestImplementation(Dependency.Test.coreKtx)
-    androidTestImplementation(Dependency.Test.espresso)
-    androidTestImplementation(Dependency.Test.espressoContrib)
-    androidTestImplementation(Dependency.Test.espressoIntents)
-    androidTestImplementation(Dependency.Test.jUnitExt)
-    androidTestImplementation(Dependency.Test.jUnitKtx)
-    androidTestImplementation(Dependency.Test.rules)
-    androidTestImplementation(Dependency.Test.runner)
-    androidTestImplementation(Dependency.Test.fragment)
-    androidTestImplementation(Dependency.Test.espressoWeb)
+    androidTestImplementation(Test.jUnit)
+    androidTestImplementation(Test.workTest)
+    androidTestImplementation(Test.coreTest)
+    androidTestImplementation(Test.coreKtx)
+    androidTestImplementation(Test.espresso)
+    androidTestImplementation(Test.espressoContrib)
+    androidTestImplementation(Test.espressoIntents)
+    androidTestImplementation(Test.jUnitExt)
+    androidTestImplementation(Test.jUnitKtx)
+    androidTestImplementation(Test.rules)
+    androidTestImplementation(Test.runner)
+    androidTestImplementation(Test.fragment)
+    androidTestImplementation(Test.espressoWeb)
 
-    debugImplementation(Dependency.Test.core)
-    androidTestImplementation(Dependency.Test.hiltTest)
-    androidTestImplementation(Dependency.Test.coroutineTest)
-    kaptAndroidTest(Dependency.Test.daggerHilt)
+    debugImplementation(Test.core)
+    androidTestImplementation(Test.hiltTest)
+    androidTestImplementation(Test.coroutineTest)
+    kaptAndroidTest(Test.daggerHilt)
 }
