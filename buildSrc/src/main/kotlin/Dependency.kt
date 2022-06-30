@@ -13,6 +13,7 @@ object Dependencies {
     const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:2.38.1"
     const val gmsGoogleService = "com.google.gms:google-services:4.3.10"
     const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-gradle:2.9.0"
+    const val ktLint = "org.jlleitschuh.gradle:ktlint-gradle:9.2.1"
 }
 
 object Configs {
@@ -79,7 +80,6 @@ object Kakao {
         const val version = "1.30.0"
     }
 
-//        const val sdk = group: 'com.kakao.sdk', name: 'usermgmt', version: '1.30.0'
     const val user = "com.kakao.sdk:v2-user:2.10.0"
 }
 

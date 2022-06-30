@@ -5,33 +5,40 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.apx6.chipmunk.domain.constants.CmdEntityTags
+import com.apx6.chipmunk.domain.entities.UserEntity.Companion.TABLE_USER
 
 @Entity(
-    tableName = "user",
+    tableName = TABLE_USER,
     indices = [Index(value = ["id"], unique = true)]
 )
 data class UserEntity(
 
     @field:PrimaryKey(autoGenerate = true)
     @field:ColumnInfo(name = CmdEntityTags.ID)
-    val id: Long = 0,
+    var id: Long?= 0L,
 
     @field:ColumnInfo(name = CmdEntityTags.ACCOUNT)
-    val account: String,
+    var account: String?= "",
 
     @field:ColumnInfo(name = CmdEntityTags.NICKNAME)
-    val nickName: String,
+    var nickName: String?= "",
 
     @field:ColumnInfo(name = CmdEntityTags.EMAIL)
-    val email: String,
+    var email: String?= "",
 
     @field:ColumnInfo(name = CmdEntityTags.REG_DATE)
-    val regDate: Long,
+    var regDate: Long?= 0L,
 
     @field:ColumnInfo(name = CmdEntityTags.PROFILE_THUMBNAIL)
-    val profileThumbnail: String,
+    var profileThumbnail: String?= "",
 
     @field:ColumnInfo(name = CmdEntityTags.F_TOKEN)
-    val fToken: String
+    var fToken: String?= ""
 
-)
+) {
+
+    companion object {
+        const val TABLE_USER = "user"
+    }
+
+}

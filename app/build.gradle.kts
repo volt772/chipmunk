@@ -7,6 +7,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
@@ -163,4 +164,9 @@ dependencies {
     androidTestImplementation(Test.hiltTest)
     androidTestImplementation(Test.coroutineTest)
     kaptAndroidTest(Test.daggerHilt)
+}
+
+ktlint {
+    android.set(true)
+    outputColorName.set("RED")
 }

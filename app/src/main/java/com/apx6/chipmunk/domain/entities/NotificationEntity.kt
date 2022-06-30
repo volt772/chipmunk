@@ -3,9 +3,10 @@ package com.apx6.chipmunk.domain.entities
 import androidx.room.*
 import androidx.room.ForeignKey.Companion.CASCADE
 import com.apx6.chipmunk.domain.constants.CmdEntityTags
+import com.apx6.chipmunk.domain.entities.NotificationEntity.Companion.TABLE_NOTIFICATION
 
 @Entity(
-    tableName = "notification",
+    tableName = TABLE_NOTIFICATION,
     foreignKeys = [ForeignKey(entity = TaskEntity::class, parentColumns = ["id"], childColumns = ["tid"], onDelete = CASCADE)],
     indices = [Index(value = ["id"], unique = true)]
 )
@@ -13,12 +14,18 @@ data class NotificationEntity(
 
     @field:PrimaryKey(autoGenerate = true)
     @field:ColumnInfo(name = CmdEntityTags.ID)
-    val id: Long = 0,
+    var id: Long?= 0L,
 
     @field:ColumnInfo(name = CmdEntityTags.TID)
-    val tid: Long,
+    var tid: Long?= 0L,
 
     @field:ColumnInfo(name = CmdEntityTags.PERIOD)
-    val period: Long
+    var period: Long?= 0L
 
-)
+) {
+
+    companion object {
+        const val TABLE_NOTIFICATION = "notification"
+    }
+
+}

@@ -3,9 +3,10 @@ package com.apx6.chipmunk.domain.entities
 import androidx.room.*
 import androidx.room.ForeignKey.Companion.CASCADE
 import com.apx6.chipmunk.domain.constants.CmdEntityTags
+import com.apx6.chipmunk.domain.entities.AttachmentEntity.Companion.TABLE_ATTACHMENT
 
 @Entity(
-    tableName = "attachment",
+    tableName = TABLE_ATTACHMENT,
     foreignKeys = [ForeignKey(entity = TaskEntity::class, parentColumns = ["id"], childColumns = ["tid"], onDelete = CASCADE)],
     indices = [Index(value = ["id"], unique = true)]
 )
@@ -13,21 +14,27 @@ data class AttachmentEntity(
 
     @field:PrimaryKey(autoGenerate = true)
     @field:ColumnInfo(name = CmdEntityTags.ID)
-    val id: Long = 0,
+    var id: Long?= 0L,
 
     @field:ColumnInfo(name = CmdEntityTags.TID)
-    val tid: Long,
+    var tid: Long?= 0L,
 
     @field:ColumnInfo(name = CmdEntityTags.NAME)
-    val name: String,
+    var name: String?= "",
 
     @field:ColumnInfo(name = CmdEntityTags.SIZE)
-    val size: Int,
+    var size: Int?= 0,
 
     @field:ColumnInfo(name = CmdEntityTags.CONTENT_TYPE)
-    val contentType: String,
+    var contentType: String?= "",
 
     @field:ColumnInfo(name = CmdEntityTags.CREATED_TIME)
-    val createdTime: Long
+    var createdTime: Long?= 0L
 
-)
+) {
+
+    companion object {
+        const val TABLE_ATTACHMENT = "attachment"
+    }
+
+}

@@ -3,9 +3,10 @@ package com.apx6.chipmunk.domain.entities
 import androidx.room.*
 import androidx.room.ForeignKey.Companion.CASCADE
 import com.apx6.chipmunk.domain.constants.CmdEntityTags
+import com.apx6.chipmunk.domain.entities.CategoryEntity.Companion.TABLE_CATEGORY
 
 @Entity(
-    tableName = "category",
+    tableName = TABLE_CATEGORY,
     foreignKeys = [ForeignKey(entity = UserEntity::class, parentColumns = ["id"], childColumns = ["uid"], onDelete = CASCADE)],
     indices = [Index(value = ["id"], unique = true)]
 )
@@ -13,12 +14,18 @@ data class CategoryEntity(
 
     @field:PrimaryKey(autoGenerate = true)
     @field:ColumnInfo(name = CmdEntityTags.ID)
-    val id: Long = 0,
+    var id: Long?= 0L,
 
     @field:ColumnInfo(name = CmdEntityTags.UID)
-    val uid: Long,
+    var uid: Long?= 0L,
 
     @field:ColumnInfo(name = CmdEntityTags.NAME)
-    val name: String
+    var name: String?= ""
 
-)
+) {
+
+    companion object {
+        const val TABLE_CATEGORY = "category"
+    }
+
+}
