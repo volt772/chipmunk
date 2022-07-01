@@ -1,8 +1,12 @@
 package com.apx6.data.di
 
+import com.apx6.data.repository.UserRepositoryImpl
+import com.apx6.domain.repository.UserRepository
+import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 /**
  * RepositoryModule
@@ -12,9 +16,9 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
 
-//    @Binds
-//    @Singleton
-//    abstract fun bindSyncRepository(impl: SyncRepositoryImpl): SyncRepository
+    @Binds
+    @Singleton
+    abstract fun bindUserRepository(impl: UserRepositoryImpl): UserRepository
 //
 //    @Binds
 //    @Singleton

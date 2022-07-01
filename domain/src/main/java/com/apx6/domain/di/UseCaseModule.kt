@@ -1,6 +1,9 @@
 package com.apx6.domain.di
 
+import com.apx6.domain.repository.UserRepository
+import com.apx6.domain.usecase.UserUseCase
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 
@@ -11,11 +14,11 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 @Module
 object UseCaseModule {
-//
-//    @Provides
-//    fun provideAccountUseCase(
-//        accountRepository: AccountRepository
-//    ) = AccountUseCase(accountRepository)
+
+    @Provides
+    fun provideUserUseCase(
+        userRepository: UserRepository
+    ) = UserUseCase(userRepository)
 //
 //    @Provides
 //    fun provideLabelUseCase(

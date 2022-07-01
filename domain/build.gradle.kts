@@ -14,7 +14,7 @@ android {
         targetSdk = Version.targetSdkVersion
 
 //        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunner = "com.apx6.domain.CustomTestRunner"
+        testInstrumentationRunner = "com.apx6.domain.chipmunk.CustomTestRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
