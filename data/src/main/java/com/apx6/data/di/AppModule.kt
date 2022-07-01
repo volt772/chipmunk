@@ -1,7 +1,7 @@
-package com.apx6.chipmunk.app.di
+package com.apx6.data.di
 
-import android.app.Application
-import android.content.Context
+import com.apx6.domain.crashlytics.CmdCrashlytics
+import com.apx6.data.crashlytics.CmdCrashlyticsImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,8 +15,7 @@ abstract class AppModule {
 
     @Binds
     @Singleton
-    abstract fun bindContext(application: Application): Context
-
+    abstract fun bindCrashlytics(impl: CmdCrashlyticsImpl): CmdCrashlytics
 
 //    @Binds
 //    @Singleton

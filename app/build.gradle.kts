@@ -60,7 +60,7 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
@@ -96,24 +96,19 @@ configurations.all {
 
 dependencies {
 
-    /* Room*/
-    implementation(Room.core)
-    implementation(Room.rxJava2)
-    implementation(Room.ktx)
-    kapt(Room.compiler)
+    /* Dependency*/
+    implementation(project(":domain"))
+    implementation(project(":data"))
+
+    /* Android*/
+    implementation(Android.appcompat)
+    implementation(Android.activityKtx)
+    implementation(Android.coreKtx)
+    implementation(Android.constraintLayout)
+    implementation(Android.swipeRefreshLayout)
 
     /* Material*/
     implementation(Material.core)
-
-    /* Retrofit*/
-    implementation(Retrofit.core)
-    implementation(Retrofit.converterGson)
-    implementation(Retrofit.adapterRxJava)
-    implementation(Retrofit.adapterRxJava2)
-    implementation(Retrofit.loggingInterceptor)
-
-    /* PreferenceManager*/
-    implementation(PrefManager.ktx)
 
     /* Glide*/
     implementation(Glide.core)

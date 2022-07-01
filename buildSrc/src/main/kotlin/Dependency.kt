@@ -16,6 +16,14 @@ object Dependencies {
     const val ktLint = "org.jlleitschuh.gradle:ktlint-gradle:9.2.1"
 }
 
+object Android {
+    const val appcompat = "androidx.appcompat:appcompat:1.2.0"
+    const val activityKtx = "androidx.activity:activity-ktx:1.1.0"
+    const val coreKtx = "androidx.core:core-ktx:1.8.0"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+    const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+}
+
 object Configs {
     const val group = "org.jetbrains"
     const val module = "annotations-java5"
