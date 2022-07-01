@@ -3,10 +3,10 @@ package com.apx6.chipmunk.app.ui
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.apx6.chipmunk.BR
+import androidx.activity.viewModels
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ui.base.BaseActivity
-import com.apx6.chipmunk.databinding.ActivityCoreBinding
+import com.apx6.chipmunk.databinding.ActivityDashboardBinding
 import com.google.android.material.snackbar.Snackbar
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
@@ -16,17 +16,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class DashBoardActivity : BaseActivity<ActivityCoreBinding>() {
+class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBinding>() {
 
-    private lateinit var binding: ActivityCoreBinding
-
-    override fun getLayoutId() = R.layout.activity_core
-    override fun getBindingVariable() = BR._all
+    override val viewModel: DashBoardViewModel by viewModels()
+    override fun getViewBinding(): ActivityDashboardBinding = ActivityDashboardBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = binding()
 
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = title

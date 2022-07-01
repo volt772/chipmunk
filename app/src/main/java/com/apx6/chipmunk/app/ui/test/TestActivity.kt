@@ -18,14 +18,12 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class TestActivity : BaseActivity<ActivityTestBinding>() {
+class TestActivity : BaseActivity<TestViewModel, ActivityTestBinding>() {
+
+    override val viewModel: TestViewModel by viewModels()
+    override fun getViewBinding(): ActivityTestBinding = ActivityTestBinding.inflate(layoutInflater)
 
     @Inject lateinit var context: Context
-
-    private val vm: TestViewModel by viewModels()
-
-    override fun getLayoutId() = R.layout.activity_test
-    override fun getBindingVariable() = BR._all
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +33,7 @@ class TestActivity : BaseActivity<ActivityTestBinding>() {
 
         initKakaoLogin()
 
-        binding().apply {
+        binding.apply {
             btnLogin.setOnClickListener { caseLogin() }
             btnUserInfo.setOnClickListener { caseUserInfo() }
             btnLogout.setOnClickListener { caseLogout() }
