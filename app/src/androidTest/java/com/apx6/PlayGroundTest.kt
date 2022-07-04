@@ -1,7 +1,7 @@
-package com.apx6.data
+package com.apx6
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.apx6.data.utils.TestCoroutineRule
+import com.apx6.utils.TestCoroutineRule
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -15,7 +15,7 @@ import org.junit.runners.MethodSorters
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @ExperimentalCoroutinesApi
 @HiltAndroidTest
-class UserUseCaseTest {
+class PlayGroundTest {
 
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
@@ -23,34 +23,17 @@ class UserUseCaseTest {
     @get:Rule
     val testCoroutineRule = TestCoroutineRule()
 
-//    @Inject
-//    lateinit var labelRepository: LabelRepository
-//
-//    @Inject
-//    lateinit var mpDatabase: MpDatabase
-
-//    @Inject lateinit var labelsDao: LabelsDao
-//    @Inject lateinit var spacesDao: SpacesDao
-//    @Inject lateinit var boardsDao: BoardsDao
-
     @Before
     fun before() {
         hiltRule.inject()
-
-        /* Parent*/
-//        runBlocking {
-//            space = spacesDao.testGetTopSpace()
-//            board = boardsDao.testGetTopBoard(spaceId = space.id)!!
-//        }
     }
 
     @After
     fun after() {
-//        mpDatabase.close()
     }
 
     @Test
-    fun test01_save_user() {
+    fun test01_random_key() {
 
         runBlocking {
             val rnds = (0..1000).random()
@@ -74,11 +57,6 @@ class UserUseCaseTest {
         }
 
         println("[TEST] probe : ==========================================================================================================================================")
-    }
-
-    @Test
-    fun test02_get_user() {
-
     }
 
     companion object {

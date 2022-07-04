@@ -13,6 +13,10 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 
 @AndroidEntryPoint
@@ -96,6 +100,41 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                 UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
             }
         }
+
+        binding.btnRandom.setOnClickListener {
+//            val key = getRandomKey(4)
+            val rnds = getRandomNum()
+            println("probe :: account : $rnds")
+        }
+
+//        val key = getRandomKey(4)
+//            val rnds = (0..1000).random()
+
+        val rnds = getRandomNum()
+        println("probe :: account : before : $rnds")
+
+    }
+
+    private fun getRandomNum(): Int {
+        return (0..1000).shuffled().last()
+//        return (0..1000).random()
+    }
+
+    private fun getRandomKey(size: Int): String {
+        val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+        println("probe :: getRandomKey : $size, charPoolSize : ${charPool.size}")
+        return try {
+            (1..size)
+            .map { Random.nextInt(0, charPool.size) }
+            .map(charPool::get)
+            .joinToString("")
+        } catch (e: Exception) {
+            "ffff"
+        }
+//        return (1..size)
+//            .map { Random.nextInt(0, charPool.size) }
+//            .map(charPool::get)
+//            .joinToString("")
     }
 
     val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->

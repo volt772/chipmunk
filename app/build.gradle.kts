@@ -96,10 +96,6 @@ configurations.all {
 
 dependencies {
 
-    /* Dependency*/
-    implementation(project(":domain"))
-    implementation(project(":data"))
-
     /* Android*/
     implementation(Android.appcompat)
     implementation(Android.activityKtx)
@@ -159,6 +155,11 @@ dependencies {
     androidTestImplementation(Test.hiltTest)
     androidTestImplementation(Test.coroutineTest)
     kaptAndroidTest(Test.daggerHilt)
+
+    /* Dependency*/
+    implementation(project(":domain"))
+    implementation(project(":data"))
+
 }
 
 ktlint {
