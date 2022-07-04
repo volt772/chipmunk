@@ -102,16 +102,17 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         }
 
         binding.btnRandom.setOnClickListener {
-//            val key = getRandomKey(4)
-            val rnds = getRandomNum()
-            println("probe :: account : $rnds")
+            val key = getRandomKey(4)
+//            val rnds = getRandomNum()
+            println("probe :: account : $key")
         }
 
 //        val key = getRandomKey(4)
 //            val rnds = (0..1000).random()
 
-        val rnds = getRandomNum()
-        println("probe :: account : before : $rnds")
+//        val rnds = getRandomNum()
+        val key = getRandomKey(4)
+        println("probe :: account : before : $key")
 
     }
 
@@ -122,10 +123,14 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     private fun getRandomKey(size: Int): String {
         val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-        println("probe :: getRandomKey : $size, charPoolSize : ${charPool.size}")
+//        println("probe :: getRandomKey : $size, charPoolSize : ${charPool.size}")
         return try {
             (1..size)
-            .map { Random.nextInt(0, charPool.size) }
+            .map {
+//                println("probe :: Int : ${Random.nextInt(0, charPool.size)}, shuffle : ${(0..1000).shuffled().last()}")
+                (1..charPool.size).shuffled().last()
+//                Random.nextInt(0, charPool.size)
+            }
             .map(charPool::get)
             .joinToString("")
         } catch (e: Exception) {

@@ -35,38 +35,10 @@ class PlayGroundTest {
     @Test
     fun test01_random_key() {
 
-        runBlocking {
-            val rnds = (0..1000).random()
-            println("probe :: account : $rnds")
-
-//            val randomAccountKey = (1..5)
-//                .map { i -> Random.nextInt(0, charPool.size) }
-//                .map(charPool::get)
-//                .joinToString("")
-
-
-//            val randomAccountKey = (1..5)
-//                .map { charPool.random() }
-//                .joinToString("")
-
-//            val account = "${baseAccountName}_${userRandomIndex}"
-//            println("probe :: account : $rnds")
-
-
-            val nickName = "고라니"
-        }
 
         println("[TEST] probe : ==========================================================================================================================================")
     }
 
-    companion object {
-        const val baseAccountName = "CHECK"
-//        const val nickName =  "고라니"
-//        const val email =  "volt772@naver.com"
-//        const val regDate =  1234L
-//        const val profileThumbnail =  1234L
-//        const val fToken =  1234L
-
-    }
+    companion object
 
 }

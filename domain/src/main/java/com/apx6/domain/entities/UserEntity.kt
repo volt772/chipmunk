@@ -9,30 +9,30 @@ import com.apx6.domain.entities.UserEntity.Companion.TABLE_USER
 
 @Entity(
     tableName = TABLE_USER,
-    indices = [Index(value = ["id"], unique = true)]
+//    indices = [Index(value = ["id"], unique = true)]
 )
 data class UserEntity(
 
-    @field:PrimaryKey(autoGenerate = true)
-    @field:ColumnInfo(name = CmdEntityTags.ID)
-    var id: Long?= 0L,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = CmdEntityTags.ID)
+    var id: Int?= 0,
 
-    @field:ColumnInfo(name = CmdEntityTags.ACCOUNT)
+    @ColumnInfo(name = CmdEntityTags.ACCOUNT)
     var account: String?= "",
 
-    @field:ColumnInfo(name = CmdEntityTags.NICKNAME)
+    @ColumnInfo(name = CmdEntityTags.NICKNAME)
     var nickName: String?= "",
 
-    @field:ColumnInfo(name = CmdEntityTags.EMAIL)
+    @ColumnInfo(name = CmdEntityTags.EMAIL)
     var email: String?= "",
 
-    @field:ColumnInfo(name = CmdEntityTags.REG_DATE)
+    @ColumnInfo(name = CmdEntityTags.REG_DATE)
     var regDate: Long?= 0L,
 
-    @field:ColumnInfo(name = CmdEntityTags.PROFILE_THUMBNAIL)
+    @ColumnInfo(name = CmdEntityTags.PROFILE_THUMBNAIL)
     var profileThumbnail: String?= "",
 
-    @field:ColumnInfo(name = CmdEntityTags.F_TOKEN)
+    @ColumnInfo(name = CmdEntityTags.F_TOKEN)
     var fToken: String?= ""
 
 ) {

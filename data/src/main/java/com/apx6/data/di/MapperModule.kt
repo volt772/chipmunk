@@ -1,8 +1,12 @@
-package com.apx6.chipmunk.app.di
+package com.apx6.data.di
 
+import com.apx6.data.mapper.UserMapperImpl
+import com.apx6.domain.mapper.UserMapper
+import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 /**
  * MapperModule
@@ -11,10 +15,10 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class MapperModule {
-//
-//    @Binds
-//    @Singleton
-//    abstract fun bindMpIdsMapper(impl: MpdIdsMapperImpl): MpdIdsMapper
+
+    @Binds
+    @Singleton
+    abstract fun bindUserMapper(impl: UserMapperImpl): UserMapper
 //
 //    @Binds
 //    @Singleton
