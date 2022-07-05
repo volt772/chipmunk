@@ -9,13 +9,16 @@ import com.apx6.domain.entities.UserEntity.Companion.TABLE_USER
 
 @Entity(
     tableName = TABLE_USER,
-//    indices = [Index(value = ["id"], unique = true)]
+    indices = [
+        Index(value = ["id"], unique = true),
+        Index(value = ["nickname", "email"], unique = true),
+    ]
 )
 data class UserEntity(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = CmdEntityTags.ID)
-    var id: Int?= 0,
+    val id: Int= 0,
 
     @ColumnInfo(name = CmdEntityTags.ACCOUNT)
     var account: String?= "",

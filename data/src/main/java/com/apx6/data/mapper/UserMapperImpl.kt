@@ -3,6 +3,7 @@ package com.apx6.data.mapper
 import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.entities.UserEntity
 import com.apx6.domain.mapper.UserMapper
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class UserMapperImpl @Inject constructor(
@@ -13,7 +14,6 @@ class UserMapperImpl @Inject constructor(
         user: CmdUser
     ): UserEntity {
         return UserEntity(
-//            id = 0,
             account = user.account,
             nickName = user.nickName,
             email = user.email,
@@ -22,6 +22,25 @@ class UserMapperImpl @Inject constructor(
             fToken = user.fToken
         )
     }
+
+//    override suspend fun entityToUserFlow(
+//        user: Flow<UserEntity>
+//    ): Flow<CmdUser> {
+//
+//        val ue = user.first()
+//        val cmdUser: Flow<CmdUser> = flow {
+//            CmdUser(
+//                account = ue.account?: "",
+//                nickName = ue.nickName?: "",
+//                email = ue.email,
+//                regDate = ue.regDate?: 0L,
+//                profileThumbnail = ue.profileThumbnail,
+//                fToken = ue.fToken?: ""
+//            )
+//        }
+//
+//        return cmdUser
+//    }
 }
 
 //override fun mapAccountDbToUi(

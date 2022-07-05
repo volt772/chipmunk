@@ -7,8 +7,14 @@ import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.repository.UserRepository
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.junit.*
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
@@ -71,7 +77,7 @@ class UserRepoTest {
             /* regDate*/
             val regDate = currMillis
 
-            /* profileThumbmail*/
+            /* profileThumbnail*/
             val profileThumbnail = "https://k.kakaocdn.net/dn/kSEsG/btrzMIjo4fj/Yz2likKAtl8kfM5Kn00Hp1/img_110x110.jpg"
 
             /* fToken*/
@@ -89,7 +95,6 @@ class UserRepoTest {
 
             userRepository.saveUser(cmdUser)
 
-
         }
 
         println("[TEST] probe : ==========================================================================================================================================")
@@ -97,7 +102,22 @@ class UserRepoTest {
 
     @Test
     fun test02_get_user() {
+        runBlocking {
+            val res = userRepository.getUser()
 
+            val cmdUser = res.map {
+                CmdUser(
+                    account = it.account?: "",
+                    nickName = it.nickName?: "",
+                    email = it.email,
+                    regDate = it.regDate?: 0L,
+                    profileThumbnail = it.profileThumbnail,
+                    fToken = it.fToken?: ""
+                )
+            }.collect {
+                println("probe :: res : $it")
+            }
+        }
     }
 
     companion object {
