@@ -1,9 +1,8 @@
 package com.apx6.data.mapper
 
 import com.apx6.domain.dto.CmdUser
-import com.apx6.domain.entities.UserEntity
+import com.apx6.domain.entities.User
 import com.apx6.domain.mapper.UserMapper
-import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class UserMapperImpl @Inject constructor(
@@ -12,8 +11,8 @@ class UserMapperImpl @Inject constructor(
 
     override suspend fun userToEntity(
         user: CmdUser
-    ): UserEntity {
-        return UserEntity(
+    ): User {
+        return User(
             account = user.account,
             nickName = user.nickName,
             email = user.email,

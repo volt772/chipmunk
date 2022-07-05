@@ -2,7 +2,7 @@ package com.apx6.data.repository
 
 import com.apx6.data.dao.UserDao
 import com.apx6.domain.dto.CmdUser
-import com.apx6.domain.entities.UserEntity
+import com.apx6.domain.entities.User
 import com.apx6.domain.mapper.UserMapper
 import com.apx6.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +18,7 @@ class UserRepositoryImpl @Inject constructor(
         userDao.insertOrUpdate(entity)
     }
 
-    override suspend fun getUser(): Flow<UserEntity> {
+    override suspend fun getUser(): Flow<User> {
         return userDao.getUser()
     }
 }

@@ -1,11 +1,11 @@
 package com.apx6.data.dao
 
 import androidx.room.Dao
-import com.apx6.domain.entities.AttachmentEntity
+import com.apx6.domain.entities.Attachment
 
 
 @Dao
-abstract class AttachmentDao : BaseDao<AttachmentEntity>() {
+abstract class AttachmentDao : BaseDao<Attachment>() {
 
     /* ▼ TRANSACTION =====================================================================================================================*/
 

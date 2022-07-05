@@ -5,16 +5,16 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.apx6.domain.constants.CmdEntityTags
-import com.apx6.domain.entities.UserEntity.Companion.TABLE_USER
+import com.apx6.domain.entities.User.Companion.TABLE_USER
 
 @Entity(
     tableName = TABLE_USER,
     indices = [
         Index(value = ["id"], unique = true),
-        Index(value = ["nickname", "email"], unique = true),
+        Index(value = ["nickname"], unique = true),
     ]
 )
-data class UserEntity(
+data class User(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = CmdEntityTags.ID)

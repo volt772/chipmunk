@@ -3,17 +3,17 @@ package com.apx6.domain.entities
 import androidx.room.*
 import androidx.room.ForeignKey.Companion.CASCADE
 import com.apx6.domain.constants.CmdEntityTags
-import com.apx6.domain.entities.TaskEntity.Companion.TABLE_TASK
+import com.apx6.domain.entities.Task.Companion.TABLE_TASK
 
 @Entity(
     tableName = TABLE_TASK,
     foreignKeys = [
-        ForeignKey(entity = UserEntity::class, parentColumns = ["id"], childColumns = ["uid"], onDelete = CASCADE),
-        ForeignKey(entity = CategoryEntity::class, parentColumns = ["id"], childColumns = ["cid"], onDelete = CASCADE),
+        ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["uid"], onDelete = CASCADE),
+        ForeignKey(entity = Category::class, parentColumns = ["id"], childColumns = ["cid"], onDelete = CASCADE),
     ],
     indices = [Index(value = ["id"], unique = true)]
 )
-data class TaskEntity(
+data class Task(
 
     @field:PrimaryKey(autoGenerate = true)
     @field:ColumnInfo(name = CmdEntityTags.ID)

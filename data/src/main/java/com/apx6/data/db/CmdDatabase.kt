@@ -12,12 +12,12 @@ import javax.inject.Provider
 
 @Database(
     entities = [
-        AttachmentEntity::class,
-        CategoryEntity::class,
-        NotificationEntity::class,
-        SyncEntity::class,
-        TaskEntity::class,
-        UserEntity::class
+        Attachment::class,
+        Category::class,
+        Notification::class,
+        Sync::class,
+        Task::class,
+        User::class
     ],
     version = 1,
     exportSchema = false

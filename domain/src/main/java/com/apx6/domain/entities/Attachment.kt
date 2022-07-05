@@ -3,14 +3,14 @@ package com.apx6.domain.entities
 import androidx.room.*
 import androidx.room.ForeignKey.Companion.CASCADE
 import com.apx6.domain.constants.CmdEntityTags
-import com.apx6.domain.entities.AttachmentEntity.Companion.TABLE_ATTACHMENT
+import com.apx6.domain.entities.Attachment.Companion.TABLE_ATTACHMENT
 
 @Entity(
     tableName = TABLE_ATTACHMENT,
-    foreignKeys = [ForeignKey(entity = TaskEntity::class, parentColumns = ["id"], childColumns = ["tid"], onDelete = CASCADE)],
+    foreignKeys = [ForeignKey(entity = Task::class, parentColumns = ["id"], childColumns = ["tid"], onDelete = CASCADE)],
     indices = [Index(value = ["id"], unique = true)]
 )
-data class AttachmentEntity(
+data class Attachment(
 
     @field:PrimaryKey(autoGenerate = true)
     @field:ColumnInfo(name = CmdEntityTags.ID)

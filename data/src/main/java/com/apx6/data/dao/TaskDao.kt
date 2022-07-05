@@ -1,11 +1,11 @@
 package com.apx6.data.dao
 
 import androidx.room.Dao
-import com.apx6.domain.entities.TaskEntity
+import com.apx6.domain.entities.Task
 
 
 @Dao
-abstract class TaskDao : BaseDao<TaskEntity>() {
+abstract class TaskDao : BaseDao<Task>() {
 
     /* ▼ TRANSACTION =====================================================================================================================*/
 

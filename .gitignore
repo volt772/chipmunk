@@ -74,3 +74,4 @@ fastlane/readme.md
 schemas/
 release/
 /captures
+.DS_Store

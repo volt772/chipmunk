@@ -3,14 +3,14 @@ package com.apx6.domain.entities
 import androidx.room.*
 import androidx.room.ForeignKey.Companion.CASCADE
 import com.apx6.domain.constants.CmdEntityTags
-import com.apx6.domain.entities.CategoryEntity.Companion.TABLE_CATEGORY
+import com.apx6.domain.entities.Category.Companion.TABLE_CATEGORY
 
 @Entity(
     tableName = TABLE_CATEGORY,
-    foreignKeys = [ForeignKey(entity = UserEntity::class, parentColumns = ["id"], childColumns = ["uid"], onDelete = CASCADE)],
+    foreignKeys = [ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["uid"], onDelete = CASCADE)],
     indices = [Index(value = ["id"], unique = true)]
 )
-data class CategoryEntity(
+data class Category(
 
     @field:PrimaryKey(autoGenerate = true)
     @field:ColumnInfo(name = CmdEntityTags.ID)

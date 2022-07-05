@@ -3,14 +3,14 @@ package com.apx6.domain.entities
 import androidx.room.*
 import androidx.room.ForeignKey.Companion.CASCADE
 import com.apx6.domain.constants.CmdEntityTags
-import com.apx6.domain.entities.SyncEntity.Companion.TABLE_SYNC
+import com.apx6.domain.entities.Sync.Companion.TABLE_SYNC
 
 @Entity(
     tableName = TABLE_SYNC,
-    foreignKeys = [ForeignKey(entity = UserEntity::class, parentColumns = ["id"], childColumns = ["uid"], onDelete = CASCADE)],
+    foreignKeys = [ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["uid"], onDelete = CASCADE)],
     indices = [Index(value = ["id"], unique = true)]
 )
-data class SyncEntity(
+data class Sync(
 
     @field:PrimaryKey(autoGenerate = true)
     @field:ColumnInfo(name = CmdEntityTags.ID)

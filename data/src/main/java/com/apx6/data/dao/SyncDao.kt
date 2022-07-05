@@ -1,11 +1,11 @@
 package com.apx6.data.dao
 
 import androidx.room.Dao
-import com.apx6.domain.entities.SyncEntity
+import com.apx6.domain.entities.Sync
 
 
 @Dao
-abstract class SyncDao : BaseDao<SyncEntity>() {
+abstract class SyncDao : BaseDao<Sync>() {
 
     /* ▼ TRANSACTION =====================================================================================================================*/
 

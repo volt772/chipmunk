@@ -1,11 +1,11 @@
 package com.apx6.data.dao
 
 import androidx.room.Dao
-import com.apx6.domain.entities.CategoryEntity
+import com.apx6.domain.entities.Category
 
 
 @Dao
-abstract class CategoryDao : BaseDao<CategoryEntity>() {
+abstract class CategoryDao : BaseDao<Category>() {
 
     /* ▼ TRANSACTION =====================================================================================================================*/
 
