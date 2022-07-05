@@ -8,6 +8,8 @@ interface UserRepository {
 
     suspend fun saveUser(user: CmdUser)
 
-    suspend fun getUser(): Flow<Resource<User>>
+    suspend fun getUser(): Flow<User>
+
+    suspend fun user(user: CmdUser): Flow<Resource<User>>
 
 }

@@ -39,19 +39,9 @@ class UserRepoTest {
     @Inject
     lateinit var cmdDatabase: CmdDatabase
 
-//    @Inject lateinit var labelsDao: LabelsDao
-//    @Inject lateinit var spacesDao: SpacesDao
-//    @Inject lateinit var boardsDao: BoardsDao
-
     @Before
     fun before() {
         hiltRule.inject()
-
-        /* Parent*/
-//        runBlocking {
-//            space = spacesDao.testGetTopSpace()
-//            board = boardsDao.testGetTopBoard(spaceId = space.id)!!
-//        }
     }
 
     @After
@@ -63,6 +53,61 @@ class UserRepoTest {
     fun test01_save_user() {
 
         runBlocking {
+            val cmdUser = sampleUser()
+            userRepository.saveUser(cmdUser)
+
+        }
+
+        println("[TEST] probe : ==========================================================================================================================================")
+    }
+
+    @Test
+    fun test02_get_user() {
+        runBlocking {
+            val res = userRepository.getUser()
+
+            val cmdUser = res.map {
+                CmdUser(
+                    account = it.account?: "",
+                    nickName = it.nickName?: "",
+                    email = it.email,
+                    regDate = it.regDate?: 0L,
+                    profileThumbnail = it.profileThumbnail,
+                    fToken = it.fToken?: ""
+                )
+            }.collect {
+                println("probe :: [TEST] :: test02_get_user : $it")
+            }
+        }
+    }
+
+    @Test
+    fun test03_user() {
+        runBlocking {
+            val cmdUser = sampleUser()
+            val flow = userRepository.user(cmdUser)
+            val res = flow.first()
+            println("probe :: [TEST] :: test03_user : $res")
+        }
+    }
+
+    companion object {
+        const val baseAccountName = "CHECK"
+
+        fun getRandomKey(): String {
+            val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+            return (1..5)
+                .map { (1..charPool.size).shuffled().last() }
+                .map(charPool::get)
+                .joinToString("")
+        }
+
+        private val currMillis: Long
+            get() {
+                return System.currentTimeMillis()
+            }
+
+        fun sampleUser(): CmdUser {
             val randKey = getRandomKey()
 
             /* account*/
@@ -84,7 +129,7 @@ class UserRepoTest {
             val fToken = "abcdefghijklmn"
 
             /* to Object >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
-            val cmdUser = CmdUser(
+            return CmdUser(
                 account = account,
                 nickName = nickName,
                 email = email,
@@ -92,49 +137,7 @@ class UserRepoTest {
                 profileThumbnail = profileThumbnail,
                 fToken = fToken
             )
-
-            userRepository.saveUser(cmdUser)
-
         }
-
-        println("[TEST] probe : ==========================================================================================================================================")
-    }
-
-    @Test
-    fun test02_get_user() {
-//        runBlocking {
-//            val res = userRepository.getUser()
-//
-//            val cmdUser = res.map {
-//                CmdUser(
-//                    account = it.account?: "",
-//                    nickName = it.nickName?: "",
-//                    email = it.email,
-//                    regDate = it.regDate?: 0L,
-//                    profileThumbnail = it.profileThumbnail,
-//                    fToken = it.fToken?: ""
-//                )
-//            }.collect {
-//                println("probe :: res : $it")
-//            }
-//        }
-    }
-
-    companion object {
-        const val baseAccountName = "CHECK"
-
-        fun getRandomKey(): String {
-            val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-            return (1..5)
-                .map { (1..charPool.size).shuffled().last() }
-                .map(charPool::get)
-                .joinToString("")
-        }
-
-        private val currMillis: Long
-            get() {
-                return System.currentTimeMillis()
-            }
 
     }
 
