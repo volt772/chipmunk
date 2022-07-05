@@ -1,20 +1,14 @@
-package com.apx6.data
+package com.apx6
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.apx6.data.db.CmdDatabase
-import com.apx6.data.utils.TestCoroutineRule
 import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.repository.UserRepository
+import com.apx6.utils.TestCoroutineRule
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import org.junit.*
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
@@ -36,8 +30,8 @@ class UserRepoTest {
     @Inject
     lateinit var userRepository: UserRepository
 
-    @Inject
-    lateinit var cmdDatabase: CmdDatabase
+//    @Inject
+//    lateinit var cmdDatabase: CmdDatabase
 
 //    @Inject lateinit var labelsDao: LabelsDao
 //    @Inject lateinit var spacesDao: SpacesDao
@@ -56,7 +50,7 @@ class UserRepoTest {
 
     @After
     fun after() {
-        cmdDatabase.close()
+//        cmdDatabase.close()
     }
 
     @Test

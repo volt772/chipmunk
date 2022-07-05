@@ -24,6 +24,12 @@ object Android {
     const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }
 
+object Lifecycle {
+    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    const val runtimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+}
+
 object Configs {
     const val group = "org.jetbrains"
     const val module = "annotations-java5"

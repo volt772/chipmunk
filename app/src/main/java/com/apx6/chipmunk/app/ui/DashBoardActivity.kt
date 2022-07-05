@@ -4,19 +4,20 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivityDashboardBinding
+import com.apx6.domain.State
 import com.google.android.material.snackbar.Snackbar
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 
 @AndroidEntryPoint
@@ -102,9 +103,10 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         }
 
         binding.btnRandom.setOnClickListener {
-            val key = getRandomKey(4)
+//            val key = getRandomKey(4)
 //            val rnds = getRandomNum()
-            println("probe :: account : $key")
+//            println("probe :: account : $key")
+            getUser()
         }
 
 //        val key = getRandomKey(4)
@@ -112,9 +114,27 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
 //        val rnds = getRandomNum()
         val key = getRandomKey(4)
-        println("probe :: account : before : $key")
+//        println("probe :: account : before : $key")
+
+        observeUser()
 
     }
+
+    private fun observeUser() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.user.collect { state ->
+                    when (state) {
+                        is State.Loading -> println("probe :: status :: LOADING")
+                        is State.Success -> println("probe :: status :: SUCCESS : ${state.data}")
+                        is State.Error -> println("probe :: status :: ERROR")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getUser() = viewModel.getUser()
 
     private fun getRandomNum(): Int {
         return (0..1000).shuffled().last()

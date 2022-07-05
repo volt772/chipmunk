@@ -103,6 +103,11 @@ dependencies {
     implementation(Android.constraintLayout)
     implementation(Android.swipeRefreshLayout)
 
+    /* LifeCycle*/
+    implementation(Lifecycle.viewModel)
+    implementation(Lifecycle.liveData)
+    implementation(Lifecycle.runtimeKtx)
+
     /* Material*/
     implementation(Material.core)
 
