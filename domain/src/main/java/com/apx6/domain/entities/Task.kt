@@ -8,34 +8,44 @@ import com.apx6.domain.entities.Task.Companion.TABLE_TASK
 @Entity(
     tableName = TABLE_TASK,
     foreignKeys = [
-        ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["uid"], onDelete = CASCADE),
-        ForeignKey(entity = Category::class, parentColumns = ["id"], childColumns = ["cid"], onDelete = CASCADE),
+        ForeignKey(
+            entity = User::class,
+            parentColumns = ["id"],
+            childColumns = ["uid"],
+            onDelete = CASCADE
+        ),
+        ForeignKey(
+            entity = Category::class,
+            parentColumns = ["id"],
+            childColumns = ["cid"],
+            onDelete = CASCADE
+        ),
     ],
     indices = [Index(value = ["id"], unique = true)]
 )
 data class Task(
 
-    @field:PrimaryKey(autoGenerate = true)
-    @field:ColumnInfo(name = CmdEntityTags.ID)
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = CmdEntityTags.ID)
     var id: Long = 0,
 
-    @field:ColumnInfo(name = CmdEntityTags.CID)
-    var cid: Long?= 0L,
+    @ColumnInfo(name = CmdEntityTags.CID)
+    val cid: Long?= 0L,
 
-    @field:ColumnInfo(name = CmdEntityTags.UID)
-    var uid: Long?= 0L,
+    @ColumnInfo(name = CmdEntityTags.UID)
+    val uid: Long?= 0L,
 
-    @field:ColumnInfo(name = CmdEntityTags.TITLE)
-    var title: String?= "",
+    @ColumnInfo(name = CmdEntityTags.TITLE)
+    val title: String?= "",
 
-    @field:ColumnInfo(name = CmdEntityTags.MEMO)
-    var memo: String?= "",
+    @ColumnInfo(name = CmdEntityTags.MEMO)
+    val memo: String?= "",
 
-    @field:ColumnInfo(name = CmdEntityTags.START_DATE)
-    var startDate: Long?= 0L,
+    @ColumnInfo(name = CmdEntityTags.START_DATE)
+    val startDate: Long?= 0L,
 
-    @field:ColumnInfo(name = CmdEntityTags.END_DATE)
-    var endDate: Long?= 0L
+    @ColumnInfo(name = CmdEntityTags.END_DATE)
+    val endDate: Long?= 0L
 
 ) {
 

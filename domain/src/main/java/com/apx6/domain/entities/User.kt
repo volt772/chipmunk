@@ -15,7 +15,6 @@ import com.apx6.domain.entities.User.Companion.TABLE_USER
     ]
 )
 data class User(
-
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = CmdEntityTags.ID)
     val id: Int= 0,
@@ -37,11 +36,8 @@ data class User(
 
     @ColumnInfo(name = CmdEntityTags.F_TOKEN)
     var fToken: String?= ""
-
 ) {
-
     companion object {
         const val TABLE_USER = "user"
     }
-
 }

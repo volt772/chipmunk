@@ -7,29 +7,36 @@ import com.apx6.domain.entities.Attachment.Companion.TABLE_ATTACHMENT
 
 @Entity(
     tableName = TABLE_ATTACHMENT,
-    foreignKeys = [ForeignKey(entity = Task::class, parentColumns = ["id"], childColumns = ["tid"], onDelete = CASCADE)],
+    foreignKeys = [
+        ForeignKey(
+            entity = Task::class,
+            parentColumns = ["id"],
+            childColumns = ["tid"],
+            onDelete = CASCADE
+        )
+    ],
     indices = [Index(value = ["id"], unique = true)]
 )
 data class Attachment(
 
-    @field:PrimaryKey(autoGenerate = true)
-    @field:ColumnInfo(name = CmdEntityTags.ID)
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = CmdEntityTags.ID)
     var id: Long?= 0L,
 
-    @field:ColumnInfo(name = CmdEntityTags.TID)
-    var tid: Long?= 0L,
+    @ColumnInfo(name = CmdEntityTags.TID)
+    val tid: Long?= 0L,
 
-    @field:ColumnInfo(name = CmdEntityTags.NAME)
-    var name: String?= "",
+    @ColumnInfo(name = CmdEntityTags.NAME)
+    val name: String?= "",
 
-    @field:ColumnInfo(name = CmdEntityTags.SIZE)
-    var size: Int?= 0,
+    @ColumnInfo(name = CmdEntityTags.SIZE)
+    val size: Int?= 0,
 
-    @field:ColumnInfo(name = CmdEntityTags.CONTENT_TYPE)
-    var contentType: String?= "",
+    @ColumnInfo(name = CmdEntityTags.CONTENT_TYPE)
+    val contentType: String?= "",
 
-    @field:ColumnInfo(name = CmdEntityTags.CREATED_TIME)
-    var createdTime: Long?= 0L
+    @ColumnInfo(name = CmdEntityTags.CREATED_TIME)
+    val createdTime: Long?= 0L
 
 ) {
 

@@ -7,25 +7,28 @@ import com.apx6.domain.entities.Category.Companion.TABLE_CATEGORY
 
 @Entity(
     tableName = TABLE_CATEGORY,
-    foreignKeys = [ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["uid"], onDelete = CASCADE)],
+    foreignKeys = [
+        ForeignKey(
+            entity = User::class,
+            parentColumns = ["id"],
+            childColumns = ["uid"],
+            onDelete = CASCADE
+        )
+    ],
     indices = [Index(value = ["id"], unique = true)]
 )
 data class Category(
-
-    @field:PrimaryKey(autoGenerate = true)
-    @field:ColumnInfo(name = CmdEntityTags.ID)
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = CmdEntityTags.ID)
     var id: Long?= 0L,
 
-    @field:ColumnInfo(name = CmdEntityTags.UID)
-    var uid: Long?= 0L,
+    @ColumnInfo(name = CmdEntityTags.UID)
+    val uid: Long?= 0L,
 
-    @field:ColumnInfo(name = CmdEntityTags.NAME)
-    var name: String?= ""
-
+    @ColumnInfo(name = CmdEntityTags.NAME)
+    val name: String?= ""
 ) {
-
     companion object {
         const val TABLE_CATEGORY = "category"
     }
-
 }

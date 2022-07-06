@@ -7,23 +7,30 @@ import com.apx6.domain.entities.Sync.Companion.TABLE_SYNC
 
 @Entity(
     tableName = TABLE_SYNC,
-    foreignKeys = [ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["uid"], onDelete = CASCADE)],
+    foreignKeys = [
+        ForeignKey(
+            entity = User::class,
+            parentColumns = ["id"],
+            childColumns = ["uid"],
+            onDelete = CASCADE
+        )
+    ],
     indices = [Index(value = ["id"], unique = true)]
 )
 data class Sync(
 
-    @field:PrimaryKey(autoGenerate = true)
-    @field:ColumnInfo(name = CmdEntityTags.ID)
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = CmdEntityTags.ID)
     var id: Long?= 0L,
 
-    @field:ColumnInfo(name = CmdEntityTags.UID)
-    var uid: Long?= 0L,
+    @ColumnInfo(name = CmdEntityTags.UID)
+    val uid: Long?= 0L,
 
-    @field:ColumnInfo(name = CmdEntityTags.SYNC_TIME)
-    var syncTime: Long?= 0L,
+    @ColumnInfo(name = CmdEntityTags.SYNC_TIME)
+    val syncTime: Long?= 0L,
 
-    @field:ColumnInfo(name = CmdEntityTags.SYNC_RESULT)
-    var syncResult: Boolean?= false
+    @ColumnInfo(name = CmdEntityTags.SYNC_RESULT)
+    val syncResult: Boolean?= false
 
 ) {
 
