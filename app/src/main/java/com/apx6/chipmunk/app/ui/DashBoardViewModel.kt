@@ -19,9 +19,9 @@ class DashBoardViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : BaseViewModel() {
 
-    private val _user: MutableStateFlow<State<User>> = MutableStateFlow(State.loading())
+    private val _user: MutableStateFlow<State<User?>> = MutableStateFlow(State.loading())
 
-    val user: StateFlow<State<User>> = _user
+    val user: StateFlow<State<User?>> = _user
 
     fun getUser() {
         val testUser = CmdUser(

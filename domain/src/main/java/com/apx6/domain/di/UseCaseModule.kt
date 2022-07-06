@@ -1,6 +1,8 @@
 package com.apx6.domain.di
 
+import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.UserRepository
+import com.apx6.domain.usecase.CategoryUseCase
 import com.apx6.domain.usecase.UserUseCase
 import dagger.Module
 import dagger.Provides
@@ -19,6 +21,11 @@ object UseCaseModule {
     fun provideUserUseCase(
         userRepository: UserRepository
     ) = UserUseCase(userRepository)
+
+    @Provides
+    fun provideCategoryUseCase(
+        categoryRepository: CategoryRepository
+    ) = CategoryUseCase(categoryRepository)
 //
 //    @Provides
 //    fun provideLabelUseCase(

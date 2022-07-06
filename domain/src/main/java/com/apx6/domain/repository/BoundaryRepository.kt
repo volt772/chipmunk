@@ -6,6 +6,13 @@ import kotlinx.coroutines.flow.*
 import retrofit2.Response
 
 
+/**
+ * Flow
+ * 1. (fetch/CURD) local
+ * 2. (fetch/CRUD) remote data
+ * 3. save remote response
+ * 4. final >>>> fetch local
+ */
 abstract class BoundaryRepository<RESULT, REQUEST> {
 
     fun asFlow() = flow<Resource<RESULT>> {

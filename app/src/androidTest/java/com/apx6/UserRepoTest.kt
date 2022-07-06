@@ -1,7 +1,6 @@
 package com.apx6
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.apx6.data.db.CmdDatabase
 import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.repository.UserRepository
 import com.apx6.utils.TestCoroutineRule
@@ -87,7 +86,7 @@ class UserRepoTest {
                 fToken = fToken
             )
 
-            userRepository.saveUser(cmdUser)
+            userRepository.postUser(cmdUser)
 
         }
 

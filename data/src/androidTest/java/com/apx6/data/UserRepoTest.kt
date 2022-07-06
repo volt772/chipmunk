@@ -7,14 +7,9 @@ import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.repository.UserRepository
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import org.junit.*
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
@@ -54,7 +49,7 @@ class UserRepoTest {
 
         runBlocking {
             val cmdUser = sampleUser()
-            userRepository.saveUser(cmdUser)
+            userRepository.postUser(cmdUser)
 
         }
 
@@ -64,20 +59,54 @@ class UserRepoTest {
     @Test
     fun test02_get_user() {
         runBlocking {
-            val res = userRepository.getUser()
+//            val res = userRepository.getUser()
+//
+//            val cmdUser = res.map {
+//                CmdUser(
+//                    account = it.account?: "",
+//                    nickName = it.nickName?: "",
+//                    email = it.email,
+//                    regDate = it.regDate?: 0L,
+//                    profileThumbnail = it.profileThumbnail,
+//                    fToken = it.fToken?: ""
+//                )
+//            }.collect {
+//                println("probe :: [TEST] :: test02_get_user : $it")
+//            }
 
-            val cmdUser = res.map {
-                CmdUser(
-                    account = it.account?: "",
-                    nickName = it.nickName?: "",
-                    email = it.email,
-                    regDate = it.regDate?: 0L,
-                    profileThumbnail = it.profileThumbnail,
-                    fToken = it.fToken?: ""
-                )
-            }.collect {
-                println("probe :: [TEST] :: test02_get_user : $it")
-            }
+
+            userRepository
+                .getUser()
+                .map { user ->
+                    user?.let {
+                        CmdUser(
+                            account = it.account?: "",
+                            nickName = it.nickName?: "",
+                            email = it.email,
+                            regDate = it.regDate?: 0L,
+                            profileThumbnail = it.profileThumbnail,
+                            fToken = it.fToken?: ""
+                        )
+                    }
+                }.collect {
+                    println("probe :: [User Test] :: Collect !! : $it")
+                }
+//
+//            val user = userRepository
+//                .getUser()
+//                .filterNotNull()
+//                .collect {
+//                    CmdUser(
+//                        account = it.account?: "",
+//                        nickName = it.nickName?: "",
+//                        email = it.email,
+//                        regDate = it.regDate?: 0L,
+//                        profileThumbnail = it.profileThumbnail,
+//                        fToken = it.fToken?: ""
+//                    )
+//                }
+
+//            println("probe :: [User Test] :: Collect !! : $user")
         }
     }
 
@@ -88,6 +117,25 @@ class UserRepoTest {
             val flow = userRepository.user(cmdUser)
             val res = flow.first()
             println("probe :: [TEST] :: test03_user : $res")
+
+//            flow.map { user -> user.let {
+//                    CmdUser(
+//                        account = it.account?: "",
+//                        nickName = it.nickName?: "",
+//                        email = it.email,
+//                        regDate = it.regDate?: 0L,
+//                        profileThumbnail = it.profileThumbnail,
+//                        fToken = it.fToken?: ""
+//                    )
+//                }
+//                }.collect {
+//                    println("probe :: [User Test] :: Collect !! : $it")
+//                }
+
+
+//            flow.collect {
+//                println("probe :: [TEST] :: test03_user : COLLECT : ${it}")
+//            }
         }
     }
 
