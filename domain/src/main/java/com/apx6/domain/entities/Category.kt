@@ -1,8 +1,10 @@
 package com.apx6.domain.entities
 
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
-import com.apx6.domain.constants.CmdEntityTags
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import com.apx6.domain.entities.Category.Companion.TABLE_CATEGORY
 
 @Entity(
@@ -19,14 +21,11 @@ import com.apx6.domain.entities.Category.Companion.TABLE_CATEGORY
 )
 data class Category(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = CmdEntityTags.ID)
-    var id: Long?= 0L,
+    val id: Int = 0,
 
-    @ColumnInfo(name = CmdEntityTags.UID)
-    val uid: Long?= 0L,
+    var uid: Int,
 
-    @ColumnInfo(name = CmdEntityTags.NAME)
-    val name: String?= ""
+    var name: String
 ) {
     companion object {
         const val TABLE_CATEGORY = "category"

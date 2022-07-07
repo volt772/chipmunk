@@ -2,10 +2,10 @@ package com.apx6.domain.dto
 
 data class CmdCategory (
 
-    val id: Long,
+    val id: Int,
 
     val name: String,
 
-    val uid: Long
+    val uid: Int
 
 )

@@ -27,30 +27,21 @@ data class Task(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = CmdEntityTags.ID)
-    var id: Long = 0,
+    val id: Int = 0,
 
-    @ColumnInfo(name = CmdEntityTags.CID)
-    val cid: Long?= 0L,
+    var cid: Int,
 
-    @ColumnInfo(name = CmdEntityTags.UID)
-    val uid: Long?= 0L,
+    var uid: Int,
 
-    @ColumnInfo(name = CmdEntityTags.TITLE)
-    val title: String?= "",
+    var title: String,
 
-    @ColumnInfo(name = CmdEntityTags.MEMO)
-    val memo: String?= "",
+    var memo: String?= "",
 
-    @ColumnInfo(name = CmdEntityTags.START_DATE)
-    val startDate: Long?= 0L,
+    var startDate: Long,
 
-    @ColumnInfo(name = CmdEntityTags.END_DATE)
-    val endDate: Long?= 0L
-
+    var endDate: Long
 ) {
-
     companion object {
         const val TABLE_TASK = "task"
     }
-
 }

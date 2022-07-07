@@ -1,8 +1,10 @@
 package com.apx6.domain.entities
 
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
-import com.apx6.domain.constants.CmdEntityTags
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import com.apx6.domain.entities.Notification.Companion.TABLE_NOTIFICATION
 
 @Entity(
@@ -20,19 +22,13 @@ import com.apx6.domain.entities.Notification.Companion.TABLE_NOTIFICATION
 data class Notification(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = CmdEntityTags.ID)
-    var id: Long?= 0L,
+    val id: Int = 0,
 
-    @ColumnInfo(name = CmdEntityTags.TID)
-    val tid: Long?= 0L,
+    var tid: Int,
 
-    @ColumnInfo(name = CmdEntityTags.PERIOD)
-    val period: Long?= 0L
-
+    var period: Long
 ) {
-
     companion object {
         const val TABLE_NOTIFICATION = "notification"
     }
-
 }

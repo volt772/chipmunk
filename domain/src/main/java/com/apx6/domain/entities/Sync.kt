@@ -1,8 +1,10 @@
 package com.apx6.domain.entities
 
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
-import com.apx6.domain.constants.CmdEntityTags
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import com.apx6.domain.entities.Sync.Companion.TABLE_SYNC
 
 @Entity(
@@ -20,22 +22,15 @@ import com.apx6.domain.entities.Sync.Companion.TABLE_SYNC
 data class Sync(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = CmdEntityTags.ID)
-    var id: Long?= 0L,
+    val id: Int = 0,
 
-    @ColumnInfo(name = CmdEntityTags.UID)
-    val uid: Long?= 0L,
+    var uid: Int,
 
-    @ColumnInfo(name = CmdEntityTags.SYNC_TIME)
-    val syncTime: Long?= 0L,
+    var syncTime: Long,
 
-    @ColumnInfo(name = CmdEntityTags.SYNC_RESULT)
-    val syncResult: Boolean?= false
-
+    var syncResult: Boolean
 ) {
-
     companion object {
         const val TABLE_SYNC = "sync"
     }
-
 }

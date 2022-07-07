@@ -59,22 +59,6 @@ class UserRepoTest {
     @Test
     fun test02_get_user() {
         runBlocking {
-//            val res = userRepository.getUser()
-//
-//            val cmdUser = res.map {
-//                CmdUser(
-//                    account = it.account?: "",
-//                    nickName = it.nickName?: "",
-//                    email = it.email,
-//                    regDate = it.regDate?: 0L,
-//                    profileThumbnail = it.profileThumbnail,
-//                    fToken = it.fToken?: ""
-//                )
-//            }.collect {
-//                println("probe :: [TEST] :: test02_get_user : $it")
-//            }
-
-
             userRepository
                 .getUser()
                 .map { user ->
@@ -91,12 +75,6 @@ class UserRepoTest {
                 }.collect {
                     println("probe :: [User Test] :: Collect !! : $it")
                 }
-//
-//            val user = userRepository
-//                .getUser()
-//                .firstOrNull()
-//
-//            println("probe :: [User Test] :: Collect !! : $user")
         }
     }
 
@@ -107,25 +85,6 @@ class UserRepoTest {
             val flow = userRepository.user(cmdUser)
             val res = flow.first()
             println("probe :: [TEST] :: test03_user : $res")
-
-//            flow.map { user -> user.let {
-//                    CmdUser(
-//                        account = it.account?: "",
-//                        nickName = it.nickName?: "",
-//                        email = it.email,
-//                        regDate = it.regDate?: 0L,
-//                        profileThumbnail = it.profileThumbnail,
-//                        fToken = it.fToken?: ""
-//                    )
-//                }
-//                }.collect {
-//                    println("probe :: [User Test] :: Collect !! : $it")
-//                }
-
-
-//            flow.collect {
-//                println("probe :: [TEST] :: test03_user : COLLECT : ${it}")
-//            }
         }
     }
 
