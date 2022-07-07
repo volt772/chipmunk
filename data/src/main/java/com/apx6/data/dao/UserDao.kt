@@ -2,6 +2,7 @@ package com.apx6.data.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.entities.User
 import kotlinx.coroutines.flow.Flow
 
@@ -13,7 +14,7 @@ abstract class UserDao : BaseDao<User>() {
 
     /* ▼ SELECT ==========================================================================================================================*/
     @Query("SELECT * FROM ${User.TABLE_USER}")
-    abstract fun getUser(): Flow<User?>
+    abstract fun getUser(): Flow<CmdUser?>
 
     /* ▼ INSERT ==========================================================================================================================*/
 

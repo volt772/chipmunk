@@ -94,18 +94,8 @@ class UserRepoTest {
 //
 //            val user = userRepository
 //                .getUser()
-//                .filterNotNull()
-//                .collect {
-//                    CmdUser(
-//                        account = it.account?: "",
-//                        nickName = it.nickName?: "",
-//                        email = it.email,
-//                        regDate = it.regDate?: 0L,
-//                        profileThumbnail = it.profileThumbnail,
-//                        fToken = it.fToken?: ""
-//                    )
-//                }
-
+//                .firstOrNull()
+//
 //            println("probe :: [User Test] :: Collect !! : $user")
         }
     }

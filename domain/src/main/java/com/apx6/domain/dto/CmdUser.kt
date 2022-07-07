@@ -2,6 +2,8 @@ package com.apx6.domain.dto
 
 data class CmdUser (
 
+    val id: Long = 0L,
+
     val account: String,
 
     val nickName: String,

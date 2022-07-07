@@ -127,7 +127,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                     when (state) {
                         is State.Loading -> println("probe :: status :: LOADING")
                         is State.Success -> println("probe :: status :: SUCCESS : ${state.data}")
-                        is State.Error -> println("probe :: status :: ERROR")
+                        is State.Error -> println("probe :: status :: ERROR : ${state.message}")
                     }
                 }
             }

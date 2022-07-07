@@ -9,6 +9,7 @@ import com.apx6.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,9 +20,9 @@ class DashBoardViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : BaseViewModel() {
 
-    private val _user: MutableStateFlow<State<User?>> = MutableStateFlow(State.loading())
+    private val _user: MutableStateFlow<State<CmdUser?>> = MutableStateFlow(State.loading())
 
-    val user: StateFlow<State<User?>> = _user
+    val user: StateFlow<State<CmdUser?>> = _user
 
     fun getUser() {
         val testUser = CmdUser(

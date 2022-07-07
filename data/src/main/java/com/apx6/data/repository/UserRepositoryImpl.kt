@@ -22,17 +22,18 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getUser(): Flow<User?> {
-        return userDao.getUser()
+        TODO()
+//        return userDao.getUser()
     }
 
-    override suspend fun user(user: CmdUser): Flow<Resource<User?>> {
-        return object: BoundaryRepository<User?, CmdUser>() {
+    override suspend fun user(user: CmdUser): Flow<Resource<CmdUser?>> {
+        return object: BoundaryRepository<CmdUser?, CmdUser>() {
             override suspend fun saveRemoteData(response: CmdUser) {
                 val entity = userMapper.userToEntity(response)
                 userDao.insertOrUpdate(entity)
             }
 
-            override fun fetchFromLocal(): Flow<User?> {
+            override fun fetchFromLocal(): Flow<CmdUser?> {
                 return userDao.getUser()
             }
 
