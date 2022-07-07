@@ -93,26 +93,6 @@ class UserRepoTest {
         println("[TEST] probe : ==========================================================================================================================================")
     }
 
-    @Test
-    fun test02_get_user() {
-//        runBlocking {
-//            val res = userRepository.getUser()
-//
-//            val cmdUser = res.map {
-//                CmdUser(
-//                    account = it.account?: "",
-//                    nickName = it.nickName?: "",
-//                    email = it.email,
-//                    regDate = it.regDate?: 0L,
-//                    profileThumbnail = it.profileThumbnail,
-//                    fToken = it.fToken?: ""
-//                )
-//            }.collect {
-//                println("probe :: res : $it")
-//            }
-//        }
-    }
-
     companion object {
         const val baseAccountName = "CHECK"
 

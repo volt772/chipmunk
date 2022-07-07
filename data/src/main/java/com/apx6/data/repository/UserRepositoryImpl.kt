@@ -21,9 +21,8 @@ class UserRepositoryImpl @Inject constructor(
         userDao.insertOrUpdate(entity)
     }
 
-    override suspend fun getUser(): Flow<User?> {
-        TODO()
-//        return userDao.getUser()
+    override suspend fun getUser(): Flow<CmdUser?> {
+        return userDao.getUser()
     }
 
     override suspend fun user(user: CmdUser): Flow<Resource<CmdUser?>> {
