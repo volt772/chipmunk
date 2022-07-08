@@ -1,13 +1,7 @@
 package com.apx6.data.di
 
-import com.apx6.data.mapper.CategoryMapperImpl
-import com.apx6.data.mapper.NotificationMapperImpl
-import com.apx6.data.mapper.TaskMapperImpl
-import com.apx6.data.mapper.UserMapperImpl
-import com.apx6.domain.mapper.CategoryMapper
-import com.apx6.domain.mapper.NotificationMapper
-import com.apx6.domain.mapper.TaskMapper
-import com.apx6.domain.mapper.UserMapper
+import com.apx6.data.mapper.*
+import com.apx6.domain.mapper.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -37,6 +31,10 @@ abstract class MapperModule {
     @Binds
     @Singleton
     abstract fun bindNotificationMapper(impl: NotificationMapperImpl): NotificationMapper
+
+    @Binds
+    @Singleton
+    abstract fun bindSyncMapper(impl: SyncMapperImpl): SyncMapper
 
 //
 //    @Binds

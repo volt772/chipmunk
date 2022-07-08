@@ -1,13 +1,7 @@
 package com.apx6.data.di
 
-import com.apx6.data.repository.CategoryRepositoryImpl
-import com.apx6.data.repository.NotificationRepositoryImpl
-import com.apx6.data.repository.TaskRepositoryImpl
-import com.apx6.data.repository.UserRepositoryImpl
-import com.apx6.domain.repository.CategoryRepository
-import com.apx6.domain.repository.NotificationRepository
-import com.apx6.domain.repository.TaskRepository
-import com.apx6.domain.repository.UserRepository
+import com.apx6.data.repository.*
+import com.apx6.domain.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -37,6 +31,10 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindNotificationRepository(impl: NotificationRepositoryImpl): NotificationRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindSyncRepository(impl: SyncRepositoryImpl): SyncRepository
 //
 //    @Binds
 //    @Singleton

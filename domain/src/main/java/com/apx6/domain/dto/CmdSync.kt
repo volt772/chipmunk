@@ -2,7 +2,7 @@ package com.apx6.domain.dto
 
 data class CmdSync (
 
-    val id: Int = 0,
+    val id: Int = 1,
 
     val uid: Int,
 
