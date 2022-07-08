@@ -1,9 +1,11 @@
 package com.apx6.data.di
 
 import com.apx6.data.repository.CategoryRepositoryImpl
+import com.apx6.data.repository.NotificationRepositoryImpl
 import com.apx6.data.repository.TaskRepositoryImpl
 import com.apx6.data.repository.UserRepositoryImpl
 import com.apx6.domain.repository.CategoryRepository
+import com.apx6.domain.repository.NotificationRepository
 import com.apx6.domain.repository.TaskRepository
 import com.apx6.domain.repository.UserRepository
 import dagger.Binds
@@ -31,6 +33,10 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindTaskRepository(impl: TaskRepositoryImpl): TaskRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindNotificationRepository(impl: NotificationRepositoryImpl): NotificationRepository
 //
 //    @Binds
 //    @Singleton
