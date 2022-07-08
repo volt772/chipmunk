@@ -48,24 +48,9 @@ class CategoryRepoTest {
         hiltRule.inject()
 
         runBlocking {
-//            userRepository
-//                .getUser()
-//                .mapNotNull {
-//                    user = CmdUser(
-//                        account = it.account?: "",
-//                        nickName = it.nickName?: "",
-//                        email = it.email,
-//                        regDate = it.regDate?: 0L,
-//                        profileThumbnail = it.profileThumbnail,
-//                        fToken = it.fToken?: ""
-//                    )
-//                }
-//
-//            /* User is NULL*/
-//            if (user == null) {
-//                println("probe :: [Category Test] :: User is NULL!!!!!!!!!!")
-//            }
-
+            user = userRepository
+                .getUser()
+                .firstOrNull()
         }
     }
 
@@ -79,6 +64,17 @@ class CategoryRepoTest {
 
         runBlocking {
             println("probe :: first user : $user")
+            user?.let { _user ->
+                val sampleCategory = CmdCategory(
+                    name = "생활1",
+                    uid = _user.id
+                )
+
+                categoryRepository.postCategory(sampleCategory)
+            } ?: run {
+                println("probe :: [TEST Category] :: User is Null !!")
+            }
+
         }
 
         println("[TEST] probe : ==========================================================================================================================================")
@@ -88,7 +84,15 @@ class CategoryRepoTest {
     fun test02_get_category() {
 
         runBlocking {
+            val sc = cmdDatabase.categoryDao().testGetCategory()
 
+            val category = sc?.let {
+                categoryRepository.getCategory(id = sc.id).firstOrNull()
+            } ?: run {
+                null
+            }
+
+            println("probe :: [TEST Category] :: Category is : $category")
         }
 
         println("[TEST] probe : ==========================================================================================================================================")
@@ -98,7 +102,13 @@ class CategoryRepoTest {
     fun test03_get_categories() {
 
         runBlocking {
+            val categories = categoryRepository.getCategories().firstOrNull()
 
+            categories?.let { _category ->
+                _category.forEach {
+                    println("probe :: [TEST Category] :: Categories : $it")
+                }
+            }
         }
 
         println("[TEST] probe : ==========================================================================================================================================")
@@ -108,7 +118,20 @@ class CategoryRepoTest {
     fun test04_patch_category() {
 
         runBlocking {
+            val sc = cmdDatabase.categoryDao().testGetCategory()
 
+            val result = sc?.let {
+                val updateCategory = CmdCategory(
+                    id = it.id,
+                    name = "수정된 햄스터",
+                    uid = it.uid
+                )
+                categoryRepository.patchCategory(category = updateCategory)
+            } ?: run {
+                null
+            }
+
+            println("probe :: [TEST Category] :: Category Patch Result : $result")
         }
 
         println("[TEST] probe : ==========================================================================================================================================")
@@ -116,22 +139,20 @@ class CategoryRepoTest {
 
     @Test
     fun test05_del_category() {
+        val sc = cmdDatabase.categoryDao().testGetLastCategory()
 
         runBlocking {
+            val result = sc?.let {
+                categoryRepository.delCategory(category = it)
+            } ?: run {
+                null
+            }
 
+            println("probe :: [TEST Category] :: Category Del Result : $result")
         }
 
         println("[TEST] probe : ==========================================================================================================================================")
     }
 
-    companion object {
-
-//        fun sampleCategory(): CmdCategory {
-//            return CmdCategory(
-//                id = 0L,
-//                name = "생활",
-//                uid =
-//            )
-//        }
-    }
+    companion object
 }

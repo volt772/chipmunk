@@ -13,6 +13,7 @@ class CategoryMapperImpl @Inject constructor(
         category: CmdCategory
     ): Category {
         return Category(
+            id = category.id,
             uid = category.uid,
             name = category.name
         )

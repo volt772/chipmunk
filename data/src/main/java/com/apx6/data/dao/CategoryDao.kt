@@ -17,7 +17,7 @@ abstract class CategoryDao : BaseDao<Category>() {
     abstract fun getCategories(): Flow<List<CmdCategory>>
 
     @Query("SELECT * FROM ${Category.TABLE_NAME} WHERE id = :id")
-    abstract fun getCategory(id: Long): Flow<CmdCategory?>
+    abstract fun getCategory(id: Int): Flow<CmdCategory?>
 
     /* ▼ INSERT ==========================================================================================================================*/
 
@@ -26,5 +26,10 @@ abstract class CategoryDao : BaseDao<Category>() {
     /* ▼ DELETE ==========================================================================================================================*/
 
     /* ▼ TEST ONLY =======================================================================================================================*/
+    @Query("SELECT * FROM ${Category.TABLE_NAME} LIMIT 1")
+    abstract fun testGetCategory(): CmdCategory?
+
+    @Query("SELECT * FROM ${Category.TABLE_NAME} WHERE id = (SELECT max(id) FROM ${Category.TABLE_NAME})")
+    abstract fun testGetLastCategory(): CmdCategory?
 
 }

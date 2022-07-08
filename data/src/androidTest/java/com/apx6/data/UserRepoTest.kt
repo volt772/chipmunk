@@ -45,12 +45,11 @@ class UserRepoTest {
     }
 
     @Test
-    fun test01_save_user() {
+    fun test01_post_user() {
 
         runBlocking {
             val cmdUser = sampleUser()
             userRepository.postUser(cmdUser)
-
         }
 
         println("[TEST] probe : ==========================================================================================================================================")
@@ -59,22 +58,10 @@ class UserRepoTest {
     @Test
     fun test02_get_user() {
         runBlocking {
-            userRepository
+            val user = userRepository
                 .getUser()
-                .map { user ->
-                    user?.let {
-                        CmdUser(
-                            account = it.account?: "",
-                            nickName = it.nickName?: "",
-                            email = it.email,
-                            regDate = it.regDate?: 0L,
-                            profileThumbnail = it.profileThumbnail,
-                            fToken = it.fToken?: ""
-                        )
-                    }
-                }.collect {
-                    println("probe :: [User Test] :: Collect !! : $it")
-                }
+                .firstOrNull()
+            println("probe :: [User Test] :: User : $user")
         }
     }
 
