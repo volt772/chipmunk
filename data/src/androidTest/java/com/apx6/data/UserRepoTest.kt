@@ -8,7 +8,8 @@ import com.apx6.domain.repository.UserRepository
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
 import org.junit.*
 import org.junit.runner.RunWith
@@ -61,7 +62,8 @@ class UserRepoTest {
             val user = userRepository
                 .getUser()
                 .firstOrNull()
-            println("probe :: [User Test] :: User : $user")
+
+            println("probe :: [TEST User] :: User : $user")
         }
     }
 
@@ -71,10 +73,20 @@ class UserRepoTest {
             val cmdUser = sampleUser()
             val flow = userRepository.user(cmdUser)
             val res = flow.first()
-            println("probe :: [TEST] :: test03_user : $res")
+            println("probe :: [TEST User] :: User Flow ?? : $res")
         }
     }
 
+    @Test
+    fun test04_del_user() {
+        val user = sampleUser()
+
+        runBlocking {
+            val result = userRepository.delUser(user)
+
+            println("probe :: [TEST User] :: User Del Result : $result")
+        }
+    }
     companion object {
         const val baseAccountName = "CHECK"
 

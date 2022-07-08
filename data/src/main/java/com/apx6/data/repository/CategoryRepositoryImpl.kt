@@ -56,13 +56,5 @@ class CategoryRepositoryImpl @Inject constructor(
     private suspend fun convertToEntity(category: CmdCategory): Category {
         return categoryMapper.categoryToEntity(category)
     }
-//
-//    override suspend fun patchCategory(): CmdCategory {
-//        TODO("Not yet implemented")
-//    }
-//
-//    override suspend fun delCategory(): Boolean {
-//        TODO("Not yet implemented")
-//    }
 
 }

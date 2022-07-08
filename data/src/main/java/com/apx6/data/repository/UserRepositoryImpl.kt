@@ -40,4 +40,13 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun getUser(): Flow<CmdUser?> {
         return userDao.getUser()
     }
+
+    override suspend fun delUser(user: CmdUser): Boolean {
+        val entity = convertToEntity(user)
+        return userDao.delete(entity) > 0
+    }
+
+    private suspend fun convertToEntity(user: CmdUser): User {
+        return userMapper.userToEntity(user)
+    }
 }

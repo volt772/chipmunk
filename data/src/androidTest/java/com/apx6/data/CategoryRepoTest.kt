@@ -9,11 +9,9 @@ import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.UserRepository
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import org.junit.*
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters

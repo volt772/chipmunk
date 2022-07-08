@@ -1,7 +1,6 @@
 package com.apx6.domain.repository
 
 import com.apx6.domain.dto.CmdCategory
-import com.apx6.domain.entities.Category
 import kotlinx.coroutines.flow.Flow
 
 interface CategoryRepository {
