@@ -1,8 +1,10 @@
 package com.apx6.data.di
 
 import com.apx6.data.mapper.CategoryMapperImpl
+import com.apx6.data.mapper.TaskMapperImpl
 import com.apx6.data.mapper.UserMapperImpl
 import com.apx6.domain.mapper.CategoryMapper
+import com.apx6.domain.mapper.TaskMapper
 import com.apx6.domain.mapper.UserMapper
 import dagger.Binds
 import dagger.Module
@@ -25,6 +27,10 @@ abstract class MapperModule {
     @Binds
     @Singleton
     abstract fun bindCategoryMapper(impl: CategoryMapperImpl): CategoryMapper
+
+    @Binds
+    @Singleton
+    abstract fun bindTaskMapper(impl: TaskMapperImpl): TaskMapper
 
 //
 //    @Binds
