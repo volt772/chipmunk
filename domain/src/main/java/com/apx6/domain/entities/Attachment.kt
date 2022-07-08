@@ -5,10 +5,10 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.apx6.domain.entities.Attachment.Companion.TABLE_ATTACHMENT
+import com.apx6.domain.entities.Attachment.Companion.TABLE_NAME
 
 @Entity(
-    tableName = TABLE_ATTACHMENT,
+    tableName = TABLE_NAME,
     foreignKeys = [
         ForeignKey(
             entity = Task::class,
@@ -35,6 +35,6 @@ data class Attachment(
     var createdTime: Long
 ) {
     companion object {
-        const val TABLE_ATTACHMENT = "attachment"
+        const val TABLE_NAME = "attachment"
     }
 }

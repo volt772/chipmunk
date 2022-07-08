@@ -3,10 +3,10 @@ package com.apx6.domain.entities
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.apx6.domain.entities.User.Companion.TABLE_USER
+import com.apx6.domain.entities.User.Companion.TABLE_NAME
 
 @Entity(
-    tableName = TABLE_USER,
+    tableName = TABLE_NAME,
     indices = [
         Index(value = ["id"], unique = true),
         Index(value = ["nickName"], unique = true),
@@ -29,6 +29,6 @@ data class User(
     var fToken: String
 ) {
     companion object {
-        const val TABLE_USER = "user"
+        const val TABLE_NAME = "user"
     }
 }

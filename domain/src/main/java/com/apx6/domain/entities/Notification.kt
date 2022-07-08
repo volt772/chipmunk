@@ -5,10 +5,10 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.apx6.domain.entities.Notification.Companion.TABLE_NOTIFICATION
+import com.apx6.domain.entities.Notification.Companion.TABLE_NAME
 
 @Entity(
-    tableName = TABLE_NOTIFICATION,
+    tableName = TABLE_NAME,
     foreignKeys = [
         ForeignKey(
             entity = Task::class,
@@ -29,6 +29,6 @@ data class Notification(
     var period: Long
 ) {
     companion object {
-        const val TABLE_NOTIFICATION = "notification"
+        const val TABLE_NAME = "notification"
     }
 }

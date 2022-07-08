@@ -5,10 +5,10 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.apx6.domain.entities.Sync.Companion.TABLE_SYNC
+import com.apx6.domain.entities.Sync.Companion.TABLE_NAME
 
 @Entity(
-    tableName = TABLE_SYNC,
+    tableName = TABLE_NAME,
     foreignKeys = [
         ForeignKey(
             entity = User::class,
@@ -31,6 +31,6 @@ data class Sync(
     var syncResult: Boolean
 ) {
     companion object {
-        const val TABLE_SYNC = "sync"
+        const val TABLE_NAME = "sync"
     }
 }

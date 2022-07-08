@@ -3,10 +3,10 @@ package com.apx6.domain.entities
 import androidx.room.*
 import androidx.room.ForeignKey.Companion.CASCADE
 import com.apx6.domain.constants.CmdEntityTags
-import com.apx6.domain.entities.Task.Companion.TABLE_TASK
+import com.apx6.domain.entities.Task.Companion.TABLE_NAME
 
 @Entity(
-    tableName = TABLE_TASK,
+    tableName = TABLE_NAME,
     foreignKeys = [
         ForeignKey(
             entity = User::class,
@@ -42,6 +42,6 @@ data class Task(
     var endDate: Long
 ) {
     companion object {
-        const val TABLE_TASK = "task"
+        const val TABLE_NAME = "task"
     }
 }

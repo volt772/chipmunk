@@ -5,10 +5,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
 
+    /* Combined*/
+    suspend fun user(user: CmdUser): Flow<Resource<CmdUser?>>
+
     suspend fun postUser(user: CmdUser)
 
     suspend fun getUser(): Flow<CmdUser?>
-
-    suspend fun user(user: CmdUser): Flow<Resource<CmdUser?>>
 
 }

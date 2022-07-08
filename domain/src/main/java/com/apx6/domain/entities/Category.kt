@@ -5,10 +5,10 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.apx6.domain.entities.Category.Companion.TABLE_CATEGORY
+import com.apx6.domain.entities.Category.Companion.TABLE_NAME
 
 @Entity(
-    tableName = TABLE_CATEGORY,
+    tableName = TABLE_NAME,
     foreignKeys = [
         ForeignKey(
             entity = User::class,
@@ -28,6 +28,6 @@ data class Category(
     var name: String
 ) {
     companion object {
-        const val TABLE_CATEGORY = "category"
+        const val TABLE_NAME = "category"
     }
 }
