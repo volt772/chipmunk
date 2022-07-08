@@ -1,21 +1,21 @@
 package com.apx6.domain.repository
 
-import com.apx6.domain.dto.CmdCategory
+import com.apx6.domain.dto.CmdTask
 import kotlinx.coroutines.flow.Flow
 
 interface TaskRepository {
 
-//    /* Combined*/
-//    suspend fun category(category: CmdCategory): Flow<Resource<List<CmdCategory>>>
-//
-//    suspend fun postCategory(category: CmdCategory)
-//
-//    suspend fun getCategories(): Flow<List<CmdCategory>>
-//
-//    suspend fun getCategory(id: Int): Flow<CmdCategory?>
-//
-//    suspend fun patchCategory(category: CmdCategory): Boolean
-//
-//    suspend fun delCategory(category: CmdCategory): Boolean
+    /* Combined*/
+    suspend fun task(task: CmdTask): Flow<Resource<List<CmdTask>>>
+
+    suspend fun postTask(task: CmdTask)
+
+    suspend fun getTasks(): Flow<List<CmdTask>>
+
+    suspend fun getTask(id: Int): Flow<CmdTask?>
+
+    suspend fun patchTask(task: CmdTask): Boolean
+
+    suspend fun delTask(task: CmdTask): Boolean
 
 }

@@ -34,7 +34,6 @@ class CategoryRepositoryImpl @Inject constructor(
         categoryDao.insertOrUpdate(entity)
     }
 
-
     override suspend fun getCategories(): Flow<List<CmdCategory>> {
         return categoryDao.getCategories()
     }

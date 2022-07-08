@@ -46,9 +46,12 @@ class CategoryRepoTest {
         hiltRule.inject()
 
         runBlocking {
-            user = userRepository
-                .getUser()
-                .firstOrNull()
+            user = cmdDatabase.userDao().testGetUser()
+
+            if (user == null) {
+                println("probe :: [TEST Category] :: User is NULL !!")
+                Assert.fail()
+            }
         }
     }
 
@@ -61,17 +64,12 @@ class CategoryRepoTest {
     fun test01_post_category() {
 
         runBlocking {
-            println("probe :: first user : $user")
-            user?.let { _user ->
-                val sampleCategory = CmdCategory(
-                    name = "생활1",
-                    uid = _user.id
-                )
+            val sampleCategory = CmdCategory(
+                name = "생활3",
+                uid = user!!.id
+            )
 
-                categoryRepository.postCategory(sampleCategory)
-            } ?: run {
-                println("probe :: [TEST Category] :: User is Null !!")
-            }
+            categoryRepository.postCategory(sampleCategory)
 
         }
 

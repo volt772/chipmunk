@@ -4,6 +4,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.apx6.data.db.CmdDatabase
 import com.apx6.data.utils.TestCoroutineRule
 import com.apx6.domain.dto.CmdCategory
+import com.apx6.domain.dto.CmdTask
 import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.TaskRepository
@@ -16,6 +17,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.*
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -51,7 +53,13 @@ class TaskRepoTest {
         hiltRule.inject()
 
         runBlocking {
-            user = userRepository.getUser().firstOrNull()
+            user = cmdDatabase.userDao().testGetUser()
+            category = cmdDatabase.categoryDao().testGetCategory()
+
+            if (user == null && category == null) {
+                println("probe :: [TEST Task] :: User & Category are NULL !!")
+                Assert.fail()
+            }
         }
     }
 
@@ -64,18 +72,16 @@ class TaskRepoTest {
     fun test01_post_task() {
 
         runBlocking {
-            println("probe :: first user : $user")
-            user?.let { _user ->
-                val sampleCategory = CmdCategory(
-                    name = "생활1",
-                    uid = _user.id
-                )
+            val sampleTask = CmdTask(
+                cid = category!!.id,
+                uid = user!!.id,
+                title = "할것1",
+                memo = "매우 중요하다!!",
+                startDate = currMillis,
+                endDate = currMillis + TimeUnit.DAYS.toMillis(1)
+            )
 
-                categoryRepository.postCategory(sampleCategory)
-            } ?: run {
-                println("probe :: [TEST Category] :: User is Null !!")
-            }
-
+            taskRepository.postTask(sampleTask)
         }
 
         println("[TEST] probe : ==========================================================================================================================================")
@@ -85,15 +91,31 @@ class TaskRepoTest {
     fun test02_get_task() {
 
         runBlocking {
-            val sc = cmdDatabase.categoryDao().testGetCategory()
+            val st = cmdDatabase.taskDao().testGetTask()
 
-            val category = sc?.let {
-                categoryRepository.getCategory(id = sc.id).firstOrNull()
+            val task = st?.let {
+                taskRepository.getTask(id = st.id).firstOrNull()
             } ?: run {
                 null
             }
 
-            println("probe :: [TEST Category] :: Category is : $category")
+            println("probe :: [TEST Task] :: Task is : $task")
+        }
+
+        println("[TEST] probe : ==========================================================================================================================================")
+    }
+
+    @Test
+    fun test03_get_tasks() {
+
+        runBlocking {
+            val tasks = taskRepository.getTasks().firstOrNull()
+
+            tasks?.let { _task ->
+                _task.forEach {
+                    println("probe :: [TEST Task] :: Tasks : $it")
+                }
+            }
         }
 
         println("[TEST] probe : ==========================================================================================================================================")
@@ -101,22 +123,25 @@ class TaskRepoTest {
 
     @Test
     fun test04_patch_task() {
-
         runBlocking {
-            val sc = cmdDatabase.categoryDao().testGetCategory()
+            val st = cmdDatabase.taskDao().testGetTask()
 
-            val result = sc?.let {
-                val updateCategory = CmdCategory(
+            val result = st?.let {
+                val updateTask = CmdTask(
                     id = it.id,
-                    name = "수정된 햄스터",
-                    uid = it.uid
+                    cid = it.cid,
+                    uid = it.uid,
+                    title = "수정된 할것!!",
+                    memo = "오모오모!!!!!!1",
+                    startDate = it.startDate,
+                    endDate = it.endDate
                 )
-                categoryRepository.patchCategory(category = updateCategory)
+                taskRepository.patchTask(task = updateTask)
             } ?: run {
                 null
             }
 
-            println("probe :: [TEST Category] :: Category Patch Result : $result")
+            println("probe :: [TEST Task] :: Task Patch Result : $result")
         }
 
         println("[TEST] probe : ==========================================================================================================================================")
@@ -124,20 +149,26 @@ class TaskRepoTest {
 
     @Test
     fun test05_del_task() {
-        val sc = cmdDatabase.categoryDao().testGetLastCategory()
+        val st = cmdDatabase.taskDao().testGetLastTask()
 
         runBlocking {
-            val result = sc?.let {
-                categoryRepository.delCategory(category = it)
+            val result = st?.let {
+                taskRepository.delTask(task = it)
             } ?: run {
                 null
             }
 
-            println("probe :: [TEST Category] :: Category Del Result : $result")
+            println("probe :: [TEST Task] :: Task Del Result : $result")
         }
 
         println("[TEST] probe : ==========================================================================================================================================")
     }
 
-    companion object
+    companion object {
+        private val currMillis: Long
+            get() {
+                return System.currentTimeMillis()
+            }
+
+    }
 }

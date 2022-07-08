@@ -12,8 +12,8 @@ data class CmdTask (
 
     val memo: String?= "",
 
-    val startDate: String,
+    val startDate: Long,
 
-    val endDate: String
+    val endDate: Long
 
 )
