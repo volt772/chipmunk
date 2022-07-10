@@ -75,3 +75,4 @@ schemas/
 release/
 /captures
 .DS_Store
+.idea/misc.xml

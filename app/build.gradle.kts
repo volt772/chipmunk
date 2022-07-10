@@ -102,6 +102,7 @@ dependencies {
     implementation(Android.coreKtx)
     implementation(Android.constraintLayout)
     implementation(Android.swipeRefreshLayout)
+    implementation(Android.splashScreen)
 
     /* LifeCycle*/
     implementation(Lifecycle.viewModel)
