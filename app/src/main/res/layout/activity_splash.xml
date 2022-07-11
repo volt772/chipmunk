@@ -4,101 +4,10 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:context=".app.ui.DashBoardActivity">
+        android:text="!!!!!!"
+        />
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/md_180"
-            android:fitsSystemWindows="true"
-            android:theme="@style/Theme.Chipmunk.AppBarOverlay">
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/toolbar_layout"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:contentScrim="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:toolbarId="@+id/toolbar">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/Theme.Chipmunk.PopupOverlay" />
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <include layout="@layout/content_scrolling" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/md_16"
-            app:layout_anchor="@id/app_bar"
-            app:layout_anchorGravity="bottom|end"
-            app:srcCompat="@android:drawable/ic_dialog_email" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.constraintlayout.utils.widget.ImageFilterButton
-                android:id="@+id/btn_kakao_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/kakao_login_medium_narrow"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias=".7" />
-
-            <Button
-                android:id="@+id/btn_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="get email"
-                android:backgroundTint="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/btn_kakao_login"
-                />
-
-            <Button
-                android:id="@+id/btn_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Logout"
-                android:backgroundTint="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/btn_email"
-                />
-
-            <Button
-                android:id="@+id/btn_disconn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Disconnection"
-                android:backgroundTint="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/btn_logout"
-                />
-
-            <Button
-                android:id="@+id/btn_random"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Random"
-                android:backgroundTint="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/btn_disconn"
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

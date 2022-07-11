@@ -20,15 +20,25 @@
         android:usesCleartextTraffic="true"
         android:largeHeap="true"
         tools:targetApi="31">
+
         <activity
-            android:name="com.apx6.chipmunk.app.ui.DashBoardActivity"
+            android:name="com.apx6.chipmunk.app.ui.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.Chipmunk.NoActionBar" >
+            android:theme="@style/Theme.App.Starting" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.apx6.chipmunk.app.ui.DashBoardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Chipmunk.NoActionBar" >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
         <activity
