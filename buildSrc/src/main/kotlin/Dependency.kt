@@ -1,8 +1,8 @@
 
 object Version {
-    const val compileSdkVersion = 32
-    const val minSdkVersion = 31
-    const val targetSdkVersion = 32
+    const val compileSdkVersion = 31
+    const val minSdkVersion = 30
+    const val targetSdkVersion = 31
     const val versionCode = 60001
     const val versionName = "6.0.1"
 }
@@ -25,6 +25,11 @@ object Android {
     const val splashScreen = "androidx.core:core-splashscreen:1.0.0-rc01"
 }
 
+object Coroutines {
+    const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
+    const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
+}
+
 object Lifecycle {
     const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
@@ -37,10 +42,10 @@ object Configs {
 }
 
 object Room {
-    const val core = "androidx.room:room-runtime:2.5.0-alpha02"
+    const val core = "androidx.room:room-runtime:2.4.0-alpha04"
     const val rxJava2 = "androidx.room:room-rxjava2:2.4.2"
-    const val ktx = "androidx.room:room-ktx:2.5.0-alpha02"
-    const val compiler = "androidx.room:room-compiler:2.5.0-alpha02"
+    const val ktx = "androidx.room:room-ktx:2.4.0-alpha04"
+    const val compiler = "androidx.room:room-compiler:2.4.0-alpha04"
 }
 
 object Material {

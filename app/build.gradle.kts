@@ -109,6 +109,10 @@ dependencies {
     implementation(Lifecycle.liveData)
     implementation(Lifecycle.runtimeKtx)
 
+    /* Coroutine*/
+    implementation(Coroutines.core)
+    implementation(Coroutines.android)
+
     /* Material*/
     implementation(Material.core)
 

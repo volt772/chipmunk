@@ -1,12 +1,16 @@
 package com.apx6.chipmunk.app.ext
 
+import android.app.Activity
 import android.graphics.Rect
+import android.os.Build
 import android.os.SystemClock
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.WindowInsetsController
 import android.widget.EditText
 import androidx.annotation.UiThread
+import com.apx6.chipmunk.R
 
 /**
  * Component, Visibility (single)
@@ -191,3 +195,19 @@ fun View?.contains(x: Int, y: Int): Boolean {
 }
 
 data class VisibleViewDto(val exposeList: List<View>, val hideList: List<View>)
+
+/* Status Bar*/
+fun Activity?.statusBar(color: Int? = R.color.white) {
+    this?.let { _activity ->
+        _activity.window.apply {
+            insetsController?.setSystemBarsAppearance(
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            )
+
+            color?.let { _color ->
+                statusBarColor = getColor(_color)
+            }
+        }
+    }
+}
