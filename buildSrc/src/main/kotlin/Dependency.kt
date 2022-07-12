@@ -23,6 +23,7 @@ object Android {
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
     const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val splashScreen = "androidx.core:core-splashscreen:1.0.0-rc01"
+    const val legacySupport = "androidx.legacy:legacy-support-v4:1.0.0"
 }
 
 object Coroutines {

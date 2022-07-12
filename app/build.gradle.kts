@@ -103,6 +103,7 @@ dependencies {
     implementation(Android.constraintLayout)
     implementation(Android.swipeRefreshLayout)
     implementation(Android.splashScreen)
+    implementation(Android.legacySupport)
 
     /* LifeCycle*/
     implementation(Lifecycle.viewModel)

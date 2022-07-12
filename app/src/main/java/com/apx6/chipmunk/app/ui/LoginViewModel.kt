@@ -13,16 +13,16 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class SplashViewModel @Inject constructor(
+class LoginViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : BaseViewModel() {
 
-    private val _user: MutableSharedFlow<CmdUser?> = MutableSharedFlow()
-    val user: SharedFlow<CmdUser?> = _user
-
-    fun getUser() {
-        viewModelScope.launch {
-            userRepository.getUser().collect { _user.emit(it) }
-        }
-    }
+//    private val _user: MutableSharedFlow<CmdUser?> = MutableSharedFlow()
+//    val user: SharedFlow<CmdUser?> = _user
+//
+//    fun getUser() {
+//        viewModelScope.launch {
+//            userRepository.getUser().collect { _user.emit(it) }
+//        }
+//    }
 }

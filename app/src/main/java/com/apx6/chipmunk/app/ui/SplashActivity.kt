@@ -2,15 +2,14 @@ package com.apx6.chipmunk.app.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.view.ViewTreeObserver
 import androidx.activity.viewModels
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivitySplashBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 
 @AndroidEntryPoint
@@ -21,33 +20,31 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-//        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
         initView()
+        observeUser()
         viewModel.getUser()
+    }
 
-//        val content: View = findViewById(android.R.id.content)
-//        content.viewTreeObserver.addOnPreDrawListener(
-//            object : ViewTreeObserver.OnPreDrawListener {
-//                override fun onPreDraw(): Boolean {
-//                    // Check if the initial data is ready.
-//                    return if (viewModel.isReady) {
-//                        // The content is ready; start drawing.
-//                        content.viewTreeObserver.removeOnPreDrawListener(this)
-//                        moveToDashBoard()
-//                        true
-//                    } else {
-//                        // The content is not ready; suspend.
-//                        false
-//                    }
-//                }
-//            }
-//        )
+    private fun observeUser() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.user.collect { user ->
+                user?.let {
+                    moveToDashBoard()
+                } ?: run {
+                    moveToLogin()
+                }
+            }
+        }
     }
 
     private fun initView() {
         this.statusBar(R.color.material_blue_400)
+    }
+
+    private fun moveToLogin() {
+
     }
 
     private fun moveToDashBoard() {
