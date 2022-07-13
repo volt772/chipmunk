@@ -4,9 +4,9 @@ import com.apx6.data.dao.TaskDao
 import com.apx6.domain.dto.CmdTask
 import com.apx6.domain.entities.Task
 import com.apx6.domain.mapper.TaskMapper
-import com.apx6.domain.repository.BoundaryRepository
 import com.apx6.domain.repository.Resource
 import com.apx6.domain.repository.TaskRepository
+import com.apx6.domain.repository.boundary.LocalBoundaryRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -16,8 +16,8 @@ class TaskRepositoryImpl @Inject constructor(
 ): TaskRepository {
 
     override suspend fun task(task: CmdTask): Flow<Resource<List<CmdTask>>> {
-        return object: BoundaryRepository<List<CmdTask>, CmdTask>() {
-            override suspend fun saveRemoteData(response: CmdTask) {
+        return object: LocalBoundaryRepository<List<CmdTask>, CmdTask>() {
+            override suspend fun postToLocal(obj: CmdTask) {
                 val entity = convertToEntity(task)
                 taskDao.insertOrUpdate(entity)
             }
@@ -26,7 +26,7 @@ class TaskRepositoryImpl @Inject constructor(
                 return taskDao.getTasks()
             }
 
-        }.asFlow()
+        }.asFlow(task)
     }
 
     override suspend fun postTask(task: CmdTask) {

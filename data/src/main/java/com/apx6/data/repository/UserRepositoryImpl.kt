@@ -4,11 +4,10 @@ import com.apx6.data.dao.UserDao
 import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.entities.User
 import com.apx6.domain.mapper.UserMapper
-import com.apx6.domain.repository.BoundaryRepository
+import com.apx6.domain.repository.boundary.LocalBoundaryRepository
 import com.apx6.domain.repository.Resource
 import com.apx6.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
@@ -17,19 +16,16 @@ class UserRepositoryImpl @Inject constructor(
 ): UserRepository {
 
     override suspend fun user(user: CmdUser): Flow<Resource<CmdUser?>> {
-        return object: BoundaryRepository<CmdUser?, CmdUser>() {
-            override suspend fun saveRemoteData(response: CmdUser) {
-                val entity = userMapper.userToEntity(response)
+        return object: LocalBoundaryRepository<CmdUser?, CmdUser>() {
+            override suspend fun postToLocal(obj: CmdUser) {
+                val entity = userMapper.userToEntity(obj)
                 userDao.insertOrUpdate(entity)
             }
 
             override fun fetchFromLocal(): Flow<CmdUser?> {
                 return userDao.getUser()
             }
-
-//            override suspend fun fetchFromRemote(): Response<User> {
-//            }
-        }.asFlow()
+        }.asFlow(user)
     }
 
     override suspend fun postUser(user: CmdUser) {

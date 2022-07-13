@@ -4,9 +4,10 @@ import com.apx6.data.dao.SyncDao
 import com.apx6.domain.dto.CmdSync
 import com.apx6.domain.entities.Sync
 import com.apx6.domain.mapper.SyncMapper
-import com.apx6.domain.repository.BoundaryRepository
+import com.apx6.domain.repository.boundary.RemoteBoundaryRepository
 import com.apx6.domain.repository.Resource
 import com.apx6.domain.repository.SyncRepository
+import com.apx6.domain.repository.boundary.LocalBoundaryRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -16,8 +17,8 @@ class SyncRepositoryImpl @Inject constructor(
 ): SyncRepository {
 
     override suspend fun sync(sync: CmdSync): Flow<Resource<CmdSync?>> {
-        return object: BoundaryRepository<CmdSync?, CmdSync>() {
-            override suspend fun saveRemoteData(response: CmdSync) {
+        return object: LocalBoundaryRepository<CmdSync?, CmdSync>() {
+            override suspend fun postToLocal(obj: CmdSync) {
 //                val entity = convertToEntity(response)
 //                syncDao.insertOrUpdate(entity)
             }
@@ -26,7 +27,7 @@ class SyncRepositoryImpl @Inject constructor(
                 return syncDao.getSync()
             }
 
-        }.asFlow()
+        }.asFlow(sync)
     }
 
     override suspend fun postSync(sync: CmdSync) {

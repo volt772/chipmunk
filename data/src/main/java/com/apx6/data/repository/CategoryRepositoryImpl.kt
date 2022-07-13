@@ -4,9 +4,10 @@ import com.apx6.data.dao.CategoryDao
 import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.entities.Category
 import com.apx6.domain.mapper.CategoryMapper
-import com.apx6.domain.repository.BoundaryRepository
+import com.apx6.domain.repository.boundary.RemoteBoundaryRepository
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.Resource
+import com.apx6.domain.repository.boundary.LocalBoundaryRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -16,9 +17,9 @@ class CategoryRepositoryImpl @Inject constructor(
 ): CategoryRepository {
 
     override suspend fun category(category: CmdCategory): Flow<Resource<List<CmdCategory>>> {
-        return object: BoundaryRepository<List<CmdCategory>, CmdCategory>() {
-            override suspend fun saveRemoteData(response: CmdCategory) {
-                val entity = convertToEntity(category)
+        return object: LocalBoundaryRepository<List<CmdCategory>, CmdCategory>() {
+            override suspend fun postToLocal(obj: CmdCategory) {
+                val entity = convertToEntity(obj)
                 categoryDao.insertOrUpdate(entity)
             }
 
@@ -26,7 +27,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 return categoryDao.getCategories()
             }
 
-        }.asFlow()
+        }.asFlow(category)
     }
 
     override suspend fun postCategory(category: CmdCategory) {

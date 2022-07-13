@@ -112,3 +112,11 @@ fun String?.koreanInitialLetters(): String {
  * Not null & Not empty
  */
 fun CharSequence?.isNotNullAndNotEmpty(): Boolean = !this.isNullOrEmpty()
+
+fun randomKey(): String {
+	val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+	return (1..5)
+		.map { (1..charPool.size).shuffled().last() }
+		.map(charPool::get)
+		.joinToString("")
+}

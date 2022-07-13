@@ -1,9 +1,10 @@
 package com.apx6.chipmunk.app.ui
 
 import androidx.lifecycle.viewModelScope
+import com.apx6.chipmunk.app.fcm.FcmHelper
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.dto.CmdUser
-import com.apx6.domain.repository.UserRepository
+import com.apx6.domain.usecase.UserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val userUseCase: UserUseCase,
+    private val fcmHelper: FcmHelper
 ) : BaseViewModel() {
 
     private val _user: MutableSharedFlow<CmdUser?> = MutableSharedFlow()
@@ -22,7 +24,11 @@ class SplashViewModel @Inject constructor(
 
     fun getUser() {
         viewModelScope.launch {
-            userRepository.getUser().collect { _user.emit(it) }
+            userUseCase.getUser().collect { _user.emit(it) }
         }
+    }
+
+    fun setFcmToken() {
+        fcmHelper.setFcmToken()
     }
 }

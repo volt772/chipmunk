@@ -5,6 +5,12 @@ import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
 import java.util.*
 
+
+val currMillis: Long
+    get() {
+        return System.currentTimeMillis()
+    }
+
 /**
  * 잘못된 Joda DateTime 을 위한 기본값.
  */
