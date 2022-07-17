@@ -49,7 +49,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     private fun initView() {
         binding.inContent.run {
             rvTask.adapter = taskAdapter
-            swTaskRefresh.setOnRefreshListener {  }
+//            swTaskRefresh.setOnRefreshListener {  }
         }
     }
 
