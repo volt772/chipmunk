@@ -13,8 +13,8 @@ abstract class TaskDao : BaseDao<Task>() {
     /* ▼ TRANSACTION =====================================================================================================================*/
 
     /* ▼ SELECT ==========================================================================================================================*/
-    @Query("SELECT * FROM ${Task.TABLE_NAME}")
-    abstract fun getTasks(): Flow<List<CmdTask>>
+    @Query("SELECT * FROM ${Task.TABLE_NAME} WHERE uid = :uid")
+    abstract fun getTasks(uid: Int): Flow<List<CmdTask>>
 
     @Query("SELECT * FROM ${Task.TABLE_NAME} WHERE id = :id")
     abstract fun getTask(id: Int): Flow<CmdTask?>

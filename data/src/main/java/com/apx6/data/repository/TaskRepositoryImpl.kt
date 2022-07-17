@@ -1,6 +1,7 @@
 package com.apx6.data.repository
 
 import com.apx6.data.dao.TaskDao
+import com.apx6.domain.constants.CmdBoundaryQueryType
 import com.apx6.domain.dto.CmdTask
 import com.apx6.domain.entities.Task
 import com.apx6.domain.mapper.TaskMapper
@@ -8,6 +9,7 @@ import com.apx6.domain.repository.Resource
 import com.apx6.domain.repository.TaskRepository
 import com.apx6.domain.repository.boundary.LocalBoundaryRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class TaskRepositoryImpl @Inject constructor(
@@ -15,7 +17,7 @@ class TaskRepositoryImpl @Inject constructor(
     private val taskMapper: TaskMapper
 ): TaskRepository {
 
-    override suspend fun task(task: CmdTask): Flow<Resource<List<CmdTask>>> {
+    override suspend fun task(task: CmdTask, uid: Int): Flow<Resource<List<CmdTask>>> {
         return object: LocalBoundaryRepository<List<CmdTask>, CmdTask>() {
             override suspend fun postToLocal(obj: CmdTask) {
                 val entity = convertToEntity(task)
@@ -23,7 +25,7 @@ class TaskRepositoryImpl @Inject constructor(
             }
 
             override fun fetchFromLocal(): Flow<List<CmdTask>> {
-                return taskDao.getTasks()
+                return taskDao.getTasks(uid)
             }
 
         }.asFlow(task)
@@ -34,8 +36,13 @@ class TaskRepositoryImpl @Inject constructor(
         taskDao.insertOrUpdate(entity)
     }
 
-    override suspend fun getTasks(): Flow<List<CmdTask>> {
-        return taskDao.getTasks()
+    override suspend fun getTasks(uid: Int): Flow<Resource<List<CmdTask>>> {
+        val tasks = taskDao.getTasks(uid)
+        val result = tasks.map {
+            Resource.Success(it)
+        }
+
+        return result
     }
 
     override suspend fun getTask(id: Int): Flow<CmdTask?> {
