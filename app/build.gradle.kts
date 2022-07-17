@@ -37,7 +37,7 @@ android {
             storeFile = file("../../chipmunk_keystore/chipmunk_deploy.jks")
             storePassword = System.getenv("CHIPMUNK_KEYSTORE_PW")
             keyAlias = "chipmunk_key"
-            keyPassword = System.getenv("CHPIMUNK_KEY_PW")
+            keyPassword = System.getenv("CHIPMUNK_KEY_PW")
         }
     }
 
@@ -113,6 +113,12 @@ dependencies {
     /* Coroutine*/
     implementation(Coroutines.core)
     implementation(Coroutines.android)
+
+    /* Room*/
+    implementation(Room.core)
+    implementation(Room.rxJava2)
+    implementation(Room.ktx)
+    kapt(Room.compiler)
 
     /* Material*/
     implementation(Material.core)

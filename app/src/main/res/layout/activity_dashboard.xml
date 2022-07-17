@@ -48,57 +48,5 @@
             app:layout_anchorGravity="bottom|end"
             app:srcCompat="@android:drawable/ic_dialog_email" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.constraintlayout.utils.widget.ImageFilterButton
-                android:id="@+id/btn_kakao_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/kakao_login_medium_narrow"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias=".7" />
-
-            <Button
-                android:id="@+id/btn_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="get email"
-                android:backgroundTint="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/btn_kakao_login"
-                />
-
-            <Button
-                android:id="@+id/btn_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Logout"
-                android:backgroundTint="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/btn_email"
-                />
-
-            <Button
-                android:id="@+id/btn_disconn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Disconnection"
-                android:backgroundTint="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/btn_logout"
-                />
-
-            <Button
-                android:id="@+id/btn_random"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Random"
-                android:backgroundTint="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/btn_disconn"
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
