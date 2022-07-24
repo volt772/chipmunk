@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/coordinator_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_h0_5">
+
+        <!-- AppBar-->
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/abl_opensource"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Toolbar -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_main"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_60"
+                android:background="@color/material_amber_700">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_close"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_toolbar_close"
+                        android:background="?selectableItemBackgroundBorderless"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/md_18"
+                        android:ellipsize="end"
+                        android:paddingEnd="@dimen/md_20"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:textSize="@dimen/md_18"
+                        android:text="@string/register_checklist"
+                        android:textColor="@color/white"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Box 0 : 메인-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/gray_h0_2"
+            android:id="@+id/cl_settings_main"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_0"
+            android:paddingHorizontal="@dimen/md_18"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/abl_opensource" >
+
+
+            <!-- Box 1 : 카테고리 리스트-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_category"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_56"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:paddingVertical="@dimen/md_12"
+                android:paddingHorizontal="@dimen/md_18"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/md_12"
+                    android:overScrollMode="never"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Box 2 : 체크리스트 이름-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_checklist_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_56"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:paddingVertical="@dimen/md_12"
+                android:paddingHorizontal="@dimen/md_18"
+                app:layout_constraintTop_toBottomOf="@id/cl_category"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" >
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Box 3 : 시작일-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_start_date"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_56"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:paddingVertical="@dimen/md_12"
+                android:paddingHorizontal="@dimen/md_18"
+                app:layout_constraintTop_toBottomOf="@id/cl_checklist_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" >
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Box 4 : 종료일-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_end_date"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_56"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:paddingVertical="@dimen/md_12"
+                android:paddingHorizontal="@dimen/md_18"
+                app:layout_constraintTop_toBottomOf="@id/cl_start_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" >
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Box 5 : 메모-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_memo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_56"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:paddingVertical="@dimen/md_12"
+                android:paddingHorizontal="@dimen/md_18"
+                app:layout_constraintTop_toBottomOf="@id/cl_end_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" >
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Box 6 : 알림-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_notification"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_56"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:paddingVertical="@dimen/md_12"
+                android:paddingHorizontal="@dimen/md_18"
+                app:layout_constraintTop_toBottomOf="@id/cl_memo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" >
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

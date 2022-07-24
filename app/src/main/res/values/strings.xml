@@ -4,4 +4,6 @@
 
     <string name="failed_login">로그인을 할 수 없습니다. 잠시후 다시 시도해 주세요.</string>
     <string name="failed_get_user_info">사용자 정보를 가져올 수 없습니다. 잠시후 다시 로그인해주세요.</string>
+
+    <string name="register_checklist">체크리스트 등록</string>
 </resources>

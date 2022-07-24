@@ -1,5 +1,6 @@
 package com.apx6.chipmunk.app.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -36,8 +37,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = title
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            moveToRegister()
         }
 
         initView()
@@ -92,6 +92,11 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                 }
             }
         }
+    }
+
+    private fun moveToRegister() {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
