@@ -3,10 +3,9 @@ package com.apx6
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.apx6.data.db.CmdDatabase
 import com.apx6.domain.dto.CmdCategory
-import com.apx6.domain.dto.CmdTask
-import com.apx6.domain.dto.CmdUser
+import com.apx6.domain.dto.CmdCheckList
 import com.apx6.domain.repository.CategoryRepository
-import com.apx6.domain.repository.TaskRepository
+import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.UserRepository
 import com.apx6.utils.TestCoroutineRule
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -23,7 +22,7 @@ import javax.inject.Inject
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @ExperimentalCoroutinesApi
 @HiltAndroidTest
-class TaskRepoTest {
+class CheckListRepoTest {
 
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
@@ -38,7 +37,7 @@ class TaskRepoTest {
     lateinit var categoryRepository: CategoryRepository
 
     @Inject
-    lateinit var taskRepository: TaskRepository
+    lateinit var checkListRepository: CheckListRepository
 
     @Inject
     lateinit var cmdDatabase: CmdDatabase
@@ -54,7 +53,7 @@ class TaskRepoTest {
             category = cmdDatabase.categoryDao().testGetCategory()
 
             if (category == null) {
-                println("probe :: [TEST Task] :: Category is NULL !!")
+                println("probe :: [TEST CheckList] :: Category is NULL !!")
                 Assert.fail()
             }
         }
@@ -66,20 +65,20 @@ class TaskRepoTest {
     }
 
     @Test
-    fun test01_post_task() {
+    fun test01_post_checklist() {
 
         runBlocking {
             for (i in 0..300) {
-                val sampleTask = CmdTask(
+                val sampleCheckList = CmdCheckList(
                     cid = category!!.id,
                     uid = category!!.uid,
-                    title = "task_$i",
+                    title = "checkList_$i",
                     memo = "memo_$i",
                     startDate = currMillis,
                     endDate = currMillis
                 )
 
-                taskRepository.postTask(sampleTask)
+                checkListRepository.postCheckList(sampleCheckList)
             }
 
         }

@@ -60,7 +60,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideTaskDao(database: CmdDatabase) = database.taskDao()
+    fun provideCheckListDao(database: CmdDatabase) = database.checkListDao()
 
     @Provides
     @Singleton

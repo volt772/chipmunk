@@ -2,17 +2,17 @@ package com.apx6.chipmunk.app.ui.viewholder
 
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.apx6.chipmunk.databinding.ItemTaskBinding
-import com.apx6.domain.dto.CmdTask
+import com.apx6.chipmunk.databinding.ItemChecklistBinding
+import com.apx6.domain.dto.CmdCheckList
 
 
-class TaskViewHolder(private val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root) {
+class CheckListViewHolder(private val binding: ItemChecklistBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(task: CmdTask, onItemClicked: (CmdTask, ImageView) -> Unit) {
+    fun bind(checkList: CmdCheckList, onItemClicked: (CmdCheckList, ImageView) -> Unit) {
 
         binding.apply {
-            tvTaskTitle.text = task.title
-            tvTaskMemo.text = task.memo
+            tvChecklistTitle.text = checkList.title
+            tvChecklistMemo.text = checkList.memo
         }
 //        binding.postTitle.text = post.title
 //        binding.postAuthor.text = post.author

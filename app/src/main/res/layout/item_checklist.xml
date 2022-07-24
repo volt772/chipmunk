@@ -9,7 +9,7 @@
     tools:ignore="UnusedAttribute">
 
     <ImageView
-        android:id="@+id/iv_task_category"
+        android:id="@+id/iv_checklist_category"
         android:layout_width="@dimen/md_80"
         android:layout_height="@dimen/md_80"
         android:transitionName="photo"
@@ -19,20 +19,20 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
-        android:id="@+id/tv_task_title"
+        android:id="@+id/tv_checklist_title"
         android:layout_width="@dimen/md_0"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/iv_task_category"
+        app:layout_constraintStart_toEndOf="@id/iv_checklist_category"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tv_task_memo"
+        app:layout_constraintBottom_toTopOf="@id/tv_checklist_memo"
         tools:text="@tools:sample/lorem" />
 
     <TextView
-        android:id="@+id/tv_task_memo"
+        android:id="@+id/tv_checklist_memo"
         android:layout_width="@dimen/md_0"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/iv_task_category"
-        app:layout_constraintTop_toBottomOf="@id/tv_task_title"
+        app:layout_constraintStart_toEndOf="@id/iv_checklist_category"
+        app:layout_constraintTop_toBottomOf="@id/tv_checklist_title"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:text="@tools:sample/full_names" />
 </androidx.constraintlayout.widget.ConstraintLayout>

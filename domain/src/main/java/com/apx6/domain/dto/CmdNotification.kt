@@ -4,7 +4,7 @@ data class CmdNotification (
 
     val id: Int = 0,
 
-    val tid: Int,
+    val clId: Int,
 
     val period: Long
 

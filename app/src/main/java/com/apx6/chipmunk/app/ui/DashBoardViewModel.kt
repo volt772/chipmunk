@@ -3,9 +3,9 @@ package com.apx6.chipmunk.app.ui
 import androidx.lifecycle.viewModelScope
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.State
-import com.apx6.domain.dto.CmdTask
+import com.apx6.domain.dto.CmdCheckList
 import com.apx6.domain.dto.CmdUser
-import com.apx6.domain.repository.TaskRepository
+import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.UserRepository
 import com.apx6.domain.usecase.UserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,15 +17,15 @@ import javax.inject.Inject
 @HiltViewModel
 class DashBoardViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val taskRepository: TaskRepository,
+    private val checkListRepository: CheckListRepository,
     private val userUseCase: UserUseCase
 ) : BaseViewModel() {
 
     private val _user: MutableSharedFlow<CmdUser?> = MutableSharedFlow()
     val user: SharedFlow<CmdUser?> = _user
 
-    private val _tasks: MutableStateFlow<State<List<CmdTask>>> = MutableStateFlow(State.loading())
-    val tasks: StateFlow<State<List<CmdTask>>> = _tasks
+    private val _checkLists: MutableStateFlow<State<List<CmdCheckList>>> = MutableStateFlow(State.loading())
+    val checkLists: StateFlow<State<List<CmdCheckList>>> = _checkLists
 
 
     fun getUser() {
@@ -34,11 +34,11 @@ class DashBoardViewModel @Inject constructor(
         }
     }
 
-    fun getTasks(uid: Int) {
+    fun getCheckLists(uid: Int) {
         viewModelScope.launch {
-            taskRepository.getTasks(uid)
+            checkListRepository.getCheckLists(uid)
                 .map { resource -> State.fromResource(resource) }
-                .collect { state -> _tasks.value = state }
+                .collect { state -> _checkLists.value = state }
         }
     }
 

@@ -1,6 +1,6 @@
 package com.apx6.domain.dto
 
-data class CmdTask (
+data class CmdCheckList (
 
     val id: Int = 0,
 

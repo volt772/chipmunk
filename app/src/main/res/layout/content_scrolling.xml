@@ -10,7 +10,7 @@
     tools:showIn="@layout/activity_dashboard">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_task"
+        android:id="@+id/rv_checkList"
         style="@style/TasksRecyclerStyle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/md_0"
@@ -18,5 +18,5 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/item_task" />
+        tools:listitem="@layout/item_checklist" />
 </androidx.core.widget.NestedScrollView>

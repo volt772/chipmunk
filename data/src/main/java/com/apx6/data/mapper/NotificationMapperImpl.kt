@@ -13,7 +13,7 @@ class NotificationMapperImpl @Inject constructor(
     ): Notification {
         return Notification(
             id = notification.id,
-            tid = notification.tid,
+            clId = notification.clId,
             period = notification.period
         )
     }

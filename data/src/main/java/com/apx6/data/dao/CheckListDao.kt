@@ -2,22 +2,22 @@ package com.apx6.data.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.apx6.domain.dto.CmdTask
-import com.apx6.domain.entities.Task
+import com.apx6.domain.dto.CmdCheckList
+import com.apx6.domain.entities.CheckList
 import kotlinx.coroutines.flow.Flow
 
 
 @Dao
-abstract class TaskDao : BaseDao<Task>() {
+abstract class CheckListDao : BaseDao<CheckList>() {
 
     /* ▼ TRANSACTION =====================================================================================================================*/
 
     /* ▼ SELECT ==========================================================================================================================*/
-    @Query("SELECT * FROM ${Task.TABLE_NAME} WHERE uid = :uid")
-    abstract fun getTasks(uid: Int): Flow<List<CmdTask>>
+    @Query("SELECT * FROM ${CheckList.TABLE_NAME} WHERE uid = :uid")
+    abstract fun getCheckLists(uid: Int): Flow<List<CmdCheckList>>
 
-    @Query("SELECT * FROM ${Task.TABLE_NAME} WHERE id = :id")
-    abstract fun getTask(id: Int): Flow<CmdTask?>
+    @Query("SELECT * FROM ${CheckList.TABLE_NAME} WHERE id = :id")
+    abstract fun getCheckList(id: Int): Flow<CmdCheckList?>
 
     /* ▼ INSERT ==========================================================================================================================*/
 
@@ -26,10 +26,10 @@ abstract class TaskDao : BaseDao<Task>() {
     /* ▼ DELETE ==========================================================================================================================*/
 
     /* ▼ TEST ONLY =======================================================================================================================*/
-    @Query("SELECT * FROM ${Task.TABLE_NAME} LIMIT 1")
-    abstract fun testGetTask(): CmdTask?
+    @Query("SELECT * FROM ${CheckList.TABLE_NAME} LIMIT 1")
+    abstract fun testGetCheckList(): CmdCheckList?
 
-    @Query("SELECT * FROM ${Task.TABLE_NAME} WHERE id = (SELECT max(id) FROM ${Task.TABLE_NAME})")
-    abstract fun testGetLastTask(): CmdTask?
+    @Query("SELECT * FROM ${CheckList.TABLE_NAME} WHERE id = (SELECT max(id) FROM ${CheckList.TABLE_NAME})")
+    abstract fun testGetLastCheckList(): CmdCheckList?
 
 }

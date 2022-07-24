@@ -14,8 +14,8 @@ abstract class NotificationDao : BaseDao<Notification>() {
     /* ▼ TRANSACTION =====================================================================================================================*/
 
     /* ▼ SELECT ==========================================================================================================================*/
-    @Query("SELECT * FROM ${Notification.TABLE_NAME} WHERE tid = :tid")
-    abstract fun getNotification(tid: Int): Flow<CmdNotification?>
+    @Query("SELECT * FROM ${Notification.TABLE_NAME} WHERE clId = :clId")
+    abstract fun getNotification(clId: Int): Flow<CmdNotification?>
 
     /* ▼ INSERT ==========================================================================================================================*/
 

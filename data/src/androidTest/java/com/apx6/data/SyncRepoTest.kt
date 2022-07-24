@@ -7,7 +7,7 @@ import com.apx6.domain.dto.CmdSync
 import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.SyncRepository
-import com.apx6.domain.repository.TaskRepository
+import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.UserRepository
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -39,7 +39,7 @@ class SyncRepoTest {
     lateinit var categoryRepository: CategoryRepository
 
     @Inject
-    lateinit var taskRepository: TaskRepository
+    lateinit var checkListRepository: CheckListRepository
 
     @Inject
     lateinit var syncRepository: SyncRepository

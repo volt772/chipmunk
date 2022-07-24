@@ -1,7 +1,7 @@
 package com.apx6.data.di
 
-import com.apx6.data.data_source.TaskDataSource
-import com.apx6.data.data_source.TaskDataSourceImpl
+import com.apx6.data.data_source.CheckListDataSource
+import com.apx6.data.data_source.CheckListDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,7 +15,7 @@ abstract class PagingModule {
 
     @Binds
     @Singleton
-    abstract fun bindTaskDataSource(impl: TaskDataSourceImpl): TaskDataSource
+    abstract fun bindTaskDataSource(impl: CheckListDataSourceImpl): CheckListDataSource
 
 //    @Binds
 //    @Singleton

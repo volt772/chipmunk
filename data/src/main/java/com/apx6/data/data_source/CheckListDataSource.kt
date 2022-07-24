@@ -1,6 +1,6 @@
 package com.apx6.data.data_source
 
-interface TaskDataSource {
+interface CheckListDataSource {
 
 //    fun tasks(
 //        ids: MpdIds,

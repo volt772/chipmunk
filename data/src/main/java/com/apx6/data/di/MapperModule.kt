@@ -26,7 +26,7 @@ abstract class MapperModule {
 
     @Binds
     @Singleton
-    abstract fun bindTaskMapper(impl: TaskMapperImpl): TaskMapper
+    abstract fun bindCheckListMapper(impl: CheckListMapperImpl): CheckListMapper
 
     @Binds
     @Singleton

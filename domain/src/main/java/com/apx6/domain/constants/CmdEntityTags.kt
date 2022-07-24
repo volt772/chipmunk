@@ -9,6 +9,7 @@ object CmdEntityTags {
 
     // C
     const val CID = "cid"
+    const val CLID = "clId"
     const val CONTENT_TYPE = "content_type"
     const val CREATED_TIME = "created_time"
 

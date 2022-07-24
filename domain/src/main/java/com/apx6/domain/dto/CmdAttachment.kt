@@ -4,7 +4,7 @@ data class CmdAttachment (
 
     val id: Int = 0,
 
-    val tid: Int,
+    val clId: Int,
 
     val name: String,
 

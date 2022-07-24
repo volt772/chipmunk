@@ -3,7 +3,7 @@ package com.apx6.domain.entities
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 import com.apx6.domain.constants.CmdEntityTags
-import com.apx6.domain.entities.Task.Companion.TABLE_NAME
+import com.apx6.domain.entities.CheckList.Companion.TABLE_NAME
 
 @Entity(
     tableName = TABLE_NAME,
@@ -23,7 +23,7 @@ import com.apx6.domain.entities.Task.Companion.TABLE_NAME
     ],
     indices = [Index(value = ["id"], unique = true)]
 )
-data class Task(
+data class CheckList(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = CmdEntityTags.ID)
@@ -42,6 +42,6 @@ data class Task(
     var endDate: Long
 ) {
     companion object {
-        const val TABLE_NAME = "task"
+        const val TABLE_NAME = "checklist"
     }
 }

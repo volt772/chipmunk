@@ -16,7 +16,7 @@ import javax.inject.Provider
         Category::class,
         Notification::class,
         Sync::class,
-        Task::class,
+        CheckList::class,
         User::class
     ],
     version = 1,
@@ -29,7 +29,7 @@ abstract class CmdDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
     abstract fun notificationDao(): NotificationDao
     abstract fun syncDao(): SyncDao
-    abstract fun taskDao(): TaskDao
+    abstract fun checkListDao(): CheckListDao
     abstract fun userDao(): UserDao
 
     class Callback @Inject constructor(

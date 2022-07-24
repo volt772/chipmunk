@@ -3,7 +3,7 @@ package com.apx6.data.data_source
 import javax.inject.Inject
 
 
-class TaskDataSourceImpl @Inject constructor(): TaskDataSource
+class CheckListDataSourceImpl @Inject constructor(): CheckListDataSource
 //class TaskDataSourceImpl @Inject constructor(
 ////    private val mpDatabase: MpDatabase,
 //) : CardRemoteDataSource {

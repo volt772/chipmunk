@@ -9,12 +9,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
-import com.apx6.chipmunk.app.ui.adapter.TaskListAdapter
+import com.apx6.chipmunk.app.ui.adapter.CheckListAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
 import com.apx6.chipmunk.databinding.ActivityDashboardBinding
 import com.apx6.domain.State
-import com.apx6.domain.dto.CmdTask
+import com.apx6.domain.dto.CmdCheckList
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -27,7 +27,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     override val viewModel: DashBoardViewModel by viewModels()
     override fun getViewBinding(): ActivityDashboardBinding = ActivityDashboardBinding.inflate(layoutInflater)
 
-    private val taskAdapter = TaskListAdapter(this::onItemClicked)
+    private val checkListAdapter = CheckListAdapter(this::onItemClicked)
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -48,12 +48,12 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     private fun initView() {
         binding.inContent.run {
-            rvTask.adapter = taskAdapter
+            rvCheckList.adapter = checkListAdapter
 //            swTaskRefresh.setOnRefreshListener {  }
         }
     }
 
-    private fun onItemClicked(task: CmdTask, imageView: ImageView) {
+    private fun onItemClicked(checkList: CmdCheckList, imageView: ImageView) {
         /* TODO*/
     }
 
@@ -63,7 +63,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                 progress?.start()
                 viewModel.user.collect { user ->
                     user?.let { _user ->
-                        viewModel.getTasks(_user.id)
+                        viewModel.getCheckLists(_user.id)
                     } ?: run {
                         progress?.stop()
                         val vw = binding.coDashboardRoot
@@ -76,13 +76,13 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
             launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    viewModel.tasks.collect { state ->
+                    viewModel.checkLists.collect { state ->
                         when (state) {
                             is State.Loading -> { }
                             is State.Success -> {
                                 progress?.stop()
-                                taskAdapter.submitList(state.data.toMutableList())
-                                println("probe :: task : ${state.data}")
+                                checkListAdapter.submitList(state.data.toMutableList())
+                                println("probe :: checkList : ${state.data}")
                             }
                             is State.Error -> {
                                 progress?.stop()

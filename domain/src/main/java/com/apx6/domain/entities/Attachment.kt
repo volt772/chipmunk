@@ -11,9 +11,9 @@ import com.apx6.domain.entities.Attachment.Companion.TABLE_NAME
     tableName = TABLE_NAME,
     foreignKeys = [
         ForeignKey(
-            entity = Task::class,
+            entity = CheckList::class,
             parentColumns = ["id"],
-            childColumns = ["tid"],
+            childColumns = ["clId"],
             onDelete = CASCADE
         )
     ],
@@ -24,7 +24,7 @@ data class Attachment(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    var tid: Int,
+    var clId: Int,
 
     var name: String,
 
