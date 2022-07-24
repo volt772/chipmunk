@@ -4,11 +4,11 @@ import com.apx6.data.dao.CategoryDao
 import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.entities.Category
 import com.apx6.domain.mapper.CategoryMapper
-import com.apx6.domain.repository.boundary.RemoteBoundaryRepository
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.Resource
 import com.apx6.domain.repository.boundary.LocalBoundaryRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class CategoryRepositoryImpl @Inject constructor(
@@ -16,7 +16,7 @@ class CategoryRepositoryImpl @Inject constructor(
     private val categoryMapper: CategoryMapper
 ): CategoryRepository {
 
-    override suspend fun category(category: CmdCategory): Flow<Resource<List<CmdCategory>>> {
+    override suspend fun category(category: CmdCategory, uid: Int): Flow<Resource<List<CmdCategory>>> {
         return object: LocalBoundaryRepository<List<CmdCategory>, CmdCategory>() {
             override suspend fun postToLocal(obj: CmdCategory) {
                 val entity = convertToEntity(obj)
@@ -24,7 +24,7 @@ class CategoryRepositoryImpl @Inject constructor(
             }
 
             override fun fetchFromLocal(): Flow<List<CmdCategory>> {
-                return categoryDao.getCategories()
+                return categoryDao.getCategories(uid)
             }
 
         }.asFlow(category)
@@ -35,8 +35,13 @@ class CategoryRepositoryImpl @Inject constructor(
         categoryDao.insertOrUpdate(entity)
     }
 
-    override suspend fun getCategories(): Flow<List<CmdCategory>> {
-        return categoryDao.getCategories()
+    override suspend fun getCategories(uid: Int): Flow<Resource<List<CmdCategory>>> {
+        val categories = categoryDao.getCategories(uid)
+        val result = categories.map {
+            Resource.Success(it)
+        }
+
+        return result
     }
 
     override suspend fun getCategory(id: Int): Flow<CmdCategory?> {

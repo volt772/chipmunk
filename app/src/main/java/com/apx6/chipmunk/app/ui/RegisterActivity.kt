@@ -2,14 +2,21 @@ package com.apx6.chipmunk.app.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ui.adapter.CategoryAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
+import com.apx6.chipmunk.app.ui.common.CmSnackBar
 import com.apx6.chipmunk.databinding.ActivityRegisterBinding
+import com.apx6.domain.State
 import com.apx6.domain.dto.CmdCategory
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -25,7 +32,31 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         super.onCreate(savedInstanceState)
 
         initView()
+        subscribers()
+
+        viewModel.getCategories(1)
 //        observeUser()
+    }
+
+    private fun subscribers() {
+        lifecycleScope.run {
+            launchWhenStarted {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    viewModel.category.collect { state ->
+                        when (state) {
+                            is State.Loading -> { }
+                            is State.Success -> {
+//                                progress?.stop()
+                                categoryAdapter.submitList(state.data.toMutableList())
+                            }
+                            is State.Error -> {
+//                                progress?.stop()
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun observeUser() {

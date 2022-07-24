@@ -13,7 +13,7 @@ class CategoryViewHolder(private val binding: ItemCategoryBinding) : RecyclerVie
     fun bind(category: CmdCategory, onItemClicked: (CmdCategory) -> Unit) {
 
         binding.apply {
-            tvChecklistTitle.text = category.name
+            tvCategoryName.text = category.name
         }
 //        binding.postTitle.text = post.title
 //        binding.postAuthor.text = post.author

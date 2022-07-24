@@ -6,11 +6,11 @@ import kotlinx.coroutines.flow.Flow
 interface CategoryRepository {
 
     /* Combined*/
-    suspend fun category(category: CmdCategory): Flow<Resource<List<CmdCategory>>>
+    suspend fun category(category: CmdCategory, uid: Int): Flow<Resource<List<CmdCategory>>>
 
     suspend fun postCategory(category: CmdCategory)
 
-    suspend fun getCategories(): Flow<List<CmdCategory>>
+    suspend fun getCategories(uid: Int): Flow<Resource<List<CmdCategory>>>
 
     suspend fun getCategory(id: Int): Flow<CmdCategory?>
 
