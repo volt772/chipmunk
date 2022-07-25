@@ -13,10 +13,10 @@ import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
 import com.apx6.chipmunk.databinding.ActivityRegisterBinding
 import com.apx6.domain.State
+import com.apx6.domain.constants.CmdConstants
 import com.apx6.domain.dto.CmdCategory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -27,14 +27,27 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
     private val categoryAdapter = CategoryAdapter(this::onItemClicked)
 
+    private var userId: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
+        with(intent) {
+            userId = getIntExtra(CmdConstants.Intent.USER_ID, 0)
+
+            if (userId == 0) {
+                val vw = binding.ablRegister
+                CmSnackBar.make(vw, getString(R.string.failed_get_user_info), "") { }.apply {
+                    show()
+                }
+            }
+        }
+
         initView()
         subscribers()
 
-        viewModel.getCategories(1)
+        viewModel.getCategories(userId)
 //        observeUser()
     }
 

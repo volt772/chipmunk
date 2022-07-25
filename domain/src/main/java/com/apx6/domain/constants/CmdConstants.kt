@@ -6,4 +6,8 @@ object CmdConstants {
         const val DB_NAME = "chipmunk.db"
     }
 
+    object Intent {
+        const val USER_ID = "userId"
+    }
+
 }

@@ -15,8 +15,8 @@ import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
 import com.apx6.chipmunk.databinding.ActivityDashboardBinding
 import com.apx6.domain.State
+import com.apx6.domain.constants.CmdConstants
 import com.apx6.domain.dto.CmdCheckList
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -29,6 +29,8 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     override fun getViewBinding(): ActivityDashboardBinding = ActivityDashboardBinding.inflate(layoutInflater)
 
     private val checkListAdapter = CheckListAdapter(this::onItemClicked)
+
+    private var userId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -64,6 +66,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                 viewModel.user.collect { user ->
                     user?.let { _user ->
                         viewModel.getCheckLists(_user.id)
+                        userId = _user.id
                     } ?: run {
                         progress?.stop()
                         val vw = binding.coDashboardRoot
@@ -95,7 +98,9 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     }
 
     private fun moveToRegister() {
-        val intent = Intent(this, RegisterActivity::class.java)
+        val intent = Intent(this, RegisterActivity::class.java).apply {
+            putExtra(CmdConstants.Intent.USER_ID, userId)
+        }
         startActivity(intent)
     }
 

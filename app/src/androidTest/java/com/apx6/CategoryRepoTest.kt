@@ -63,13 +63,14 @@ class CategoryRepoTest {
     fun test01_post_category() {
 
         runBlocking {
-            val sampleCategory = CmdCategory(
-                name = "생활1",
-                uid = user!!.id
-            )
+            for (i in 1..20) {
+                val sampleCategory = CmdCategory(
+                    name = "생활${i}",
+                    uid = user!!.id
+                )
 
-            categoryRepository.postCategory(sampleCategory)
-
+                categoryRepository.postCategory(sampleCategory)
+            }
         }
 
         println("[TEST] probe : ==========================================================================================================================================")
