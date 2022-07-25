@@ -76,12 +76,11 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_category"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/md_56"
+                android:layout_height="@dimen/md_0"
                 android:foreground="?selectableItemBackgroundBorderless"
                 android:paddingVertical="@dimen/md_12"
-                android:paddingHorizontal="@dimen/md_18"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" >
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -92,8 +91,7 @@
                     android:overScrollMode="never"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

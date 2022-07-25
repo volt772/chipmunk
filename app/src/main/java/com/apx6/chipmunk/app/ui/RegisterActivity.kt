@@ -87,7 +87,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 //        }
     }
 
-    private fun onItemClicked(checkList: CmdCategory) {
+    private fun onItemClicked(category: CmdCategory) {
         /* TODO*/
     }
 

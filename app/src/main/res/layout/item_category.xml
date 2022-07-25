@@ -3,18 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:foreground="?android:attr/selectableItemBackground"
+    android:layout_marginEnd="@dimen/md_10"
     tools:ignore="UnusedAttribute">
 
-    <TextView
-        android:id="@+id/tv_category_name"
-        android:layout_width="@dimen/md_0"
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:selectionRequired="true"
+        app:singleSelection="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="@tools:sample/lorem" />
+        app:layout_constraintBottom_toBottomOf="parent" >
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/ch_category_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="@tools:sample/lorem" />
+
+    </com.google.android.material.chip.ChipGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
