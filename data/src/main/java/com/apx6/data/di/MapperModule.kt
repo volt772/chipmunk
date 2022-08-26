@@ -36,6 +36,10 @@ abstract class MapperModule {
     @Singleton
     abstract fun bindSyncMapper(impl: SyncMapperImpl): SyncMapper
 
+    @Binds
+    @Singleton
+    abstract fun bindAttachMapper(impl: AttachMapperImpl): AttachMapper
+
 //
 //    @Binds
 //    @Singleton

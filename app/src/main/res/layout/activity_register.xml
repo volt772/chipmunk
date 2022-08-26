@@ -98,14 +98,27 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_checklist_name"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/md_56"
+                android:layout_height="wrap_content"
                 android:foreground="?selectableItemBackgroundBorderless"
                 android:paddingVertical="@dimen/md_12"
-                android:paddingHorizontal="@dimen/md_18"
                 app:layout_constraintTop_toBottomOf="@id/cl_category"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" >
 
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/aet_checklist_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/md_48"
+                    android:drawablePadding="@dimen/md_32"
+                    android:textSize="@dimen/md_16"
+                    android:drawableStart="@drawable/ic_contacts_profile_item_fax"
+                    android:inputType="text"
+                    android:hint="체크리스트 이름"
+                    android:singleLine="true"
+                    android:background="@null"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -146,26 +159,77 @@
                 android:layout_height="@dimen/md_56"
                 android:foreground="?selectableItemBackgroundBorderless"
                 android:paddingVertical="@dimen/md_12"
-                android:paddingHorizontal="@dimen/md_18"
                 app:layout_constraintTop_toBottomOf="@id/cl_end_date"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" >
 
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/aet_memo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/md_48"
+                    android:drawablePadding="@dimen/md_32"
+                    android:textSize="@dimen/md_16"
+                    android:drawableStart="@drawable/ic_contacts_profile_item_fax"
+                    android:inputType="text"
+                    android:hint="메모"
+                    android:singleLine="true"
+                    android:background="@null"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Box 6 : 알림-->
+            <!-- Box 6 : 장소-->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_notification"
+                android:id="@+id/cl_location"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/md_56"
                 android:foreground="?selectableItemBackgroundBorderless"
                 android:paddingVertical="@dimen/md_12"
-                android:paddingHorizontal="@dimen/md_18"
                 app:layout_constraintTop_toBottomOf="@id/cl_memo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" >
 
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/aet_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/md_48"
+                    android:drawablePadding="@dimen/md_32"
+                    android:textSize="@dimen/md_16"
+                    android:drawableStart="@drawable/ic_contacts_profile_item_fax"
+                    android:inputType="text"
+                    android:hint="장소"
+                    android:singleLine="true"
+                    android:background="@null"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Box 7 : 알림-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_attachment"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_0"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:paddingVertical="@dimen/md_12"
+                app:layout_constraintTop_toBottomOf="@id/cl_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_attach_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_attach_card"
+                    android:layout_marginTop="@dimen/md_12"
+                    android:overScrollMode="never"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

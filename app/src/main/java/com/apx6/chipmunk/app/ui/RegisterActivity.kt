@@ -5,9 +5,11 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
+import com.apx6.chipmunk.app.ui.adapter.AttachAdapter
 import com.apx6.chipmunk.app.ui.adapter.CategoryAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
@@ -27,6 +29,8 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     override fun getViewBinding(): ActivityRegisterBinding = ActivityRegisterBinding.inflate(layoutInflater)
 
     private val categoryAdapter = CategoryAdapter(this::onItemClicked)
+
+    private val attachAdapter = AttachAdapter()
 
     private var userId: Int = 0
 
@@ -48,7 +52,8 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         initView()
         subscribers()
 
-        viewModel.getCategories(userId)
+        viewModel.getCategories(uid = userId)
+        viewModel.getAttachments(clId = userId)
 //        observeUser()
     }
 
@@ -108,6 +113,11 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
     private fun initView() {
         this.statusBar(R.color.material_amber_700)
+
+        with(binding.rvAttachList) {
+            layoutManager = LinearLayoutManager(this@RegisterActivity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = attachAdapter
+        }
 
 //        with(binding.rvCategory) {
 //            layoutManager = LinearLayoutManager(this@RegisterActivity, LinearLayoutManager.HORIZONTAL, false)

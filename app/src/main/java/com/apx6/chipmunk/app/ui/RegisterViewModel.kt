@@ -3,7 +3,9 @@ package com.apx6.chipmunk.app.ui
 import androidx.lifecycle.viewModelScope
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.State
+import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
+import com.apx6.domain.repository.AttachRepository
 import com.apx6.domain.repository.CategoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,17 +18,29 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val categoryRepository: CategoryRepository
+    private val categoryRepository: CategoryRepository,
+    private val attachRepository: AttachRepository
 ) : BaseViewModel() {
 
     private val _category: MutableStateFlow<State<List<CmdCategory>>> = MutableStateFlow(State.loading())
     val category: StateFlow<State<List<CmdCategory>>> = _category
+
+    private val _attachment: MutableStateFlow<State<List<CmdAttachment>>> = MutableStateFlow(State.loading())
+    val attachment: StateFlow<State<List<CmdAttachment>>> = _attachment
 
     fun getCategories(uid: Int) {
         viewModelScope.launch {
             categoryRepository.getCategories(uid)
                 .map { resource -> State.fromResource(resource) }
                 .collect { state -> _category.value = state }
+        }
+    }
+
+    fun getAttachments(clId: Int) {
+        viewModelScope.launch {
+            attachRepository.getAttachments(clId)
+                .map { resource -> State.fromResource(resource) }
+                .collect { state -> _attachment.value = state }
         }
     }
 
