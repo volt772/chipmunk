@@ -5,8 +5,8 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ui.adapter.CategoryAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
@@ -15,6 +15,7 @@ import com.apx6.chipmunk.databinding.ActivityRegisterBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
 import com.apx6.domain.dto.CmdCategory
+import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -59,17 +60,31 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                         when (state) {
                             is State.Loading -> { }
                             is State.Success -> {
-//                                progress?.stop()
-                                categoryAdapter.submitList(state.data.toMutableList())
+                                addCategoryChips(state.data.toMutableList())
                             }
                             is State.Error -> {
-//                                progress?.stop()
                             }
                         }
                     }
                 }
             }
         }
+    }
+
+    private fun addCategoryChips(categories: List<CmdCategory>) {
+        categories.forEach { _category ->
+            val chip = Chip(this)
+            chip.text = _category.name
+            chip.setOnSingleClickListener {
+                selectChip(_category)
+            }
+
+            binding.cgCategory.addView(chip)
+        }
+    }
+
+    private fun selectChip(category: CmdCategory) {
+        println("probe :: category :: ${category.name}")
     }
 
     private fun observeUser() {
@@ -94,10 +109,10 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     private fun initView() {
         this.statusBar(R.color.material_amber_700)
 
-        with(binding.rvCategory) {
-            layoutManager = LinearLayoutManager(this@RegisterActivity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = categoryAdapter
-        }
+//        with(binding.rvCategory) {
+//            layoutManager = LinearLayoutManager(this@RegisterActivity, LinearLayoutManager.HORIZONTAL, false)
+//            adapter = categoryAdapter
+//        }
     }
 
 }

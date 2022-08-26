@@ -83,16 +83,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" >
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_category"
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cg_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/md_12"
-                    android:overScrollMode="never"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:selectionRequired="true"
+                    app:singleSelection="true"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
+                    app:layout_constraintBottom_toBottomOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Box 2 : 체크리스트 이름-->
