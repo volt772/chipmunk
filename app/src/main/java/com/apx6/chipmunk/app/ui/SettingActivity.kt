@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivitySettingBinding
@@ -30,6 +31,10 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
 
     private fun initView() {
         this.statusBar(R.color.material_amber_700)
+
+        binding.ivClose.setOnSingleClickListener {
+            finish()
+        }
     }
 
     private fun setProfile(user: CmdUser) {

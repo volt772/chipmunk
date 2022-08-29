@@ -129,15 +129,14 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     private fun initView() {
         this.statusBar(R.color.material_amber_700)
 
+        binding.ivClose.setOnSingleClickListener {
+            finish()
+        }
+
         with(binding.rvAttachList) {
             layoutManager = LinearLayoutManager(this@RegisterActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = attachAdapter
         }
-
-//        with(binding.rvCategory) {
-//            layoutManager = LinearLayoutManager(this@RegisterActivity, LinearLayoutManager.HORIZONTAL, false)
-//            adapter = categoryAdapter
-//        }
     }
 
 }
