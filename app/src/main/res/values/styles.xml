@@ -32,6 +32,12 @@
         <item name="android:textColor">@color/black_h32</item>
     </style>
 
+    <!-- Setting User Checklist Count -->
+    <style name="SettingUserChecklistCount">
+        <item name="android:textSize">@dimen/md_14</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <!-- Setting Menu Label -->
     <style name="SettingMenuLabel">
         <item name="android:textSize">@dimen/md_16</item>
