@@ -6,4 +6,10 @@
     <string name="failed_get_user_info">사용자 정보를 가져올 수 없습니다. 잠시후 다시 로그인해주세요.</string>
 
     <string name="register_checklist">체크리스트 등록</string>
+    <string name="setting">설정</string>
+    <string name="checklist_sync">체크리스트 동기화</string>
+    <string name="category_manage">카테고리 관리</string>
+    <string name="app_info">앱정보</string>
+    <string name="membership_logout">로그아웃</string>
+    <string name="membership_withdrawal">회원탈퇴</string>
 </resources>

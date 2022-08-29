@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MpProfileView">
+        <attr name="defaultImage" format="reference"/>
+        <attr name="textSize" format="reference" />
+        <attr name="imgWidth" format="dimension" />
+        <attr name="imgHeight" format="dimension" />
+        <attr name="minusMargin" format="dimension" />
+    </declare-styleable>
+</resources>

@@ -154,6 +154,8 @@ dependencies {
     )
     implementation(Kakao.user)
 
+    implementation(AvatarView.coil)
+
     androidTestImplementation(Test.jUnit)
     androidTestImplementation(Test.workTest)
     androidTestImplementation(Test.coreTest)

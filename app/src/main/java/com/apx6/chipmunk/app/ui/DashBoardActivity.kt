@@ -104,6 +104,13 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         startActivity(intent)
     }
 
+    private fun moveToSetting() {
+        val intent = Intent(this, SettingActivity::class.java).apply {
+//            putExtra(CmdConstants.Intent.USER_ID, userId)
+        }
+        startActivity(intent)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_scrolling, menu)
@@ -116,7 +123,10 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         // as you specify a parent activity in AndroidManifest.xml.
 
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings -> {
+                moveToSetting()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

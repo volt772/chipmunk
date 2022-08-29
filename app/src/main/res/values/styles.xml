@@ -19,6 +19,25 @@
     </style>
 
 
+    <!-- Setting User Name -->
+    <style name="SettingUserName">
+        <item name="android:textSize">@dimen/md_18</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black_h32</item>
+    </style>
+
+    <!-- Setting User Email -->
+    <style name="SettingUserEmail">
+        <item name="android:textSize">@dimen/md_14</item>
+        <item name="android:textColor">@color/black_h32</item>
+    </style>
+
+    <!-- Setting Menu Label -->
+    <style name="SettingMenuLabel">
+        <item name="android:textSize">@dimen/md_16</item>
+        <item name="android:textColor">@color/black_h32</item>
+    </style>
+
 
     <!--    <style name="PostAuthorText">-->
 <!--        <item name="android:layout_marginStart">@dimen/dimen_16</item>-->

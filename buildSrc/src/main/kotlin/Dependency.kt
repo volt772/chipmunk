@@ -104,6 +104,10 @@ object Kakao {
     const val user = "com.kakao.sdk:v2-user:2.10.0"
 }
 
+object AvatarView {
+    const val coil = "io.getstream:avatarview-coil:1.0.6"
+}
+
 object Test {
     const val jUnit = "junit:junit:4.13.2"
     const val workTest = "android.arch.work:work-testing:1.0.1"

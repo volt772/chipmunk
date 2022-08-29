@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <array name="rainbow">
+        <item>#D32F2F</item>
+        <item>#F57C00</item>
+        <item>#FBC02D</item>
+        <item>#1976D2</item>
+        <item>#388E3C</item>
+    </array>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
