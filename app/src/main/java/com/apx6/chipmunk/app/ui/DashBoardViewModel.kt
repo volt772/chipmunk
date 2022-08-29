@@ -17,8 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DashBoardViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val checkListRepository: CheckListRepository,
-    private val userUseCase: UserUseCase
+    private val checkListRepository: CheckListRepository
 ) : BaseViewModel() {
 
     private val _user: MutableSharedFlow<CmdUser?> = MutableSharedFlow()
@@ -30,7 +29,7 @@ class DashBoardViewModel @Inject constructor(
 
     fun getUser() {
         viewModelScope.launch {
-            userUseCase.getUser().collect { _user.emit(it) }
+            userRepository.getUser().collect{ _user.emit(it) }
         }
     }
 

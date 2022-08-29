@@ -12,4 +12,5 @@
     <string name="app_info">앱정보</string>
     <string name="membership_logout">로그아웃</string>
     <string name="membership_withdrawal">회원탈퇴</string>
+    <string name="unknown_membership">알수없는 사용자</string>
 </resources>

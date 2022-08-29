@@ -18,7 +18,6 @@ import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
 import com.apx6.domain.dto.CmdCheckList
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -106,7 +105,6 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     private fun moveToSetting() {
         val intent = Intent(this, SettingActivity::class.java).apply {
-//            putExtra(CmdConstants.Intent.USER_ID, userId)
         }
         startActivity(intent)
     }
