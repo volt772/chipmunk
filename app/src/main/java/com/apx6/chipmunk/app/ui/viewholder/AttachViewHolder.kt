@@ -10,6 +10,8 @@ class AttachViewHolder(private val binding: ItemAttachBinding) : RecyclerView.Vi
     fun bind(attachment: CmdAttachment) {
 
         binding.apply {
+            tvAttachName.text = attachment.name
+            tvAttachSize.text = attachment.size.toString()
         }
     }
 }
