@@ -2,9 +2,11 @@ package com.apx6
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.apx6.data.db.CmdDatabase
+import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.dto.CmdCheckList
 import com.apx6.domain.dto.CmdUser
+import com.apx6.domain.repository.AttachRepository
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.UserRepository
@@ -41,10 +43,14 @@ class FlowRepoTest {
     lateinit var checkListRepository: CheckListRepository
 
     @Inject
+    lateinit var attachRepository: AttachRepository
+
+    @Inject
     lateinit var cmdDatabase: CmdDatabase
 
     private var user: CmdUser?= null
     private var category: CmdCategory?= null
+    private var checklist: CmdCheckList?= null
 
     @Before
     fun before() {
@@ -106,6 +112,52 @@ class FlowRepoTest {
 
                 checkListRepository.postCheckList(sampleCheckList)
             }
+
+        }
+
+        println("[TEST] probe : ==========================================================================================================================================")
+    }
+
+    @Test
+    fun test03_post_attachment() {
+
+        runBlocking {
+            checklist = cmdDatabase.checkListDao().testGetCheckList()
+
+            if (checklist == null) {
+                println("probe :: [TEST CheckList] :: CheckList is NULL !!")
+                Assert.fail()
+            }
+
+            println("probe :: test :: checklist :: $checklist")
+
+            checklist?.let { chk ->
+                val attach = CmdAttachment(
+                    clId = chk.id,
+                    name = "고라니.png",
+                    size = 21345,
+                    contentType = "image/png",
+                    createdTime = currMillis
+                )
+
+                attachRepository.postAttachment(attach)
+            }
+
+
+
+
+//            for (i in 0..300) {
+//                val sampleCheckList = CmdCheckList(
+//                    cid = category!!.id,
+//                    uid = category!!.uid,
+//                    title = "checkList_$i",
+//                    memo = "memo_$i",
+//                    startDate = currMillis,
+//                    endDate = currMillis
+//                )
+//
+//                checkListRepository.postCheckList(sampleCheckList)
+//            }
 
         }
 

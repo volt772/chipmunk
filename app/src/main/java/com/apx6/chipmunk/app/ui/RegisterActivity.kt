@@ -20,6 +20,7 @@ import com.apx6.domain.dto.CmdCategory
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -53,22 +54,36 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         subscribers()
 
         viewModel.getCategories(uid = userId)
-        viewModel.getAttachments(clId = userId)
+        viewModel.getAttachments(clId = 1)
 //        observeUser()
     }
 
     private fun subscribers() {
         lifecycleScope.run {
-            launchWhenStarted {
-                repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    viewModel.category.collect { state ->
-                        when (state) {
-                            is State.Loading -> { }
-                            is State.Success -> {
-                                addCategoryChips(state.data.toMutableList())
-                            }
-                            is State.Error -> {
-                            }
+            launch {
+                viewModel.category.collect { state ->
+                    when (state) {
+                        is State.Loading -> { }
+                        is State.Success -> {
+                            println("probe :: category observe !! success : ${state.data}")
+                            addCategoryChips(state.data.toMutableList())
+                        }
+                        is State.Error -> {
+                        }
+                    }
+                }
+            }
+
+            launch {
+                viewModel.attachment.collect { state ->
+                    when (state) {
+                        is State.Loading -> {
+                        }
+                        is State.Success -> {
+                            println("probe :: attach observe !! success : ${state.data}")
+                            attachAdapter.submitList(state.data.toMutableList())
+                        }
+                        is State.Error -> {
                         }
                     }
                 }

@@ -85,7 +85,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                             is State.Success -> {
                                 progress?.stop()
                                 checkListAdapter.submitList(state.data.toMutableList())
-                                println("probe :: checkList : ${state.data}")
+//                                println("probe :: checkList : ${state.data}")
                             }
                             is State.Error -> {
                                 progress?.stop()
