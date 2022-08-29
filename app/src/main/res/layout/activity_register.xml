@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_h0_5">
+        >
 
         <!-- AppBar-->
         <com.google.android.material.appbar.AppBarLayout
@@ -61,179 +59,182 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Box 0 : 메인-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@color/gray_h0_2"
-            android:id="@+id/cl_settings_main"
+        <!-- Scroll-->
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="@dimen/md_0"
-            android:paddingHorizontal="@dimen/md_18"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/abl_register" >
+            android:fillViewport="true"
+            app:layout_constraintTop_toBottomOf="@id/abl_register"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" >
 
-
-            <!-- Box 1 : 카테고리 리스트-->
+            <!-- Box 0 : 메인-->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_category"
+                android:id="@+id/cl_settings_main"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/md_0"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:paddingVertical="@dimen/md_12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" >
+                android:paddingHorizontal="@dimen/md_18"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/abl_register" >
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/cg_category"
+                <!-- Box 1 : 카테고리 리스트-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/md_0"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:paddingVertical="@dimen/md_12"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" >
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/cg_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:selectionRequired="true"
+                        app:singleSelection="true"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Box 2 : 체크리스트 이름-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_checklist_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:selectionRequired="true"
-                    app:singleSelection="true"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    app:layout_constraintTop_toBottomOf="@id/cl_category"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintEnd_toEndOf="parent" >
 
-            <!-- Box 2 : 체크리스트 이름-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_checklist_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:paddingVertical="@dimen/md_12"
-                app:layout_constraintTop_toBottomOf="@id/cl_category"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" >
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/aet_checklist_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/md_48"
+                        android:drawablePadding="@dimen/md_32"
+                        android:theme="@style/RegisterPlaceHolderLabel"
+                        android:drawableStart="@drawable/ic_checklist"
+                        android:inputType="text"
+                        android:hint="@string/checklist_name"
+                        android:singleLine="true"
+                        android:background="@null"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/aet_checklist_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/md_48"
-                    android:drawablePadding="@dimen/md_32"
-                    android:textSize="@dimen/md_16"
-                    android:drawableStart="@drawable/ic_contacts_profile_item_fax"
-                    android:inputType="text"
-                    android:hint="체크리스트 이름"
-                    android:singleLine="true"
-                    android:background="@null"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Box 3 : 시작일-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_start_date"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/md_56"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:paddingVertical="@dimen/md_12"
-                android:paddingHorizontal="@dimen/md_18"
-                app:layout_constraintTop_toBottomOf="@id/cl_checklist_name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" >
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Box 4 : 종료일-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_end_date"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/md_56"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:paddingVertical="@dimen/md_12"
-                android:paddingHorizontal="@dimen/md_18"
-                app:layout_constraintTop_toBottomOf="@id/cl_start_date"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" >
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Box 5 : 메모-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_memo"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/md_56"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:paddingVertical="@dimen/md_12"
-                app:layout_constraintTop_toBottomOf="@id/cl_end_date"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" >
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/aet_memo"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/md_48"
-                    android:drawablePadding="@dimen/md_32"
-                    android:textSize="@dimen/md_16"
-                    android:drawableStart="@drawable/ic_contacts_profile_item_fax"
-                    android:inputType="text"
-                    android:hint="메모"
-                    android:singleLine="true"
-                    android:background="@null"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Box 6 : 장소-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_location"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/md_56"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:paddingVertical="@dimen/md_12"
-                app:layout_constraintTop_toBottomOf="@id/cl_memo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" >
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/aet_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/md_48"
-                    android:drawablePadding="@dimen/md_32"
-                    android:textSize="@dimen/md_16"
-                    android:drawableStart="@drawable/ic_contacts_profile_item_fax"
-                    android:inputType="text"
-                    android:hint="장소"
-                    android:singleLine="true"
-                    android:background="@null"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Box 7 : 알림-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_attachment"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/md_0"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:paddingVertical="@dimen/md_12"
-                app:layout_constraintTop_toBottomOf="@id/cl_location"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" >
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_attach_list"
+                <!-- Box 3 : 시작일-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_attach_card"
-                    android:layout_marginTop="@dimen/md_12"
-                    android:overScrollMode="never"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    app:layout_constraintTop_toBottomOf="@id/cl_checklist_name"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent" >
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/aet_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/md_48"
+                        android:focusableInTouchMode="false"
+                        android:drawablePadding="@dimen/md_32"
+                        android:theme="@style/RegisterPlaceHolderLabel"
+                        android:drawableStart="@drawable/ic_calendar"
+                        android:cursorVisible="false"
+                        android:inputType="text"
+                        android:hint="@string/date_range"
+                        android:singleLine="true"
+                        android:background="@null"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Box 5 : 메모-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_memo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    app:layout_constraintTop_toBottomOf="@id/cl_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" >
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/aet_memo"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/md_48"
+                        android:drawablePadding="@dimen/md_32"
+                        android:theme="@style/RegisterPlaceHolderLabel"
+                        android:drawableStart="@drawable/ic_description"
+                        android:inputType="text"
+                        android:hint="@string/description"
+                        android:singleLine="true"
+                        android:background="@null"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Box 6 : 장소-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    app:layout_constraintTop_toBottomOf="@id/cl_memo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" >
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/aet_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/md_48"
+                        android:drawablePadding="@dimen/md_32"
+                        android:theme="@style/RegisterPlaceHolderLabel"
+                        android:drawableStart="@drawable/ic_location"
+                        android:inputType="text"
+                        android:hint="@string/location"
+                        android:singleLine="true"
+                        android:background="@null"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Box 7 : 첨부파일-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_attachment"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/md_0"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    app:layout_constraintTop_toBottomOf="@id/cl_location"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" >
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_attach_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_attach_card"
+                        android:layout_marginTop="@dimen/md_12"
+                        android:overScrollMode="never"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

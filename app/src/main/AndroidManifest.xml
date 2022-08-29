@@ -49,6 +49,7 @@
         <activity
             android:name="com.apx6.chipmunk.app.ui.RegisterActivity"
             android:theme="@style/Theme.Chipmunk.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
 
         <activity

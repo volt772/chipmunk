@@ -75,7 +75,7 @@ class FlowRepoTest {
     fun test01_post_category() {
 
         runBlocking {
-            for (i in 1..20) {
+            for (i in 21..50) {
                 val sampleCategory = CmdCategory(
                     name = "생활${i}",
                     uid = user!!.id
