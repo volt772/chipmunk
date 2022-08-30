@@ -183,20 +183,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" >
 
+                    <ImageView
+                        android:id="@+id/iv_memo_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/md_48"
+                        android:src="@drawable/ic_description"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/aet_memo"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/md_48"
+                        android:layout_width="@dimen/md_0"
+                        android:layout_height="wrap_content"
                         android:drawablePadding="@dimen/md_32"
                         android:theme="@style/RegisterPlaceHolderLabel"
-                        android:drawableStart="@drawable/ic_description"
                         android:inputType="textMultiLine"
                         android:hint="@string/description"
                         android:background="@null"
+                        android:layout_marginStart="@dimen/md_33"
+                        app:layout_constraintStart_toEndOf="@id/iv_memo_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!-- Box 6 : 장소-->
