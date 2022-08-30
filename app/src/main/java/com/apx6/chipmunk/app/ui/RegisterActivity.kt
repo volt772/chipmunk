@@ -2,9 +2,7 @@ package com.apx6.chipmunk.app.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
@@ -20,7 +18,6 @@ import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -93,9 +90,14 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     private fun addCategoryChips(categories: List<CmdCategory>) {
         categories.forEach { _category ->
             val chip = Chip(this)
-            chip.text = _category.name
-            chip.setOnSingleClickListener {
-                selectChip(_category)
+
+            chip.apply {
+                text = _category.name
+                setOnSingleClickListener {
+                    selectChip(chip, _category)
+                }
+                chipBackgroundColor = getColorStateList(R.color.material_gray_300)
+
             }
 
             binding.cgCategory.addView(chip)
@@ -108,7 +110,20 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         }
     }
 
-    private fun selectChip(category: CmdCategory) {
+    private fun selectChip(chip: Chip, category: CmdCategory) {
+        val selectState = !chip.isSelected
+
+        chip.apply {
+            isSelected = selectState
+            val (chipColor, textColor) = if (selectState) {
+                R.color.material_amber_700 to R.color.white
+            } else {
+                R.color.material_gray_300 to R.color.black_h0
+            }
+
+            chipBackgroundColor = getColorStateList(chipColor)
+            setTextColor(getColor(textColor))
+        }
     }
 
     private fun observeUser() {
