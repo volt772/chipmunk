@@ -1,6 +1,7 @@
 package com.apx6.chipmunk.app.ui
 
 import androidx.lifecycle.viewModelScope
+import com.apx6.chipmunk.app.di.IoDispatcher
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.State
 import com.apx6.domain.dto.CmdAttachment
@@ -8,6 +9,7 @@ import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.repository.AttachRepository
 import com.apx6.domain.repository.CategoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -18,6 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
+    @IoDispatcher val ioDispatcher: CoroutineDispatcher,
     private val categoryRepository: CategoryRepository,
     private val attachRepository: AttachRepository
 ) : BaseViewModel() {
@@ -41,6 +44,12 @@ class RegisterViewModel @Inject constructor(
             attachRepository.getAttachments(clId)
                 .map { resource -> State.fromResource(resource) }
                 .collect { state -> _attachment.value = state }
+        }
+    }
+
+    fun deleteAttachment(attachment: CmdAttachment) {
+        viewModelScope.launch(ioDispatcher) {
+            attachRepository.delAttachment(attachment.id)
         }
     }
 

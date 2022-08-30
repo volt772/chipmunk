@@ -26,7 +26,7 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindTaskRepository(impl: CheckListRepositoryImpl): CheckListRepository
+    abstract fun bindCheckListRepository(impl: CheckListRepositoryImpl): CheckListRepository
 
     @Binds
     @Singleton

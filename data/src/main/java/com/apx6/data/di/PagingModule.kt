@@ -15,7 +15,7 @@ abstract class PagingModule {
 
     @Binds
     @Singleton
-    abstract fun bindTaskDataSource(impl: CheckListDataSourceImpl): CheckListDataSource
+    abstract fun bindCheckListDataSource(impl: CheckListDataSourceImpl): CheckListDataSource
 
 //    @Binds
 //    @Singleton

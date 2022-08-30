@@ -75,7 +75,7 @@ class FlowRepoTest {
     fun test01_post_category() {
 
         runBlocking {
-            for (i in 21..50) {
+            for (i in 1..50) {
                 val sampleCategory = CmdCategory(
                     name = "생활${i}",
                     uid = user!!.id
@@ -131,16 +131,18 @@ class FlowRepoTest {
 
             println("probe :: test :: checklist :: $checklist")
 
-            checklist?.let { chk ->
-                val attach = CmdAttachment(
-                    clId = chk.id,
-                    name = "고라니.png",
-                    size = 21345,
-                    contentType = "image/png",
-                    createdTime = currMillis
-                )
+            for (i in 0..10) {
+                checklist?.let { chk ->
+                    val attach = CmdAttachment(
+                        clId = chk.id,
+                        name = "고라니_$i.png",
+                        size = 21345,
+                        contentType = "image/png",
+                        createdTime = currMillis
+                    )
 
-                attachRepository.postAttachment(attach)
+                    attachRepository.postAttachment(attach)
+                }
             }
 
 

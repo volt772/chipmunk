@@ -16,6 +16,7 @@ import com.apx6.chipmunk.app.ui.common.CmSnackBar
 import com.apx6.chipmunk.databinding.ActivityRegisterBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
+import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +32,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
     private val categoryAdapter = CategoryAdapter(this::onItemClicked)
 
-    private val attachAdapter = AttachAdapter()
+    private val attachAdapter = AttachAdapter(::deleteAttach)
 
     private var userId: Int = 0
 
@@ -65,7 +66,6 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                     when (state) {
                         is State.Loading -> { }
                         is State.Success -> {
-                            println("probe :: category observe !! success : ${state.data}")
                             addCategoryChips(state.data.toMutableList())
                         }
                         is State.Error -> {
@@ -80,7 +80,6 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                         is State.Loading -> {
                         }
                         is State.Success -> {
-                            println("probe :: attach observe !! success : ${state.data}")
                             attachAdapter.submitList(state.data.toMutableList())
                         }
                         is State.Error -> {
@@ -103,8 +102,13 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         }
     }
 
+    private fun deleteAttach(attach: CmdAttachment) {
+        lifecycleScope.launch {
+            viewModel.deleteAttachment(attach)
+        }
+    }
+
     private fun selectChip(category: CmdCategory) {
-        println("probe :: category :: ${category.name}")
     }
 
     private fun observeUser() {

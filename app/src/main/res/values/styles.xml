@@ -6,13 +6,13 @@
         <item name="android:paddingTop">@dimen/md_4</item>
     </style>
 
-    <!-- Settings Attach Name Style -->
+    <!-- Attach Name Style -->
     <style name="AttachName">
         <item name="android:textSize">@dimen/md_14</item>
         <item name="android:textColor">@color/black_h32</item>
     </style>
 
-    <!-- Settings Attach Size Style -->
+    <!-- Attach Size Style -->
     <style name="AttachSize">
         <item name="android:textSize">@dimen/md_12</item>
         <item name="android:textColor">@color/gray_h0_4</item>

@@ -44,9 +44,8 @@ class AttachRepositoryImpl @Inject constructor(
         return result
     }
 
-    override suspend fun delAttachment(attachment: CmdAttachment): Boolean {
-        val entity = convertToEntity(attachment)
-        return attachmentDao.delete(entity) > 0
+    override suspend fun delAttachment(id: Int): Boolean {
+        return attachmentDao.delAttachment(id) > 0
     }
 
     private suspend fun convertToEntity(attachment: CmdAttachment): Attachment {

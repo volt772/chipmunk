@@ -3,9 +3,7 @@ package com.apx6.data.dao
 import androidx.room.Dao
 import androidx.room.Query
 import com.apx6.domain.dto.CmdAttachment
-import com.apx6.domain.dto.CmdCheckList
 import com.apx6.domain.entities.Attachment
-import com.apx6.domain.entities.CheckList
 import kotlinx.coroutines.flow.Flow
 
 

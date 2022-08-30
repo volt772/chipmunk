@@ -13,6 +13,6 @@ interface AttachRepository {
 
     suspend fun getAttachments(clId: Int): Flow<Resource<List<CmdAttachment>>>
 
-    suspend fun delAttachment(attachment: CmdAttachment): Boolean
+    suspend fun delAttachment(id: Int): Boolean
 
 }

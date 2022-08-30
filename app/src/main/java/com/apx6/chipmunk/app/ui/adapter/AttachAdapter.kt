@@ -11,6 +11,7 @@ import com.apx6.domain.dto.CmdCategory
 
 
 class AttachAdapter(
+    private val deleteAttach: (CmdAttachment) -> Unit
 ) : ListAdapter<CmdAttachment, AttachViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AttachViewHolder(
@@ -18,7 +19,8 @@ class AttachAdapter(
             LayoutInflater.from(parent.context),
             parent,
             false
-        )
+        ),
+        deleteAttach
     )
 
     override fun onBindViewHolder(holder: AttachViewHolder, position: Int) =
