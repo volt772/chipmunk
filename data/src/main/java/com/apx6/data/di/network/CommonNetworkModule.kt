@@ -1,7 +1,6 @@
 package com.apx6.data.di.network
 
-import com.apx6.data.di.GeneralHttpClient
-import com.apx6.data.di.GeneralInterceptor
+import com.apx6.data.di.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,13 +14,13 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
-/**
- * CommonNetworkModule
- */
-
 private const val CONNECT_TIMEOUT = 10L
 private const val WRITE_TIMEOUT = 10L
 private const val READ_TIMEOUT = 10L
+
+private const val KAKAO_MAP_CONNECT_TIMEOUT = 10L
+private const val KAKAO_MAP_WRITE_TIMEOUT = 10L
+private const val KAKAO_MAP_READ_TIMEOUT = 10L
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -34,14 +33,14 @@ object RetrofitModule {
     }
 
     /**
-     * @desc 일반 TASK HttpClient
+     * @desc 앱 HttpClient
      */
     @Provides
     @Singleton
-    @GeneralHttpClient
-    fun provideGeneralHttpClient(
+    @ChipmunkHttpClient
+    fun provideChipmunkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
-        @GeneralInterceptor generalInterceptor: Interceptor
+        @ChipmunkInterceptor chipmunkInterceptor: Interceptor
     ): OkHttpClient {
 
         return OkHttpClient.Builder().apply {
@@ -49,9 +48,28 @@ object RetrofitModule {
             writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
             retryOnConnectionFailure(true)
-            addInterceptor(generalInterceptor)
+            addInterceptor(chipmunkInterceptor)
             addInterceptor(loggingInterceptor)
         }.build()
     }
 
+    /**
+     * @desc Kakao Map HttpClient
+     */
+    @Provides
+    @Singleton
+    @KakaoMapHttpClient
+    fun provideKakaoMapHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor,
+        @KakaoMapInterceptor kakaoMapInterceptor: Interceptor,
+    ): OkHttpClient {
+
+        return OkHttpClient.Builder().apply {
+            connectTimeout(KAKAO_MAP_CONNECT_TIMEOUT, TimeUnit.SECONDS)
+            writeTimeout(KAKAO_MAP_WRITE_TIMEOUT, TimeUnit.SECONDS)
+            readTimeout(KAKAO_MAP_READ_TIMEOUT, TimeUnit.SECONDS)
+            addInterceptor(kakaoMapInterceptor)
+            addInterceptor(loggingInterceptor)
+        }.build()
+    }
 }

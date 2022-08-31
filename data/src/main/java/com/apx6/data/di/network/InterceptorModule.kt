@@ -1,6 +1,7 @@
 package com.apx6.data.di.network
 
-import com.apx6.data.di.GeneralInterceptor
+import com.apx6.data.di.ChipmunkInterceptor
+import com.apx6.data.di.KakaoMapInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,57 +19,45 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object InterceptorModule {
 
-    @Provides
-    @Singleton
-    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    }
+    /**
+     * InterceptorModule
+     */
 
-    @Provides
-    @Singleton
-    @GeneralInterceptor
-    fun provideInterceptor(): Interceptor {
-        return Interceptor { chain ->
+    @Module
+    @InstallIn(SingletonComponent::class)
+    object InterceptorModule {
 
-            val builder = chain.request().newBuilder()
-//                    .header(AUTHORIZATION, bearer)
-//                    .header(USER_AGENT, userAgent?: "")
-//                    .header(USER_LANGUAGE, appLang?: "")
-//                    .header(ACCEPT, "application/json")
-            chain.proceed(builder.build())
+        @Provides
+        @Singleton
+        fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+            return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        }
 
+        /**
+         * @desc Chipmunk Interceptor
+         */
+        @Provides
+        @Singleton
+        @ChipmunkInterceptor
+        fun provideChipmunkInterceptor(): Interceptor {
+            return Interceptor { chain ->
+                chain.proceed(chain.request())
+            }
+        }
 
-//            if (accessToken.isNotBlank()) {
-////                val userAgent = mpPreference.getString(MpConstants.Prefs.USER_AGENT, "")
-////                val appLang = mpPreference.getString(MpConstants.Prefs.APP_LANGUAGE, "")
-////                val bearer = "$BEARER $accessToken"
-//                val builder = chain.request().newBuilder()
-////                    .header(AUTHORIZATION, bearer)
-////                    .header(USER_AGENT, userAgent?: "")
-////                    .header(USER_LANGUAGE, appLang?: "")
-////                    .header(ACCEPT, "application/json")
-//                chain.proceed(builder.build())
-//            } else {
-//                chain.proceed(chain.request())
-//            }
+        /**
+         * @desc Kakao Map Interceptor
+         */
+        @Provides
+        @Singleton
+        @KakaoMapInterceptor
+        fun provideKakaoMapInterceptor(): Interceptor {
+            return Interceptor { chain ->
+                val apiKey = "2b82712949a4f348da1dda55f11619bc"
+                val builder = chain.request().newBuilder()
+                    .header("Authorization", "KakaoAK $apiKey")
+                chain.proceed(builder.build())
+            }
         }
     }
-//
-//    /**
-//     * @desc 첨부파일 전용 TASK Interceptor
-//     */
-//    @Provides
-//    @Singleton
-//    @ProgressInterceptor
-//    fun provideProgressInterceptor(listener: ProgressListener): Interceptor {
-//        return Interceptor { chain ->
-//            val originalResponse = chain.proceed(chain.request())
-//            val body: ResponseBody = originalResponse.body ?: throw IOException("empty response")
-//            val progressResponseBody = ProgressResponseBody(body, listener)
-//
-//            originalResponse.newBuilder()
-//                .body(progressResponseBody)
-//                .build()
-//        }
-//    }
 }
