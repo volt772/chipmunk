@@ -19,45 +19,36 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object InterceptorModule {
 
+    @Provides
+    @Singleton
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
+
     /**
-     * InterceptorModule
+     * @desc Chipmunk Interceptor
      */
-
-    @Module
-    @InstallIn(SingletonComponent::class)
-    object InterceptorModule {
-
-        @Provides
-        @Singleton
-        fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-            return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    @Provides
+    @Singleton
+    @ChipmunkInterceptor
+    fun provideChipmunkInterceptor(): Interceptor {
+        return Interceptor { chain ->
+            chain.proceed(chain.request())
         }
+    }
 
-        /**
-         * @desc Chipmunk Interceptor
-         */
-        @Provides
-        @Singleton
-        @ChipmunkInterceptor
-        fun provideChipmunkInterceptor(): Interceptor {
-            return Interceptor { chain ->
-                chain.proceed(chain.request())
-            }
-        }
-
-        /**
-         * @desc Kakao Map Interceptor
-         */
-        @Provides
-        @Singleton
-        @KakaoMapInterceptor
-        fun provideKakaoMapInterceptor(): Interceptor {
-            return Interceptor { chain ->
-                val apiKey = "2b82712949a4f348da1dda55f11619bc"
-                val builder = chain.request().newBuilder()
-                    .header("Authorization", "KakaoAK $apiKey")
-                chain.proceed(builder.build())
-            }
+    /**
+     * @desc Kakao Map Interceptor
+     */
+    @Provides
+    @Singleton
+    @KakaoMapInterceptor
+    fun provideKakaoMapInterceptor(): Interceptor {
+        return Interceptor { chain ->
+            val apiKey = "2b82712949a4f348da1dda55f11619bc"
+            val builder = chain.request().newBuilder()
+                .header("Authorization", "KakaoAK $apiKey")
+            chain.proceed(builder.build())
         }
     }
 }

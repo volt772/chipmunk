@@ -16,24 +16,4 @@ abstract class PagingModule {
     @Binds
     @Singleton
     abstract fun bindCheckListDataSource(impl: CheckListDataSourceImpl): CheckListDataSource
-
-//    @Binds
-//    @Singleton
-//    abstract fun bindRemoteKeyOperator(impl: RemoteKeyOperatorImpl): RemoteKeyOperator
-//
-//    @Binds
-//    @Singleton
-//    abstract fun bindSpaceMemberRemoteDataSource(impl: SpaceMemberRemoteDataSourceImpl): SpaceMemberRemoteDataSource
-//
-//    @Binds
-//    @Singleton
-//    abstract fun bindAssigneeMemberRemoteDataSource(impl: AssigneeMemberRemoteDataSourceImpl): AssigneeMemberRemoteDataSource
-//
-//    @Binds
-//    @Singleton
-//    abstract fun bindCardRemoteDataSource(impl: CardRemoteDataSourceImpl): CardRemoteDataSource
-//
-//    @Binds
-//    @Singleton
-//    abstract fun bindLogRemoteDataSource(impl: LogRemoteDataSourceImpl): LogRemoteDataSource
 }
