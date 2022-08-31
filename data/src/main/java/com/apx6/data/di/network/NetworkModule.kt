@@ -38,7 +38,7 @@ object NetworkModule {
     fun provideChipmunkRetrofitClient(
         @ChipmunkBaseUrl baseUrl: String,
         @ChipmunkHttpClient okHttpClient: OkHttpClient,
-        converterFactory: Converter.Factory
+//        converterFactory: Converter.Factory
     ): Retrofit {
         return retrofitBuilder(baseUrl, okHttpClient)
     }
@@ -49,7 +49,7 @@ object NetworkModule {
     fun provideKakaoMapRetrofitClient(
         @KakaoMapBaseUrl baseUrl: String,
         @KakaoMapHttpClient okHttpClient: OkHttpClient,
-        converterFactory: Converter.Factory
+//        converterFactory: Converter.Factory
     ): Retrofit {
         return retrofitBuilder(baseUrl, okHttpClient)
     }

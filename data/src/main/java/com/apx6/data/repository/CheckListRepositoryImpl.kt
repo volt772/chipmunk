@@ -1,6 +1,7 @@
 package com.apx6.data.repository
 
 import com.apx6.data.dao.CheckListDao
+import com.apx6.data.network.KakaoMapApiService
 import com.apx6.domain.dto.CmdCheckList
 import com.apx6.domain.entities.CheckList
 import com.apx6.domain.mapper.CheckListMapper
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class CheckListRepositoryImpl @Inject constructor(
+    private val api: KakaoMapApiService,
     private val checkListDao: CheckListDao,
     private val checkListMapper: CheckListMapper
 ): CheckListRepository {
@@ -56,6 +58,11 @@ class CheckListRepositoryImpl @Inject constructor(
     override suspend fun delCheckList(checkList: CmdCheckList): Boolean {
         val entity = convertToEntity(checkList)
         return checkListDao.delete(entity) > 0
+    }
+
+    override suspend fun getLocation(query: String) {
+        val result = api.getLocationDocs(query)
+        println("probe :: result : $result")
     }
 
     private suspend fun convertToEntity(checkList: CmdCheckList): CheckList {
