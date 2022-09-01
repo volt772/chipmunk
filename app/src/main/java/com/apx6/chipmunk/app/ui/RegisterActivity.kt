@@ -171,6 +171,10 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
             layoutManager = LinearLayoutManager(this@RegisterActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = attachAdapter
         }
+
+        binding.ivLocationSearch.setOnSingleClickListener {
+
+        }
     }
 
 }
