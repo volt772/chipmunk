@@ -58,6 +58,11 @@
             android:exported="false" />
 
         <activity
+            android:name="com.apx6.chipmunk.app.ui.LocationActivity"
+            android:theme="@style/Theme.Chipmunk.NoActionBar"
+            android:exported="false" />
+
+        <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>

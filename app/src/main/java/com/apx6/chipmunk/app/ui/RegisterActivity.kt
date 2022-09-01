@@ -1,5 +1,6 @@
 package com.apx6.chipmunk.app.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -53,7 +54,6 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
         viewModel.getCategories(uid = userId)
         viewModel.getAttachments(clId = 1)
-        viewModel.getLocations(query = "선릉역")
 //        observeUser()
     }
 
@@ -79,20 +79,6 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                         }
                         is State.Success -> {
                             attachAdapter.submitList(state.data.toMutableList())
-                        }
-                        is State.Error -> {
-                        }
-                    }
-                }
-            }
-
-            launch {
-                viewModel.location.collect { state ->
-                    when (state) {
-                        is State.Loading -> {
-                        }
-                        is State.Success -> {
-                            println("probe :: location :: ${state.data}")
                         }
                         is State.Error -> {
                         }
@@ -173,7 +159,11 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         }
 
         binding.ivLocationSearch.setOnSingleClickListener {
-
+            val query = binding.aetLocation.text
+            val intent = Intent(this, LocationActivity::class.java).apply {
+                putExtra(CmdConstants.Intent.QUERY, query)
+            }
+            startActivity(intent)
         }
     }
 

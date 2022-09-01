@@ -29,9 +29,6 @@ class RegisterViewModel @Inject constructor(
     private val attachRepository: AttachRepository
 ) : BaseViewModel() {
 
-    private val _location: MutableStateFlow<State<CmdLocation>> = MutableStateFlow(State.loading())
-    val location: StateFlow<State<CmdLocation>> = _location
-
     private val _category: MutableStateFlow<State<List<CmdCategory>>> = MutableStateFlow(State.loading())
     val category: StateFlow<State<List<CmdCategory>>> = _category
 
@@ -57,14 +54,6 @@ class RegisterViewModel @Inject constructor(
     fun deleteAttachment(attachment: CmdAttachment) {
         viewModelScope.launch(ioDispatcher) {
             attachRepository.delAttachment(attachment.id)
-        }
-    }
-
-    fun getLocations(query: String) {
-        viewModelScope.launch {
-            checkListRepository.getLocation(query)
-                .map { resource -> State.fromResource(resource) }
-                .collect { state -> _location.value = state }
         }
     }
 
