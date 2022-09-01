@@ -3,16 +3,20 @@ package com.apx6.data.repository
 import com.apx6.data.dao.CheckListDao
 import com.apx6.data.network.KakaoMapApiService
 import com.apx6.domain.dto.CmdCheckList
+import com.apx6.domain.dto.CmdLocation
 import com.apx6.domain.entities.CheckList
 import com.apx6.domain.mapper.CheckListMapper
 import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.Resource
 import com.apx6.domain.repository.boundary.LocalBoundaryRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import com.apx6.domain.response.CmdErrorResponse
+import com.apx6.domain.response.CmdResponseRefinery
+import com.apx6.domain.response.CmdSuccessResponse
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class CheckListRepositoryImpl @Inject constructor(
+    private val refinery: CmdResponseRefinery,
     private val api: KakaoMapApiService,
     private val checkListDao: CheckListDao,
     private val checkListMapper: CheckListMapper
@@ -60,9 +64,21 @@ class CheckListRepositoryImpl @Inject constructor(
         return checkListDao.delete(entity) > 0
     }
 
-    override suspend fun getLocation(query: String) {
-        val result = api.getLocationDocs(query)
-        println("probe :: result : $result")
+    @Suppress("UNCHECKED_CAST")
+    override suspend fun getLocation(query: String): Flow<Resource<CmdLocation>> {
+        val response = refinery.response(
+            api.getLocationDocs(query)
+        )
+
+        return if (response is CmdSuccessResponse<*>) {
+            val resp = response.body as CmdLocation
+
+            flow { emit(Resource.Success(resp)) }
+        } else {
+            val err = response as CmdErrorResponse
+
+            flow { emit(Resource.Failed(err.message)) }
+        }
     }
 
     private suspend fun convertToEntity(checkList: CmdCheckList): CheckList {

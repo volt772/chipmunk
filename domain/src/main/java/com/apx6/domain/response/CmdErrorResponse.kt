@@ -8,6 +8,6 @@ import com.apx6.domain.exception.CmdErrorDto
 
 data class CmdErrorResponse(
 
-    var error: CmdErrorDto? = null
+    val message: String
 
 )

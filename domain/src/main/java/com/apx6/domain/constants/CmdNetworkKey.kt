@@ -9,6 +9,7 @@ object CmdNetworkKey {
     // C
 
     // D
+    const val DOCUMENTS = "documents"
 
     // E
 

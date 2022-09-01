@@ -53,6 +53,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
         viewModel.getCategories(uid = userId)
         viewModel.getAttachments(clId = 1)
+        viewModel.getLocations(query = "선릉역")
 //        observeUser()
     }
 
@@ -78,6 +79,20 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                         }
                         is State.Success -> {
                             attachAdapter.submitList(state.data.toMutableList())
+                        }
+                        is State.Error -> {
+                        }
+                    }
+                }
+            }
+
+            launch {
+                viewModel.location.collect { state ->
+                    when (state) {
+                        is State.Loading -> {
+                        }
+                        is State.Success -> {
+                            println("probe :: location :: ${state.data}")
                         }
                         is State.Error -> {
                         }

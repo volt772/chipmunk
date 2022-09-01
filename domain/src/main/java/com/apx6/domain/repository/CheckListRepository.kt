@@ -1,6 +1,8 @@
 package com.apx6.domain.repository
 
 import com.apx6.domain.dto.CmdCheckList
+import com.apx6.domain.dto.CmdLocation
+import com.apx6.domain.dto.CmdLocationDoc
 import kotlinx.coroutines.flow.Flow
 
 interface CheckListRepository {
@@ -18,6 +20,6 @@ interface CheckListRepository {
 
     suspend fun delCheckList(checkList: CmdCheckList): Boolean
 
-    suspend fun getLocation(query: String)
+    suspend fun getLocation(query: String): Flow<Resource<CmdLocation>>
 
 }

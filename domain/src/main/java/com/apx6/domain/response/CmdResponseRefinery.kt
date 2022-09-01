@@ -5,6 +5,6 @@ import retrofit2.Response
 
 interface CmdResponseRefinery {
 
-    fun <T> response(response: Response<T>) : CmdResult<Any>
+    fun <T> response(response: Response<T>) : Any
 
 }

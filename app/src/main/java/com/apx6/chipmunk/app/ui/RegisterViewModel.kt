@@ -6,8 +6,11 @@ import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.State
 import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
+import com.apx6.domain.dto.CmdLocation
+import com.apx6.domain.dto.CmdLocationDoc
 import com.apx6.domain.repository.AttachRepository
 import com.apx6.domain.repository.CategoryRepository
+import com.apx6.domain.repository.CheckListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,9 +24,13 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     @IoDispatcher val ioDispatcher: CoroutineDispatcher,
+    private val checkListRepository: CheckListRepository,
     private val categoryRepository: CategoryRepository,
     private val attachRepository: AttachRepository
 ) : BaseViewModel() {
+
+    private val _location: MutableStateFlow<State<CmdLocation>> = MutableStateFlow(State.loading())
+    val location: StateFlow<State<CmdLocation>> = _location
 
     private val _category: MutableStateFlow<State<List<CmdCategory>>> = MutableStateFlow(State.loading())
     val category: StateFlow<State<List<CmdCategory>>> = _category
@@ -50,6 +57,14 @@ class RegisterViewModel @Inject constructor(
     fun deleteAttachment(attachment: CmdAttachment) {
         viewModelScope.launch(ioDispatcher) {
             attachRepository.delAttachment(attachment.id)
+        }
+    }
+
+    fun getLocations(query: String) {
+        viewModelScope.launch {
+            checkListRepository.getLocation(query)
+                .map { resource -> State.fromResource(resource) }
+                .collect { state -> _location.value = state }
         }
     }
 

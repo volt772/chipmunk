@@ -8,10 +8,6 @@ data class CmdSuccessResponse<T>(
 
     val code : Int,
 
-    val body : T?,
-
-    val nextOffset : Int?= null,
-
-    val limit : Int?= null
+    val body : T?
 
 )

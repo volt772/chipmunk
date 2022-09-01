@@ -7,6 +7,4 @@ sealed class CmdResult<out T: Any> {
 
     data class Error<out T: Any>(val exception: CmdErrorResponse): CmdResult<T>()
 
-//    object InProgress: MpdResult<Nothing>()
-
 }
