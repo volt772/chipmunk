@@ -12,7 +12,9 @@ import com.apx6.domain.repository.boundary.LocalBoundaryRepository
 import com.apx6.domain.response.CmdErrorResponse
 import com.apx6.domain.response.CmdResponseRefinery
 import com.apx6.domain.response.CmdSuccessResponse
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class CheckListRepositoryImpl @Inject constructor(
@@ -70,14 +72,14 @@ class CheckListRepositoryImpl @Inject constructor(
             api.getLocationDocs(query)
         )
 
-        return if (response is CmdSuccessResponse<*>) {
-            val resp = response.body as CmdLocation
-
-            flow { emit(Resource.Success(resp)) }
-        } else {
-            val err = response as CmdErrorResponse
-
-            flow { emit(Resource.Failed(err.message)) }
+        return flow {
+            if (response is CmdSuccessResponse<*>) {
+                val resp = response.body as CmdLocation
+                emit(Resource.Success(resp))
+            } else {
+                val err = response as CmdErrorResponse
+                emit(Resource.Failed(err.message))
+            }
         }
     }
 

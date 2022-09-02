@@ -1,5 +1,7 @@
 package com.apx6.chipmunk.app.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -7,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
-import com.apx6.chipmunk.app.ui.adapter.CheckListAdapter
+import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.adapter.LocationAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
@@ -40,7 +42,7 @@ class LocationActivity : BaseActivity<LocationViewModel, ActivityLocationBinding
 
             if (query == "") {
                 val vw = binding.ablLocation
-                CmSnackBar.make(vw, getString(R.string.failed_get_user_info), "") { }.apply {
+                CmSnackBar.make(vw, getString(R.string.failed_get_location_query), "") { }.apply {
                     show()
                 }
             }
@@ -49,11 +51,15 @@ class LocationActivity : BaseActivity<LocationViewModel, ActivityLocationBinding
         initView()
         subscribers()
 
-        viewModel.getLocations("선릉역")
+        viewModel.getLocations(query)
     }
 
     private fun onItemClicked(location: CmdLocationDoc) {
-        println("probe :: onItemClicked : $location")
+        val rData = Intent().apply {
+            putExtra(CmdConstants.Intent.LOCATION_NAME, location.placeName)
+        }
+        setResult(Activity.RESULT_OK, rData)
+        finish()
     }
 
     private fun initView() {
@@ -77,14 +83,22 @@ class LocationActivity : BaseActivity<LocationViewModel, ActivityLocationBinding
                         is State.Loading -> {
                         }
                         is State.Success -> {
+                            visibleForNoLocations(false)
                             locationAdapter.submitList(state.data.documents)
-                            println("probe :: location :: ${state.data}")
                         }
                         is State.Error -> {
+                            visibleForNoLocations(true)
                         }
                     }
                 }
             }
+        }
+    }
+
+    private fun visibleForNoLocations(visible: Boolean) {
+        binding.apply {
+            clNoLocation.visibilityExt(visible)
+            svLocations.visibilityExt(!visible)
         }
     }
 

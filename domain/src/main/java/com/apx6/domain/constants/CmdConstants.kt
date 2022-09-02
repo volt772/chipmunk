@@ -9,6 +9,7 @@ object CmdConstants {
     object Intent {
         const val USER_ID = "userId"
         const val QUERY = "query"
+        const val LOCATION_NAME = "locationName"
     }
 
 }

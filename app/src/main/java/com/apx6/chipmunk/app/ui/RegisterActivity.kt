@@ -1,7 +1,9 @@
 package com.apx6.chipmunk.app.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +29,16 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
     override val viewModel: RegisterViewModel by viewModels()
     override fun getViewBinding(): ActivityRegisterBinding = ActivityRegisterBinding.inflate(layoutInflater)
+
+    private var locationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.let { data ->
+                val locationName = data.getStringExtra(CmdConstants.Intent.LOCATION_NAME)?: ""
+                setLocationName(locationName)
+            }
+        }
+    }
+
 
     private val categoryAdapter = CategoryAdapter(this::onItemClicked)
 
@@ -161,10 +173,14 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         binding.ivLocationSearch.setOnSingleClickListener {
             val query = binding.aetLocation.text
             val intent = Intent(this, LocationActivity::class.java).apply {
-                putExtra(CmdConstants.Intent.QUERY, query)
+                putExtra(CmdConstants.Intent.QUERY, query.toString())
             }
-            startActivity(intent)
+            locationLauncher.launch(intent)
         }
+    }
+
+    private fun setLocationName(location: String) {
+        binding.aetLocation.setText(location)
     }
 
 }
