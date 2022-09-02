@@ -105,4 +105,51 @@
 <!--        <item name="android:lineSpacingExtra">@dimen/dimen_4</item>-->
 <!--    </style>-->
 
+    <!-- 캘린더 RangePicker-->
+    <style name="RangePickerCell">
+        <item name="android:layout_width">@dimen/md_0</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <!-- 캘린더 RangePicker (월)-->
+    <style name="RangePickerCell.Month">
+        <item name="android:textSize">@dimen/md_20</item>
+        <item name="android:paddingStart">@dimen/md_34</item>
+        <item name="android:textColor">@color/black_h0</item>
+    </style>
+
+    <!-- 캘린더 RangePicker (주)-->
+    <style name="RangePickerCell.Week" parent="RangePickerCell">
+        <item name="android:textSize">@dimen/md_12</item>
+        <item name="android:textColor">@color/black_h0</item>
+    </style>
+
+    <!-- 캘린더 RangePicker (일)-->
+    <style name="RangePickerCell.Day">
+        <item name="android:layout_width">@dimen/md_36</item>
+        <item name="android:layout_height">@dimen/md_36</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">@dimen/md_14</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black_h0</item>
+    </style>
+
+    <!-- 캘린더 RangePicker Header 스타일-->
+    <style name="RangePickerDate">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- 캘린더 RangePicker Header 스타일 > 레이블-->
+    <style name="RangePickerDate.Label">
+        <item name="android:textSize">@dimen/md_12</item>
+    </style>
+
+    <!-- 캘린더 RangePicker Header 스타일 > 날짜-->
+    <style name="RangePickerDate.Date">
+        <item name="android:textSize">@dimen/md_24</item>
+    </style>
+
 </resources>

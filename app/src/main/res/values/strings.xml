@@ -2,6 +2,22 @@
     <string name="app_name">chipmunk</string>
     <string name="kakao_app_key">9e6558b0ff2328661fc462b40990bacb</string>
 
+    <string name="range_picker_month_title">{YEAR}년 {MONTH}</string>
+    <string name="range_picker_date_label">{YEAR}-{MONTH}-{DAY}</string>
+    <string name="range_picker_invalid_range">처리하지 못하였습니다. 기간을 다시 설정해 주세요.</string>
+    <string name="range_picker_start_date">시작일</string>
+    <string name="range_picker_end_date">종료일</string>
+
+    <!-- 날짜관련-->
+    <string name="date_week_abbr_1">일</string>
+    <string name="date_week_abbr_2">월</string>
+    <string name="date_week_abbr_3">화</string>
+    <string name="date_week_abbr_4">수</string>
+    <string name="date_week_abbr_5">목</string>
+    <string name="date_week_abbr_6">금</string>
+    <string name="date_week_abbr_7">토</string>
+
+
     <string name="failed_login">로그인을 할 수 없습니다. 잠시후 다시 시도해 주세요.</string>
     <string name="failed_get_user_info">사용자 정보를 가져올 수 없습니다. 잠시후 다시 로그인해주세요.</string>
     <string name="failed_get_location_query">장소 키워드가 없습니다.</string>

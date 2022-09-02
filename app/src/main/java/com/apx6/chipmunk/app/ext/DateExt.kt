@@ -274,3 +274,34 @@ internal fun Calendar.withTime(date: Date) {
     set(Calendar.SECOND, 0)
     set(Calendar.MILLISECOND, 0)
 }
+
+class DateExt {
+    companion object {
+        /**
+         * 현재 일자 (분리형)
+         * @return DateOfYear
+         */
+        fun getDateOfToday(): DateOfToday {
+            val date = DateTime()
+            val converted = date.convertDateByType(4)
+
+            if (converted.equalsExt("")) {
+                return DateOfToday(0, 0, 0)
+            }
+
+            val formatted = converted.splitExt("-")
+
+            return if (formatted.isEmpty()) {
+                return DateOfToday(0, 0, 0)
+            } else {
+                DateOfToday(
+                    year = formatted[0].toInt(),
+                    month = formatted[1].toInt(),
+                    day = formatted[2].toInt()
+                )
+            }
+        }
+    }
+
+    data class DateOfToday(val year: Int, val month: Int, val day: Int)
+}

@@ -52,7 +52,7 @@ class LocationActivity : BaseActivity<LocationViewModel, ActivityLocationBinding
         val rData = Intent().apply {
             putExtra(CmdConstants.Intent.LOCATION_NAME, location.placeName)
         }
-        setResult(Activity.RESULT_OK, rData)
+        setResult(CmdConstants.Intent.Code.CODE_LOCATION, rData)
         finish()
     }
 

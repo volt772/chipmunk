@@ -1,6 +1,5 @@
 package com.apx6.chipmunk.app.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
@@ -8,12 +7,14 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.ext.convertDateByType
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ui.adapter.AttachAdapter
 import com.apx6.chipmunk.app.ui.adapter.CategoryAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
+import com.apx6.chipmunk.app.ui.picker.RangePickerActivity
 import com.apx6.chipmunk.databinding.ActivityRegisterBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
@@ -22,6 +23,8 @@ import com.apx6.domain.dto.CmdCategory
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 
 
 @AndroidEntryPoint
@@ -30,15 +33,25 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     override val viewModel: RegisterViewModel by viewModels()
     override fun getViewBinding(): ActivityRegisterBinding = ActivityRegisterBinding.inflate(layoutInflater)
 
-    private var locationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            result.data?.let { data ->
-                val locationName = data.getStringExtra(CmdConstants.Intent.LOCATION_NAME)?: ""
-                setLocationName(locationName)
+    private var activityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        result.data?.let { data ->
+            when (result.resultCode) {
+                CmdConstants.Intent.Code.CODE_LOCATION -> {
+                    val locationName = data.getStringExtra(CmdConstants.Intent.LOCATION_NAME)?: ""
+                    setLocationName(locationName)
+                }
+                CmdConstants.Intent.Code.CODE_CALENDAR -> {
+                    val selectedSDay = data.getStringExtra(CmdConstants.Intent.SELECTED_START_DAY)?: ""
+                    val selectedEDay = data.getStringExtra(CmdConstants.Intent.SELECTED_END_DAY)?: ""
+
+                    val startDay = DateTime(selectedSDay, DateTimeZone.getDefault()).convertDateByType(5)
+                    val endDay = DateTime(selectedEDay, DateTimeZone.getDefault()).convertDateByType(5)
+
+                    setPeriod(startDay, endDay)
+                }
             }
         }
     }
-
 
     private val categoryAdapter = CategoryAdapter(this::onItemClicked)
 
@@ -175,12 +188,21 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
             val intent = Intent(this, LocationActivity::class.java).apply {
                 putExtra(CmdConstants.Intent.QUERY, query.toString())
             }
-            locationLauncher.launch(intent)
+            activityLauncher.launch(intent)
+        }
+
+        binding.aetDate.setOnSingleClickListener {
+            val intent = Intent(this, RangePickerActivity::class.java)
+            activityLauncher.launch(intent)
         }
     }
 
     private fun setLocationName(location: String) {
         binding.aetLocation.setText(location)
+    }
+
+    private fun setPeriod(sDay: String, eDay: String) {
+        binding.aetDate.setText("$sDay - $eDay")
     }
 
 }

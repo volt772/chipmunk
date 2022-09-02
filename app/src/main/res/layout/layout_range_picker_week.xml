@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingBottom="8dp"
+        android:weightSum="7">
+
+        <!-- 일-->
+        <TextView
+            style="@style/RangePickerCell.Week"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/md_48"
+            android:layout_weight="1"
+            android:text="@string/date_week_abbr_1" />
+
+        <!-- 월-->
+        <TextView
+            style="@style/RangePickerCell.Week"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/md_48"
+            android:layout_weight="1"
+            android:text="@string/date_week_abbr_2" />
+
+        <!-- 화-->
+        <TextView
+            style="@style/RangePickerCell.Week"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/md_48"
+            android:layout_weight="1"
+            android:text="@string/date_week_abbr_3" />
+
+        <!-- 수-->
+        <TextView
+            style="@style/RangePickerCell.Week"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/md_48"
+            android:layout_weight="1"
+            android:text="@string/date_week_abbr_4" />
+
+        <!-- 목-->
+        <TextView
+            style="@style/RangePickerCell.Week"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/md_48"
+            android:layout_weight="1"
+            android:text="@string/date_week_abbr_5" />
+
+        <!-- 금-->
+        <TextView
+            style="@style/RangePickerCell.Week"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/md_48"
+            android:layout_weight="1"
+            android:text="@string/date_week_abbr_6" />
+
+        <!-- 토-->
+        <TextView
+            style="@style/RangePickerCell.Week"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/md_48"
+            android:layout_weight="1"
+            android:text="@string/date_week_abbr_7" />
+    </LinearLayout>
+</layout>
