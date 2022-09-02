@@ -1,6 +1,6 @@
 package com.apx6.domain.response
 
-import com.apx6.domain.constants.CmdNetworkKey
+import com.apx6.domain.constants.CmdNetworkKeyTags
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -9,19 +9,19 @@ import com.google.gson.annotations.SerializedName
 
 data class CmdResponseListDto<T> (
 
-    @field:SerializedName(CmdNetworkKey.Response.VALUE)
+    @field:SerializedName(CmdNetworkKeyTags.Response.VALUE)
     val value: List<T>,
 
-    @field:SerializedName(CmdNetworkKey.Response.COUNT)
+    @field:SerializedName(CmdNetworkKeyTags.Response.COUNT)
     var count: Int = 0,
 
-    @field:SerializedName(CmdNetworkKey.Response.OFFSET)
+    @field:SerializedName(CmdNetworkKeyTags.Response.OFFSET)
     var offset: Int = 0,
 
-    @field:SerializedName(CmdNetworkKey.Response.LIMIT)
+    @field:SerializedName(CmdNetworkKeyTags.Response.LIMIT)
     var limit: Int = 0,
 
-    @field:SerializedName(CmdNetworkKey.Response.TOTAL)
+    @field:SerializedName(CmdNetworkKeyTags.Response.TOTAL)
     var total: Int = 0,
 
 )

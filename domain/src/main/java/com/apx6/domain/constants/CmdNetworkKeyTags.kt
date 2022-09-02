@@ -15,10 +15,28 @@ object CmdNetworkKeyTags {
     const val X = "x"
     const val Y = "y"
 
+    const val DOCUMENTS = "documents"
+    const val META = "meta"
+
+    const val PAGEABLE_COUNT = "pageable_count"
+    const val TOTAL_COUNT = "total_count"
+
     object QueryParam {
         const val QUERY = "query"
         const val OFFSET = "offset"
         const val LIMIT = "limit"
+    }
+
+    object Response {
+        const val VALUE = "value"
+        const val COUNT = "count"
+        const val OFFSET = "offset"
+        const val LIMIT = "limit"
+        const val TOTAL = "total"
+
+        const val ERROR = "error"
+        const val CODE = "code"
+        const val MESSAGE = "message"
     }
 
 }

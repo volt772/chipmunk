@@ -18,6 +18,7 @@ import com.apx6.chipmunk.databinding.ActivityLocationBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
 import com.apx6.domain.dto.CmdLocationDoc
+import com.apx6.domain.dto.CmdLocationMeta
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -39,13 +40,6 @@ class LocationActivity : BaseActivity<LocationViewModel, ActivityLocationBinding
 
         with(intent) {
             query = getStringExtra(CmdConstants.Intent.QUERY)?: ""
-
-            if (query == "") {
-                val vw = binding.ablLocation
-                CmSnackBar.make(vw, getString(R.string.failed_get_location_query), "") { }.apply {
-                    show()
-                }
-            }
         }
 
         initView()
@@ -83,7 +77,7 @@ class LocationActivity : BaseActivity<LocationViewModel, ActivityLocationBinding
                         is State.Loading -> {
                         }
                         is State.Success -> {
-                            visibleForNoLocations(false)
+                            visibleForNoLocations(state.data.meta.pageableCount == 0)
                             locationAdapter.submitList(state.data.documents)
                         }
                         is State.Error -> {
@@ -95,10 +89,10 @@ class LocationActivity : BaseActivity<LocationViewModel, ActivityLocationBinding
         }
     }
 
-    private fun visibleForNoLocations(visible: Boolean) {
+    private fun visibleForNoLocations(isEmpty: Boolean) {
         binding.apply {
-            clNoLocation.visibilityExt(visible)
-            svLocations.visibilityExt(!visible)
+            clNoLocation.visibilityExt(isEmpty)
+            svLocations.visibilityExt(!isEmpty)
         }
     }
 

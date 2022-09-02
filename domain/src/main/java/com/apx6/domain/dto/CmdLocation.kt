@@ -1,11 +1,14 @@
 package com.apx6.domain.dto
 
-import com.apx6.domain.constants.CmdNetworkKey
+import com.apx6.domain.constants.CmdNetworkKeyTags
 import com.google.gson.annotations.SerializedName
 
 data class CmdLocation (
 
-    @field:SerializedName(CmdNetworkKey.DOCUMENTS)
-    val documents: List<CmdLocationDoc>?= emptyList()
+    @field:SerializedName(CmdNetworkKeyTags.DOCUMENTS)
+    val documents: List<CmdLocationDoc>?= emptyList(),
+
+    @field:SerializedName(CmdNetworkKeyTags.META)
+    val meta: CmdLocationMeta
 
 )
