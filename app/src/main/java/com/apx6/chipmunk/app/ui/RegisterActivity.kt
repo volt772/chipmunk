@@ -10,6 +10,7 @@ import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.convertDateByType
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
+import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.adapter.AttachAdapter
 import com.apx6.chipmunk.app.ui.adapter.CategoryAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
@@ -22,6 +23,9 @@ import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
@@ -32,6 +36,8 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
     override val viewModel: RegisterViewModel by viewModels()
     override fun getViewBinding(): ActivityRegisterBinding = ActivityRegisterBinding.inflate(layoutInflater)
+
+    private val msDate = MutableStateFlow("")
 
     private var activityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         result.data?.let { data ->
@@ -76,10 +82,25 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
         initView()
         subscribers()
+        initValidFlow()
 
         viewModel.getCategories(uid = userId)
         viewModel.getAttachments(clId = 1)
 //        observeUser()
+
+    }
+
+    private fun initValidFlow() {
+        /* Form is Valid*/
+        lifecycleScope.launch {
+            combine(msDate) { msDate ->
+                msDate.isNotEmpty()
+            }
+            .collectLatest { _isValid ->
+                println("probe :: isvalid : $_isValid")
+                binding.ivDateInit.visibilityExt(_isValid)
+            }
+        }
     }
 
     private fun subscribers() {
@@ -202,7 +223,9 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     }
 
     private fun setPeriod(sDay: String, eDay: String) {
-        binding.aetDate.setText("$sDay - $eDay")
+        val rangeText = "$sDay - $eDay"
+        binding.aetDate.setText(rangeText)
+        msDate.value = rangeText
     }
 
 }

@@ -156,7 +156,7 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/aet_date"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/md_0"
                         android:layout_height="@dimen/md_48"
                         android:focusableInTouchMode="false"
                         android:drawablePadding="@dimen/md_32"
@@ -167,9 +167,19 @@
                         android:hint="@string/date_range"
                         android:singleLine="true"
                         android:background="@null"
+                        android:layout_marginEnd="@dimen/md_10"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                        app:layout_constraintEnd_toStartOf="@id/iv_date_init" />
+
+                    <ImageView
+                        android:id="@+id/iv_date_init"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_init"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
