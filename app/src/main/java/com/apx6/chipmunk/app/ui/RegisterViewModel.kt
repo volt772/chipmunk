@@ -7,16 +7,16 @@ import com.apx6.domain.State
 import com.apx6.domain.constants.CmdSelectedChipEvent
 import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
-import com.apx6.domain.dto.CmdLocation
-import com.apx6.domain.dto.CmdLocationDoc
 import com.apx6.domain.repository.AttachRepository
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.CheckListRepository
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

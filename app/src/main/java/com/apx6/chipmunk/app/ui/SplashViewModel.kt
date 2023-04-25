@@ -4,27 +4,31 @@ import androidx.lifecycle.viewModelScope
 import com.apx6.chipmunk.app.fcm.FcmHelper
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.dto.CmdUser
-import com.apx6.domain.usecase.UserUseCase
+import com.apx6.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val userUseCase: UserUseCase,
+    private val userRepository: UserRepository,
     private val fcmHelper: FcmHelper
 ) : BaseViewModel() {
+
+    init {
+        getUser()
+    }
 
     private val _user: MutableSharedFlow<CmdUser?> = MutableSharedFlow()
     val user: SharedFlow<CmdUser?> = _user
 
-    fun getUser() {
+    private fun getUser() {
         viewModelScope.launch {
-            userUseCase.getUser().collect { _user.emit(it) }
+            userRepository.getUser().collectLatest { _user.emit(it) }
         }
     }
 

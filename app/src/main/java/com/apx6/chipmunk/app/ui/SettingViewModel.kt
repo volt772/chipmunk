@@ -7,6 +7,7 @@ import com.apx6.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ class SettingViewModel @Inject constructor(
 
     fun getUser() {
         viewModelScope.launch {
-            userRepository.getUser().collect{ _user.emit(it) }
+            userRepository.getUser().collectLatest { _user.emit(it) }
         }
     }
 

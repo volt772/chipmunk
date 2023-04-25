@@ -29,7 +29,7 @@ class DashBoardViewModel @Inject constructor(
 
     fun getUser() {
         viewModelScope.launch {
-            userRepository.getUser().collect{ _user.emit(it) }
+            userRepository.getUser().collectLatest { _user.emit(it) }
         }
     }
 

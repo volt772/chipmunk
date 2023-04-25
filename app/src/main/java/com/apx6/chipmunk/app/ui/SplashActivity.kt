@@ -25,7 +25,6 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
 
         initView()
         observeUser()
-        viewModel.getUser()
     }
 
     private fun observeUser() {
