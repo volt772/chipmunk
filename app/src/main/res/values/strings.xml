@@ -36,4 +36,5 @@
     <string name="date_range">기간</string>
     <string name="checklist_name">체크리스트 이름</string>
     <string name="category">카테고리</string>
+    <string name="my_checklist_count">내 체크리스트 : %d개</string>
 </resources>

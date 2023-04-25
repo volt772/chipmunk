@@ -16,6 +16,8 @@ interface CheckListRepository {
 
     suspend fun getCheckList(id: Int): Flow<CmdCheckList?>
 
+    suspend fun getCheckListCount(uid: Int): Flow<Resource<Int>>
+
     suspend fun patchCheckList(checkList: CmdCheckList): Boolean
 
     suspend fun delCheckList(checkList: CmdCheckList): Boolean

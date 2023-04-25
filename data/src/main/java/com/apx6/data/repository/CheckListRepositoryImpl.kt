@@ -56,6 +56,15 @@ class CheckListRepositoryImpl @Inject constructor(
         return checkListDao.getCheckList(id)
     }
 
+    override suspend fun getCheckListCount(uid: Int): Flow<Resource<Int>> {
+        val count = checkListDao.getCheckListCount(uid)
+        val result = count.map {
+            Resource.Success(it)
+        }
+
+        return result
+    }
+
     override suspend fun patchCheckList(checkList: CmdCheckList): Boolean {
         val entity = convertToEntity(checkList)
         return checkListDao.update(entity) > 0

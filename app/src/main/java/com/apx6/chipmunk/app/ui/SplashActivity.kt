@@ -10,7 +10,6 @@ import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivitySplashBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 
 
 @AndroidEntryPoint
