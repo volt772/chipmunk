@@ -10,13 +10,11 @@ import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.repository.AttachRepository
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.CheckListRepository
+import com.apx6.domain.repository.UserRepository
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,8 +24,16 @@ class RegisterViewModel @Inject constructor(
     @IoDispatcher val ioDispatcher: CoroutineDispatcher,
     private val checkListRepository: CheckListRepository,
     private val categoryRepository: CategoryRepository,
-    private val attachRepository: AttachRepository
+    private val attachRepository: AttachRepository,
+    private val userRepository: UserRepository
 ) : BaseViewModel() {
+
+    init {
+        getUserId()
+    }
+
+    private val _userId: MutableSharedFlow<Int?> = MutableSharedFlow()
+    val userId: SharedFlow<Int?> = _userId
 
     private val _selectedChips: MutableStateFlow<MutableList<Chip>> = MutableStateFlow(mutableListOf())
     val selectedChips: StateFlow<MutableList<Chip>> = _selectedChips
@@ -37,6 +43,12 @@ class RegisterViewModel @Inject constructor(
 
     private val _attachment: MutableStateFlow<State<List<CmdAttachment>>> = MutableStateFlow(State.loading())
     val attachment: StateFlow<State<List<CmdAttachment>>> = _attachment
+
+    private fun getUserId() {
+        viewModelScope.launch {
+            userRepository.getUserId().collectLatest { _userId.emit(it) }
+        }
+    }
 
     fun selectChip(chip: Chip, ce: CmdSelectedChipEvent) {
         viewModelScope.launch {

@@ -10,7 +10,6 @@ import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivityCategoryManageBinding
 import com.apx6.domain.State
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 

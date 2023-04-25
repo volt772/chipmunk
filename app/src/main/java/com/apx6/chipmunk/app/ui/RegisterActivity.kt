@@ -64,31 +64,13 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
     private val attachAdapter = AttachAdapter(::deleteAttach)
 
-    private var userId: Int = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
-        with(intent) {
-            userId = getIntExtra(CmdConstants.Intent.USER_ID, 0)
-
-            if (userId == 0) {
-                val vw = binding.ablRegister
-                CmSnackBar.make(vw, getString(R.string.failed_get_user_info), "") { }.apply {
-                    show()
-                }
-            }
-        }
-
         initView()
         subscribers()
         initValidFlow()
-
-        viewModel.getCategories(uid = userId)
-        viewModel.getAttachments(clId = 1)
-//        observeUser()
-
     }
 
     private fun initValidFlow() {
@@ -104,8 +86,30 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         }
     }
 
+    private fun snackForNoUser() {
+        val vw = binding.ablRegister
+        CmSnackBar.make(vw, getString(R.string.failed_get_user_info), "") { }.apply {
+            show()
+        }
+    }
+
     private fun subscribers() {
         lifecycleScope.run {
+            launchWhenStarted {
+                viewModel.userId.collect { uid ->
+                    uid?.let { _uid ->
+                        if (_uid > 0) {
+                            viewModel.getCategories(uid = _uid)
+                            viewModel.getAttachments(clId = 1)
+                        } else {
+                            snackForNoUser()
+                        }
+                    } ?: run {
+                        snackForNoUser()
+                    }
+                }
+            }
+
             launch {
                 viewModel.category.collect { state ->
                     when (state) {

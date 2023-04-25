@@ -98,9 +98,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     }
 
     private fun moveToRegister() {
-        val intent = Intent(this, RegisterActivity::class.java).apply {
-            putExtra(CmdConstants.Intent.USER_ID, userId)
-        }
+        val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }
 
