@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.annotation.StyleRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import com.apx6.chipmunk.app.ext.hideKeyboard
+import com.apx6.chipmunk.app.ext.showKeyboard
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 abstract class BaseBottomSheetDialog<B : ViewDataBinding, PARAM>(
@@ -40,6 +43,14 @@ abstract class BaseBottomSheetDialog<B : ViewDataBinding, PARAM>(
     private fun performDataBinding() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.executePendingBindings()
+    }
+
+    fun showKeyBoard(view: EditText?) {
+        requireActivity().showKeyboard(view)
+    }
+
+    fun hideKeyBoard() {
+        requireActivity().hideKeyboard()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -166,35 +166,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cl_user_profile" >
 
-                    <!-- Box 2-1 : 체크리스트 동기화-->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_checklist_sync"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/md_56"
-                        android:foreground="?selectableItemBackgroundBorderless"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" >
-
-                        <!-- Box 2-1 : `체크리스트 동기화`레이블-->
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/checklist_sync"
-                            android:theme="@style/SettingMenuLabel"
-                            android:paddingHorizontal="@dimen/md_18"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/md_1"
-                            android:background="@drawable/line_shadow"
-                            app:layout_constraintBottom_toBottomOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
                     <!-- Box 2-2 : 카테고리 관리-->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_category_manage"
@@ -203,7 +174,7 @@
                         android:foreground="?selectableItemBackgroundBorderless"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/cl_checklist_sync" >
+                        app:layout_constraintTop_toTopOf="parent" >
 
                         <!-- Box 2-1 : `카테고리 관리`레이블-->
                         <TextView

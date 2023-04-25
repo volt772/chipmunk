@@ -32,8 +32,13 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
     private fun initView() {
         this.statusBar(R.color.material_amber_700)
 
-        binding.ivClose.setOnSingleClickListener {
-            finish()
+        with(binding) {
+            ivClose.setOnSingleClickListener {
+                finish()
+            }
+
+            clCategoryManage.setOnSingleClickListener {
+            }
         }
     }
 

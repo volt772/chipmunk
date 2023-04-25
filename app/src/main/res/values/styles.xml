@@ -6,6 +6,11 @@
         <item name="android:paddingTop">@dimen/md_4</item>
     </style>
 
+    <!-- AppBaseTextColor -->
+    <style name="AppBaseTextColor">
+        <item name="android:textColor">@color/black_h32</item>
+    </style>
+
     <!-- Attach Name Style -->
     <style name="AttachName">
         <item name="android:textSize">@dimen/md_14</item>
