@@ -12,6 +12,8 @@ interface UserRepository {
 
     suspend fun getUser(): Flow<CmdUser?>
 
+    suspend fun getUserId(): Flow<Int?>
+
     suspend fun delUser(user: CmdUser): Boolean
 
 }

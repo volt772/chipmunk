@@ -16,6 +16,9 @@ abstract class UserDao : BaseDao<User>() {
     @Query("SELECT * FROM ${User.TABLE_NAME}")
     abstract fun getUser(): Flow<CmdUser?>
 
+    @Query("SELECT id FROM ${User.TABLE_NAME}")
+    abstract fun getUserId(): Flow<Int?>
+
     /* ▼ INSERT ==========================================================================================================================*/
 
     /* ▼ UPDATE ==========================================================================================================================*/

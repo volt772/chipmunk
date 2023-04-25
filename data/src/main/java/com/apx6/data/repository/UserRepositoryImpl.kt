@@ -37,6 +37,10 @@ class UserRepositoryImpl @Inject constructor(
         return userDao.getUser()
     }
 
+    override suspend fun getUserId(): Flow<Int?> {
+        return userDao.getUserId()
+    }
+
     override suspend fun delUser(user: CmdUser): Boolean {
         val entity = convertToEntity(user)
         return userDao.delete(entity) > 0

@@ -1,5 +1,6 @@
 package com.apx6.chipmunk.app.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -38,8 +39,14 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
             }
 
             clCategoryManage.setOnSingleClickListener {
+                moveToCategoryManage()
             }
         }
+    }
+
+    private fun moveToCategoryManage() {
+        val intent = Intent(this, CategoryManageActivity::class.java)
+        startActivity(intent)
     }
 
     private fun setProfile(user: CmdUser) {
