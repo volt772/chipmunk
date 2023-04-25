@@ -19,6 +19,7 @@ import com.apx6.chipmunk.app.ui.picker.RangePickerActivity
 import com.apx6.chipmunk.databinding.ActivityRegisterBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
+import com.apx6.domain.constants.CmdSelectedChipEvent
 import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
 import com.google.android.material.chip.Chip
@@ -131,6 +132,12 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                     }
                 }
             }
+
+            launch {
+                viewModel.selectedChips.collect { chipList ->
+                    println("probe :: chip list : $chipList")
+                }
+            }
         }
     }
 
@@ -163,8 +170,12 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         chip.apply {
             isSelected = selectState
             val (chipColor, textColor) = if (selectState) {
+                /* Selected*/
+                viewModel.selectChip(this, CmdSelectedChipEvent.ADD)
                 R.color.material_amber_700 to R.color.white
             } else {
+                /* DeSelected*/
+                viewModel.selectChip(this, CmdSelectedChipEvent.DELETE)
                 R.color.material_gray_300 to R.color.black_h0
             }
 
