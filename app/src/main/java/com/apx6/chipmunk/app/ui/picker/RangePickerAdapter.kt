@@ -1,5 +1,6 @@
 package com.apx6.chipmunk.app.ui.picker
 
+import android.app.Activity
 import android.view.LayoutInflater.from
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +8,6 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.apx6.chipmunk.R
-import com.apx6.chipmunk.app.ui.picker.*
 
 /**
  * RangePickerAdapter
@@ -16,7 +16,7 @@ import com.apx6.chipmunk.app.ui.picker.*
 fun ViewGroup.inflate(@LayoutRes layoutId: Int, attachedToRoot: Boolean = false): View =
     from(context).inflate(layoutId, this, attachedToRoot)
 
-internal class RangePickerAdapter : RecyclerView.Adapter<RangePickerViewHolder>() {
+internal class RangePickerAdapter() : RecyclerView.Adapter<RangePickerViewHolder>() {
     private val data: MutableList<RangePickerEntity> = mutableListOf()
     var onActionListener: (RangePickerEntity, Int) -> Unit = { _, _ -> }
 
@@ -37,9 +37,9 @@ internal class RangePickerAdapter : RecyclerView.Adapter<RangePickerViewHolder>(
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RangePickerViewHolder {
         return when (viewType) {
-            CalendarType.MONTH.ordinal -> MonthViewHolder(parent.inflate(R.layout.item_range_picker_month))
-            CalendarType.DAY.ordinal -> DayViewHolder(parent.inflate(R.layout.item_range_picker_day))
-            else -> EmptyViewHolder(parent.inflate(R.layout.item_range_picker_empty))
+            CalendarType.MONTH.ordinal -> MonthViewHolder(parent.inflate(R.layout.item_range_picker_month), parent)
+            CalendarType.DAY.ordinal -> DayViewHolder(parent.inflate(R.layout.item_range_picker_day), parent)
+            else -> EmptyViewHolder(parent.inflate(R.layout.item_range_picker_empty), parent)
         }
     }
 

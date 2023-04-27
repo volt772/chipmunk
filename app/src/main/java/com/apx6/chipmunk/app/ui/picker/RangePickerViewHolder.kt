@@ -1,11 +1,14 @@
 package com.apx6.chipmunk.app.ui.picker
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.apx6.chipmunk.R
-import kotlinx.android.synthetic.main.item_range_picker_day.view.*
-import kotlinx.android.synthetic.main.item_range_picker_month.view.*
+import com.apx6.chipmunk.databinding.ItemRangePickerDayBinding
+import com.apx6.chipmunk.databinding.ItemRangePickerMonthBinding
 
 /**
  * RangePickerViewHolder
@@ -18,11 +21,17 @@ internal abstract class RangePickerViewHolder(view: View) : RecyclerView.ViewHol
 /**
  * ViewHolder (월)
  */
-internal class MonthViewHolder(private val view: View) : RangePickerViewHolder(view) {
-    private val monthName by lazy { view.tv_month_name }
+internal class MonthViewHolder(view: View, parent: ViewGroup) : RangePickerViewHolder(view) {
+    val binding = ItemRangePickerMonthBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     override fun onBind(item: RangePickerEntity, actionListener: (RangePickerEntity, Int) -> Unit) {
         if (item is RangePickerEntity.Month) {
-            monthName.text = item.label
+            println("probe :: picker :: month viewholder label : ${item.label}")
+//            monthName.text = item.label
+//            val binding = ItemRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            println("probe :: picker :: month viewholder label : ${item.label}, binding : $binding")
+
+//            binding.tvMonthName.text = item.label
+            binding.tvMonthName.text = "hamster!"
         }
     }
 }
@@ -30,18 +39,22 @@ internal class MonthViewHolder(private val view: View) : RangePickerViewHolder(v
 /**
  * ViewHolder (주)
  */
-internal open class WeekViewHolder(view: View) : RangePickerViewHolder(view) {
+internal open class WeekViewHolder(view: View, parent: ViewGroup) : RangePickerViewHolder(view) {
     override fun onBind(item: RangePickerEntity, actionListener: (RangePickerEntity, Int) -> Unit) {
+        println("probe :: picker :: this empty??")
     }
 }
 
 /**
  * ViewHolder (일)
  */
-internal class DayViewHolder(view: View) : RangePickerViewHolder(view) {
-    private val dayName by lazy { view.tv_day_name }
-    private val leftBackGround by lazy { view.vw_left_bg }
-    private val rightBackGround by lazy { view.vw_right_bg }
+internal class DayViewHolder(view: View, parent: ViewGroup) : RangePickerViewHolder(view) {
+//    val binding = ItemRangePickerDayBinding.inflate(LayoutInflater.from(view.context))
+    val binding = ItemRangePickerDayBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+    private val dayName by lazy { binding.tvDayName }
+    private val leftBackGround by lazy { binding.vwLeftBg }
+    private val rightBackGround by lazy { binding.vwRightBg }
 
     override fun onBind(item: RangePickerEntity, actionListener: (RangePickerEntity, Int) -> Unit) {
         if (item is RangePickerEntity.Day) {
@@ -165,4 +178,4 @@ internal class DayViewHolder(view: View) : RangePickerViewHolder(view) {
     }
 }
 
-internal class EmptyViewHolder(view: View) : WeekViewHolder(view)
+internal class EmptyViewHolder(view: View, parent: ViewGroup) : WeekViewHolder(view, parent)

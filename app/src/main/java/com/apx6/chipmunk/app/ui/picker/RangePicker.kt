@@ -14,7 +14,6 @@ import java.util.Calendar.*
 /**
  * RangePicker
  */
-
 class RangePicker : RecyclerView {
     private val timeZone = TimeZone.getDefault()
     private val locale = Locale.getDefault()

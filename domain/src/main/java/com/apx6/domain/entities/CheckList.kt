@@ -1,7 +1,7 @@
 package com.apx6.domain.entities
 
 import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
+import androidx.room.ForeignKey.Companion.CASCADE
 import com.apx6.domain.constants.CmdEntityTags
 import com.apx6.domain.entities.CheckList.Companion.TABLE_NAME
 

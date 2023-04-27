@@ -9,8 +9,8 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.DateExt
+import com.apx6.chipmunk.databinding.ActivityRangePickerBinding
 import com.apx6.domain.constants.CmdConstants
-import kotlinx.android.synthetic.main.activity_range_picker.*
 import org.joda.time.DateTime
 import java.util.*
 import java.util.Calendar.*
@@ -20,6 +20,8 @@ import java.util.Calendar.*
  * @desc 범위 선택 캘린더
  */
 class RangePickerActivity : Activity() {
+    private lateinit var binding : ActivityRangePickerBinding
+
     private var queryStartDate: DateTime?= null
     private var queryEndDate: DateTime?= null
 
@@ -27,7 +29,9 @@ class RangePickerActivity : Activity() {
         super.onCreate(savedInstanceState)
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(R.layout.activity_range_picker)
+
+        binding = ActivityRangePickerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         /* 상태바 색상*/
         setSystemBarColor(this, R.color.material_indigo_A700)
@@ -48,45 +52,45 @@ class RangePickerActivity : Activity() {
         defaultCalDate.set(MILLISECOND, 0)
 
         /* Picker 초기설정*/
-        rp_search_date.apply {
-            setSelectionDefaultDate(::setDefaultDate)
-            setSelectionDate(defaultCalDate.time, defaultCalDate.time)
-        }
+        with(binding) {
+            rpSearchDate.setSelectionDefaultDate(::setDefaultDate)
+            rpSearchDate.setSelectionDate(defaultCalDate.time, defaultCalDate.time)
 
-        /* Picker 범위 선택*/
-        rp_search_date.setOnRangeSelectedListener { startDate, endDate, startLabel, endLabel ->
-            atv_start_date.text = startLabel
-            atv_end_date.text = endLabel
-            setDateTimeForQuery(DaySelectType.RANGE, startDate, endDate)
-        }
+            /* Picker 범위 선택*/
+            rpSearchDate.setOnRangeSelectedListener { startDate, endDate, startLabel, endLabel ->
+                atvStartDate.text = startLabel
+                atvEndDate.text = endLabel
+                setDateTimeForQuery(DaySelectType.RANGE, startDate, endDate)
+            }
 
-        /* Picker 단일 선택*/
-        rp_search_date.setOnStartSelectedListener { startDate, label ->
-            atv_start_date.text = label
-            atv_end_date.text = "-"
-            setDateTimeForQuery(DaySelectType.SINGLE, startDate)
-        }
+            /* Picker 단일 선택*/
+            rpSearchDate.setOnStartSelectedListener { startDate, label ->
+                atvStartDate.text = label
+                atvEndDate.text = "-"
+                setDateTimeForQuery(DaySelectType.SINGLE, startDate)
+            }
 
-        /* '닫기'*/
-        iv_picker_close.setOnClickListener {
-            finish()
-        }
-
-        /* '기간선택'*/
-        iv_picker_confirm.setOnClickListener {
-            /**
-             * '종료일' 없을경우, '시작일'로 대체 (당일검색으로 판단)
-             * '시작일', '종료일'은 null 이 될 수 없음
-             */
-            val queryEndDate = checkEndDate()
-
-            if (queryEndDate != null) {
-                val rData = Intent().apply {
-                    putExtra(CmdConstants.Intent.SELECTED_START_DAY, queryStartDate.toString())
-                    putExtra(CmdConstants.Intent.SELECTED_END_DAY, queryEndDate.toString())
-                }
-                setResult(CmdConstants.Intent.Code.CODE_CALENDAR, rData)
+            /* '닫기'*/
+            ivPickerClose.setOnClickListener {
                 finish()
+            }
+
+            /* '기간선택'*/
+            ivPickerConfirm.setOnClickListener {
+                /**
+                 * '종료일' 없을경우, '시작일'로 대체 (당일검색으로 판단)
+                 * '시작일', '종료일'은 null 이 될 수 없음
+                 */
+                val queryEndDate = checkEndDate()
+
+                if (queryEndDate != null) {
+                    val rData = Intent().apply {
+                        putExtra(CmdConstants.Intent.SELECTED_START_DAY, queryStartDate.toString())
+                        putExtra(CmdConstants.Intent.SELECTED_END_DAY, queryEndDate.toString())
+                    }
+                    setResult(CmdConstants.Intent.Code.CODE_CALENDAR, rData)
+                    finish()
+                }
             }
         }
     }
@@ -124,8 +128,11 @@ class RangePickerActivity : Activity() {
      * 캘린더 생성 후, 기본 일자 선택 (오늘)
      */
     private fun setDefaultDate(defaultDate: RangePickerEntity.Day) {
-        atv_start_date.text = defaultDate.prettyLabel
-        atv_end_date.text = defaultDate.prettyLabel
+        with(binding) {
+            atvStartDate.text = defaultDate.prettyLabel
+            atvEndDate.text = defaultDate.prettyLabel
+        }
+
         setDateTimeForQuery(DaySelectType.DEFAULT, defaultDate.date)
     }
 
@@ -153,11 +160,12 @@ class RangePickerActivity : Activity() {
         }
     }
 
-    fun setSystemBarColor(act: Activity, @ColorRes color: Int) {
-        val window = act.window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.statusBarColor = ContextCompat.getColor(act, color)
+    private fun setSystemBarColor(act: Activity, @ColorRes color: Int) {
+        act.window.apply {
+            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            statusBarColor = ContextCompat.getColor(act, color)
+        }
     }
 
     enum class DaySelectType { DEFAULT, SINGLE, RANGE }
