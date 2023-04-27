@@ -3,7 +3,9 @@ package com.apx6.chipmunk.app.ui
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
@@ -13,6 +15,7 @@ import com.apx6.domain.State
 import com.apx6.domain.dto.CmdUser
 import dagger.hilt.android.AndroidEntryPoint
 import io.getstream.avatarview.coil.loadImage
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
@@ -27,6 +30,10 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
         super.onCreate(savedInstanceState)
 
         initView()
+        lifecycleScope.launch {
+            subscribeUser()
+        }
+
         subscribers()
     }
 
@@ -68,9 +75,9 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
         binding.tvUserChecklistCount.text = getString(R.string.my_checklist_count, count)
     }
 
-    private fun subscribers() {
+    private suspend fun subscribeUser() {
         lifecycleScope.run {
-            launchWhenStarted {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.user.collect { user ->
                     user?.let { _user ->
                         setProfile(_user)
@@ -78,7 +85,11 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
                     }
                 }
             }
+        }
+    }
 
+    private fun subscribers() {
+        lifecycleScope.run {
             launch {
                 viewModel.checkListCount.collect { state ->
                     val count = when (state) {

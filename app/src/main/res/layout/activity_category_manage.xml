@@ -10,7 +10,7 @@
 
         <!-- AppBar-->
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/abl_location"
+            android:id="@+id/abl_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent">
@@ -74,17 +74,17 @@
 
         <!-- Scroll-->
         <ScrollView
-            android:id="@+id/sv_locations"
+            android:id="@+id/sv_category"
             android:layout_width="match_parent"
             android:layout_height="@dimen/md_0"
             android:fillViewport="true"
-            app:layout_constraintTop_toBottomOf="@id/abl_location"
+            app:layout_constraintTop_toBottomOf="@id/abl_category"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" >
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_location_list"
+                android:id="@+id/rv_categories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
@@ -96,16 +96,16 @@
 
         <!-- No Locations-->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_no_location"
+            android:id="@+id/cl_no_categories"
             android:layout_width="match_parent"
             android:layout_height="@dimen/md_0"
-            app:layout_constraintTop_toBottomOf="@id/abl_location"
+            app:layout_constraintTop_toBottomOf="@id/abl_category"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" >
 
             <ImageView
-                android:id="@+id/iv_no_location"
+                android:id="@+id/iv_no_categories"
                 android:layout_width="@dimen/md_120"
                 android:layout_height="@dimen/md_120"
                 android:src="@drawable/ic_no_locations"
@@ -118,13 +118,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/failed_to_find_location"
+                android:text="@string/failed_to_load_categories"
                 android:layout_marginTop="@dimen/md_12"
                 android:gravity="center"
-                app:layout_constraintTop_toBottomOf="@id/iv_no_location"
+                app:layout_constraintTop_toBottomOf="@id/iv_no_categories"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

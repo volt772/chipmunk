@@ -1,4 +1,4 @@
-package com.apx6.chipmunk.app.ui.viewholder
+package com.apx6.chipmunk.app.ui
 
 import androidx.lifecycle.viewModelScope
 import com.apx6.chipmunk.app.ui.base.BaseViewModel

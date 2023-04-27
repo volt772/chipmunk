@@ -1,6 +1,5 @@
 package com.apx6.chipmunk.app.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -12,13 +11,10 @@ import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.adapter.LocationAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
-import com.apx6.chipmunk.app.ui.common.CmSnackBar
-import com.apx6.chipmunk.app.ui.viewholder.LocationViewModel
 import com.apx6.chipmunk.databinding.ActivityLocationBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
 import com.apx6.domain.dto.CmdLocationDoc
-import com.apx6.domain.dto.CmdLocationMeta
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
