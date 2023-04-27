@@ -1,24 +1,27 @@
 package com.apx6.chipmunk.app.ui
 
 import android.os.Bundle
-import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ext.visibilityExt
-import com.apx6.chipmunk.app.ui.adapter.CategoryManageAdapter
-import com.apx6.chipmunk.app.ui.adapter.CheckListAdapter
+import com.apx6.chipmunk.app.ui.adapter.category_manage.CMLoadStateAdapter
+import com.apx6.chipmunk.app.ui.adapter.category_manage.CMPagingAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivityCategoryManageBinding
-import com.apx6.domain.State
 import com.apx6.domain.dto.CmdCategory
-import com.apx6.domain.dto.CmdCheckList
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -28,7 +31,7 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
     override val viewModel: CategoryManageViewModel by viewModels()
     override fun getViewBinding(): ActivityCategoryManageBinding = ActivityCategoryManageBinding.inflate(layoutInflater)
 
-    private val categoryManageAdapter = CategoryManageAdapter(this::onItemClicked)
+    private val categoryManageAdapter by lazy { CMPagingAdapter(this::onItemClicked) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -38,11 +41,7 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
 
         initView()
 
-        lifecycleScope.launch {
-            subscribeUser()
-        }
-
-        subscribers()
+        subscribeFlow()
     }
 
     private fun initView() {
@@ -58,56 +57,84 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
                 /* 카테고리 추가*/
                 TODO()
             }
+        }
 
+        initCategoryManageAdapter()
+    }
+
+    private fun initCategoryManageAdapter(isMediator: Boolean = false) {
+        binding.apply {
             rvCategories.apply {
+                addItemDecoration(DividerItemDecoration(this@CategoryManageActivity, DividerItemDecoration.VERTICAL))
                 layoutManager = LinearLayoutManager(this@CategoryManageActivity, LinearLayoutManager.VERTICAL, false)
-                adapter = categoryManageAdapter
+                adapter = categoryManageAdapter.withLoadStateHeaderAndFooter(
+                    header = CMLoadStateAdapter { categoryManageAdapter.retry() },
+                    footer = CMLoadStateAdapter { categoryManageAdapter.retry() }
+                )
+            }
+
+            categoryManageAdapter.addLoadStateListener { loadState ->
+                val isVisible = loadState.source.refresh is LoadState.NotLoading &&
+                        loadState.append.endOfPaginationReached &&
+                        categoryManageAdapter.itemCount < 1
+
+                switchListView(!isVisible)
+
+                val refreshState = if (isMediator) {
+                    loadState.mediator?.refresh
+                } else {
+                    loadState.source.refresh
+                }
+                rvCategories.isVisible = refreshState is LoadState.NotLoading
+                pbLoadingCategory.isVisible = refreshState is LoadState.Loading
+                btnRetryCategory.isVisible = refreshState is LoadState.Error
+                handleError(loadState)
+            }
+
+            btnRetryCategory.setOnClickListener {
+                categoryManageAdapter.retry()
             }
         }
     }
 
-    private suspend fun subscribeUser() {
-        lifecycleScope.run {
+    private fun subscribeFlow() {
+        lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userId.collect { uid ->
                     uid?.let { _uid ->
-                        viewModel.getCategories(_uid)
+                        subscribeCategory(_uid)
                     }
                 }
             }
         }
     }
 
-
-    private fun subscribers() {
-        lifecycleScope.run {
-            launch {
-                viewModel.category.collect { state ->
-                    when (state) {
-                        is State.Loading -> { }
-                        is State.Success -> {
-                            println("probe :: category :: collect : ${state.data.toMutableList()}")
-                            val categories = state.data.toMutableList()
-                            val count = categories.count()
-
-                            switchListView(count > 0)
-                            categoryManageAdapter.submitList(state.data.toMutableList())
-                        }
-                        is State.Error -> {
-                        }
-                    }
+    private fun subscribeCategory(uid: Int) {
+        lifecycleScope.launch {
+            viewModel.fetchCategories(uid)
+                .collectLatest { categories ->
+                    categoryManageAdapter.submitData(categories)
                 }
-            }        }
+        }
     }
 
-    private fun onItemClicked(checkList: CmdCategory) {
+    private fun onItemClicked(category: CmdCategory) {
         /* TODO*/
     }
 
     private fun switchListView(lv: Boolean) {
         with(binding) {
-            svCategory.visibilityExt(lv)
+            clCategory.visibilityExt(lv)
             clNoCategories.visibilityExt(!lv)
+        }
+    }
+
+    private fun handleError(loadState: CombinedLoadStates) {
+        val errorState = loadState.source.append as? LoadState.Error
+            ?: loadState.source.prepend as? LoadState.Error
+
+        errorState?.let {
+            Toast.makeText(this, "${it.error}", Toast.LENGTH_LONG).show()
         }
     }
 }

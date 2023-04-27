@@ -44,6 +44,11 @@ dependencies {
     implementation(Hilt.dagger)
     kapt(Hilt.compiler)
 
+    /* Paging3*/
+    implementation(Paging3.ktx)
+    implementation(Paging3.rxJava3)
+    implementation(Paging3.room_paging)
+
     implementation(Android.coreKtx)
     androidTestImplementation(Test.hiltTest)
     androidTestImplementation(Test.coroutineTest)

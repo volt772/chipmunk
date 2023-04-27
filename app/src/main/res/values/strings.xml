@@ -24,6 +24,7 @@
     <string name="failed_to_find_location">장소를 찾을 수 없습니다.</string>
     <string name="failed_to_load_categories">카테고리가 없습니다.\n카테고리를 추가해주세요.</string>
 
+    <string name="retry">재시도</string>
     <string name="register_checklist">체크리스트 등록</string>
     <string name="setting">설정</string>
     <string name="checklist_sync">체크리스트 동기화</string>

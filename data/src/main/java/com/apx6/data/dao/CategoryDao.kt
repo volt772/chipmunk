@@ -1,5 +1,6 @@
 package com.apx6.data.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
 import com.apx6.domain.dto.CmdCategory
@@ -18,6 +19,9 @@ abstract class CategoryDao : BaseDao<Category>() {
 
     @Query("SELECT * FROM ${Category.TABLE_NAME} WHERE id = :id")
     abstract fun getCategory(id: Int): Flow<CmdCategory?>
+
+    @Query("SELECT * FROM ${Category.TABLE_NAME} WHERE uid = :uid")
+    abstract fun getPagingCategories(uid: Int): PagingSource<Int, CmdCategory>
 
     /* ▼ INSERT ==========================================================================================================================*/
 

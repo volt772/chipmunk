@@ -4,6 +4,9 @@ object CmdConstants {
 
     object DB {
         const val DB_NAME = "chipmunk.db"
+
+        /* PAGING(LOCAL) PAGE SIZE*/
+        const val LOCAL_PAGE_SIZE = 40
     }
 
     object Intent {

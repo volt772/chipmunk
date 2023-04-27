@@ -1,6 +1,8 @@
 package com.apx6.data.repository
 
+import androidx.paging.PagingData
 import com.apx6.data.dao.CategoryDao
+import com.apx6.data.data_source.category.CategoryRemoteDataSource
 import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.entities.Category
 import com.apx6.domain.mapper.CategoryMapper
@@ -13,7 +15,8 @@ import javax.inject.Inject
 
 class CategoryRepositoryImpl @Inject constructor(
     private val categoryDao: CategoryDao,
-    private val categoryMapper: CategoryMapper
+    private val categoryMapper: CategoryMapper,
+    private val categoryRemoteDataSource: CategoryRemoteDataSource
 ): CategoryRepository {
 
     override suspend fun category(category: CmdCategory, uid: Int): Flow<Resource<List<CmdCategory>>> {
@@ -42,6 +45,10 @@ class CategoryRepositoryImpl @Inject constructor(
         }
 
         return result
+    }
+
+    override fun fetchCategories(uid: Int): Flow<PagingData<CmdCategory>> {
+        return categoryRemoteDataSource.category(uid)
     }
 
     override suspend fun getCategory(id: Int): Flow<CmdCategory?> {

@@ -86,6 +86,12 @@ object Badge {
     const val shortcutBadge = "me.leolin:ShortcutBadger:1.1.22@aar"
 }
 
+object Paging3 {
+    const val ktx = "androidx.paging:paging-runtime-ktx:3.1.1"
+    const val rxJava3 = "androidx.paging:paging-rxjava3:3.1.1"
+    const val room_paging = "androidx.room:room-paging:2.5.0"
+}
+
 object Firebase {
     const val bom = "com.google.firebase:firebase-bom:31.5.0"
     const val analytics = "com.google.firebase:firebase-analytics-ktx"

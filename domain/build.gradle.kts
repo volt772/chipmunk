@@ -37,6 +37,11 @@ dependencies {
     implementation(Retrofit.adapterRxJava2)
     implementation(Retrofit.loggingInterceptor)
 
+    /* Paging3*/
+    implementation(Paging3.ktx)
+    implementation(Paging3.rxJava3)
+    implementation(Paging3.room_paging)
+
     implementation(Android.coreKtx)
     androidTestImplementation(Test.hiltTest)
     androidTestImplementation(Test.coroutineTest)

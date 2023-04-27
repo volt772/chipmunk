@@ -136,6 +136,11 @@ dependencies {
     /* Badge Count*/
     implementation(Badge.shortcutBadge)
 
+    /* Paging3*/
+    implementation(Paging3.ktx)
+    implementation(Paging3.rxJava3)
+    implementation(Paging3.room_paging)
+
     /* Firebase*/
     implementation(platform(Firebase.bom))
     implementation(Firebase.analytics)
