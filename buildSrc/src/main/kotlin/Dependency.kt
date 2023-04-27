@@ -24,6 +24,7 @@ object Android {
     const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val splashScreen = "androidx.core:core-splashscreen:1.0.1"
     const val legacySupport = "androidx.legacy:legacy-support-v4:1.0.0"
+    const val fragmentKtx = "androidx.fragment:fragment-ktx:1.5.5"
 }
 
 object Coroutines {
@@ -43,10 +44,6 @@ object Configs {
 }
 
 object Room {
-//    const val core = "androidx.room:room-runtime:2.4.0-alpha04"
-//    const val rxJava2 = "androidx.room:room-rxjava2:2.4.2"
-//    const val ktx = "androidx.room:room-ktx:2.4.0-alpha04"
-//    const val compiler = "androidx.room:room-compiler:2.4.0-alpha04"
     const val core = "androidx.room:room-runtime:2.5.1"
     const val rxJava2 = "androidx.room:room-rxjava2:2.5.1"
     const val ktx = "androidx.room:room-ktx:2.5.1"
@@ -89,7 +86,7 @@ object Badge {
 object Paging3 {
     const val ktx = "androidx.paging:paging-runtime-ktx:3.1.1"
     const val rxJava3 = "androidx.paging:paging-rxjava3:3.1.1"
-    const val room_paging = "androidx.room:room-paging:2.5.0"
+    const val roomPaging = "androidx.room:room-paging:2.5.0"
 }
 
 object Firebase {

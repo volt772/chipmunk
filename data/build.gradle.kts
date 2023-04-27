@@ -47,7 +47,7 @@ dependencies {
     /* Paging3*/
     implementation(Paging3.ktx)
     implementation(Paging3.rxJava3)
-    implementation(Paging3.room_paging)
+    implementation(Paging3.roomPaging)
 
     implementation(Android.coreKtx)
     androidTestImplementation(Test.hiltTest)

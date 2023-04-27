@@ -18,6 +18,7 @@ import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.adapter.category_manage.CMLoadStateAdapter
 import com.apx6.chipmunk.app.ui.adapter.category_manage.CMPagingAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
+import com.apx6.chipmunk.app.ui.dialog.CategoryAddDialog
 import com.apx6.chipmunk.databinding.ActivityCategoryManageBinding
 import com.apx6.domain.dto.CmdCategory
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,13 +54,17 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
                 finish()
             }
 
-            ivAdd.setOnSingleClickListener {
-                /* 카테고리 추가*/
-                TODO()
-            }
         }
 
         initCategoryManageAdapter()
+    }
+
+    private fun setCategoryAddDialog(uid: Int) {
+        binding.ivAdd.setOnSingleClickListener {
+            /* 카테고리 추가*/
+            val categoryAddDialog = CategoryAddDialog.newInstance(uid)
+            supportFragmentManager.beginTransaction().add(categoryAddDialog, TAG).commitAllowingStateLoss()
+        }
     }
 
     private fun initCategoryManageAdapter(isMediator: Boolean = false) {
@@ -102,6 +107,7 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userId.collect { uid ->
                     uid?.let { _uid ->
+                        setCategoryAddDialog(_uid)
                         subscribeCategory(_uid)
                     }
                 }
@@ -119,7 +125,6 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
     }
 
     private fun onItemClicked(category: CmdCategory) {
-        /* TODO*/
     }
 
     private fun switchListView(lv: Boolean) {
@@ -136,5 +141,9 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
         errorState?.let {
             Toast.makeText(this, "${it.error}", Toast.LENGTH_LONG).show()
         }
+    }
+
+    companion object {
+        const val TAG = "CategoryManageActivity"
     }
 }

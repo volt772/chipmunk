@@ -104,6 +104,7 @@ dependencies {
     implementation(Android.swipeRefreshLayout)
     implementation(Android.splashScreen)
     implementation(Android.legacySupport)
+    implementation(Android.fragmentKtx)
 
     /* LifeCycle*/
     implementation(Lifecycle.viewModel)
@@ -139,7 +140,7 @@ dependencies {
     /* Paging3*/
     implementation(Paging3.ktx)
     implementation(Paging3.rxJava3)
-    implementation(Paging3.room_paging)
+    implementation(Paging3.roomPaging)
 
     /* Firebase*/
     implementation(platform(Firebase.bom))
