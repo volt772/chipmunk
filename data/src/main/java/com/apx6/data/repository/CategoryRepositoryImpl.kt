@@ -33,9 +33,9 @@ class CategoryRepositoryImpl @Inject constructor(
         }.asFlow(category)
     }
 
-    override suspend fun postCategory(category: CmdCategory) {
+    override suspend fun postCategory(category: CmdCategory): Int {
         val entity = convertToEntity(category)
-        categoryDao.insertOrUpdate(entity)
+        return categoryDao.insertOrUpdate(entity)
     }
 
     override suspend fun getCategories(uid: Int): Flow<Resource<List<CmdCategory>>> {

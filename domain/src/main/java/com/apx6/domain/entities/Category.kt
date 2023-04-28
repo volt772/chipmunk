@@ -17,7 +17,10 @@ import com.apx6.domain.entities.Category.Companion.TABLE_NAME
             onDelete = CASCADE
         )
     ],
-    indices = [Index(value = ["id"], unique = true)]
+    indices = [
+        Index(value = ["id"], unique = true),
+        Index(value = ["name"], unique = true),
+    ]
 )
 data class Category(
     @PrimaryKey(autoGenerate = true)

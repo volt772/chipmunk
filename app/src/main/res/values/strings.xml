@@ -40,4 +40,6 @@
     <string name="category">카테고리</string>
     <string name="my_checklist_count">내 체크리스트 : %d개</string>
     <string name="new_category">새로운 카테고리</string>
+    <string name="add_category_success">추가하였습니다.</string>
+    <string name="add_category_fail">추가하지 못하였습니다.</string>
 </resources>

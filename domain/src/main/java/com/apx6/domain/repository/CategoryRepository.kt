@@ -9,7 +9,7 @@ interface CategoryRepository {
     /* Combined*/
     suspend fun category(category: CmdCategory, uid: Int): Flow<Resource<List<CmdCategory>>>
 
-    suspend fun postCategory(category: CmdCategory)
+    suspend fun postCategory(category: CmdCategory): Int
 
     suspend fun getCategories(uid: Int): Flow<Resource<List<CmdCategory>>>
 

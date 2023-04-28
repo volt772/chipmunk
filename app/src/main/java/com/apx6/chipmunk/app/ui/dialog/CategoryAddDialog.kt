@@ -4,12 +4,15 @@ import android.content.DialogInterface
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ui.CategoryManageViewModel
 import com.apx6.chipmunk.app.ui.base.BaseBottomSheetDialog
 import com.apx6.chipmunk.databinding.DialogCategoryAddBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 /**
  * Later TODO
@@ -22,6 +25,7 @@ class CategoryAddDialog : BaseBottomSheetDialog<DialogCategoryAddBinding, Unit>(
 ) {
 
     private var uid: Int = 0
+    private lateinit var resultToast: (Int) -> Unit
 
     private val viewModel: CategoryManageViewModel by viewModels()
 
@@ -33,15 +37,28 @@ class CategoryAddDialog : BaseBottomSheetDialog<DialogCategoryAddBinding, Unit>(
         }
 
         setUpListener()
-        setUpViewModel()
+        subscribe()
     }
 
-    private fun setUpViewModel() {
-//        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-//            vm.isAddCard.collect {
-//                dismiss()
-//            }
-//        }
+    private fun subscribe() {
+        lifecycleScope.run {
+            launch {
+                viewModel.addResult.collectLatest {result ->
+                    resultToast.invoke(result)
+                }
+            }
+        }
+    }
+
+    private fun addCategory() {
+        lifecycleScope.run {
+            launch {
+                val name = binding.etCategoryAdd.text
+                viewModel.postCategory(uid, name.toString())
+            }
+        }
+
+        dismiss()
     }
 
     private fun setUpListener() {
@@ -65,6 +82,7 @@ class CategoryAddDialog : BaseBottomSheetDialog<DialogCategoryAddBinding, Unit>(
 
             /* Card Add */
             ivCategoryAdd.setOnSingleClickListener {
+                addCategory()
             }
         }
     }
@@ -82,8 +100,10 @@ class CategoryAddDialog : BaseBottomSheetDialog<DialogCategoryAddBinding, Unit>(
     companion object {
         fun newInstance(
             uid: Int,
+            resultToast: (Int) -> Unit
         ) = CategoryAddDialog().apply {
             this.uid = uid
+            this.resultToast = resultToast
             param = Unit
         }
     }

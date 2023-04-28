@@ -20,7 +20,7 @@ abstract class CategoryDao : BaseDao<Category>() {
     @Query("SELECT * FROM ${Category.TABLE_NAME} WHERE id = :id")
     abstract fun getCategory(id: Int): Flow<CmdCategory?>
 
-    @Query("SELECT * FROM ${Category.TABLE_NAME} WHERE uid = :uid")
+    @Query("SELECT * FROM ${Category.TABLE_NAME} WHERE uid = :uid ORDER BY id DESC")
     abstract fun getPagingCategories(uid: Int): PagingSource<Int, CmdCategory>
 
     /* ▼ INSERT ==========================================================================================================================*/

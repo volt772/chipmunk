@@ -62,9 +62,20 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
     private fun setCategoryAddDialog(uid: Int) {
         binding.ivAdd.setOnSingleClickListener {
             /* 카테고리 추가*/
-            val categoryAddDialog = CategoryAddDialog.newInstance(uid)
+            val categoryAddDialog = CategoryAddDialog.newInstance(uid, ::postCategoryResultToast)
             supportFragmentManager.beginTransaction().add(categoryAddDialog, TAG).commitAllowingStateLoss()
         }
+    }
+
+    private fun postCategoryResultToast(result: Int) {
+        val msg = if (result > 0) {
+            getString(R.string.add_category_success)
+        } else {
+            getString(R.string.add_category_fail)
+        }
+
+        binding.rvCategories.smoothScrollToPosition(0)
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 
     private fun initCategoryManageAdapter(isMediator: Boolean = false) {
