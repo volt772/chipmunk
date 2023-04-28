@@ -46,4 +46,52 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="colorControlActivated">@color/gray_h0_8</item>
     </style>
+
+    <!-- TEST: AlertDialog-->
+    <style name="AlertDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:textSize">@dimen/md_15</item>
+        <item name="android:colorAccent">@color/material_light_blue_600</item>
+        <item name="android:windowMinWidthMajor">95%</item>
+        <item name="android:windowMinWidthMinor">95%</item>
+        <item name="android:windowTitleStyle">@style/AlertDialogThemeTitle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/AlertDialogThemeNegativeButton</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AlertDialogThemePositiveButtonRed</item>
+    </style>
+
+    <!-- AlertDialogTheme 본문-->
+    <style name="AlertDialogThemeMessage" parent="AlertDialogTheme">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/gray_h0</item>
+        <item name="android:textSize">@dimen/md_14</item>
+    </style>
+
+    <!-- AlertDialogTheme 커스텀 타이틀-->
+    <style name="AlertDialogThemeTitle" parent="AlertDialogTheme">
+        <item name="android:textColor">@color/black_h32</item>
+        <item name="android:textSize">@dimen/md_16</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- AlertDialogTheme Negative 버튼-->
+    <style name="AlertDialogThemeNegativeButton" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/gray_h0_6</item>
+        <item name="android:textSize">@dimen/md_14</item>
+    </style>
+
+    <!-- AlertDialogTheme Positive 버튼-->
+    <style name="AlertDialogThemePositiveButton" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textSize">@dimen/md_14</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- AlertDialogTheme Positive (Red) 버튼-->
+    <style name="AlertDialogThemePositiveButtonRed" parent="AlertDialogThemePositiveButton">
+        <item name="android:textColor">@color/material_amber_700</item>
+    </style>
+
+    <!-- AlertDialogTheme Positive (Blue) 버튼-->
+    <style name="AlertDialogThemePositiveButtonBlue" parent="AlertDialogThemePositiveButton">
+        <item name="android:textColor">@color/purple_700</item>
+    </style>
 </resources>

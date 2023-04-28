@@ -6,15 +6,16 @@ import com.apx6.domain.dto.CmdCategory
 
 class CMViewHolder(
     val binding: ItemCategoryManageBinding,
-    val onItemClicked: (CmdCategory) -> Unit
+    val onCategoryLongPressed: (CmdCategory) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(category: CmdCategory) {
 
         binding.tvCategoryName.apply {
             text = category.name
-            setOnClickListener {
-                onItemClicked(category)
+            setOnLongClickListener {
+                onCategoryLongPressed(category)
+                false
             }
         }
     }

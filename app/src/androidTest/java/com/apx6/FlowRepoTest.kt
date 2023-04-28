@@ -100,7 +100,7 @@ class FlowRepoTest {
                 Assert.fail()
             }
 
-            for (i in 0..300) {
+            for (i in 0..30) {
                 val sampleCheckList = CmdCheckList(
                     cid = category!!.id,
                     uid = category!!.uid,

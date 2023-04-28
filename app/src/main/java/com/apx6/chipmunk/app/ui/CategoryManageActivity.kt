@@ -18,9 +18,12 @@ import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.adapter.category_manage.CMLoadStateAdapter
 import com.apx6.chipmunk.app.ui.adapter.category_manage.CMPagingAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
+import com.apx6.chipmunk.app.ui.base.Dialogs
 import com.apx6.chipmunk.app.ui.dialog.CategoryAddDialog
 import com.apx6.chipmunk.databinding.ActivityCategoryManageBinding
+import com.apx6.domain.State
 import com.apx6.domain.dto.CmdCategory
+import com.apx6.domain.dto.CmdCheckList
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -32,7 +35,7 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
     override val viewModel: CategoryManageViewModel by viewModels()
     override fun getViewBinding(): ActivityCategoryManageBinding = ActivityCategoryManageBinding.inflate(layoutInflater)
 
-    private val categoryManageAdapter by lazy { CMPagingAdapter(this::onItemClicked) }
+    private val categoryManageAdapter by lazy { CMPagingAdapter(this::onCategoryLongPressed) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -135,7 +138,57 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
         }
     }
 
-    private fun onItemClicked(category: CmdCategory) {
+    private fun subscribeCheckList(category: CmdCategory) {
+        lifecycleScope.launch {
+            viewModel.checkList.collect { state ->
+                when (state) {
+                    is State.Loading -> { }
+                    is State.Success -> {
+                        categoryDeleteConfirm(state.data.toMutableList(), category)
+                    }
+                    is State.Error -> {
+                    }
+                }
+            }
+        }
+    }
+
+    private fun categoryDeleteConfirm(checkList: List<CmdCheckList>, category: CmdCategory) {
+        val checkListCount = checkList.count()
+        val delMsg = if (checkList.isEmpty()) {
+            getString(R.string.add_category_delete)
+        } else {
+            if (checkListCount == 1) {
+                "%s\n\n* %s".format(
+                    getString(R.string.add_category_delete_with_checklist),
+                    getString(R.string.check_list_count_only_1, checkList[0].title)
+                )
+            } else {
+                "%s\n\n* %s".format(
+                    getString(R.string.add_category_delete_with_checklist),
+                    getString(R.string.check_list_count_over_2, checkList[0].title, checkList.count() - 1)
+                )
+            }
+        }
+
+        Dialogs.confirm(
+            context = this,
+            btnYes = getString(R.string.dlg_confirm),
+            btnNo = getString(R.string.dlg_cancel),
+            message = delMsg,
+            cancelable = true,
+            positiveListener = { _, _ -> run {
+                viewModel.deleteCategory(category)
+            }},
+            negativeListener = { _, _ -> },
+            title = getString(R.string.caution)
+        )
+    }
+
+    private fun onCategoryLongPressed(category: CmdCategory) {
+        subscribeCheckList(category)
+
+        viewModel.getCheckListInCategory(category.uid, category.id)
     }
 
     private fun switchListView(lv: Boolean) {

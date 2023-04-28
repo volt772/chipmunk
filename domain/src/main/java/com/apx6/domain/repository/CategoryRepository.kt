@@ -19,6 +19,6 @@ interface CategoryRepository {
 
     suspend fun patchCategory(category: CmdCategory): Boolean
 
-    suspend fun delCategory(category: CmdCategory): Boolean
+    suspend fun delCategory(id: Int): Boolean
 
 }

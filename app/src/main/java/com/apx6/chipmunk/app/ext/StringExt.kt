@@ -1,5 +1,6 @@
 package com.apx6.chipmunk.app.ext
 
+import com.apx6.chipmunk.app.ChipmunkApp.Companion.appContext
 import java.util.*
 
 /**
@@ -120,3 +121,5 @@ fun randomKey(): String {
 		.map(charPool::get)
 		.joinToString("")
 }
+
+fun getStringRes(str: Int) = appContext.getString(str)

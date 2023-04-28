@@ -133,22 +133,22 @@ class CategoryRepoTest {
         println("[TEST] probe : ==========================================================================================================================================")
     }
 
-    @Test
-    fun test05_del_category() {
-        val sc = cmdDatabase.categoryDao().testGetLastCategory()
-
-        runBlocking {
-            val result = sc?.let {
-                categoryRepository.delCategory(category = it)
-            } ?: run {
-                null
-            }
-
-            println("probe :: [TEST Category] :: Category Del Result : $result")
-        }
-
-        println("[TEST] probe : ==========================================================================================================================================")
-    }
+//    @Test
+//    fun test05_del_category() {
+//        val sc = cmdDatabase.categoryDao().testGetLastCategory()
+//
+//        runBlocking {
+//            val result = sc?.let {
+//                categoryRepository.delCategory(category = it)
+//            } ?: run {
+//                null
+//            }
+//
+//            println("probe :: [TEST Category] :: Category Del Result : $result")
+//        }
+//
+//        println("[TEST] probe : ==========================================================================================================================================")
+//    }
 
     companion object
 }

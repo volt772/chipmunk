@@ -5,15 +5,22 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.apx6.chipmunk.app.di.IoDispatcher
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
+import com.apx6.domain.State
+import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
+import com.apx6.domain.dto.CmdCheckList
 import com.apx6.domain.repository.CategoryRepository
+import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,6 +29,7 @@ import javax.inject.Inject
 class CategoryManageViewModel @Inject constructor(
     @IoDispatcher val ioDispatcher: CoroutineDispatcher,
     private val categoryRepository: CategoryRepository,
+    private val checkListRepository: CheckListRepository,
     private val userRepository: UserRepository,
 ) : BaseViewModel() {
 
@@ -34,6 +42,17 @@ class CategoryManageViewModel @Inject constructor(
 
     private val _addResult: MutableSharedFlow<Int> = MutableSharedFlow()
     val addResult: SharedFlow<Int> = _addResult
+
+    private val _checkList: MutableStateFlow<State<List<CmdCheckList>>> = MutableStateFlow(State.loading())
+    val checkList: StateFlow<State<List<CmdCheckList>>> = _checkList
+
+    fun getCheckListInCategory(uid: Int, cid: Int) {
+        viewModelScope.launch {
+            checkListRepository.getCheckListsInCategory(uid, cid)
+                .map { resource -> State.fromResource(resource) }
+                .collect { state -> _checkList.value = state }
+        }
+    }
 
     fun fetchCategories(uid: Int): Flow<PagingData<CmdCategory>> {
         return categoryRepository.fetchCategories(uid = uid).cachedIn(viewModelScope)
@@ -55,6 +74,14 @@ class CategoryManageViewModel @Inject constructor(
             _addResult.emit(result)
         }
     }
+
+    fun deleteCategory(category: CmdCategory) {
+        viewModelScope.launch(ioDispatcher) {
+            println("probe :: delete category : $category")
+            categoryRepository.delCategory(category.id)
+        }
+    }
+
 
 
 

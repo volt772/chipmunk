@@ -1,6 +1,7 @@
 package com.apx6.chipmunk.app
 
 import android.app.Application
+import android.content.Context
 import com.apx6.chipmunk.R
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.util.Utility
@@ -15,7 +16,7 @@ class ChipmunkApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-//        appContext = applicationContext
+        appContext = applicationContext
 
         KakaoSdk.init(this, getString(R.string.kakao_app_key))
 
@@ -24,9 +25,9 @@ class ChipmunkApp : Application() {
 
 //        crashlytics.collectionEnabled(!BuildConfig.DEBUG)
     }
-//
-//    companion object {
-//        lateinit var appContext: Context
-//            private set
-//    }
+
+    companion object {
+        lateinit var appContext: Context
+            private set
+    }
 }

@@ -1,6 +1,14 @@
 package com.apx6.chipmunk.app.ui.base
 
+import android.content.Context
+import android.content.DialogInterface
+import android.graphics.Typeface
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
+import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.ext.getStringRes
 
 /**
  * Dialogs
@@ -74,40 +82,39 @@ class Dialogs : AppCompatActivity() {
 //            }
 //        }
 //
-//        /**
-//         * ConfirmDialog
-//         * * @param message Int
-//         */
-//        fun confirm(
-//            context: Context,
-//            btnYes: Int,
-//            btnNo: Int,
-//            message: Any,
-//            cancelable: Boolean = false,
-//            positiveListener: DialogInterface.OnClickListener,
-//            negativeListener: DialogInterface.OnClickListener? = null,
-//            title: Int? = null,
-//            isBlue: Boolean = false,
-//        ) {
-//            val builder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
-//            with(builder) {
-//                title?.let { _title -> setTitle(getStringRes(_title)) }
-//                if (message is Int) setMessage(getStringRes(message)) else setMessage(message as String)
-//                setCancelable(cancelable)
-//                setPositiveButton(getStringRes(btnYes), positiveListener)
-//                negativeListener?.let { _listener -> setNegativeButton(getStringRes(btnNo), _listener) }
-//                showDialog(context, builder, isBlue)
-//            }
-//        }
-//
-//        /* Dialog 메세지 스타일*/
-//        private fun setTextViewContentStyle(dialog: AlertDialog?) {
-//            val contentView = dialog?.findViewById<TextView>(android.R.id.message)
-//            contentView?.setTextAppearance(R.style.AlertDialogThemeMessage)
-//        }
-//
-//        /* Dialog 타이틀 스타일*/
-//        private fun setTextViewTitleStyle(context: Context, dialog: AlertDialog?) {
+        /**
+         * ConfirmDialog
+         * * @param message Int
+         */
+        fun confirm(
+            context: Context,
+            btnYes: String,
+            btnNo: String,
+            message: Any,
+            cancelable: Boolean = false,
+            positiveListener: DialogInterface.OnClickListener,
+            negativeListener: DialogInterface.OnClickListener? = null,
+            title: String? = null
+        ) {
+            val builder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
+            with(builder) {
+                title?.let { _title -> setTitle(_title) }
+                if (message is Int) setMessage(getStringRes(message)) else setMessage(message as String)
+                setCancelable(cancelable)
+                setPositiveButton(btnYes, positiveListener)
+                negativeListener?.let { _listener -> setNegativeButton(btnNo, _listener) }
+                showDialog(context, builder)
+            }
+        }
+
+        /* Dialog 메세지 스타일*/
+        private fun setTextViewContentStyle(dialog: AlertDialog?) {
+            val contentView = dialog?.findViewById<TextView>(android.R.id.message)
+            contentView?.setTextAppearance(R.style.AlertDialogThemeMessage)
+        }
+
+        /* Dialog 타이틀 스타일*/
+        private fun setTextViewTitleStyle(context: Context, dialog: AlertDialog?) {
 //            val titleView = dialog?.findViewById<TextView>(R.id.alertTitle)
 //            val face = ResourcesCompat.getFont(context, R.font.spoqahansansneo_bold)
 //
@@ -116,26 +123,26 @@ class Dialogs : AppCompatActivity() {
 //                setTypeface(null, Typeface.BOLD)
 //                typeface = face
 //            }
-//        }
-//
-//        /* Dialog 버튼 스타일*/
-//        private fun setButtonStyle(dialog: AlertDialog?, isBlue: Boolean = false) {
-//            dialog?.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextAppearance(R.style.AlertDialogThemeNegativeButton)
-//            val buttonColor = if (isBlue) R.style.AlertDialogThemePositiveButtonBlue else R.style.AlertDialogThemePositiveButtonRed
-//            dialog?.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextAppearance(buttonColor)
-//        }
-//
-//        /* Dialog 생성*/
-//        private fun showDialog(context: Context, builder: AlertDialog.Builder, isBlue: Boolean = false) {
-//            try {
-//                val dlg = builder.show()
-//                /* 타이틀, 본문, 버튼 스타일지정*/
-//                setTextViewContentStyle(dlg)
-//                setTextViewTitleStyle(context, dlg)
-//                setButtonStyle(dlg, isBlue)
-//            } catch (e: Exception) {
-//                MpLogger.e("Dialog", -1L, "Dialog Exception $e, \ncontext : $context, builder : $builder", e)
-//            }
-//        }
+        }
+
+        /* Dialog 버튼 스타일*/
+        private fun setButtonStyle(dialog: AlertDialog?) {
+            dialog?.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextAppearance(R.style.AlertDialogThemeNegativeButton)
+            val buttonColor = R.style.AlertDialogThemePositiveButtonRed
+            dialog?.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextAppearance(buttonColor)
+        }
+
+        /* Dialog 생성*/
+        private fun showDialog(context: Context, builder: AlertDialog.Builder) {
+            try {
+                val dlg = builder.show()
+                /* 타이틀, 본문, 버튼 스타일지정*/
+                setTextViewContentStyle(dlg)
+                setTextViewTitleStyle(context, dlg)
+                setButtonStyle(dlg)
+            } catch (e: Exception) {
+                ""
+            }
+        }
     }
 }

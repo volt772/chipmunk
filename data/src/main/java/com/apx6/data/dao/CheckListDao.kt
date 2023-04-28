@@ -22,6 +22,9 @@ abstract class CheckListDao : BaseDao<CheckList>() {
     @Query("SELECT COUNT(*) FROM ${CheckList.TABLE_NAME} WHERE uid = :uid")
     abstract fun getCheckListCount(uid: Int): Flow<Int>
 
+    @Query("SELECT * FROM ${CheckList.TABLE_NAME} WHERE uid = :uid AND cid = :cid")
+    abstract fun getCheckListInCategory(uid: Int, cid: Int): Flow<List<CmdCheckList>>
+
     /* ▼ INSERT ==========================================================================================================================*/
 
     /* ▼ UPDATE ==========================================================================================================================*/

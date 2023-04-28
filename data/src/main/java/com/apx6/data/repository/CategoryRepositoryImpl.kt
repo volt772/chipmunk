@@ -60,9 +60,8 @@ class CategoryRepositoryImpl @Inject constructor(
         return categoryDao.update(entity) > 0
     }
 
-    override suspend fun delCategory(category: CmdCategory): Boolean {
-        val entity = convertToEntity(category)
-        return categoryDao.delete(entity) > 0
+    override suspend fun delCategory(id: Int): Boolean {
+        return categoryDao.delCategory(id) > 0
     }
 
     private suspend fun convertToEntity(category: CmdCategory): Category {

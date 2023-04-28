@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
 import com.apx6.domain.dto.CmdCategory
+import com.apx6.domain.entities.Attachment
 import com.apx6.domain.entities.Category
 import kotlinx.coroutines.flow.Flow
 
@@ -28,6 +29,8 @@ abstract class CategoryDao : BaseDao<Category>() {
     /* ▼ UPDATE ==========================================================================================================================*/
 
     /* ▼ DELETE ==========================================================================================================================*/
+    @Query("DELETE FROM ${Category.TABLE_NAME} WHERE id = :id")
+    abstract fun delCategory(id: Int): Int
 
     /* ▼ TEST ONLY =======================================================================================================================*/
     @Query("SELECT * FROM ${Category.TABLE_NAME} LIMIT 1")
