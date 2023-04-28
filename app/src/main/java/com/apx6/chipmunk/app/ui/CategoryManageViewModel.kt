@@ -9,6 +9,7 @@ import com.apx6.domain.State
 import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.dto.CmdCheckList
+import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.UserRepository
@@ -43,14 +44,12 @@ class CategoryManageViewModel @Inject constructor(
     private val _addResult: MutableSharedFlow<Int> = MutableSharedFlow()
     val addResult: SharedFlow<Int> = _addResult
 
-    private val _checkList: MutableStateFlow<State<List<CmdCheckList>>> = MutableStateFlow(State.loading())
-    val checkList: StateFlow<State<List<CmdCheckList>>> = _checkList
+    private val _checkList: MutableSharedFlow<List<CmdCheckList>> = MutableSharedFlow()
+    val checkList: SharedFlow<List<CmdCheckList>> = _checkList
 
     fun getCheckListInCategory(uid: Int, cid: Int) {
         viewModelScope.launch {
-            checkListRepository.getCheckListsInCategory(uid, cid)
-                .map { resource -> State.fromResource(resource) }
-                .collect { state -> _checkList.value = state }
+            checkListRepository.getCheckListsInCategory(uid, cid).collectLatest { _checkList.emit(it) }
         }
     }
 
@@ -77,7 +76,6 @@ class CategoryManageViewModel @Inject constructor(
 
     fun deleteCategory(category: CmdCategory) {
         viewModelScope.launch(ioDispatcher) {
-            println("probe :: delete category : $category")
             categoryRepository.delCategory(category.id)
         }
     }
