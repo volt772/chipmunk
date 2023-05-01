@@ -12,17 +12,15 @@ import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.adapter.AttachAdapter
-import com.apx6.chipmunk.app.ui.adapter.CategoryAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
+import com.apx6.chipmunk.app.ui.dialog.CategoryListDialog
 import com.apx6.chipmunk.app.ui.picker.RangePickerActivity
 import com.apx6.chipmunk.databinding.ActivityRegisterBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
-import com.apx6.domain.constants.CmdSelectedChipEvent
 import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
-import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -39,6 +37,9 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     override fun getViewBinding(): ActivityRegisterBinding = ActivityRegisterBinding.inflate(layoutInflater)
 
     private val msDate = MutableStateFlow("")
+
+    private var categoryList = listOf<CmdCategory>()
+    private var selectedCategory =  CmdCategory.default()
 
     private var activityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         result.data?.let { data ->
@@ -59,8 +60,6 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
             }
         }
     }
-
-    private val categoryAdapter = CategoryAdapter(this::onItemClicked)
 
     private val attachAdapter = AttachAdapter(::deleteAttach)
 
@@ -115,7 +114,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                     when (state) {
                         is State.Loading -> { }
                         is State.Success -> {
-                            addCategoryChips(state.data.toMutableList())
+                            categoryList = state.data.toMutableList()
                         }
                         is State.Error -> {
                         }
@@ -126,39 +125,18 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
             launch {
                 viewModel.attachment.collect { state ->
                     when (state) {
-                        is State.Loading -> {
-                        }
-                        is State.Success -> {
-                            attachAdapter.submitList(state.data.toMutableList())
-                        }
-                        is State.Error -> {
-                        }
+                        is State.Loading -> { }
+                        is State.Success -> { attachAdapter.submitList(state.data.toMutableList()) }
+                        is State.Error -> { }
                     }
                 }
             }
 
             launch {
-                viewModel.selectedChips.collect { chipList ->
-                    println("probe :: chip list : $chipList")
+                viewModel.selectedCategory.collectLatest { category ->
+                    selectedCategory = category
                 }
             }
-        }
-    }
-
-    private fun addCategoryChips(categories: List<CmdCategory>) {
-        categories.forEach { _category ->
-            val chip = Chip(this)
-
-            chip.apply {
-                text = _category.name
-                setOnSingleClickListener {
-                    selectChip(chip, _category)
-                }
-                chipBackgroundColor = getColorStateList(R.color.material_gray_300)
-
-            }
-
-            binding.cgCategory.addView(chip)
         }
     }
 
@@ -166,45 +144,6 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         lifecycleScope.launch {
             viewModel.deleteAttachment(attach)
         }
-    }
-
-    private fun selectChip(chip: Chip, category: CmdCategory) {
-        val selectState = !chip.isSelected
-
-        chip.apply {
-            isSelected = selectState
-            val (chipColor, textColor) = if (selectState) {
-                /* Selected*/
-                viewModel.selectChip(this, CmdSelectedChipEvent.ADD)
-                R.color.material_amber_700 to R.color.white
-            } else {
-                /* DeSelected*/
-                viewModel.selectChip(this, CmdSelectedChipEvent.DELETE)
-                R.color.material_gray_300 to R.color.black_h0
-            }
-
-            chipBackgroundColor = getColorStateList(chipColor)
-            setTextColor(getColor(textColor))
-        }
-    }
-
-    private fun observeUser() {
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.user.collect { user ->
-//                user?.let {
-//                    delay(SCREEN_MOVE_DELAY)
-//                    moveToDashBoard()
-//                } ?: run {
-//                    delay(SCREEN_MOVE_DELAY)
-//                    viewModel.setFcmToken()
-//                    moveToLogin()
-//                }
-//            }
-//        }
-    }
-
-    private fun onItemClicked(category: CmdCategory) {
-        /* TODO*/
     }
 
     private fun initView() {
@@ -231,6 +170,16 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
             val intent = Intent(this, RangePickerActivity::class.java)
             activityLauncher.launch(intent)
         }
+
+        binding.aetCategory.setOnSingleClickListener {
+            val categoryListDialog = CategoryListDialog.newInstance(categoryList, selectedCategory, ::selectCategory)
+            supportFragmentManager.beginTransaction().add(categoryListDialog, TAG).commitAllowingStateLoss()
+        }
+    }
+
+    private fun selectCategory(category: CmdCategory) {
+        binding.aetCategory.setText(category.name)
+        viewModel.selectCategory(category)
     }
 
     private fun setLocationName(location: String) {
@@ -241,6 +190,10 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         val rangeText = "$sDay - $eDay"
         binding.aetDate.setText(rangeText)
         msDate.value = rangeText
+    }
+
+    companion object {
+        const val TAG = "RegisterActivity"
     }
 
 }

@@ -318,6 +318,7 @@
     - Example :: red_h4  ==>     #F44336
     - Example :: red_h4_op12 ==> #1FF44336
     -->
+    <color name="app_main_color">#FFA000</color>
 
     <color name="black_h0">#424242</color>
     <color name="black_h30">#070605</color>

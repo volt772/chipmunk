@@ -110,6 +110,7 @@
                         android:id="@+id/cg_category"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:selectionRequired="true"
                         app:singleSelection="true"
                         app:layout_constraintStart_toStartOf="parent"

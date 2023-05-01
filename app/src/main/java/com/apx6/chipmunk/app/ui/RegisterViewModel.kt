@@ -4,17 +4,20 @@ import androidx.lifecycle.viewModelScope
 import com.apx6.chipmunk.app.di.IoDispatcher
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.State
-import com.apx6.domain.constants.CmdSelectedChipEvent
 import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.repository.AttachRepository
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.UserRepository
-import com.google.android.material.chip.Chip
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,8 +38,8 @@ class RegisterViewModel @Inject constructor(
     private val _userId: MutableSharedFlow<Int?> = MutableSharedFlow()
     val userId: SharedFlow<Int?> = _userId
 
-    private val _selectedChips: MutableStateFlow<MutableList<Chip>> = MutableStateFlow(mutableListOf())
-    val selectedChips: StateFlow<MutableList<Chip>> = _selectedChips
+    private val _selectedCategory: MutableSharedFlow<CmdCategory> = MutableSharedFlow()
+    val selectedCategory: SharedFlow<CmdCategory> = _selectedCategory
 
     private val _category: MutableStateFlow<State<List<CmdCategory>>> = MutableStateFlow(State.loading())
     val category: StateFlow<State<List<CmdCategory>>> = _category
@@ -50,16 +53,9 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    fun selectChip(chip: Chip, ce: CmdSelectedChipEvent) {
+    fun selectCategory(category: CmdCategory) {
         viewModelScope.launch {
-            _selectedChips.update {
-                _selectedChips.value.toMutableList().apply {
-                    when (ce) {
-                        CmdSelectedChipEvent.ADD -> this.add(chip)
-                        CmdSelectedChipEvent.DELETE -> this.remove(chip)
-                    }
-                }
-            }
+            _selectedCategory.emit(category)
         }
     }
 

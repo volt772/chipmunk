@@ -8,4 +8,14 @@ data class CmdCategory (
 
     val uid: Int
 
-)
+) {
+    companion object {
+        fun default(): CmdCategory {
+            return CmdCategory(
+                id = -1,
+                name = "default",
+                uid = 0,
+            )
+        }
+    }
+}
