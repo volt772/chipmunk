@@ -31,7 +31,7 @@ class CheckListDetailDialog : DialogFragment() {
 
         binding = DialogChecklistDetailBinding.inflate(inflater, container, false)
 
-        isCancelable = false
+        isCancelable = true
 
         setInitView()
 

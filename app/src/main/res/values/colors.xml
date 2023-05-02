@@ -347,4 +347,7 @@
     <color name="orange_h35">#FFEBCF</color>
     <color name="orange_h37">#FFFAF2</color>
     <color name="orange_h10">#F5CFA2</color>
+
+    <color name="dialog_text_baby_powder_600">#71716E</color>
+
 </resources>

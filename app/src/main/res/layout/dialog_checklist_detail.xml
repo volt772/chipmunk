@@ -13,76 +13,196 @@
             android:layout_height="match_parent"
             android:background="@drawable/bg_white_corner">
 
-            <!-- TITLE-->
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/md_46"
-                android:layout_marginHorizontal="@dimen/md_16"
-                android:theme="@style/UpdateDialogTitle"
-                android:text="@string/app_update_dialog_title"
-                app:layout_constrainedWidth="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/app_update_dialog_title" />
-
-            <!-- 업데이트 레이블-->
-            <TextView
-                android:id="@+id/tv_content"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/md_16"
-                android:layout_marginTop="@dimen/md_30"
-                android:theme="@style/UpdateDialogLabel"
-                android:breakStrategy="high_quality"
-                android:letterSpacing="-0.03"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_title"
-                tools:text="@string/app_update_dialog_info" />
-
-            <!-- 업데이트 상세 내용-->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_update_note"
+            <!-- Box1 : Top-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/md_16"
-                android:layout_marginHorizontal="@dimen/md_16"
-                app:layout_constraintTop_toBottomOf="@id/tv_content" />
-
-            <!-- 취소-->
-            <TextView
-                android:id="@+id/tv_negative"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/md_56"
-                android:layout_marginTop="@dimen/md_32"
-                android:theme="@style/UpdateDialogButton"
-                android:text="@string/app_update_dialog_later"
-                android:textColor="@color/gray_h212"
-                android:background="@drawable/bg_top_border"
-                android:foreground="?selectableItemBackgroundBorderless"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tv_positive"
-                app:layout_constraintTop_toBottomOf="@id/rv_update_note"
-                tools:text="@string/app_update_dialog_later" />
-
-            <!-- 업데이트-->
-            <TextView
-                android:id="@+id/tv_positive"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/md_56"
-                android:layout_marginTop="@dimen/md_32"
-                android:theme="@style/UpdateDialogButton"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:background="@color/orange_h21"
-                android:text="@string/app_update_dialog_update"
-                android:textColor="@color/material_white"
-                app:layout_constraintStart_toEndOf="@id/tv_negative"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_update_note"
-                tools:text="@string/app_update_dialog_update" />
+                app:layout_constraintStart_toStartOf="parent" >
+
+                <!-- Close Button-->
+                <ImageView
+                    android:id="@+id/iv_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_toolbar_close_black"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:layout_marginEnd="@dimen/md_18"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- CheckList Name-->
+                <TextView
+                    android:id="@+id/tv_checklist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/md_36"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="@dimen/md_54"
+                    android:theme="@style/CheckListDetailCheckListName"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="체크리스트 이름" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Box2 : Mid-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_mid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/md_24"
+                app:layout_constraintTop_toBottomOf="@id/cl_detail_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" >
+
+                <!-- Box2-1 : Category-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_mid_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/md_16"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" >
+
+                    <!-- Category Label-->
+                    <TextView
+                        android:id="@+id/tv_category_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/CheckListDetailLabel"
+                        android:text="@string/dlg_checklist_detail_category"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <!-- Category Value-->
+                    <TextView
+                        android:id="@+id/tv_category"
+                        android:layout_width="@dimen/md_0"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/CheckListDetailValue"
+                        android:text="-"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="카테고리 이름" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Box2-2 : Due Date-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_mid_due_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/md_12"
+                    android:paddingHorizontal="@dimen/md_16"
+                    app:layout_constraintTop_toBottomOf="@id/cl_mid_category"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" >
+
+                    <!-- Due Date Label-->
+                    <TextView
+                        android:id="@+id/tv_due_date_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/CheckListDetailLabel"
+                        android:text="@string/dlg_checklist_detail_due_date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <!-- Due Date Value-->
+                    <TextView
+                        android:id="@+id/tv_due_date"
+                        android:layout_width="@dimen/md_0"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:theme="@style/CheckListDetailValue"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="2023.06.01.0 (D-30)" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Box2-3 : Memo-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_mid_memo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/md_12"
+                    android:paddingHorizontal="@dimen/md_16"
+                    app:layout_constraintTop_toBottomOf="@id/cl_mid_due_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" >
+
+                    <!-- Memo Label-->
+                    <TextView
+                        android:id="@+id/tv_memo_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/CheckListDetailLabel"
+                        android:text="@string/dlg_checklist_detail_memo"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/tv_memo"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Memo Value-->
+                    <TextView
+                        android:id="@+id/tv_memo"
+                        android:layout_width="@dimen/md_0"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/CheckListDetailValue"
+                        android:layout_marginTop="@dimen/md_8"
+                        android:text="-"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_memo_label"
+                        tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. " />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Box3 : Bot-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_bot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/md_24"
+                app:layout_constraintTop_toBottomOf="@id/cl_detail_mid"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" >
+
+                <!-- 삭제-->
+                <TextView
+                    android:id="@+id/tv_delete"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/md_56"
+                    android:theme="@style/CheckListDetailBotButton"
+                    android:textColor="@color/gray_h212"
+                    android:background="@drawable/bg_top_border"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:text="@string/dlg_checklist_detail_delete"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_modify"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- 수정-->
+                <TextView
+                    android:id="@+id/tv_modify"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/md_56"
+                    android:theme="@style/CheckListDetailBotButton"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:background="@color/material_amber_700"
+                    android:textColor="@color/white"
+                    android:text="@string/dlg_checklist_detail_modify"
+                    app:layout_constraintStart_toEndOf="@id/tv_delete"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

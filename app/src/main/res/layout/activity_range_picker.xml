@@ -24,7 +24,7 @@
                 android:id="@+id/iv_picker_close"
                 android:layout_width="@dimen/md_24"
                 android:layout_height="@dimen/md_24"
-                android:src="@drawable/ic_toolbar_close"
+                android:src="@drawable/ic_toolbar_close_white"
                 android:layout_marginStart="@dimen/md_16"
                 android:layout_marginTop="@dimen/md_24"
                 app:layout_constraintTop_toTopOf="parent"

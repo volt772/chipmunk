@@ -99,4 +99,44 @@
         <item name="colorAccent">@color/app_main_color</item>
         <item name="android:windowBackground">@drawable/dp_background</item>
     </style>
+
+    <!-- CheckList Detail Dialog : CheckList Name -->
+    <style name="CheckListDetailCheckListName">
+        <item name="android:textSize">@dimen/md_18</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/spoqahansansneo_bold</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <!-- CheckList Detail Dialog : Item Labels -->
+    <style name="CheckListDetailLabel">
+        <item name="android:textSize">@dimen/md_14</item>
+        <item name="android:textColor">@color/dialog_text_baby_powder_600</item>
+        <item name="android:fontFamily">@font/spoqahansansneo_regular</item>
+    </style>
+
+    <!-- CheckList Detail Dialog : Item Values -->
+    <style name="CheckListDetailValue">
+        <item name="android:textSize">@dimen/md_14</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/spoqahansansneo_regular</item>
+    </style>
+
+    <!-- CheckList Detail Dialog : Category Name -->
+    <style name="CheckListDetailCategoryName">
+        <item name="android:textSize">@dimen/md_14</item>
+        <item name="android:textColor">@color/dialog_text_baby_powder_600</item>
+        <item name="android:fontFamily">@font/spoqahansansneo_regular</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- CheckList Detail Dialog : Bottom Button -->
+    <style name="CheckListDetailBotButton">
+        <item name="android:textSize">@dimen/md_16</item>
+        <item name="android:fontFamily">@font/spoqahansansneo_regular</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>
