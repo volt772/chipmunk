@@ -17,7 +17,9 @@ import com.apx6.chipmunk.app.ui.dialog.CheckListDetailDialog
 import com.apx6.chipmunk.databinding.ActivityDashboardBinding
 import com.apx6.domain.State
 import com.apx6.domain.dto.CmdCheckList
+import com.apx6.domain.dto.CmdCheckListDetail
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -27,7 +29,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     override val viewModel: DashBoardViewModel by viewModels()
     override fun getViewBinding(): ActivityDashboardBinding = ActivityDashboardBinding.inflate(layoutInflater)
 
-    private val checkListAdapter = CheckListAdapter(this::showDetailDialog)
+    private val checkListAdapter = CheckListAdapter(this::selectCheckList)
 
     private var userId: Int = 0
 
@@ -55,16 +57,20 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     }
 
     private fun goToModify(checkList: CmdCheckList) {
-
+        println("probe :: dashboard : modify : $checkList")
     }
 
     private fun deleteCheckList(checkList: CmdCheckList) {
-
+        println("probe :: dashboard : delete : $checkList")
     }
 
-    private fun showDetailDialog(checkList: CmdCheckList) {
+    private fun selectCheckList(cl: CmdCheckList) {
+        viewModel.getSelectedCategoryName(cl)
+    }
+
+    private fun openDetailDialog(cld: CmdCheckListDetail) {
         val dialog = CheckListDetailDialog.newInstance(
-            checkList = checkList,
+            cld = cld,
             toModify = ::goToModify,
             toDelete = ::deleteCheckList
         )
@@ -98,13 +104,18 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                             is State.Success -> {
                                 progress?.stop()
                                 checkListAdapter.submitList(state.data.toMutableList())
-//                                println("probe :: checkList : ${state.data}")
                             }
                             is State.Error -> {
                                 progress?.stop()
                             }
                         }
                     }
+                }
+            }
+
+            launch {
+                viewModel.selCheckListDetail.collectLatest { details ->
+                    openDetailDialog(details)
                 }
             }
         }

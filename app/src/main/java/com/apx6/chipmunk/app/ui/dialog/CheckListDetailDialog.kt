@@ -10,14 +10,19 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.databinding.DialogChecklistDetailBinding
 import com.apx6.domain.dto.CmdCheckList
+import com.apx6.domain.dto.CmdCheckListDetail
 
 
 class CheckListDetailDialog : DialogFragment() {
-    private var checkList: CmdCheckList = CmdCheckList.default()
+    private var cld: CmdCheckListDetail = CmdCheckListDetail.default()
     private var toModify: (CmdCheckList) -> Unit = {}
     private var toDelete: (CmdCheckList) -> Unit = {}
+
+    private lateinit var cl: CmdCheckList
+    private lateinit var caName: String
 
     lateinit var binding: DialogChecklistDetailBinding
 
@@ -33,13 +38,40 @@ class CheckListDetailDialog : DialogFragment() {
 
         isCancelable = true
 
+        setInitData()
+
         setInitView()
 
         return binding.root
     }
 
+    private fun setInitData() {
+        cl = cld.checkList
+        caName = cld.categoryName
+    }
+
     private fun setInitView() {
         with(binding) {
+            /* 닫기*/
+            ivClose.setOnSingleClickListener { dismiss() }
+
+            /* 삭제*/
+            tvDelete.setOnSingleClickListener { toDelete(cl) }
+
+            /* 수정*/
+            tvModify.setOnSingleClickListener { toModify(cl) }
+
+            /* `체크리스트`*/
+            tvChecklist.text = cl.title
+
+            /* `카테고리`*/
+            tvCategory.text = caName
+
+            /* `기한`*/
+            tvDueDate.text = cl.endDate.toString()
+
+            /* `메모`*/
+            tvMemo.text = cl.memo
         }
     }
 
@@ -64,11 +96,11 @@ class CheckListDetailDialog : DialogFragment() {
 
     companion object {
         fun newInstance(
-            checkList: CmdCheckList,
+            cld: CmdCheckListDetail,
             toModify: (CmdCheckList) -> Unit,
             toDelete: (CmdCheckList) -> Unit
         ) = CheckListDetailDialog().apply {
-            this.checkList = checkList
+            this.cld = cld
             this.toModify = toModify
             this.toDelete = toDelete
         }

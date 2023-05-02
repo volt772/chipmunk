@@ -11,7 +11,7 @@ import com.apx6.domain.dto.CmdCheckList
 
 
 class CheckListAdapter(
-    private val showDetailDialog: (CmdCheckList) -> Unit
+    private val selectCheckList: (CmdCheckList) -> Unit
 ) : ListAdapter<CmdCheckList, CheckListViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CheckListViewHolder(
@@ -23,7 +23,7 @@ class CheckListAdapter(
     )
 
     override fun onBindViewHolder(holder: CheckListViewHolder, position: Int) =
-        holder.bind(getItem(position), showDetailDialog)
+        holder.bind(getItem(position), selectCheckList)
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CmdCheckList>() {
