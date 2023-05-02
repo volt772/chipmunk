@@ -22,4 +22,10 @@ object CmdConstants {
         }
     }
 
+    object Date {
+        const val YEAR = "year"
+        const val MONTH = "month"
+        const val DAY = "day"
+    }
+
 }

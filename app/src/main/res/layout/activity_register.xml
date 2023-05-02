@@ -5,8 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent" >
 
         <!-- AppBar-->
         <com.google.android.material.appbar.AppBarLayout
@@ -55,6 +54,18 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <ImageView
+                        android:id="@+id/iv_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_category_plus"
+                        android:layout_marginEnd="@dimen/md_16"
+                        app:tint="@color/white"
+                        android:background="?selectableItemBackgroundBorderless"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
@@ -83,8 +94,8 @@
                     android:id="@+id/cl_category"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/md_0"
+                    android:layout_marginTop="@dimen/md_18"
                     android:foreground="?selectableItemBackgroundBorderless"
-                    android:paddingVertical="@dimen/md_12"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" >
@@ -217,69 +228,6 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <!-- Box 6 : 장소-->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:foreground="?selectableItemBackgroundBorderless"
-                    app:layout_constraintTop_toBottomOf="@id/cl_memo"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" >
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/aet_location"
-                        android:layout_width="@dimen/md_0"
-                        android:layout_height="@dimen/md_48"
-                        android:drawablePadding="@dimen/md_32"
-                        android:theme="@style/RegisterPlaceHolderLabel"
-                        android:drawableStart="@drawable/ic_location"
-                        android:inputType="text"
-                        android:hint="@string/location"
-                        android:singleLine="true"
-                        android:background="@null"
-                        android:layout_marginEnd="@dimen/md_10"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/iv_location_search" />
-
-                    <ImageView
-                        android:id="@+id/iv_location_search"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_search"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <!-- Box 7 : 첨부파일-->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_attachment"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/md_0"
-                    android:paddingBottom="@dimen/md_18"
-                    android:foreground="?selectableItemBackgroundBorderless"
-                    app:layout_constraintTop_toBottomOf="@id/cl_location"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" >
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_attach_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_attach_card"
-                        android:layout_marginTop="@dimen/md_12"
-                        android:overScrollMode="never"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

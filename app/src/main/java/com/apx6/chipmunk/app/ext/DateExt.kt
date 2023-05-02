@@ -1,8 +1,10 @@
 package com.apx6.chipmunk.app.ext
 
 import android.content.Context
+import com.apx6.domain.constants.CmdConstants
 import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
+import org.joda.time.LocalDate
 import java.util.*
 
 
@@ -43,6 +45,31 @@ fun DateTime?.convertDateByType(type: Int): String {
         else -> this.toString("YY.MM.dd HH:mm")
     }
 }
+
+fun getTodaySeparate(type: String): Int {
+    val localDate = LocalDate()
+    val today = localDate.toString()
+    val todayArr = today.splitExt("-")
+
+    when (type) {
+        CmdConstants.Date.YEAR -> return Integer.parseInt(todayArr[0])
+        CmdConstants.Date.MONTH -> return Integer.parseInt(todayArr[1])
+        CmdConstants.Date.DAY -> return Integer.parseInt(todayArr[2])
+    }
+
+    return 0
+}
+
+fun String.getDateToAbbr(divider: String): String {
+    if (this.isBlank()) return ""
+
+    val year = this.substring(2, 4)
+    val month = this.substring(4, 6)
+    val day = this.substring(6, 8)
+
+    return String.format(Locale.getDefault(), "%s%s%s%s%s", year, divider, month, divider, day)
+}
+
 
 /**
  * 시간 Formatted

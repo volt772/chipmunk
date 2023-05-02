@@ -79,22 +79,22 @@ class CheckListRepositoryImpl @Inject constructor(
         return checkListDao.delete(entity) > 0
     }
 
-    @Suppress("UNCHECKED_CAST")
-    override suspend fun getLocation(query: String): Flow<Resource<CmdLocation>> {
-        val response = refinery.response(
-            api.getLocationDocs(query)
-        )
-
-        return flow {
-            if (response is CmdSuccessResponse<*>) {
-                val resp = response.body as CmdLocation
-                emit(Resource.Success(resp))
-            } else {
-                val err = response as CmdErrorResponse
-                emit(Resource.Failed(err.message))
-            }
-        }
-    }
+//    @Suppress("UNCHECKED_CAST")
+//    override suspend fun getLocation(query: String): Flow<Resource<CmdLocation>> {
+//        val response = refinery.response(
+//            api.getLocationDocs(query)
+//        )
+//
+//        return flow {
+//            if (response is CmdSuccessResponse<*>) {
+//                val resp = response.body as CmdLocation
+//                emit(Resource.Success(resp))
+//            } else {
+//                val err = response as CmdErrorResponse
+//                emit(Resource.Failed(err.message))
+//            }
+//        }
+//    }
 
     private suspend fun convertToEntity(checkList: CmdCheckList): CheckList {
         return checkListMapper.checkListToEntity(checkList)

@@ -15,7 +15,7 @@ abstract class CategoryDao : BaseDao<Category>() {
     /* ▼ TRANSACTION =====================================================================================================================*/
 
     /* ▼ SELECT ==========================================================================================================================*/
-    @Query("SELECT * FROM ${Category.TABLE_NAME} WHERE uid = :uid")
+    @Query("SELECT * FROM ${Category.TABLE_NAME} WHERE uid = :uid ORDER BY id DESC")
     abstract fun getCategories(uid: Int): Flow<List<CmdCategory>>
 
     @Query("SELECT * FROM ${Category.TABLE_NAME} WHERE id = :id")

@@ -22,4 +22,5 @@ abstract class AppModule {
     @Binds
     @Singleton
     abstract fun bindCmKoreanCharUtils(impl: CmKoreanCharUtilsImpl): CmKoreanCharUtils
+
 }

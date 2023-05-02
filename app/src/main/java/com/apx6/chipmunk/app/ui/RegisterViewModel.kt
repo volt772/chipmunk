@@ -4,9 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.apx6.chipmunk.app.di.IoDispatcher
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.State
-import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
-import com.apx6.domain.repository.AttachRepository
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.UserRepository
@@ -27,7 +25,6 @@ class RegisterViewModel @Inject constructor(
     @IoDispatcher val ioDispatcher: CoroutineDispatcher,
     private val checkListRepository: CheckListRepository,
     private val categoryRepository: CategoryRepository,
-    private val attachRepository: AttachRepository,
     private val userRepository: UserRepository
 ) : BaseViewModel() {
 
@@ -43,9 +40,6 @@ class RegisterViewModel @Inject constructor(
 
     private val _category: MutableStateFlow<State<List<CmdCategory>>> = MutableStateFlow(State.loading())
     val category: StateFlow<State<List<CmdCategory>>> = _category
-
-    private val _attachment: MutableStateFlow<State<List<CmdAttachment>>> = MutableStateFlow(State.loading())
-    val attachment: StateFlow<State<List<CmdAttachment>>> = _attachment
 
     private fun getUserId() {
         viewModelScope.launch {
@@ -64,20 +58,6 @@ class RegisterViewModel @Inject constructor(
             categoryRepository.getCategories(uid)
                 .map { resource -> State.fromResource(resource) }
                 .collect { state -> _category.value = state }
-        }
-    }
-
-    fun getAttachments(clId: Int) {
-        viewModelScope.launch {
-            attachRepository.getAttachments(clId)
-                .map { resource -> State.fromResource(resource) }
-                .collect { state -> _attachment.value = state }
-        }
-    }
-
-    fun deleteAttachment(attachment: CmdAttachment) {
-        viewModelScope.launch(ioDispatcher) {
-            attachRepository.delAttachment(attachment.id)
         }
     }
 }
