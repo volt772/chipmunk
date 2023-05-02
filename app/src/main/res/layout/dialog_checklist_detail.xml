@@ -24,10 +24,10 @@
 
                 <!-- Close Button-->
                 <ImageView
-                    android:id="@+id/iv_close"
+                    android:id="@+id/iv_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_toolbar_close_black"
+                    android:src="@drawable/ic_trash_red"
                     android:background="?selectableItemBackgroundBorderless"
                     android:layout_marginEnd="@dimen/md_18"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -175,16 +175,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" >
 
-                <!-- 삭제-->
+                <!-- 확인-->
                 <TextView
-                    android:id="@+id/tv_delete"
+                    android:id="@+id/tv_confirm"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/md_56"
                     android:theme="@style/CheckListDetailBotButton"
                     android:textColor="@color/gray_h212"
                     android:background="@drawable/bg_top_border"
                     android:foreground="?selectableItemBackgroundBorderless"
-                    android:text="@string/dlg_checklist_detail_delete"
+                    android:text="@string/dlg_checklist_detail_confirm"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_modify"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -199,7 +199,7 @@
                     android:background="@color/material_amber_700"
                     android:textColor="@color/white"
                     android:text="@string/dlg_checklist_detail_modify"
-                    app:layout_constraintStart_toEndOf="@id/tv_delete"
+                    app:layout_constraintStart_toEndOf="@id/tv_confirm"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>

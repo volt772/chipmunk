@@ -52,11 +52,11 @@ class CheckListDetailDialog : DialogFragment() {
 
     private fun setInitView() {
         with(binding) {
-            /* 닫기*/
-            ivClose.setOnSingleClickListener { dismiss() }
+            /* 확인*/
+            tvConfirm.setOnSingleClickListener { dismiss() }
 
             /* 삭제*/
-            tvDelete.setOnSingleClickListener { toDelete(cl) }
+            ivDelete.setOnSingleClickListener { toDelete(cl) }
 
             /* 수정*/
             tvModify.setOnSingleClickListener { toModify(cl) }
