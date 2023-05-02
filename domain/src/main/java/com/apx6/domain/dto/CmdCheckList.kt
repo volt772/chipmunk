@@ -16,4 +16,19 @@ data class CmdCheckList (
 
     val endDate: Long
 
-)
+) {
+
+    companion object {
+        fun default(): CmdCheckList {
+            return CmdCheckList(
+                id = -1,
+                cid = -1,
+                uid = -1,
+                title = "",
+                memo = "",
+                startDate = 0L,
+                endDate = 0L,
+            )
+        }
+    }
+}

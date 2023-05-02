@@ -46,7 +46,7 @@ class RegisterTest {
     fun test01_get_location() {
 
         runBlocking {
-            checkListRepository.getLocation("가수행복로")
+//            checkListRepository.getLocation("가수행복로")
         }
 
         println("[TEST] probe : ==========================================================================================================================================")

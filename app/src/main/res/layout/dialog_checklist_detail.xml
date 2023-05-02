@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="@dimen/md_8">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_white_corner">
+
+            <!-- TITLE-->
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/md_46"
+                android:layout_marginHorizontal="@dimen/md_16"
+                android:theme="@style/UpdateDialogTitle"
+                android:text="@string/app_update_dialog_title"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/app_update_dialog_title" />
+
+            <!-- 업데이트 레이블-->
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/md_16"
+                android:layout_marginTop="@dimen/md_30"
+                android:theme="@style/UpdateDialogLabel"
+                android:breakStrategy="high_quality"
+                android:letterSpacing="-0.03"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                tools:text="@string/app_update_dialog_info" />
+
+            <!-- 업데이트 상세 내용-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_update_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/md_16"
+                android:layout_marginHorizontal="@dimen/md_16"
+                app:layout_constraintTop_toBottomOf="@id/tv_content" />
+
+            <!-- 취소-->
+            <TextView
+                android:id="@+id/tv_negative"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/md_56"
+                android:layout_marginTop="@dimen/md_32"
+                android:theme="@style/UpdateDialogButton"
+                android:text="@string/app_update_dialog_later"
+                android:textColor="@color/gray_h212"
+                android:background="@drawable/bg_top_border"
+                android:foreground="?selectableItemBackgroundBorderless"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_positive"
+                app:layout_constraintTop_toBottomOf="@id/rv_update_note"
+                tools:text="@string/app_update_dialog_later" />
+
+            <!-- 업데이트-->
+            <TextView
+                android:id="@+id/tv_positive"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/md_56"
+                android:layout_marginTop="@dimen/md_32"
+                android:theme="@style/UpdateDialogButton"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:background="@color/orange_h21"
+                android:text="@string/app_update_dialog_update"
+                android:textColor="@color/material_white"
+                app:layout_constraintStart_toEndOf="@id/tv_negative"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_update_note"
+                tools:text="@string/app_update_dialog_update" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

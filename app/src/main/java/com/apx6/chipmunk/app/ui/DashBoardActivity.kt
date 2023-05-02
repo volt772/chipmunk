@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,9 +13,9 @@ import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ui.adapter.CheckListAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
+import com.apx6.chipmunk.app.ui.dialog.CheckListDetailDialog
 import com.apx6.chipmunk.databinding.ActivityDashboardBinding
 import com.apx6.domain.State
-import com.apx6.domain.constants.CmdConstants
 import com.apx6.domain.dto.CmdCheckList
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -28,7 +27,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     override val viewModel: DashBoardViewModel by viewModels()
     override fun getViewBinding(): ActivityDashboardBinding = ActivityDashboardBinding.inflate(layoutInflater)
 
-    private val checkListAdapter = CheckListAdapter(this::onItemClicked)
+    private val checkListAdapter = CheckListAdapter(this::showDetailDialog)
 
     private var userId: Int = 0
 
@@ -55,8 +54,22 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         }
     }
 
-    private fun onItemClicked(checkList: CmdCheckList, imageView: ImageView) {
-        /* TODO*/
+    private fun goToModify(checkList: CmdCheckList) {
+
+    }
+
+    private fun deleteCheckList(checkList: CmdCheckList) {
+
+    }
+
+    private fun showDetailDialog(checkList: CmdCheckList) {
+        val dialog = CheckListDetailDialog.newInstance(
+            checkList = checkList,
+            toModify = ::goToModify,
+            toDelete = ::deleteCheckList
+        )
+
+        supportFragmentManager.beginTransaction().add(dialog, TAG).commitAllowingStateLoss()
     }
 
     private fun subscribers() {
@@ -126,5 +139,9 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    companion object {
+        const val TAG = "DashBoardActivity"
     }
 }

@@ -157,4 +157,11 @@
         <item name="android:textSize">@dimen/md_24</item>
     </style>
 
+    <style name="CheckListDetailDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
 </resources>

@@ -2,13 +2,14 @@ package com.apx6.chipmunk.app.ui.viewholder
 
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.databinding.ItemChecklistBinding
 import com.apx6.domain.dto.CmdCheckList
 
 
 class CheckListViewHolder(private val binding: ItemChecklistBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(checkList: CmdCheckList, onItemClicked: (CmdCheckList, ImageView) -> Unit) {
+    fun bind(checkList: CmdCheckList, showDetailDialog: (CmdCheckList) -> Unit) {
 
         binding.apply {
             tvChecklistTitle.text = checkList.title
@@ -21,8 +22,8 @@ class CheckListViewHolder(private val binding: ItemChecklistBinding) : RecyclerV
 //            error(R.drawable.ic_broken_image)
 //        }
 //
-//        binding.root.setOnClickListener {
-//            onItemClicked(post, binding.imageView)
-//        }
+        binding.root.setOnSingleClickListener {
+            showDetailDialog.invoke(checkList)
+        }
     }
 }
