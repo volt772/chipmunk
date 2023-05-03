@@ -10,12 +10,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
+import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ui.adapter.CheckListAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
 import com.apx6.chipmunk.app.ui.dialog.CheckListDetailDialog
 import com.apx6.chipmunk.databinding.ActivityDashboardBinding
 import com.apx6.domain.State
+import com.apx6.domain.constants.CmdConstants
 import com.apx6.domain.dto.CmdCheckList
 import com.apx6.domain.dto.CmdCheckListDetail
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,12 +58,12 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         }
     }
 
-    private fun goToModify(checkList: CmdCheckList) {
-        println("probe :: dashboard : modify : $checkList")
+    private fun goToModify(cl: CmdCheckList) {
+        moveToRegister(cl.id)
     }
 
-    private fun deleteCheckList(checkList: CmdCheckList) {
-        println("probe :: dashboard : delete : $checkList")
+    private fun deleteCheckList(cl: CmdCheckList) {
+        viewModel.delCheckList(cl)
     }
 
     private fun selectCheckList(cl: CmdCheckList) {
@@ -80,17 +82,19 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     private fun subscribers() {
         lifecycleScope.run {
-            launchWhenStarted {
-                progress?.start()
-                viewModel.user.collect { user ->
-                    user?.let { _user ->
-                        viewModel.getCheckLists(_user.id)
-                        userId = _user.id
-                    } ?: run {
-                        progress?.stop()
-                        val vw = binding.coDashboardRoot
-                        CmSnackBar.make(vw, getString(R.string.failed_get_user_info), "") { }.apply {
-                            show()
+            launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    progress?.start()
+                    viewModel.user.collect { user ->
+                        user?.let { _user ->
+                            viewModel.getCheckLists(_user.id)
+                            userId = _user.id
+                        } ?: run {
+                            progress?.stop()
+                            val vw = binding.coDashboardRoot
+                            CmSnackBar.make(vw, getString(R.string.failed_get_user_info), "") { }.apply {
+                                show()
+                            }
                         }
                     }
                 }
@@ -118,11 +122,25 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                     openDetailDialog(details)
                 }
             }
+
+            launch {
+                viewModel.checkListDeleted.collectLatest { deleted ->
+                    showToast(
+                        getString(
+                            if (deleted) R.string.dlg_checklist_delete_success
+                            else R.string.dlg_checklist_delete_fail
+                        ),
+                        false
+                    )
+                }
+            }
         }
     }
 
-    private fun moveToRegister() {
-        val intent = Intent(this, RegisterActivity::class.java)
+    private fun moveToRegister(clId: Int?= null) {
+        val intent = Intent(this, RegisterActivity::class.java).apply {
+            putExtra(CmdConstants.Intent.CHECKLIST_ID, clId)
+        }
         startActivity(intent)
     }
 

@@ -3,6 +3,7 @@ package com.apx6.chipmunk.app.ui.picker
 import android.app.Activity
 import android.app.DatePickerDialog
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.ext.getDateToAbbr
 import java.util.Locale
 
 /**
@@ -36,7 +37,9 @@ class DaysCalendar {
                     "%d%02d%02d", todayYear, todayMonth, todayDay
                 )
 
-                selectEndDate(searchDate)
+                val dateLabel = searchDate.getDateToAbbr(".")
+
+                selectEndDate(dateLabel)
             }
         }
 

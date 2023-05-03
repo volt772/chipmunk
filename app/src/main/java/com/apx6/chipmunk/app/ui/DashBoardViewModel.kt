@@ -1,6 +1,7 @@
 package com.apx6.chipmunk.app.ui
 
 import androidx.lifecycle.viewModelScope
+import com.apx6.chipmunk.app.di.IoDispatcher
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.State
 import com.apx6.domain.dto.CmdCheckList
@@ -10,6 +11,7 @@ import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -22,6 +24,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DashBoardViewModel @Inject constructor(
+    @IoDispatcher val ioDispatcher: CoroutineDispatcher,
     private val userRepository: UserRepository,
     private val checkListRepository: CheckListRepository,
     private val categoryRepository: CategoryRepository
@@ -35,6 +38,9 @@ class DashBoardViewModel @Inject constructor(
 
     private val _selCheckListDetail: MutableSharedFlow<CmdCheckListDetail> = MutableSharedFlow()
     val selCheckListDetail: SharedFlow<CmdCheckListDetail> = _selCheckListDetail
+
+    private val _checkListDeleted: MutableSharedFlow<Boolean> = MutableSharedFlow()
+    val checkListDeleted: SharedFlow<Boolean> = _checkListDeleted
 
     fun getSelectedCategoryName(cl: CmdCheckList) {
         viewModelScope.launch {
@@ -63,6 +69,13 @@ class DashBoardViewModel @Inject constructor(
             checkListRepository.getCheckLists(uid)
                 .map { resource -> State.fromResource(resource) }
                 .collect { state -> _checkLists.value = state }
+        }
+    }
+
+    fun delCheckList(cl: CmdCheckList) {
+        viewModelScope.launch(ioDispatcher) {
+            val deleted = checkListRepository.delCheckList(cl)
+            _checkListDeleted.emit(deleted)
         }
     }
 

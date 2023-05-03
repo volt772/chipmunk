@@ -3,6 +3,8 @@ package com.apx6.data.dao
 import androidx.room.Dao
 import androidx.room.Query
 import com.apx6.domain.dto.CmdCheckList
+import com.apx6.domain.dto.CmdCheckListWithCategory
+import com.apx6.domain.entities.Category
 import com.apx6.domain.entities.CheckList
 import kotlinx.coroutines.flow.Flow
 
@@ -24,6 +26,17 @@ abstract class CheckListDao : BaseDao<CheckList>() {
 
     @Query("SELECT * FROM ${CheckList.TABLE_NAME} WHERE uid = :uid AND cid = :cid")
     abstract fun getCheckListInCategory(uid: Int, cid: Int): Flow<List<CmdCheckList>>
+
+    @Query(
+        value =
+        """
+        SELECT cl.*, ca.name AS categoryName
+        FROM ${CheckList.TABLE_NAME} AS cl 
+        LEFT JOIN ${Category.TABLE_NAME} AS ca 
+        ON cl.cid = ca.id WHERE cl.id = :clId
+        """
+    )
+    abstract fun getCheckListWithCategory(clId: Int): Flow<CmdCheckListWithCategory?>
 
     /* ▼ INSERT ==========================================================================================================================*/
 

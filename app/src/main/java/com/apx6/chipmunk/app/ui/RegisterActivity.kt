@@ -6,8 +6,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
-import com.apx6.chipmunk.app.ext.getDateToAbbr
 import com.apx6.chipmunk.app.ext.getTodaySeparate
+import com.apx6.chipmunk.app.ext.millisToFormedDate
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ext.visibilityExt
@@ -19,6 +19,7 @@ import com.apx6.chipmunk.databinding.ActivityRegisterBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
 import com.apx6.domain.dto.CmdCategory
+import com.apx6.domain.dto.CmdCheckListWithCategory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -43,21 +44,29 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
         super.onCreate(savedInstanceState)
 
+        with(intent) {
+            val clId = getIntExtra(CmdConstants.Intent.CHECKLIST_ID, 0)
+
+            if (clId > 0) {
+                viewModel.getCheckListWithCategory(clId)
+            }
+        }
+
         initView()
         subscribers()
         initValidFlow()
     }
 
     private fun initValidFlow() {
-        /* Form is Valid*/
-        lifecycleScope.launch {
-            combine(msDate) { msDate ->
-                msDate.isNotEmpty()
-            }
-            .collectLatest { _isValid ->
-                binding.ivDateInit.visibilityExt(_isValid)
-            }
-        }
+//        /* Form is Valid*/
+//        lifecycleScope.launch {
+//            combine(msDate) { msDate ->
+//                msDate.isNotEmpty()
+//            }
+//            .collectLatest { _isValid ->
+//                binding.ivDateInit.visibilityExt(_isValid)
+//            }
+//        }
     }
 
     private fun snackForNoUser() {
@@ -103,6 +112,30 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                     selectedCategory = category
                 }
             }
+
+            launch {
+                viewModel.checkList.collectLatest { checkList ->
+                    applyCheckListTemplate(checkList)
+                }
+            }
+        }
+    }
+
+    private fun applyCheckListTemplate(checkList: CmdCheckListWithCategory?) {
+        checkList?.let { cl ->
+            with(binding) {
+                /* 카테고리*/
+                selectCategory(CmdCategory(id = cl.cid, name = cl.categoryName, uid = cl.uid))
+
+                /* 체크리스트 이름*/
+                aetChecklistName.setText(cl.title)
+
+                /* 일자*/
+                selectEndDate(cl.endDate.millisToFormedDate())
+
+                /* 메모*/
+                aetMemo.setText(cl.memo)
+            }
         }
     }
 
@@ -134,8 +167,8 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         viewModel.selectCategory(category)
     }
 
-    private fun selectEndDate(selected: String) {
-        val dateLabel = selected.getDateToAbbr(".")
+    private fun selectEndDate(dateLabel: String) {
+//        val dateLabel = selected.getDateToAbbr(".")
         binding.aetDate.setText(dateLabel)
     }
 

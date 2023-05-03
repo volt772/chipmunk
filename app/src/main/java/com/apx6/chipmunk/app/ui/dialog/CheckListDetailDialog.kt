@@ -59,10 +59,16 @@ class CheckListDetailDialog : DialogFragment() {
             tvConfirm.setOnSingleClickListener { dismiss() }
 
             /* 삭제*/
-            ivDelete.setOnSingleClickListener { toDelete(cl) }
+            ivDelete.setOnSingleClickListener {
+                toDelete(cl)
+                dismiss()
+            }
 
             /* 수정*/
-            tvModify.setOnSingleClickListener { toModify(cl) }
+            tvModify.setOnSingleClickListener {
+                toModify(cl)
+                dismiss()
+            }
 
             /* `체크리스트`*/
             tvChecklist.text = cl.title

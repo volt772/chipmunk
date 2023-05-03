@@ -3,6 +3,7 @@ package com.apx6.data.repository
 import com.apx6.data.dao.CheckListDao
 import com.apx6.data.network.KakaoMapApiService
 import com.apx6.domain.dto.CmdCheckList
+import com.apx6.domain.dto.CmdCheckListWithCategory
 import com.apx6.domain.dto.CmdLocation
 import com.apx6.domain.entities.CheckList
 import com.apx6.domain.mapper.CheckListMapper
@@ -58,6 +59,10 @@ class CheckListRepositoryImpl @Inject constructor(
 
     override suspend fun getCheckList(id: Int): Flow<CmdCheckList?> {
         return checkListDao.getCheckList(id)
+    }
+
+    override suspend fun getCheckListWithCategory(id: Int): Flow<CmdCheckListWithCategory?> {
+        return checkListDao.getCheckListWithCategory(id)
     }
 
     override suspend fun getCheckListCount(uid: Int): Flow<Resource<Int>> {

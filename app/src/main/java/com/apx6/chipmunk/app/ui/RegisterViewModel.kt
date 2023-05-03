@@ -5,6 +5,7 @@ import com.apx6.chipmunk.app.di.IoDispatcher
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.State
 import com.apx6.domain.dto.CmdCategory
+import com.apx6.domain.dto.CmdCheckListWithCategory
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.UserRepository
@@ -41,6 +42,9 @@ class RegisterViewModel @Inject constructor(
     private val _category: MutableStateFlow<State<List<CmdCategory>>> = MutableStateFlow(State.loading())
     val category: StateFlow<State<List<CmdCategory>>> = _category
 
+    private val _checkList: MutableSharedFlow<CmdCheckListWithCategory?> = MutableSharedFlow()
+    val checkList: SharedFlow<CmdCheckListWithCategory?> = _checkList
+
     private fun getUserId() {
         viewModelScope.launch {
             userRepository.getUserId().collectLatest { _userId.emit(it) }
@@ -58,6 +62,14 @@ class RegisterViewModel @Inject constructor(
             categoryRepository.getCategories(uid)
                 .map { resource -> State.fromResource(resource) }
                 .collect { state -> _category.value = state }
+        }
+    }
+
+    fun getCheckListWithCategory(clId: Int) {
+        viewModelScope.launch {
+            checkListRepository.getCheckListWithCategory(clId).collectLatest { checkList ->
+                _checkList.emit(checkList)
+            }
         }
     }
 }
