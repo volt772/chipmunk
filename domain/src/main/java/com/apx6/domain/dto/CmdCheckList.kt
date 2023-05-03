@@ -21,7 +21,7 @@ data class CmdCheckList (
     companion object {
         fun default(): CmdCheckList {
             return CmdCheckList(
-                id = -1,
+                id = 0,
                 cid = -1,
                 uid = -1,
                 title = "",

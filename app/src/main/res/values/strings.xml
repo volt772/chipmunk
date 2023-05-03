@@ -61,4 +61,7 @@
     <string name="dlg_checklist_delete_success">삭제되었습니다.</string>
     <string name="dlg_checklist_delete_fail">삭제하지 못하였습니다.</string>
 
+    <string name="dlg_checklist_post_success">추가되었습니다.</string>
+    <string name="dlg_checklist_post_fail">추가하지 못하였습니다.</string>
+
 </resources>

@@ -39,9 +39,9 @@ class CheckListRepositoryImpl @Inject constructor(
         }.asFlow(checkList)
     }
 
-    override suspend fun postCheckList(checkList: CmdCheckList) {
+    override suspend fun postCheckList(checkList: CmdCheckList): Boolean {
         val entity = convertToEntity(checkList)
-        checkListDao.insertOrUpdate(entity)
+        return checkListDao.insertOrUpdate(entity) > 0
     }
 
     override suspend fun getCheckLists(uid: Int): Flow<Resource<List<CmdCheckList>>> {

@@ -6,11 +6,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.ext.formedDateToMillis
+import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.getTodaySeparate
 import com.apx6.chipmunk.app.ext.millisToFormedDate
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
+import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.statusBar
-import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
 import com.apx6.chipmunk.app.ui.dialog.CategoryListDialog
@@ -19,11 +21,11 @@ import com.apx6.chipmunk.databinding.ActivityRegisterBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
 import com.apx6.domain.dto.CmdCategory
+import com.apx6.domain.dto.CmdCheckList
 import com.apx6.domain.dto.CmdCheckListWithCategory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 
@@ -39,6 +41,8 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     private var selectedCategory =  CmdCategory.default()
 
     private val calListener = DaysCalendar.datePickerListener(selectEndDate = ::selectEndDate)
+
+    private var userId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -83,6 +87,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                     viewModel.userId.collect { uid ->
                         uid?.let { _uid ->
                             if (_uid > 0) {
+                                userId = _uid
                                 viewModel.getCategories(uid = _uid)
                             } else {
                                 snackForNoUser()
@@ -118,7 +123,22 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                     applyCheckListTemplate(checkList)
                 }
             }
+
+            launch {
+                viewModel.checkListPosted.collectLatest { posted ->
+                    showPostedCheckList(posted)
+                }
+            }
         }
+    }
+
+    private fun showPostedCheckList(posted: Boolean) {
+        val msg = getString(
+            if (posted) R.string.dlg_checklist_post_success
+            else R.string.dlg_checklist_post_fail
+        )
+
+        showToast(msg, false)
     }
 
     private fun applyCheckListTemplate(checkList: CmdCheckListWithCategory?) {
@@ -142,18 +162,34 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     private fun initView() {
         this.statusBar(R.color.material_amber_700)
 
-        binding.ivClose.setOnSingleClickListener {
-            finish()
+        with(binding) {
+            ivClose.setOnSingleClickListener {
+                finish()
+            }
+
+            aetDate.setOnSingleClickListener {
+                DaysCalendar.datePickerDialog(this@RegisterActivity, calListener).show()
+            }
+
+            aetCategory.setOnSingleClickListener {
+                val categoryListDialog = CategoryListDialog.newInstance(categoryList, selectedCategory, ::selectCategory)
+                supportFragmentManager.beginTransaction().add(categoryListDialog, TAG).commitAllowingStateLoss()
+            }
+
+            ivAdd.setOnSingleClickListener {
+                val newCheckList =  CmdCheckList(
+                    cid = selectedCategory.id,
+                    uid = userId,
+                    title = aetChecklistName.text.toString(),
+                    memo = aetMemo.text.toString(),
+                    startDate = getTodayMillis(),
+                    endDate = aetDate.text.toString().formedDateToMillis()
+                )
+
+                viewModel.postCheckList(newCheckList)
+            }
         }
 
-        binding.aetDate.setOnSingleClickListener {
-            DaysCalendar.datePickerDialog(this, calListener).show()
-        }
-
-        binding.aetCategory.setOnSingleClickListener {
-            val categoryListDialog = CategoryListDialog.newInstance(categoryList, selectedCategory, ::selectCategory)
-            supportFragmentManager.beginTransaction().add(categoryListDialog, TAG).commitAllowingStateLoss()
-        }
 
         DaysCalendar.apply {
             todayYear = getTodaySeparate(CmdConstants.Date.YEAR)
@@ -168,7 +204,6 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     }
 
     private fun selectEndDate(dateLabel: String) {
-//        val dateLabel = selected.getDateToAbbr(".")
         binding.aetDate.setText(dateLabel)
     }
 

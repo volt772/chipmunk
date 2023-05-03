@@ -11,7 +11,7 @@ interface CheckListRepository {
     /* Combined*/
     suspend fun checklists(checkList: CmdCheckList, uid: Int): Flow<Resource<List<CmdCheckList>>>
 
-    suspend fun postCheckList(checkList: CmdCheckList)
+    suspend fun postCheckList(checkList: CmdCheckList): Boolean
 
     suspend fun getCheckLists(uid: Int): Flow<Resource<List<CmdCheckList>>>
 
