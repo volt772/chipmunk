@@ -5,6 +5,8 @@ import com.apx6.domain.constants.CmdConstants
 import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
 import org.joda.time.LocalDate
+import org.joda.time.Period
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -17,6 +19,8 @@ val currMillis: Long
  * 잘못된 Joda DateTime 을 위한 기본값.
  */
 val INVALID_JODA_DATE_TIME = DateTime(Long.MIN_VALUE)
+
+val BASE_DATE_FORMATE = "yy.MM.dd"
 
 /**
  * Joda DateTime 이 올바른 값인지 검사.
@@ -45,6 +49,60 @@ fun DateTime?.convertDateByType(type: Int): String {
         else -> this.toString("YY.MM.dd HH:mm")
     }
 }
+
+/**
+ * Date Convert
+ * @desc String to Millis
+ */
+fun String?.formedDateToMillis(format : String = BASE_DATE_FORMATE): Long {
+    val millis = this?.let { formed ->
+        val sdf = SimpleDateFormat("yy.MM.dd")
+        val date: Date = sdf.parse(formed) as Date
+        date.time
+    } ?: 0L
+
+    return millis
+}
+
+/**
+ * Date Convert
+ * @desc Millis to String
+ */
+fun Long?.millisToFormedDate(format : String = BASE_DATE_FORMATE): String {
+    val formed = this?.let { millis ->
+        val formatter = SimpleDateFormat(format)
+        formatter.format(Date(millis))
+    } ?: ""
+
+    return formed
+}
+
+/**
+ * Today Millis
+ */
+fun getTodayMillis(): Long {
+    val d = Date().time
+    val offset: Int = TimeZone.getDefault().getOffset(d)
+    return (d + offset) / 86400000L * 86400000L - offset
+}
+
+/**
+ * D-Day
+ * @desc "yy.MM.dd".getDfFromToday()
+ * @desc "millis".getDfFromToday()
+ */
+fun Any.getDfFromToday(): Int {
+    val today = getTodayMillis()
+
+    val period = when (this) {
+        is String -> Period(today, this.formedDateToMillis())
+        is Long -> Period(today, this)
+        else -> Period()
+    }
+
+    return period.weeks * 7 + period.days
+}
+
 
 fun getTodaySeparate(type: String): Int {
     val localDate = LocalDate()

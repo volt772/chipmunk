@@ -10,6 +10,9 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.ext.getDfFromToday
+import com.apx6.chipmunk.app.ext.limitAndAbbr
+import com.apx6.chipmunk.app.ext.millisToFormedDate
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.databinding.DialogChecklistDetailBinding
 import com.apx6.domain.dto.CmdCheckList
@@ -68,11 +71,27 @@ class CheckListDetailDialog : DialogFragment() {
             tvCategory.text = caName
 
             /* `기한`*/
-            tvDueDate.text = cl.endDate.toString()
+            tvDueDate.text = convertDateLabel(cl.endDate)
 
             /* `메모`*/
-            tvMemo.text = cl.memo
+            tvMemo.text = cl.memo?.limitAndAbbr(MEMO_LIMIT)
         }
+    }
+
+    private fun convertDateLabel(endDate: Long): String {
+        val dateLabel = endDate.millisToFormedDate()
+        val dfDays = endDate.getDfFromToday()
+        val dDayLabel = if (dfDays != 0) {
+            if (dfDays < 0) {
+                "D+%d".format(dfDays * -1)
+            } else {
+                "D-%d".format(dfDays)
+            }
+        } else {
+            "D Day"
+        }
+
+        return "%s (%s)".format(dateLabel, dDayLabel)
     }
 
     override fun onResume() {
@@ -95,6 +114,8 @@ class CheckListDetailDialog : DialogFragment() {
     }
 
     companion object {
+        const val MEMO_LIMIT = 500
+
         fun newInstance(
             cld: CmdCheckListDetail,
             toModify: (CmdCheckList) -> Unit,

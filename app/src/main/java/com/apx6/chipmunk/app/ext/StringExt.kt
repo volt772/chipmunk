@@ -123,3 +123,11 @@ fun randomKey(): String {
 }
 
 fun getStringRes(str: Int) = appContext.getString(str)
+
+fun String.limitAndAbbr(limit: Int): String {
+	return if (this.count() > limit) {
+		this.substring(0, limit) + "..."
+	} else {
+		this
+	}
+}
