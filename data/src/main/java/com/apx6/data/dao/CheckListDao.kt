@@ -15,7 +15,7 @@ abstract class CheckListDao : BaseDao<CheckList>() {
     /* ▼ TRANSACTION =====================================================================================================================*/
 
     /* ▼ SELECT ==========================================================================================================================*/
-    @Query("SELECT * FROM ${CheckList.TABLE_NAME} WHERE uid = :uid")
+    @Query("SELECT * FROM ${CheckList.TABLE_NAME} WHERE uid = :uid ORDER BY endDate DESC")
     abstract fun getCheckLists(uid: Int): Flow<List<CmdCheckList>>
 
     @Query("SELECT * FROM ${CheckList.TABLE_NAME} WHERE id = :id")

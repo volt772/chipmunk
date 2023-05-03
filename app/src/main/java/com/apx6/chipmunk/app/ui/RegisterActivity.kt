@@ -43,6 +43,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     private val calListener = DaysCalendar.datePickerListener(selectEndDate = ::selectEndDate)
 
     private var userId: Int = 0
+    private var checkListId: Int?= 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -139,11 +140,18 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         )
 
         showToast(msg, false)
+
+        if (posted) {
+            finish()
+        }
     }
 
     private fun applyCheckListTemplate(checkList: CmdCheckListWithCategory?) {
         checkList?.let { cl ->
             with(binding) {
+                /* 체크리스트 ID*/
+                checkListId = checkList.id
+
                 /* 카테고리*/
                 selectCategory(CmdCategory(id = cl.cid, name = cl.categoryName, uid = cl.uid))
 
@@ -178,6 +186,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
             ivAdd.setOnSingleClickListener {
                 val newCheckList =  CmdCheckList(
+                    id = checkListId?: 0,
                     cid = selectedCategory.id,
                     uid = userId,
                     title = aetChecklistName.text.toString(),
