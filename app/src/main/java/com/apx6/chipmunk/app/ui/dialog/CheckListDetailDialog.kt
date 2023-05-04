@@ -10,9 +10,8 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.apx6.chipmunk.R
-import com.apx6.chipmunk.app.ext.getDfFromToday
+import com.apx6.chipmunk.app.ext.convertDateLabel
 import com.apx6.chipmunk.app.ext.limitAndAbbr
-import com.apx6.chipmunk.app.ext.millisToFormedDate
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.databinding.DialogChecklistDetailBinding
 import com.apx6.domain.dto.CmdCheckList
@@ -82,22 +81,6 @@ class CheckListDetailDialog : DialogFragment() {
             /* `메모`*/
             tvMemo.text = cl.memo?.limitAndAbbr(MEMO_LIMIT)
         }
-    }
-
-    private fun convertDateLabel(endDate: Long): String {
-        val dateLabel = endDate.millisToFormedDate()
-        val dfDays = endDate.getDfFromToday()
-        val dDayLabel = if (dfDays != 0) {
-            if (dfDays < 0) {
-                "D+%d".format(dfDays * -1)
-            } else {
-                "D-%d".format(dfDays)
-            }
-        } else {
-            "D Day"
-        }
-
-        return "%s (%s)".format(dateLabel, dDayLabel)
     }
 
     override fun onResume() {

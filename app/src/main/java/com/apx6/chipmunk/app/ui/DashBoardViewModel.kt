@@ -64,9 +64,9 @@ class DashBoardViewModel @Inject constructor(
         }
     }
 
-    fun getCheckLists(uid: Int) {
+    fun getCheckLists(uid: Int, millis: Long) {
         viewModelScope.launch {
-            checkListRepository.getCheckLists(uid)
+            checkListRepository.getCheckLists(uid, millis)
                 .map { resource -> State.fromResource(resource) }
                 .collect { state -> _checkLists.value = state }
         }

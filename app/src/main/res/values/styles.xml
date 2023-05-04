@@ -164,4 +164,29 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <!-- DashBoard : CheckList : Item : Common -->
+    <style name="DashBoardCheckListCommon">
+        <item name="android:fontFamily">@font/spoqahansansneo_regular</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <!-- DashBoard : CheckList : Item : Title -->
+    <style name="DashBoardCheckListTitle" parent="DashBoardCheckListCommon">
+        <item name="android:textSize">@dimen/md_16</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- DashBoard : CheckList : Item : DDay -->
+    <style name="DashBoardCheckListDay" parent="DashBoardCheckListCommon">
+        <item name="android:textSize">@dimen/md_14</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- DashBoard : CheckList : Item : Desc -->
+    <style name="DashBoardCheckListDesc" parent="DashBoardCheckListCommon">
+        <item name="android:textSize">@dimen/md_14</item>
+        <item name="android:textColor">@color/gray_h0_4</item>
+    </style>
+
 </resources>

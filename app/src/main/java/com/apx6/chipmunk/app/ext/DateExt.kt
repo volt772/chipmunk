@@ -103,6 +103,26 @@ fun Any.getDfFromToday(): Int {
     return period.weeks * 7 + period.days
 }
 
+/**
+ * D-Day String Maker
+ * @desc "yy.MM.dd (D-NN)"
+ */
+fun convertDateLabel(_date: Long): String {
+    val dateLabel = _date.millisToFormedDate()
+    val dfDays = _date.getDfFromToday()
+    val dDayLabel = if (dfDays != 0) {
+        if (dfDays < 0) {
+            "D+%d".format(dfDays * -1)
+        } else {
+            "D-%d".format(dfDays)
+        }
+    } else {
+        "D Day"
+    }
+
+    return "%s (%s)".format(dateLabel, dDayLabel)
+}
+
 
 fun getTodaySeparate(type: String): Int {
     val localDate = LocalDate()

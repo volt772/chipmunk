@@ -18,6 +18,17 @@ abstract class CheckListDao : BaseDao<CheckList>() {
     @Query("SELECT * FROM ${CheckList.TABLE_NAME} WHERE uid = :uid ORDER BY endDate DESC")
     abstract fun getCheckLists(uid: Int): Flow<List<CmdCheckList>>
 
+    @Query(
+        value =
+        """
+        SELECT * 
+        FROM ${CheckList.TABLE_NAME} 
+        WHERE uid = :uid 
+        ORDER BY (CASE WHEN endDate = :millis THEN 0 ELSE 1 END), endDate DESC   
+        """
+    )
+    abstract fun getCheckListsFromMillis(uid: Int, millis: Long): Flow<List<CmdCheckList>>
+
     @Query("SELECT * FROM ${CheckList.TABLE_NAME} WHERE id = :id")
     abstract fun getCheckList(id: Int): Flow<CmdCheckList?>
 

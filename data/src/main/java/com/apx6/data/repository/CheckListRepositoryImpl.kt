@@ -4,17 +4,13 @@ import com.apx6.data.dao.CheckListDao
 import com.apx6.data.network.KakaoMapApiService
 import com.apx6.domain.dto.CmdCheckList
 import com.apx6.domain.dto.CmdCheckListWithCategory
-import com.apx6.domain.dto.CmdLocation
 import com.apx6.domain.entities.CheckList
 import com.apx6.domain.mapper.CheckListMapper
 import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.Resource
 import com.apx6.domain.repository.boundary.LocalBoundaryRepository
-import com.apx6.domain.response.CmdErrorResponse
 import com.apx6.domain.response.CmdResponseRefinery
-import com.apx6.domain.response.CmdSuccessResponse
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -44,8 +40,8 @@ class CheckListRepositoryImpl @Inject constructor(
         return checkListDao.insertOrUpdate(entity) > 0
     }
 
-    override suspend fun getCheckLists(uid: Int): Flow<Resource<List<CmdCheckList>>> {
-        val checkLists = checkListDao.getCheckLists(uid)
+    override suspend fun getCheckLists(uid: Int, millis: Long): Flow<Resource<List<CmdCheckList>>> {
+        val checkLists = checkListDao.getCheckListsFromMillis(uid, millis)
         val result = checkLists.map {
             Resource.Success(it)
         }

@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ui.adapter.CheckListAdapter
@@ -87,7 +88,8 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                     progress?.start()
                     viewModel.user.collect { user ->
                         user?.let { _user ->
-                            viewModel.getCheckLists(_user.id)
+                            val millis = getTodayMillis()
+                            viewModel.getCheckLists(_user.id, millis)
                             userId = _user.id
                         } ?: run {
                             progress?.stop()

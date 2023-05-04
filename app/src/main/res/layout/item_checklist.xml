@@ -1,40 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:foreground="?android:attr/selectableItemBackground"
-    tools:ignore="UnusedAttribute">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/iv_checklist_category"
-        android:layout_width="@dimen/md_80"
-        android:layout_height="@dimen/md_80"
-        android:transitionName="photo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/md_60"
+        android:paddingHorizontal="@dimen/md_16"
+        android:layout_marginHorizontal="@dimen/md_8"
+        android:layout_marginBottom="@dimen/md_8"
+        android:background="@drawable/bg_checklist_gray_corner" >
 
-    <TextView
-        android:id="@+id/tv_checklist_title"
-        android:layout_width="@dimen/md_0"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/iv_checklist_category"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tv_checklist_memo"
-        tools:text="@tools:sample/lorem" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_checklist_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_checklist_desc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" >
 
-    <TextView
-        android:id="@+id/tv_checklist_memo"
-        android:layout_width="@dimen/md_0"
-        android:layout_height="wrap_content"
-        android:maxLines="2"
-        android:ellipsize="end"
-        app:layout_constraintStart_toEndOf="@id/iv_checklist_category"
-        app:layout_constraintTop_toBottomOf="@id/tv_checklist_title"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="@tools:sample/full_names" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- 이름-->
+            <TextView
+                android:id="@+id/tv_checklist_title"
+                android:layout_width="@dimen/md_0"
+                android:layout_height="wrap_content"
+                style="@style/DashBoardCheckListTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_day"
+                android:layout_marginEnd="@dimen/md_10"
+                tools:text="checklist name" />
+
+            <!-- D Day-->
+            <TextView
+                android:id="@+id/tv_day"
+                android:layout_width="@dimen/md_0"
+                android:layout_height="wrap_content"
+                style="@style/DashBoardCheckListDay"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="D Day" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 간략설명-->
+        <TextView
+            android:id="@+id/tv_checklist_desc"
+            android:layout_width="@dimen/md_0"
+            android:layout_height="wrap_content"
+            style="@style/DashBoardCheckListDesc"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_checklist_info"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="@tools:sample/full_names" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
