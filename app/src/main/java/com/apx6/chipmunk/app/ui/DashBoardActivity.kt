@@ -9,10 +9,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.ext.getDfFromToday
 import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
-import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.adapter.CheckListAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
@@ -39,6 +39,9 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     private var userId: Int = 0
 
+    private var dfTodayCount: Int = 0
+    private var dfFutureCount: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -56,19 +59,17 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                 if (scrollRange == -1) {
                     scrollRange = appBarLayout.totalScrollRange
                 }
+
+
                 if (scrollRange + verticalOffset == 0) {
-                    isShow = true
                     /* 접혔을때*/
-                    println("probe :: dashboard :: is Show True")
-                    binding.toolbarLayout.title = title
-//                    showOption(R.id.action_info)
+                    isShow = true
                 } else if (isShow) {
-                    isShow = false
                     /* 펴졌을때*/
-                    binding.toolbarLayout.title = ""
-                    println("probe :: dashboard :: is Show False")
-//                    hideOption(R.id.action_info)
+                    isShow = false
                 }
+
+                makeSummaryTitle()
             }
         })
 
@@ -135,7 +136,9 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                             is State.Loading -> { }
                             is State.Success -> {
                                 progress?.stop()
-                                checkListAdapter.submitList(state.data.toMutableList())
+                                val cl = state.data.toMutableList()
+                                checkListAdapter.submitList(cl)
+                                makeCheckListSummary(cl)
                             }
                             is State.Error -> {
                                 progress?.stop()
@@ -163,6 +166,38 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                 }
             }
         }
+    }
+
+    private fun makeCheckListSummary(cl: List<CmdCheckList>) {
+        val dfToday = cl.filter {
+            val df = it.endDate.getDfFromToday()
+            df == 0
+        }
+
+        val dfFuture = cl.filter {
+            val df = it.endDate.getDfFromToday()
+            df > 0
+        }
+
+        dfTodayCount = dfToday.count()
+        dfFutureCount = dfFuture.count()
+
+        makeSummaryTitle()
+    }
+
+    private fun makeSummaryTitle() {
+        val summaryLabel = if (dfTodayCount > 0) {
+            /* 오늘기준*/
+            getString(R.string.dashboard_checklist_summary_today, dfTodayCount)
+        } else if (dfTodayCount == 0 && (dfFutureCount in 1..7)) {
+            /* 미래기준(금방)*/
+            getString(R.string.dashboard_checklist_summary_future, dfFutureCount)
+        } else {
+            /* 기타*/
+            getString(R.string.dashboard_checklist_summary_else)
+        }
+
+        binding.tvSummaryTitle.text = summaryLabel
     }
 
     private fun moveToRegister(clId: Int?= null) {

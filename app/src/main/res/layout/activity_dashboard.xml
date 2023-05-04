@@ -36,7 +36,6 @@
                     android:paddingHorizontal="@dimen/md_16"
                     android:layout_marginTop="@dimen/md_10"
                     style="@style/DashBoardAppBarTitle"
-                    android:text="오늘 끝나는 일이 있어용"
                     android:layout_gravity="center"
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="0.1" />

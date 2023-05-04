@@ -8,6 +8,10 @@
     <string name="range_picker_start_date">시작일</string>
     <string name="range_picker_end_date">종료일</string>
 
+    <string name="dashboard_checklist_summary_today">오늘 끝나는 체크리스트가\n%d개 있어요.</string>
+    <string name="dashboard_checklist_summary_future">곧 끝나는 체크리스트가\n%d개 있어요.</string>
+    <string name="dashboard_checklist_summary_else">확인해야 할 체크리스트</string>
+
     <!-- 날짜관련-->
     <string name="date_week_abbr_1">일</string>
     <string name="date_week_abbr_2">월</string>
