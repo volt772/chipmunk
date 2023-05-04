@@ -28,6 +28,19 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:toolbarId="@+id/toolbar">
 
+                <TextView
+                    android:id="@+id/tv_summary_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/md_16"
+                    android:layout_marginTop="@dimen/md_10"
+                    style="@style/DashBoardAppBarTitle"
+                    android:text="오늘 끝나는 일이 있어용"
+                    android:layout_gravity="center"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.1" />
+
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"

@@ -12,6 +12,7 @@ import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
+import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.adapter.CheckListAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
@@ -21,6 +22,8 @@ import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
 import com.apx6.domain.dto.CmdCheckList
 import com.apx6.domain.dto.CmdCheckListDetail
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -41,10 +44,33 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         super.onCreate(savedInstanceState)
 
         setSupportActionBar(findViewById(R.id.toolbar))
-        binding.toolbarLayout.title = title
+        binding.toolbarLayout.title = " "
         binding.fab.setOnSingleClickListener {
             moveToRegister()
         }
+
+        binding.appBar.addOnOffsetChangedListener(object : OnOffsetChangedListener {
+            var isShow = false
+            var scrollRange = -1
+            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.totalScrollRange
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    isShow = true
+                    /* 접혔을때*/
+                    println("probe :: dashboard :: is Show True")
+                    binding.toolbarLayout.title = title
+//                    showOption(R.id.action_info)
+                } else if (isShow) {
+                    isShow = false
+                    /* 펴졌을때*/
+                    binding.toolbarLayout.title = ""
+                    println("probe :: dashboard :: is Show False")
+//                    hideOption(R.id.action_info)
+                }
+            }
+        })
 
         initView()
         subscribers()
