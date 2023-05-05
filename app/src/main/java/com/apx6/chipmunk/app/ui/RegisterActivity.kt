@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.constants.CmdCategoryDialogType
 import com.apx6.chipmunk.app.ext.formedDateToMillis
 import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.getTodaySeparate
@@ -201,7 +202,12 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
             }
 
             aetCategory.setOnSingleClickListener {
-                val categoryListDialog = CategoryListDialog.newInstance(categoryList, selectedCategory, ::selectCategory)
+                val categoryListDialog = CategoryListDialog.newInstance(
+                    categoryList,
+                    selectedCategory,
+                    CmdCategoryDialogType.REGISTER,
+                    ::selectCategory
+                )
                 supportFragmentManager.beginTransaction().add(categoryListDialog, TAG).commitAllowingStateLoss()
             }
 

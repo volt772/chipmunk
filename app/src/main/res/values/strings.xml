@@ -56,6 +56,10 @@
     <string name="check_list_count_only_1">%s</string>
     <string name="empty_checklist">체크리스트가 없습니다.</string>
 
+    <string name="dlg_category_title_filter">필터</string>
+    <string name="dlg_category_title_select">카테고리 선택</string>
+    <string name="dlg_category_title_default">카테고리</string>
+
     <string name="dlg_checklist_detail_category">카테고리</string>
     <string name="dlg_checklist_detail_due_date">기한</string>
     <string name="dlg_checklist_detail_memo">메모</string>

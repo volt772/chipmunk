@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.constants.CmdCategoryDialogType
 import com.apx6.chipmunk.app.ext.getDfFromToday
 import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
@@ -237,7 +238,13 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     }
 
     private fun doFilter() {
-        val categoryListDialog = CategoryListDialog.newInstance(categoryList, CmdCategory.default(), ::selectCategory)
+        val categoryListDialog = CategoryListDialog.newInstance(
+            categoryList,
+            CmdCategory.default(),
+            CmdCategoryDialogType.DASHBOARD,
+            ::selectCategory,
+            ::clearFilter
+        )
         supportFragmentManager.beginTransaction().add(categoryListDialog, RegisterActivity.TAG).commitAllowingStateLoss()
     }
 
@@ -245,8 +252,11 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         println("probe :: dashboard : select category : $category")
         val millis = getTodayMillis()
         viewModel.getCheckLists(userId, millis, category.id)
-//        binding.aetCategory.setText(category.name)
-//        viewModel.selectCategory(category)
+    }
+
+    private fun clearFilter() {
+        val millis = getTodayMillis()
+        viewModel.getCheckLists(userId, millis)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
