@@ -134,10 +134,11 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
 
     private fun subscribeCategory(uid: Int) {
         lifecycleScope.launch {
-            viewModel.fetchCategories(uid)
-                .collectLatest { categories ->
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.fetchCategories(uid).collectLatest { categories ->
                     categoryManageAdapter.submitData(categories)
                 }
+            }
         }
     }
 

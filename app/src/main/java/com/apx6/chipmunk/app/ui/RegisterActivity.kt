@@ -2,6 +2,7 @@ package com.apx6.chipmunk.app.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -13,6 +14,7 @@ import com.apx6.chipmunk.app.ext.millisToFormedDate
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.statusBar
+import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
 import com.apx6.chipmunk.app.ui.dialog.CategoryListDialog
@@ -26,6 +28,7 @@ import com.apx6.domain.dto.CmdCheckListWithCategory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 
@@ -35,6 +38,8 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     override val viewModel: RegisterViewModel by viewModels()
     override fun getViewBinding(): ActivityRegisterBinding = ActivityRegisterBinding.inflate(layoutInflater)
 
+    private val msCategory = MutableStateFlow("")
+    private val msCheckListName = MutableStateFlow("")
     private val msDate = MutableStateFlow("")
 
     private var categoryList = listOf<CmdCategory>()
@@ -63,15 +68,19 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     }
 
     private fun initValidFlow() {
-//        /* Form is Valid*/
-//        lifecycleScope.launch {
-//            combine(msDate) { msDate ->
-//                msDate.isNotEmpty()
-//            }
-//            .collectLatest { _isValid ->
-//                binding.ivDateInit.visibilityExt(_isValid)
-//            }
-//        }
+        /* Form is Valid*/
+        lifecycleScope.launch {
+            combine(msCategory, msCheckListName, msDate) { msCategory, msCheckListName, msDate ->
+                val isCategoryValid = msCategory.isNotEmpty()
+                val isCheckListNameValid = msCheckListName.isNotEmpty()
+                val isDateValid = msDate.isNotEmpty()
+
+                isCategoryValid and isCheckListNameValid and isDateValid
+            }
+            .collectLatest { isValid ->
+                binding.ivAdd.visibilityExt(isValid)
+            }
+        }
     }
 
     private fun snackForNoUser() {
@@ -177,6 +186,18 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
             aetDate.setOnSingleClickListener {
                 DaysCalendar.datePickerDialog(this@RegisterActivity, calListener).show()
+            }
+
+            aetDate.doOnTextChanged { text, _, _, _ ->
+                msDate.value = text.toString()
+            }
+
+            aetCategory.doOnTextChanged { text, _, _, _ ->
+                msCategory.value = text.toString()
+            }
+
+            aetChecklistName.doOnTextChanged { text, _, _, _ ->
+                msCheckListName.value = text.toString()
             }
 
             aetCategory.setOnSingleClickListener {
