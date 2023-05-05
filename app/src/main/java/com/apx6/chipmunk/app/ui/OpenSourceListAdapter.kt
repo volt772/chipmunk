@@ -37,30 +37,10 @@ class OpenSourceListAdapter @Inject constructor(
     ) : BaseViewHolder<CmdOpenSource, ItemOpensourceBinding>(parent, R.layout.item_opensource) {
 
         override fun bind(os: CmdOpenSource) {
-//            setIsRecyclable(false)
             with(binding) {
                 tvLicenseName.text = os.name
                 tvLicenseContent.text = os.description
             }
-//            with(binding) {
-//                /* 라이선스 이름*/
-//                tvLicenseName.text = data.name
-//
-//                /* 라이선스 설명*/
-//                tvDescription.text = data.description
-//                tvDescription.visibilityExt(data.isExpanded)
-//
-//                /* 라이선스 펼침/접힙*/
-//                ivExpand.rotation = if (data.isExpanded) 180f else 0f
-//
-//                /* 라이선스 상세보기 Toggle*/
-//                clOpensourceBox.setOnClickListener {
-//                    val expandStatus = data.isExpanded.not()
-//                    toggleLayoutExpand(expandStatus, ivExpand, tvDescription)
-//
-//                    data.isExpanded = data.isExpanded.not()
-//                }
-//            }
         }
     }
 }
