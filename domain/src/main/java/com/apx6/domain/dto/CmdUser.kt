@@ -16,4 +16,18 @@ data class CmdUser (
 
     val fToken: String
 
-)
+) {
+    companion object {
+        fun default(): CmdUser {
+            return CmdUser(
+                id = 0,
+                account = "",
+                nickName = "",
+                email = "",
+                regDate = 0L,
+                profileThumbnail = "",
+                fToken = "",
+            )
+        }
+    }
+}

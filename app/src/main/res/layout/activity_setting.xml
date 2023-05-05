@@ -217,11 +217,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/md_1"
-                            android:background="@drawable/line_shadow"
-                            app:layout_constraintBottom_toBottomOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -258,41 +253,8 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/md_1"
-                            android:background="@drawable/line_shadow"
-                            app:layout_constraintBottom_toBottomOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <!-- Box 3-2 : 회원탈퇴-->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_user_remove"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/md_56"
-                        android:foreground="?selectableItemBackgroundBorderless"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/cl_user_logout" >
-
-                        <!-- Box 3-1 : `회원탈퇴`레이블-->
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/membership_withdrawal"
-                            android:theme="@style/SettingMenuLabel"
-                            android:paddingHorizontal="@dimen/md_18"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/md_1"
-                            android:background="@drawable/line_shadow"
-                            app:layout_constraintBottom_toBottomOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

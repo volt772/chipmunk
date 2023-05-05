@@ -16,6 +16,7 @@ import com.apx6.domain.dto.CmdUser
 import dagger.hilt.android.AndroidEntryPoint
 import io.getstream.avatarview.coil.loadImage
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -24,6 +25,8 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
 
     override val viewModel: SettingViewModel by viewModels()
     override fun getViewBinding(): ActivitySettingBinding = ActivitySettingBinding.inflate(layoutInflater)
+
+    private var currUser: CmdUser = CmdUser.default()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -64,6 +67,10 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
 
             tvUserName.text = user.nickName
             tvUserEmail.text = user.email
+
+            clUserLogout.setOnSingleClickListener {
+                viewModel.deleteUser(currUser)
+            }
         }
     }
 
@@ -82,6 +89,7 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
                     user?.let { _user ->
                         setProfile(_user)
                         getCategoryCount(_user.id)
+                        currUser = _user
                     }
                 }
             }
@@ -101,7 +109,19 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
                     setCategoryCount(count)
                 }
             }
+
+            launch {
+                viewModel.userDeleted.collectLatest { deleted ->
+                    if (deleted) {
+                        moveToSplash()
+                    }
+                }
+            }
         }
     }
 
+    private fun moveToSplash() {
+        val intent = Intent(this, SplashActivity::class.java)
+        startActivity(intent)
+    }
 }

@@ -13,6 +13,7 @@ class UserMapperImpl @Inject constructor(
         user: CmdUser
     ): User {
         return User(
+            id = user.id,
             account = user.account,
             nickName = user.nickName,
             email = user.email,

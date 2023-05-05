@@ -116,12 +116,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/failed_to_load_categories"
-                tools:layout_editor_absoluteY="391dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- No Locations-->
@@ -144,6 +138,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/EmptyLabel"
+                android:layout_marginTop="@dimen/md_12"
+                android:text="@string/failed_to_load_categories"
+                app:layout_constraintTop_toBottomOf="@id/iv_no_categories" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
