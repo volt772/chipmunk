@@ -202,13 +202,17 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
             }
 
             aetCategory.setOnSingleClickListener {
-                val categoryListDialog = CategoryListDialog.newInstance(
-                    categoryList,
-                    selectedCategory,
-                    CmdCategoryDialogType.REGISTER,
-                    ::selectCategory
-                )
-                supportFragmentManager.beginTransaction().add(categoryListDialog, TAG).commitAllowingStateLoss()
+                if (categoryList.isEmpty()) {
+                    showToast(R.string.no_category_add_first, false)
+                } else {
+                    val categoryListDialog = CategoryListDialog.newInstance(
+                        categoryList,
+                        selectedCategory,
+                        CmdCategoryDialogType.REGISTER,
+                        ::selectCategory
+                    )
+                    supportFragmentManager.beginTransaction().add(categoryListDialog, TAG).commitAllowingStateLoss()
+                }
             }
 
             ivAdd.setOnSingleClickListener {

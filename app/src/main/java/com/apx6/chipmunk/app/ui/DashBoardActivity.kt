@@ -277,7 +277,12 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
             }
 
             R.id.action_filter -> {
-                doFilter()
+                if (categoryList.isEmpty()) {
+                    showToast(R.string.no_category_add_first, false)
+                } else {
+                    doFilter()
+                }
+
                 true
             }
             else -> super.onOptionsItemSelected(item)
