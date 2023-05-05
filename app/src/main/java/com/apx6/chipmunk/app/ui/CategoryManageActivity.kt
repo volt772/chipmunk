@@ -87,7 +87,6 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
     private fun initCategoryManageAdapter(isMediator: Boolean = false) {
         binding.apply {
             rvCategories.apply {
-                addItemDecoration(DividerItemDecoration(this@CategoryManageActivity, DividerItemDecoration.VERTICAL))
                 layoutManager = LinearLayoutManager(this@CategoryManageActivity, LinearLayoutManager.VERTICAL, false)
                 adapter = categoryManageAdapter.withLoadStateHeaderAndFooter(
                     header = CMLoadStateAdapter { categoryManageAdapter.retry() },

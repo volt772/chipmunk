@@ -8,13 +8,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_root"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/md_58">
+        android:layout_height="@dimen/md_58"
+        android:background="@drawable/bg_checklist_gray_corner"
+        android:paddingHorizontal="@dimen/md_16"
+        android:layout_marginHorizontal="@dimen/md_8"
+        android:layout_marginBottom="@dimen/md_8" >
 
         <!-- Item Box-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_item_box"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
