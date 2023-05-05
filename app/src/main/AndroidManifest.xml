@@ -57,13 +57,18 @@
             android:theme="@style/Theme.Chipmunk.NoActionBar"
             android:exported="false" />
 
+<!--        <activity-->
+<!--            android:name="com.apx6.chipmunk.app.ui.LocationActivity"-->
+<!--            android:theme="@style/Theme.Chipmunk.NoActionBar"-->
+<!--            android:exported="false" />-->
+
         <activity
-            android:name="com.apx6.chipmunk.app.ui.LocationActivity"
+            android:name="com.apx6.chipmunk.app.ui.CategoryManageActivity"
             android:theme="@style/Theme.Chipmunk.NoActionBar"
             android:exported="false" />
 
         <activity
-            android:name="com.apx6.chipmunk.app.ui.CategoryManageActivity"
+            android:name="com.apx6.chipmunk.app.ui.InfoActivity"
             android:theme="@style/Theme.Chipmunk.NoActionBar"
             android:exported="false" />
 

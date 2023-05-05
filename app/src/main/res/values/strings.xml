@@ -56,6 +56,8 @@
     <string name="check_list_count_only_1">%s</string>
     <string name="empty_checklist">체크리스트가 없습니다.</string>
     <string name="no_category_add_first">카테고리를 먼저 추가해야합니다.</string>
+    <string name="opensource">오픈라이센스</string>
+    <string name="app_version">앱버전</string>
 
     <string name="dlg_category_title_filter">필터</string>
     <string name="dlg_category_title_select">카테고리 선택</string>
