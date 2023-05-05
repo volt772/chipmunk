@@ -51,11 +51,20 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
             clCategoryManage.setOnSingleClickListener {
                 moveToCategoryManage()
             }
+
+            clAppInfo.setOnSingleClickListener {
+                moveToAppInfo()
+            }
         }
     }
 
     private fun moveToCategoryManage() {
         val intent = Intent(this, CategoryManageActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun moveToAppInfo() {
+        val intent = Intent(this, InfoActivity::class.java)
         startActivity(intent)
     }
 

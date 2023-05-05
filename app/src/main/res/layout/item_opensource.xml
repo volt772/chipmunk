@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_lic_card_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_checklist_gray_corner"
+        android:padding="@dimen/md_16"
+        android:layout_marginBottom="@dimen/md_16" >
+
+        <!-- License Subject-->
+        <TextView
+            android:id="@+id/tv_license_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/OpenSourceName"
+            android:gravity="center"
+            tools:text="License"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Divider-->
+        <ImageView
+            android:id="@+id/iv_license_divider"
+            android:layout_width="@dimen/md_25"
+            android:layout_height="@dimen/md_4"
+            android:layout_gravity="center"
+            style="@style/OpenSourceContent"
+            android:layout_marginTop="@dimen/md_5"
+            android:src="@drawable/swipe_up_handle"
+            app:tint="@color/material_amber_700"
+            app:layout_constraintTop_toBottomOf="@id/tv_license_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- License Content-->
+        <TextView
+            android:id="@+id/tv_license_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/md_15"
+            tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+            app:layout_constraintTop_toBottomOf="@id/iv_license_divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

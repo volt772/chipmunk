@@ -77,6 +77,20 @@
         <item name="android:textColor">@color/gray_h0_4</item>
     </style>
 
+    <!-- OpenSource Name -->
+    <style name="OpenSourceName" parent="">
+        <item name="android:textSize">@dimen/md_16</item>
+        <item name="android:textColor">@color/gray_h0_4</item>
+        <item name="android:fontFamily">@font/spoqahansansneo_bold</item>
+    </style>
+
+    <!-- OpenSource Content -->
+    <style name="OpenSourceContent">
+        <item name="android:textSize">@dimen/md_14</item>
+        <item name="android:textColor">@color/gray_h0_4</item>
+        <item name="android:fontFamily">@font/spoqahansansneo_regular</item>
+    </style>
+
 
     <!--    <style name="PostAuthorText">-->
 <!--        <item name="android:layout_marginStart">@dimen/dimen_16</item>-->

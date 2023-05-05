@@ -32,7 +32,8 @@
                         android:id="@+id/iv_close"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_toolbar_close_white"
+                        android:src="@drawable/ic_toolbar_back"
+                        app:tint="@color/white"
                         android:background="?selectableItemBackgroundBorderless"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +75,7 @@
 
             <!-- Box 1 : 라이선스-->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_category_manage"
+                android:id="@+id/cl_license"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/md_56"
                 android:foreground="?selectableItemBackgroundBorderless"
@@ -109,7 +110,7 @@
                 android:foreground="?selectableItemBackgroundBorderless"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_category_manage" >
+                app:layout_constraintTop_toBottomOf="@id/cl_license" >
 
                 <!-- Box 2-1 : `버전`레이블-->
                 <TextView

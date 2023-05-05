@@ -73,6 +73,11 @@
             android:exported="false" />
 
         <activity
+            android:name="com.apx6.chipmunk.app.ui.OpenSourceActivity"
+            android:theme="@style/Theme.Chipmunk.NoActionBar"
+            android:exported="false" />
+
+        <activity
             android:name=".app.ui.picker.RangePickerActivity"
             android:label="Date Range Picker" />
 
