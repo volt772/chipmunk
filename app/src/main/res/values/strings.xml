@@ -54,6 +54,7 @@
     <string name="add_category_delete">카테고리를 삭제하시겠습니까?</string>
     <string name="check_list_count_over_2">%s외 %d개</string>
     <string name="check_list_count_only_1">%s</string>
+    <string name="empty_checklist">체크리스트가 없습니다.</string>
 
     <string name="dlg_checklist_detail_category">카테고리</string>
     <string name="dlg_checklist_detail_due_date">기한</string>

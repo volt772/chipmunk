@@ -40,8 +40,8 @@ class CheckListRepositoryImpl @Inject constructor(
         return checkListDao.insertOrUpdate(entity) > 0
     }
 
-    override suspend fun getCheckLists(uid: Int, millis: Long): Flow<Resource<List<CmdCheckList>>> {
-        val checkLists = checkListDao.getCheckListsFromMillis(uid, millis)
+    override suspend fun getCheckLists(uid: Int, millis: Long, cid: Int?): Flow<Resource<List<CmdCheckList>>> {
+        val checkLists = checkListDao.getCheckListsFromMillis(uid, millis, cid)
         val result = checkLists.map {
             Resource.Success(it)
         }

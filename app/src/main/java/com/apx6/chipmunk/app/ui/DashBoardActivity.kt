@@ -13,13 +13,16 @@ import com.apx6.chipmunk.app.ext.getDfFromToday
 import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
+import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.adapter.CheckListAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.common.CmSnackBar
+import com.apx6.chipmunk.app.ui.dialog.CategoryListDialog
 import com.apx6.chipmunk.app.ui.dialog.CheckListDetailDialog
 import com.apx6.chipmunk.databinding.ActivityDashboardBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
+import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.dto.CmdCheckList
 import com.apx6.domain.dto.CmdCheckListDetail
 import com.google.android.material.appbar.AppBarLayout
@@ -38,6 +41,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     private val checkListAdapter = CheckListAdapter(this::selectCheckList)
 
     private var userId: Int = 0
+    private var categoryList = listOf<CmdCategory>()
 
     private var dfTodayCount: Int = 0
     private var dfFutureCount: Int = 0
@@ -117,6 +121,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                         user?.let { _user ->
                             val millis = getTodayMillis()
                             viewModel.getCheckLists(_user.id, millis)
+                            viewModel.getCategories(_user.id)
                             userId = _user.id
                         } ?: run {
                             progress?.stop()
@@ -137,6 +142,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                             is State.Success -> {
                                 progress?.stop()
                                 val cl = state.data.toMutableList()
+                                showEmptyCheckListView(cl.count())
                                 checkListAdapter.submitList(cl)
                                 makeCheckListSummary(cl)
                             }
@@ -165,7 +171,24 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                     )
                 }
             }
+
+            launch {
+                viewModel.category.collect { state ->
+                    when (state) {
+                        is State.Loading -> { }
+                        is State.Success -> {
+                            categoryList = state.data.toMutableList()
+                        }
+                        is State.Error -> {
+                        }
+                    }
+                }
+            }
         }
+    }
+
+    private fun showEmptyCheckListView(count: Int) {
+        binding.clNoChecklist.visibilityExt(count <= 0)
     }
 
     private fun makeCheckListSummary(cl: List<CmdCheckList>) {
@@ -213,6 +236,19 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         startActivity(intent)
     }
 
+    private fun doFilter() {
+        val categoryListDialog = CategoryListDialog.newInstance(categoryList, CmdCategory.default(), ::selectCategory)
+        supportFragmentManager.beginTransaction().add(categoryListDialog, RegisterActivity.TAG).commitAllowingStateLoss()
+    }
+
+    private fun selectCategory(category: CmdCategory) {
+        println("probe :: dashboard : select category : $category")
+        val millis = getTodayMillis()
+        viewModel.getCheckLists(userId, millis, category.id)
+//        binding.aetCategory.setText(category.name)
+//        viewModel.selectCategory(category)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_scrolling, menu)
@@ -227,6 +263,11 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         return when (item.itemId) {
             R.id.action_settings -> {
                 moveToSetting()
+                true
+            }
+
+            R.id.action_filter -> {
+                doFilter()
                 true
             }
             else -> super.onOptionsItemSelected(item)

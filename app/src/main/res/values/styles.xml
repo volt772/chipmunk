@@ -64,6 +64,13 @@
         <item name="colorControlActivated">@color/material_amber_700</item>
     </style>
 
+    <!-- List No Label -->
+    <style name="EmptyLabel">
+        <item name="android:textSize">@dimen/md_16</item>
+        <item name="android:textColor">@color/gray_h0_4</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 
     <!--    <style name="PostAuthorText">-->
 <!--        <item name="android:layout_marginStart">@dimen/dimen_16</item>-->
