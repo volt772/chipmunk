@@ -88,7 +88,7 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
     }
 
     private fun initView() {
-        this.statusBar(R.color.material_blue_400)
+        this.statusBar(R.color.white)
     }
 
     private fun moveToLogin() {
