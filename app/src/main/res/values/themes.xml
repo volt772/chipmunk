@@ -28,6 +28,7 @@
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo_app</item>
         <item name="android:windowSplashScreenAnimationDuration">1000</item>
         <item name="postSplashScreenTheme">@style/Theme.Chipmunk.NoActionBar</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/logo_project</item>
     </style>
 
     <!-- BottomSheet -->
