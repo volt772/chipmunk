@@ -63,6 +63,9 @@ class InfoActivity : BaseActivity<InfoViewModel, ActivityInfoBinding>() {
         with(binding) {
             ivNew.visibilityExt(updateNeeded)
             clVersionUpdatedLabel.visibilityExt(updateNeeded)
+
+            tvCurrentVersion.text = uv.currAppVersionName
+            tvNewVersion.text = uv.remoteAppVersionName
         }
     }
 }

@@ -47,7 +47,6 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
                         override fun fail() {
                             subscribeUser()
                         }
-
                     })
                 }
             }

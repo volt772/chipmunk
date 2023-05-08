@@ -140,7 +140,7 @@ class CmdRemoteConfigMgrImpl @Inject constructor(
         parseUtils.read(frc, param, T::class.java)
 
     companion object {
-        const val DEBUG_INTERVAL = 5L
+        const val DEBUG_INTERVAL = 86400L * 30
 
         const val PIN_POSITION_RELEASE = 1
         const val PIN_POSITION_MAJOR = 3
