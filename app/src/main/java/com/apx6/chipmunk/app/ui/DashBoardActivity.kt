@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -47,9 +48,20 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     private var dfTodayCount: Int = 0
     private var dfFutureCount: Int = 0
 
+    private val backCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_HOME)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+
+        this.onBackPressedDispatcher.addCallback(this, backCallback)
 
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = " "
@@ -117,7 +129,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         lifecycleScope.run {
             launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    progress?.start()
+//                    progress?.start()
                     viewModel.user.collect { user ->
                         user?.let { _user ->
                             val millis = getTodayMillis()
@@ -125,7 +137,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                             viewModel.getCategories(_user.id)
                             userId = _user.id
                         } ?: run {
-                            progress?.stop()
+//                            progress?.stop()
                             val vw = binding.coDashboardRoot
                             CmSnackBar.make(vw, getString(R.string.failed_get_user_info), "") { }.apply {
                                 show()
@@ -141,14 +153,14 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                         when (state) {
                             is State.Loading -> { }
                             is State.Success -> {
-                                progress?.stop()
+//                                progress?.stop()
                                 val cl = state.data.toMutableList()
                                 showEmptyCheckListView(cl.count())
                                 checkListAdapter.submitList(cl)
                                 makeCheckListSummary(cl)
                             }
                             is State.Error -> {
-                                progress?.stop()
+//                                progress?.stop()
                             }
                         }
                     }

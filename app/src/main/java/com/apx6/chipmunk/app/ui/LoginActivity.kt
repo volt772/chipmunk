@@ -43,7 +43,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     }
 
     private fun initView() {
-        this.statusBar(R.color.material_blue_400)
+        this.statusBar(R.color.white)
 
         binding.btnKakaoLogin.setOnSingleClickListener {
 

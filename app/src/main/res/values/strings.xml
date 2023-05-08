@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_label">아!그거</string>
     <string name="app_name">chipmunk</string>
     <string name="kakao_app_key">9e6558b0ff2328661fc462b40990bacb</string>
 
