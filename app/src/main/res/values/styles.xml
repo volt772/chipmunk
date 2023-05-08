@@ -77,6 +77,13 @@
         <item name="android:textColor">@color/gray_h0_4</item>
     </style>
 
+    <!-- Setting Version New Label -->
+    <style name="SettingMenuVersionNew">
+        <item name="android:textSize">@dimen/md_14</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/material_amber_700</item>
+    </style>
+
     <!-- OpenSource Name -->
     <style name="OpenSourceName" parent="">
         <item name="android:textSize">@dimen/md_16</item>

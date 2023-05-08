@@ -112,35 +112,96 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_license" >
 
-                <!-- Box 2-1 : `버전`레이블-->
-                <TextView
-                    android:id="@+id/tv_version_label"
-                    android:layout_width="wrap_content"
+                <!-- Box 3-4-1 : 버전정보 레이블 및 N표식-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_version_labels"
+                    android:layout_width="@dimen/md_0"
                     android:layout_height="wrap_content"
-                    android:text="@string/app_version"
-                    android:theme="@style/SettingMenuLabel"
                     android:paddingHorizontal="@dimen/md_18"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent" >
 
-                <!-- Box 2-2 : `버전`정보-->
-                <TextView
-                    android:id="@+id/tv_version_info"
-                    android:layout_width="wrap_content"
+                    <!-- Box 3-4-1 : 버전정보 레이블-->
+                    <TextView
+                        android:id="@+id/tv_version_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_version"
+                        style="@style/SettingMenuLabel"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <!-- Box 3-4-1 : 버전정보 업데이트 N표식-->
+                    <ImageView
+                        android:id="@+id/iv_new"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/md_4"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_version_label"
+                        android:src="@drawable/ic_version_new" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Box 3-4-2 : 버전표시-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_version_contents"
+                    android:layout_width="@dimen/md_0"
                     android:layout_height="wrap_content"
-                    android:theme="@style/SettingMenuVersion"
-                    android:gravity="right"
-                    android:paddingEnd="@dimen/md_18"
+                    android:paddingHorizontal="@dimen/md_18"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="최신버전" />
+                    app:layout_constraintEnd_toEndOf="parent" >
 
+                    <!-- Box 3-4-2 : 현재버전-->
+                    <TextView
+                        android:id="@+id/tv_current_version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1.0.0"
+                        style="@style/SettingMenuVersion"
+                        app:layout_constraintEnd_toStartOf="@id/cl_version_updated_label"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <!-- Box 3-4-2 : 신규버전-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_version_updated_label"
+                        android:layout_width="@dimen/md_0"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" >
+
+                        <!-- Box 3-4-2 : 버전구분자-->
+                        <TextView
+                            android:id="@+id/tv_version_splitter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" / "
+                            style="@style/SettingMenuVersion"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/tv_new_version"/>
+
+                        <!-- Box 3-4-2 : 신규버전-->
+                        <TextView
+                            android:id="@+id/tv_new_version"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1.0.1"
+                            style="@style/SettingMenuVersionNew"
+                            app:layout_constraintStart_toEndOf="@id/tv_version_splitter"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

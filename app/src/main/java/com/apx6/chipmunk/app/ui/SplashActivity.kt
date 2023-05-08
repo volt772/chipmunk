@@ -70,7 +70,6 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
         val uv = viewModel.getUpdateDetails()
 
         val updateNeeded = (uv.currAppVersionCode < uv.remoteAppVersionCode)
-        println("probe :: update :: updateNeeded : $updateNeeded")
 
         if (updateNeeded) {
             val dialog = AppUpdateDialog.newInstance(

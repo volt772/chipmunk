@@ -7,10 +7,11 @@ import androidx.lifecycle.lifecycleScope
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
+import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivityInfoBinding
+import com.apx6.domain.dto.CmdAppUpdateValue
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
@@ -51,10 +52,17 @@ class InfoActivity : BaseActivity<InfoViewModel, ActivityInfoBinding>() {
     private fun subscribers() {
         lifecycleScope.run {
             launch {
-                viewModel.version.collect { _version ->
-                    println("probe :: version :: $_version")
-                }
+                viewModel.uv.collect { _uv -> labelToUpdateInfo(_uv) }
             }
+        }
+    }
+
+    private fun labelToUpdateInfo(uv: CmdAppUpdateValue) {
+        val updateNeeded = (uv.currAppVersionCode < uv.remoteAppVersionCode)
+
+        with(binding) {
+            ivNew.visibilityExt(updateNeeded)
+            clVersionUpdatedLabel.visibilityExt(updateNeeded)
         }
     }
 }

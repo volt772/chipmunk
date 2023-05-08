@@ -2,8 +2,7 @@ package com.apx6.chipmunk.app.ui
 
 import androidx.lifecycle.viewModelScope
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
-import com.apx6.domain.dto.CmdCheckListWithCategory
-import com.apx6.domain.repository.CheckListRepository
+import com.apx6.domain.dto.CmdAppUpdateValue
 import com.apx6.domain.utils.CmdRemoteConfigMgr
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -16,18 +15,17 @@ class InfoViewModel @Inject constructor(
     private val rcManager: CmdRemoteConfigMgr,
 ) : BaseViewModel() {
 
-    private val _version: MutableSharedFlow<String> = MutableSharedFlow()
-    val version: SharedFlow<String> = _version
+    private val _uv: MutableSharedFlow<CmdAppUpdateValue> = MutableSharedFlow()
+    val uv: SharedFlow<CmdAppUpdateValue> = _uv
 
     init {
-        getVersion()
+        getUpdateValue()
     }
 
-    private fun getVersion() {
+    private fun getUpdateValue() {
         viewModelScope.launch {
-            val appVersion = rcManager.getCurrentVersionName()
-            println("probe :: version :: viewModel :: $appVersion")
-            _version.emit(appVersion)
+            val updateValue = rcManager.versionDetails()
+            _uv.emit(updateValue)
         }
     }
 }
