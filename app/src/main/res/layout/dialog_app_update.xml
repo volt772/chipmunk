@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="@dimen/md_8">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_white_corner">
+
+            <!-- Box1 : Top-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_update_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" >
+
+                <!-- Update Title-->
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/md_36"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="@dimen/md_54"
+                    android:theme="@style/UpdateDialogName"
+                    android:text="@string/dlg_app_update_title"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Box2 : Mid-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_update_mid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/md_24"
+                app:layout_constraintTop_toBottomOf="@id/cl_update_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" >
+
+                <!-- Box2-1 : Update-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_mid_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/md_16"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" >
+
+                    <!-- Update Label-->
+                    <TextView
+                        android:id="@+id/tv_update_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/UpdateDialogLabel"
+                        android:text="@string/dlg_app_update_new_version"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <!-- Update Value-->
+                    <TextView
+                        android:id="@+id/tv_update"
+                        android:layout_width="@dimen/md_0"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/UpdateDialogValue"
+                        android:text="-"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="0.5.5" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Box2-2 : Desc-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_mid_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/md_12"
+                    android:paddingHorizontal="@dimen/md_16"
+                    app:layout_constraintTop_toBottomOf="@id/cl_mid_update"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" >
+
+                    <!-- Memo Label-->
+                    <TextView
+                        android:id="@+id/tv_desc_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/UpdateDialogLabel"
+                        android:text="@string/dlg_app_update_description"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/tv_desc"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Memo Value-->
+                    <TextView
+                        android:id="@+id/tv_desc"
+                        android:layout_width="@dimen/md_0"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/UpdateDialogValue"
+                        android:layout_marginTop="@dimen/md_8"
+                        android:text="-"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_desc_label"
+                        tools:text="버그수정" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Box3 : Bot-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_update_bot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/md_24"
+                app:layout_constraintTop_toBottomOf="@id/cl_update_mid"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" >
+
+                <!-- 업데이트-->
+                <TextView
+                    android:id="@+id/tv_do_update"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/md_56"
+                    android:theme="@style/UpdateDialogBotButton"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:background="@color/material_amber_700"
+                    android:textColor="@color/white"
+                    android:text="@string/dlg_app_update_do_update"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

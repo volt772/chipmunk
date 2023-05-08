@@ -42,6 +42,18 @@ dependencies {
     implementation(Paging3.rxJava3)
     implementation(Paging3.roomPaging)
 
+    /* Firebase*/
+    /* Firebase*/
+    implementation(platform(Firebase.bom))
+    implementation(Firebase.analytics)
+    implementation(Firebase.core)
+    implementation(Firebase.messaging)
+    implementation(Firebase.config)
+    implementation(Firebase.configKtx)
+    implementation(Firebase.analyticsKtx)
+    implementation(Firebase.crashlytics)
+    implementation(Firebase.volley)
+
     implementation(Android.coreKtx)
     androidTestImplementation(Test.hiltTest)
     androidTestImplementation(Test.coroutineTest)

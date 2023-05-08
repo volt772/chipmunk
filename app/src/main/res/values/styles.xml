@@ -200,6 +200,13 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="UpdateDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
     <!-- DashBoard : CheckList : Item : Common -->
     <style name="DashBoardCheckListCommon">
         <item name="android:fontFamily">@font/spoqahansansneo_regular</item>

@@ -1,6 +1,22 @@
 package com.apx6.domain.constants
 
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import org.json.JSONObject
+
 object CmdConstants {
+
+    object App {
+        const val NAME = "Chipmunk"
+        const val AGENT_APP_CHIPMUNK = "APP_CHIPMUNK"
+        const val OS = "Android"
+        const val DEFAULT_USER_AGENT = "ANDROID/NA"
+    }
+
+    object RemoteConfig {
+        const val MAIN_KEY = "up_info"
+        const val VERSION = "version"
+        const val DESCRIPTIONS = "descriptions"
+    }
 
     object DB {
         const val DB_NAME = "chipmunk.db"

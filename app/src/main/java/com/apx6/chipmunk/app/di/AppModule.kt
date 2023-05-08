@@ -4,6 +4,12 @@ import android.app.Application
 import android.content.Context
 import com.apx6.chipmunk.app.utils.CmKoreanCharUtils
 import com.apx6.chipmunk.app.utils.CmKoreanCharUtilsImpl
+import com.apx6.domain.utils.CmdApplicationInfo
+import com.apx6.domain.utils.CmdApplicationInfoImpl
+import com.apx6.domain.utils.CmdParseUtils
+import com.apx6.domain.utils.CmdParseUtilsImpl
+import com.apx6.domain.utils.CmdRemoteConfigMgr
+import com.apx6.domain.utils.CmdRemoteConfigMgrImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,5 +28,17 @@ abstract class AppModule {
     @Binds
     @Singleton
     abstract fun bindCmKoreanCharUtils(impl: CmKoreanCharUtilsImpl): CmKoreanCharUtils
+
+    @Binds
+    @Singleton
+    abstract fun bindCmdRemoteConfigMgr(impl: CmdRemoteConfigMgrImpl): CmdRemoteConfigMgr
+
+    @Binds
+    @Singleton
+    abstract fun bindCmdApplicationInfo(impl: CmdApplicationInfoImpl): CmdApplicationInfo
+
+    @Binds
+    @Singleton
+    abstract fun bindParseUtils(impl: CmdParseUtilsImpl): CmdParseUtils
 
 }

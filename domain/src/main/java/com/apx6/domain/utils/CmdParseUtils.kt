@@ -1,5 +1,8 @@
 package com.apx6.domain.utils
 
+import com.apx6.domain.constants.CmdRemoteConfigParam
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+
 
 interface CmdParseUtils {
 
@@ -17,10 +20,10 @@ interface CmdParseUtils {
         obj: Any
     ): String
 
-//    fun <T> read(
-//        frc: FirebaseRemoteConfig,
-//        param: CmdRemoteConfigParam,
-//        returnType: Class<T>
-//    ): T?
+    fun <T> read(
+        frc: FirebaseRemoteConfig,
+        param: CmdRemoteConfigParam,
+        returnType: Class<T>
+    ): T?
 
 }

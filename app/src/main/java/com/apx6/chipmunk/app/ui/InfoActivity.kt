@@ -3,12 +3,15 @@ package com.apx6.chipmunk.app.ui
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivityInfoBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -22,6 +25,8 @@ class InfoActivity : BaseActivity<InfoViewModel, ActivityInfoBinding>() {
         super.onCreate(savedInstanceState)
 
         initView()
+
+        subscribers()
     }
 
     private fun initView() {
@@ -36,10 +41,20 @@ class InfoActivity : BaseActivity<InfoViewModel, ActivityInfoBinding>() {
                 moveToOpenSource()
             }
         }
-
     }
+
     private fun moveToOpenSource() {
         val intent = Intent(this, OpenSourceActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun subscribers() {
+        lifecycleScope.run {
+            launch {
+                viewModel.version.collect { _version ->
+                    println("probe :: version :: $_version")
+                }
+            }
+        }
     }
 }
