@@ -1,8 +1,5 @@
 package com.apx6.domain.constants
 
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import org.json.JSONObject
-
 object CmdConstants {
 
     object App {

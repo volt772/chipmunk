@@ -10,9 +10,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ui.base.BaseActivity
-import com.apx6.chipmunk.app.ui.dialog.AppUpdateDialog
-import com.apx6.chipmunk.app.ui.dialog.CheckListDetailDialog
 import com.apx6.chipmunk.databinding.ActivitySplashBinding
+import com.apx6.domain.dto.CmdAppUpdateValue
 import com.apx6.domain.utils.CmdRemoteConfigCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -27,11 +26,14 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-//        installSplashScreen()
-
         initView()
+        splashScreen.setKeepOnScreenCondition { true }
+//        Handler(Looper.getMainLooper()).postDelayed({ false }, 2000L)
+
+
         observeUser()
     }
 
@@ -66,20 +68,13 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
         }
     }
 
-    private fun doUpdate() { }
-
     private fun checkUpdate() {
         val uv = viewModel.getUpdateDetails()
 
         val updateNeeded = (uv.currAppVersionCode < uv.remoteAppVersionCode)
 
         if (updateNeeded) {
-            val dialog = AppUpdateDialog.newInstance(
-                update = uv,
-                toUpdate = ::doUpdate
-            )
-
-            supportFragmentManager.beginTransaction().add(dialog, TAG).commitAllowingStateLoss()
+            moveToAppUpdate()
         } else {
             subscribeUser()
         }
@@ -100,6 +95,11 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
 
     private fun moveToDashBoard() {
         val intent = Intent(this, DashBoardActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun moveToAppUpdate() {
+        val intent = Intent(this, AppUpdateActivity::class.java)
         startActivity(intent)
     }
 
