@@ -11,18 +11,18 @@
         <!-- Splash Logo-->
         <ImageView
             android:id="@+id/iv_splash_logo"
-            android:layout_width="@dimen/md_200"
-            android:layout_height="@dimen/md_200"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/logo_app"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/iv_splash_company" />
+            app:layout_constraintBottom_toTopOf="@id/iv_splash_prj" />
 
         <!-- Splash Company Name-->
         <ImageView
-            android:id="@+id/iv_splash_company"
-            android:layout_width="@dimen/md_70"
+            android:id="@+id/iv_splash_prj"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/logo_project"
             android:layout_marginBottom="@dimen/md_32"

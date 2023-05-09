@@ -51,7 +51,7 @@
 
         <include
             android:id="@+id/in_content"
-            layout="@layout/content_scrolling" />
+            layout="@layout/list_checklists" />
 
         <!-- No Checklist-->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -84,9 +84,7 @@
                 app:layout_constraintTop_toBottomOf="@id/iv_no_checklist"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -97,6 +95,5 @@
             android:backgroundTint="@color/white"
             app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_add_checklist" />
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

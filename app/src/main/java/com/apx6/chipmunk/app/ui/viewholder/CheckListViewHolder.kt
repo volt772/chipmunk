@@ -1,5 +1,6 @@
 package com.apx6.chipmunk.app.ui.viewholder
 
+import android.content.res.ColorStateList
 import android.view.ViewGroup
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.constants.CmdCategoryDiffLabel
@@ -29,7 +30,7 @@ class CheckListViewHolder(
             val dayColor = context.getColor(CmdCategoryDiffLabel.getColorByDiffDays(dfDays).color)
 
             ivDayStatus.setColorFilter(dayColor)
-            tvDay.setTextColor(dayColor)
+            tvDay.backgroundTintList = ColorStateList.valueOf(dayColor)
 
             tvChecklistDesc.text = cl.memo
         }
