@@ -40,6 +40,8 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     override val viewModel: DashBoardViewModel by viewModels()
     override fun getViewBinding(): ActivityDashboardBinding = ActivityDashboardBinding.inflate(layoutInflater)
 
+    private lateinit var menu: Menu
+
     private val checkListAdapter = CheckListAdapter(this::selectCheckList)
 
     private var userId: Int = 0
@@ -47,6 +49,8 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     private var dfTodayCount: Int = 0
     private var dfFutureCount: Int = 0
+
+    private var filteredCategory: CmdCategory = CmdCategory.default()
 
     private val backCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
@@ -200,6 +204,13 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                     }
                 }
             }
+
+            launch {
+                viewModel.filtered.collect { category ->
+                    println("probe :: filtered Category : $category")
+                    filteredCategory = category
+                }
+            }
         }
     }
 
@@ -255,7 +266,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     private fun doFilter() {
         val categoryListDialog = CategoryListDialog.newInstance(
             categoryList,
-            CmdCategory.default(),
+            filteredCategory,
             CmdCategoryDialogType.DASHBOARD,
             ::selectCategory,
             ::clearFilter
@@ -267,15 +278,18 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         println("probe :: dashboard : select category : $category")
         val millis = getTodayMillis()
         viewModel.getCheckLists(userId, millis, category.id)
+        viewModel.setFilteredCategory(category)
     }
 
     private fun clearFilter() {
         val millis = getTodayMillis()
         viewModel.getCheckLists(userId, millis)
+        viewModel.setFilteredCategory(CmdCategory.default())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
+        this.menu = menu
         menuInflater.inflate(R.menu.menu_scrolling, menu)
         return true
     }

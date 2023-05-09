@@ -46,6 +46,15 @@ class DashBoardViewModel @Inject constructor(
     private val _category: MutableStateFlow<State<List<CmdCategory>>> = MutableStateFlow(State.loading())
     val category: StateFlow<State<List<CmdCategory>>> = _category
 
+    private val _filtered: MutableSharedFlow<CmdCategory> = MutableSharedFlow()
+    val filtered: SharedFlow<CmdCategory> = _filtered
+
+    fun setFilteredCategory(category: CmdCategory) {
+        viewModelScope.launch {
+            _filtered.emit(category)
+        }
+    }
+
     fun getSelectedCategoryName(cl: CmdCheckList) {
         viewModelScope.launch {
             categoryRepository.getCategory(cl.cid).collectLatest { category ->
