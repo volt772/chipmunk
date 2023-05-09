@@ -15,7 +15,7 @@
     <style name="DashBoardAppBarTitle">
         <item name="android:textSize">@dimen/md_23</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:fontFamily">@font/spoqahansansneo_bold</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">2</item>
     </style>
@@ -88,14 +88,13 @@
     <style name="OpenSourceName" parent="">
         <item name="android:textSize">@dimen/md_16</item>
         <item name="android:textColor">@color/gray_h0_4</item>
-        <item name="android:fontFamily">@font/spoqahansansneo_bold</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- OpenSource Content -->
     <style name="OpenSourceContent">
         <item name="android:textSize">@dimen/md_14</item>
         <item name="android:textColor">@color/gray_h0_4</item>
-        <item name="android:fontFamily">@font/spoqahansansneo_regular</item>
     </style>
 
     <style name="CheckListDetailDialog" parent="Theme.MaterialComponents.Light.Dialog">
@@ -114,7 +113,6 @@
 
     <!-- DashBoard : CheckList : Item : Common -->
     <style name="DashBoardCheckListCommon">
-        <item name="android:fontFamily">@font/spoqahansansneo_regular</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>

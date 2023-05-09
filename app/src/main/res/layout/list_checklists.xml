@@ -21,7 +21,5 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:listitem="@layout/item_checklist" />
-
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 </layout>
