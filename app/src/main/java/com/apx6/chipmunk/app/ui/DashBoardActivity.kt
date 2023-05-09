@@ -99,7 +99,10 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     private fun initView() {
         binding.inContent.run {
             rvCheckList.adapter = checkListAdapter
-//            swTaskRefresh.setOnRefreshListener {  }
+            srfRefresh.setOnRefreshListener {
+                clearFilter()
+                srfRefresh.isRefreshing = false
+            }
         }
     }
 

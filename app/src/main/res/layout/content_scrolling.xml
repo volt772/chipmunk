@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/md_8"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".app.ui.DashBoardActivity"
-    tools:showIn="@layout/activity_dashboard">
+    xmlns:tools="http://schemas.android.com/tools" >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_checkList"
-        style="@style/TasksRecyclerStyle"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/md_0"
-        android:layoutAnimation="@anim/layout_animation_right_to_left"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/item_checklist" />
-</androidx.core.widget.NestedScrollView>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id = "@+id/srf_refresh"
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:layout_marginTop="@dimen/md_8"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_checkList"
+                style="@style/TasksRecyclerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_0"
+                android:layoutAnimation="@anim/layout_animation_right_to_left"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:listitem="@layout/item_checklist" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</layout>
