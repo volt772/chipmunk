@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
+import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.adapter.category_manage.CMLoadStateAdapter
@@ -45,9 +46,7 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out)
 
         initView()
-
         subscribeFlow()
-
         subscribeCheckList()
     }
 
@@ -59,7 +58,6 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
                 /* 종료*/
                 finish()
             }
-
         }
 
         initCategoryManageAdapter()
@@ -81,7 +79,7 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
         }
 
         binding.rvCategories.smoothScrollToPosition(0)
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+        showToast(msg, false)
     }
 
     private fun initCategoryManageAdapter(isMediator: Boolean = false) {

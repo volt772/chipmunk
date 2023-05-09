@@ -31,6 +31,8 @@
     <string name="failed_get_location_query">장소 키워드가 없습니다.</string>
     <string name="failed_to_find_location">장소를 찾을 수 없습니다.</string>
     <string name="failed_to_load_categories">카테고리가 없습니다.\n카테고리를 추가해주세요.</string>
+    <string name="failed_get_checklists">체크리스트를 가져오는데 실패하였습니다.</string>
+    <string name="try_again">잠시 후 다시 시도해 주세요.</string>
 
     <string name="caution">주의</string>
     <string name="retry">재시도</string>

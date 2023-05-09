@@ -20,7 +20,6 @@ class AppUpdateActivity : BaseActivity<AppUpdateViewModel, ActivityAppUpdateBind
 
         super.onCreate(savedInstanceState)
 
-
         initView()
         showUpdateDialog()
     }

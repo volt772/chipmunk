@@ -5,11 +5,8 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.apx6.chipmunk.app.di.IoDispatcher
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
-import com.apx6.domain.State
-import com.apx6.domain.dto.CmdAttachment
 import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.dto.CmdCheckList
-import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.UserRepository
@@ -17,11 +14,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -79,18 +73,4 @@ class CategoryManageViewModel @Inject constructor(
             categoryRepository.delCategory(category.id)
         }
     }
-
-
-
-
-//    private val _category: MutableStateFlow<State<List<CmdCategory>>> = MutableStateFlow(State.loading())
-//    val category: StateFlow<State<List<CmdCategory>>> = _category
-
-//    fun getCategories(uid: Int) {
-//        viewModelScope.launch {
-//            categoryRepository.getCategories(uid)
-//                .map { resource -> State.fromResource(resource) }
-//                .collect { state -> _category.value = state }
-//        }
-//    }
 }

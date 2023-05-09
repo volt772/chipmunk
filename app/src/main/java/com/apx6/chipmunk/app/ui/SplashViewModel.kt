@@ -23,9 +23,6 @@ class SplashViewModel @Inject constructor(
     private val rcManager: CmdRemoteConfigMgr
 ) : BaseViewModel() {
 
-    init {
-    }
-
     private val _user: MutableSharedFlow<CmdUser?> = MutableSharedFlow()
     val user: SharedFlow<CmdUser?> = _user
 

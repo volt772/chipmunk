@@ -11,10 +11,8 @@ import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivitySplashBinding
-import com.apx6.domain.dto.CmdAppUpdateValue
 import com.apx6.domain.utils.CmdRemoteConfigCallback
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -27,17 +25,16 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         val splashScreen = installSplashScreen()
+
         super.onCreate(savedInstanceState)
 
         initView()
         splashScreen.setKeepOnScreenCondition { true }
-//        Handler(Looper.getMainLooper()).postDelayed({ false }, 2000L)
 
-
-        observeUser()
+        observeSplashFlow()
     }
 
-    private fun observeUser() {
+    private fun observeSplashFlow() {
         lifecycleScope.run {
             launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -56,10 +53,8 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
             launch {
                 viewModel.user.collect { user ->
                     user?.let {
-                        delay(SCREEN_MOVE_DELAY)
                         moveToDashBoard()
                     } ?: run {
-                        delay(SCREEN_MOVE_DELAY)
                         viewModel.setFcmToken()
                         moveToLogin()
                     }

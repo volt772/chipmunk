@@ -18,7 +18,6 @@ import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.adapter.CheckListAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
-import com.apx6.chipmunk.app.ui.common.CmSnackBar
 import com.apx6.chipmunk.app.ui.dialog.CategoryListDialog
 import com.apx6.chipmunk.app.ui.dialog.CheckListDetailDialog
 import com.apx6.chipmunk.databinding.ActivityDashboardBinding
@@ -54,9 +53,11 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     private val backCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.addCategory(Intent.CATEGORY_HOME)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            val intent = Intent(Intent.ACTION_MAIN).apply {
+                addCategory(Intent.CATEGORY_HOME)
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+
             startActivity(intent)
         }
     }
@@ -68,31 +69,6 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         this.onBackPressedDispatcher.addCallback(this, backCallback)
 
         setSupportActionBar(findViewById(R.id.toolbar))
-        binding.toolbarLayout.title = " "
-        binding.fab.setOnSingleClickListener {
-            moveToRegister()
-        }
-
-        binding.appBar.addOnOffsetChangedListener(object : OnOffsetChangedListener {
-            var isShow = false
-            var scrollRange = -1
-            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.totalScrollRange
-                }
-
-
-                if (scrollRange + verticalOffset == 0) {
-                    /* 접혔을때*/
-                    isShow = true
-                } else if (isShow) {
-                    /* 펴졌을때*/
-                    isShow = false
-                }
-
-                makeSummaryTitle()
-            }
-        })
 
         initView()
         subscribers()
@@ -101,27 +77,58 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     }
 
     private fun initView() {
-        binding.inContent.run {
-            rvCheckList.adapter = checkListAdapter
-            srfRefresh.setOnRefreshListener {
-                clearFilter()
-                srfRefresh.isRefreshing = false
+        with(binding) {
+            inContent.run {
+                rvCheckList.adapter = checkListAdapter
+                srfRefresh.setOnRefreshListener {
+                    clearFilter()
+                    srfRefresh.isRefreshing = false
+                }
             }
+
+            toolbarLayout.title = " "
+            fab.setOnSingleClickListener {
+                moveToRegister()
+            }
+
+            appBar.addOnOffsetChangedListener(object : OnOffsetChangedListener {
+                var isShow = false
+                var scrollRange = -1
+                override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+                    if (scrollRange == -1) {
+                        scrollRange = appBarLayout.totalScrollRange
+                    }
+
+                    if (scrollRange + verticalOffset == 0) {
+                        /* 접혔을때*/
+                        isShow = true
+                    } else if (isShow) {
+                        /* 펴졌을때*/
+                        isShow = false
+                    }
+
+                    makeSummaryTitle()
+                }
+            })
         }
     }
 
+    /* 액션 : 수정*/
     private fun goToModify(cl: CmdCheckList) {
         moveToRegister(cl.id)
     }
 
+    /* 액션 : 삭제*/
     private fun deleteCheckList(cl: CmdCheckList) {
         viewModel.delCheckList(cl)
     }
 
+    /* 체크리스트 선택*/
     private fun selectCheckList(cl: CmdCheckList) {
         viewModel.getSelectedCategoryName(cl)
     }
 
+    /* Dialog ; 체크리스트 상세보기*/
     private fun openDetailDialog(cld: CmdCheckListDetail) {
         val dialog = CheckListDetailDialog.newInstance(
             cld = cld,
@@ -132,54 +139,54 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         supportFragmentManager.beginTransaction().add(dialog, TAG).commitAllowingStateLoss()
     }
 
+    /* Subscribers*/
     private fun subscribers() {
         lifecycleScope.run {
             launch {
+                /* 사용자*/
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                    progress?.start()
                     viewModel.user.collect { user ->
                         user?.let { _user ->
-                            val millis = getTodayMillis()
-                            viewModel.getCheckLists(_user.id, millis)
-                            viewModel.getCategories(_user.id)
+                            viewModel.run {
+                                getCheckLists(_user.id, todayMillis)
+                                getCategories(_user.id)
+                            }
                             userId = _user.id
                         } ?: run {
-//                            progress?.stop()
-                            val vw = binding.coDashboardRoot
-                            CmSnackBar.make(vw, getString(R.string.failed_get_user_info), "") { }.apply {
-                                show()
-                            }
+                            showToast(R.string.failed_get_user_info, false)
                         }
                     }
                 }
             }
 
             launch {
+                /* 체크리스트*/
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.checkLists.collect { state ->
                         when (state) {
                             is State.Loading -> { }
                             is State.Success -> {
-//                                progress?.stop()
                                 val cl = state.data.toMutableList()
                                 showEmptyCheckListView(cl.count())
                                 checkListAdapter.submitList(cl)
                                 makeCheckListSummary(cl)
                             }
                             is State.Error -> {
-//                                progress?.stop()
+                                showToast(R.string.failed_get_checklists, false)
                             }
                         }
                     }
                 }
             }
 
+            /* 체크리스트 상세보기*/
             launch {
                 viewModel.selCheckListDetail.collectLatest { details ->
                     openDetailDialog(details)
                 }
             }
 
+            /* 체크리스트 삭제후*/
             launch {
                 viewModel.checkListDeleted.collectLatest { deleted ->
                     showToast(
@@ -192,6 +199,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                 }
             }
 
+            /* 카테고리 리스트*/
             launch {
                 viewModel.category.collect { state ->
                     when (state) {
@@ -200,24 +208,27 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                             categoryList = state.data.toMutableList()
                         }
                         is State.Error -> {
+                            showToast(R.string.try_again, false)
                         }
                     }
                 }
             }
 
+            /* 필터링*/
             launch {
                 viewModel.filtered.collect { category ->
-                    println("probe :: filtered Category : $category")
                     filteredCategory = category
                 }
             }
         }
     }
 
+    /* 뷰 : 체크리스트 없음*/
     private fun showEmptyCheckListView(count: Int) {
         binding.clNoChecklist.visibilityExt(count <= 0)
     }
 
+    /* 뷰 : 체크리스트 요약 메세지 (상단)*/
     private fun makeCheckListSummary(cl: List<CmdCheckList>) {
         val dfToday = cl.filter {
             val df = it.endDate.getDfFromToday()
@@ -235,6 +246,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         makeSummaryTitle()
     }
 
+    /* 뷰 : 체크리스트 요약 메세지 (상단)*/
     private fun makeSummaryTitle() {
         val summaryLabel = if (dfTodayCount > 0) {
             /* 오늘기준*/
@@ -275,16 +287,17 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     }
 
     private fun selectCategory(category: CmdCategory) {
-        println("probe :: dashboard : select category : $category")
-        val millis = getTodayMillis()
-        viewModel.getCheckLists(userId, millis, category.id)
-        viewModel.setFilteredCategory(category)
+        viewModel.run {
+            getCheckLists(userId, todayMillis, category.id)
+            setFilteredCategory(category)
+        }
     }
 
     private fun clearFilter() {
-        val millis = getTodayMillis()
-        viewModel.getCheckLists(userId, millis)
-        viewModel.setFilteredCategory(CmdCategory.default())
+        viewModel.run {
+            getCheckLists(userId, todayMillis)
+            setFilteredCategory(CmdCategory.default())
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -320,5 +333,6 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     companion object {
         const val TAG = "DashBoardActivity"
+        val todayMillis = getTodayMillis()
     }
 }

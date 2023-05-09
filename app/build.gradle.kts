@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-android")
     id("kotlin-kapt")
-//    id("kotlin-android-extensions")
     id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
@@ -20,7 +19,6 @@ android {
         versionCode = Version.versionCode
         versionName = Version.versionName
 
-//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunner = "com.apx6.chipmunk.CustomTestRunner"
 
         javaCompileOptions {

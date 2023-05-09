@@ -10,10 +10,10 @@ import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.currMillis
 import com.apx6.chipmunk.app.ext.randomKey
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
+import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.fcm.FcmHelper
 import com.apx6.chipmunk.app.ui.base.BaseActivity
-import com.apx6.chipmunk.app.ui.common.CmSnackBar
 import com.apx6.chipmunk.databinding.ActivityLoginBinding
 import com.apx6.domain.State
 import com.apx6.domain.dto.CmdUser
@@ -22,7 +22,6 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -46,7 +45,6 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         this.statusBar(R.color.white)
 
         binding.btnKakaoLogin.setOnSingleClickListener {
-
             UserApiClient.instance.apply {
                 if (isKakaoTalkLoginAvailable(this@LoginActivity)) {
                     loginWithKakaoTalk(this@LoginActivity) { token, error ->
@@ -98,7 +96,6 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         }
     }
 
-
     private val loginCallBack: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
             failedLogin(getString(R.string.failed_login))
@@ -139,9 +136,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
     private fun failedLogin(msg: String) {
         val vw = binding.clLoginRoot
-        CmSnackBar.make(vw, msg, "") { }.apply {
-            show()
-        }
+        showToast(msg, false)
     }
 
     companion object {
