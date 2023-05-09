@@ -1,4 +1,4 @@
-package com.apx6.chipmunk.app.ui
+package com.apx6.chipmunk.app.ui.activity
 
 import android.os.Bundle
 import android.widget.Toast
@@ -9,13 +9,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ext.visibilityExt
+import com.apx6.chipmunk.app.ui.vms.CategoryManageViewModel
 import com.apx6.chipmunk.app.ui.adapter.category_manage.CMLoadStateAdapter
 import com.apx6.chipmunk.app.ui.adapter.category_manage.CMPagingAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity

@@ -1,4 +1,4 @@
-package com.apx6.chipmunk.app.ui
+package com.apx6.chipmunk.app.ui.vms
 
 import android.content.Context
 import androidx.lifecycle.viewModelScope

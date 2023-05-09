@@ -1,4 +1,4 @@
-package com.apx6.chipmunk.app.ui
+package com.apx6.chipmunk.app.ui.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -17,9 +17,9 @@ import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.base.BaseActivity
-import com.apx6.chipmunk.app.ui.common.CmSnackBar
 import com.apx6.chipmunk.app.ui.dialog.CategoryListDialog
 import com.apx6.chipmunk.app.ui.picker.DaysCalendar
+import com.apx6.chipmunk.app.ui.vms.RegisterViewModel
 import com.apx6.chipmunk.databinding.ActivityRegisterBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
@@ -85,10 +85,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     }
 
     private fun snackForNoUser() {
-        val vw = binding.ablRegister
-        CmSnackBar.make(vw, getString(R.string.failed_get_user_info), "") { }.apply {
-            show()
-        }
+        showToast(R.string.failed_get_user_info, false)
     }
 
     private fun subscribers() {

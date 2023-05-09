@@ -8,15 +8,7 @@ import javax.inject.Qualifier
  */
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class TaskBaseUrl
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class CrmBaseUrl
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class PushConnectionUrl
+annotation class ChipmunkBaseUrl
 
 /**
  * @Related

@@ -1,4 +1,4 @@
-package com.apx6.chipmunk.app.ui
+package com.apx6.chipmunk.app.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,13 +9,13 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
+import com.apx6.chipmunk.app.ui.vms.SettingViewModel
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivitySettingBinding
 import com.apx6.domain.State
 import com.apx6.domain.dto.CmdUser
 import dagger.hilt.android.AndroidEntryPoint
 import io.getstream.avatarview.coil.loadImage
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

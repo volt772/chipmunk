@@ -22,7 +22,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name="com.apx6.chipmunk.app.ui.SplashActivity"
+            android:name="com.apx6.chipmunk.app.ui.activity.SplashActivity"
             android:theme="@style/Theme.App.Starting"
             android:noHistory="true"
             android:exported="true" >
@@ -33,44 +33,44 @@
         </activity>
 
         <activity
-            android:name="com.apx6.chipmunk.app.ui.LoginActivity"
+            android:name="com.apx6.chipmunk.app.ui.activity.LoginActivity"
             android:theme="@style/Theme.Chipmunk.NoActionBar"
             android:exported="false" />
 
         <activity
-            android:name="com.apx6.chipmunk.app.ui.DashBoardActivity"
+            android:name="com.apx6.chipmunk.app.ui.activity.DashBoardActivity"
             android:exported="false"
             android:theme="@style/Theme.Chipmunk.NoActionBar" >
         </activity>
 
         <activity
-            android:name="com.apx6.chipmunk.app.ui.AppUpdateActivity"
+            android:name="com.apx6.chipmunk.app.ui.activity.AppUpdateActivity"
             android:theme="@style/Theme.Chipmunk.NoActionBar"
             android:exported="false" />
 
         <activity
-            android:name="com.apx6.chipmunk.app.ui.RegisterActivity"
+            android:name="com.apx6.chipmunk.app.ui.activity.RegisterActivity"
             android:theme="@style/Theme.Chipmunk.NoActionBar"
             android:windowSoftInputMode="adjustPan"
             android:exported="false" />
 
         <activity
-            android:name="com.apx6.chipmunk.app.ui.SettingActivity"
+            android:name="com.apx6.chipmunk.app.ui.activity.SettingActivity"
             android:theme="@style/Theme.Chipmunk.NoActionBar"
             android:exported="false" />
 
         <activity
-            android:name="com.apx6.chipmunk.app.ui.CategoryManageActivity"
+            android:name="com.apx6.chipmunk.app.ui.activity.CategoryManageActivity"
             android:theme="@style/Theme.Chipmunk.NoActionBar"
             android:exported="false" />
 
         <activity
-            android:name="com.apx6.chipmunk.app.ui.InfoActivity"
+            android:name="com.apx6.chipmunk.app.ui.activity.InfoActivity"
             android:theme="@style/Theme.Chipmunk.NoActionBar"
             android:exported="false" />
 
         <activity
-            android:name="com.apx6.chipmunk.app.ui.OpenSourceActivity"
+            android:name="com.apx6.chipmunk.app.ui.activity.OpenSourceActivity"
             android:theme="@style/Theme.Chipmunk.NoActionBar"
             android:exported="false" />
 

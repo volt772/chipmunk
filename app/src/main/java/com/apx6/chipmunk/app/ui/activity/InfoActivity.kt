@@ -1,4 +1,4 @@
-package com.apx6.chipmunk.app.ui
+package com.apx6.chipmunk.app.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ext.visibilityExt
+import com.apx6.chipmunk.app.ui.vms.InfoViewModel
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivityInfoBinding
 import com.apx6.domain.dto.CmdAppUpdateValue

@@ -1,4 +1,4 @@
-package com.apx6.chipmunk.app.ui
+package com.apx6.chipmunk.app.ui.vms
 
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.dto.CmdAppUpdateValue

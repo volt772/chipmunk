@@ -1,4 +1,4 @@
-package com.apx6.chipmunk.app.ui
+package com.apx6.chipmunk.app.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +13,7 @@ import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.fcm.FcmHelper
+import com.apx6.chipmunk.app.ui.vms.LoginViewModel
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivityLoginBinding
 import com.apx6.domain.State

@@ -7,16 +7,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
-import com.apx6.chipmunk.app.ui.CategoryManageViewModel
+import com.apx6.chipmunk.app.ui.vms.CategoryManageViewModel
 import com.apx6.chipmunk.app.ui.base.BaseBottomSheetDialog
 import com.apx6.chipmunk.databinding.DialogCategoryAddBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-/**
- * Later TODO
- */
 
 @AndroidEntryPoint
 class CategoryAddDialog : BaseBottomSheetDialog<DialogCategoryAddBinding, Unit>(

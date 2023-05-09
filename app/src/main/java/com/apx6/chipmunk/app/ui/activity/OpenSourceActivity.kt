@@ -1,20 +1,18 @@
-package com.apx6.chipmunk.app.ui
+package com.apx6.chipmunk.app.ui.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.statusBar
+import com.apx6.chipmunk.app.ui.adapter.OpenSourceListAdapter
+import com.apx6.chipmunk.app.ui.vms.OpenSourceViewModel
 import com.apx6.chipmunk.app.ui.base.BaseActivity
-import com.apx6.chipmunk.databinding.ActivityInfoBinding
 import com.apx6.chipmunk.databinding.ActivityOpensourceBinding
 import com.apx6.domain.dto.CmdOpenSource
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 

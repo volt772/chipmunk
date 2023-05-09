@@ -1,9 +1,10 @@
-package com.apx6.chipmunk.app.ui
+package com.apx6.chipmunk.app.ui.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.statusBar
+import com.apx6.chipmunk.app.ui.vms.AppUpdateViewModel
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.dialog.AppUpdateDialog
 import com.apx6.chipmunk.databinding.ActivityAppUpdateBinding
