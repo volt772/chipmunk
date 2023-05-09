@@ -107,7 +107,7 @@ fun Any.getDfFromToday(): Int {
  * D-Day String Maker
  * @desc "yy.MM.dd (D-NN)"
  */
-fun convertDateLabel(_date: Long): String {
+fun convertDateLabel(_date: Long, onlyDay: Boolean = false): String {
     val dateLabel = _date.millisToFormedDate()
     val dfDays = _date.getDfFromToday()
     val dDayLabel = if (dfDays != 0) {
@@ -120,7 +120,13 @@ fun convertDateLabel(_date: Long): String {
         "D Day"
     }
 
-    return "%s (%s)".format(dateLabel, dDayLabel)
+    val label = if (onlyDay) {
+        "(%s)".format(dDayLabel)
+    } else {
+        "%s (%s)".format(dateLabel, dDayLabel)
+    }
+
+    return label
 }
 
 

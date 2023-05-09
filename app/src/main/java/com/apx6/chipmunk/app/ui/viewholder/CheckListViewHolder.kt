@@ -22,12 +22,14 @@ class CheckListViewHolder(
 
         binding.apply {
             tvChecklistTitle.text = cl.title
-            tvDay.text = convertDateLabel(cl.endDate)
+            tvDay.text = convertDateLabel(cl.endDate, true)
 
             val dfDays = cl.endDate.getDfFromToday()
-            tvDay.setTextColor(
-                context.getColor(CmdCategoryDiffLabel.getColorByDiffDays(dfDays).color)
-            )
+
+            val dayColor = context.getColor(CmdCategoryDiffLabel.getColorByDiffDays(dfDays).color)
+
+            ivDayStatus.setColorFilter(dayColor)
+            tvDay.setTextColor(dayColor)
 
             tvChecklistDesc.text = cl.memo
         }

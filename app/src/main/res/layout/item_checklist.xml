@@ -6,54 +6,77 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/md_60"
-        android:paddingHorizontal="@dimen/md_16"
         android:layout_marginHorizontal="@dimen/md_8"
         android:layout_marginBottom="@dimen/md_8"
         android:background="@drawable/bg_checklist_gray_corner" >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_checklist_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tv_checklist_desc"
+        <ImageView
+            android:id="@+id/iv_day_status"
+            android:layout_width="@dimen/md_10"
+            android:layout_height="@dimen/md_0"
+            android:src="@drawable/bg_rect"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" >
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-            <!-- 이름-->
-            <TextView
-                android:id="@+id/tv_checklist_title"
-                android:layout_width="@dimen/md_0"
-                android:layout_height="wrap_content"
-                style="@style/DashBoardCheckListTitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tv_day"
-                android:layout_marginEnd="@dimen/md_10"
-                tools:text="checklist name" />
-
-            <!-- D Day-->
-            <TextView
-                android:id="@+id/tv_day"
-                android:layout_width="@dimen/md_0"
-                android:layout_height="wrap_content"
-                style="@style/DashBoardCheckListDay"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="D Day" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!-- 간략설명-->
-        <TextView
-            android:id="@+id/tv_checklist_desc"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_checklist_root"
             android:layout_width="@dimen/md_0"
             android:layout_height="wrap_content"
-            style="@style/DashBoardCheckListDesc"
-            android:maxLines="1"
-            android:ellipsize="end"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_checklist_info"
+            android:layout_marginStart="@dimen/md_8"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="@tools:sample/full_names" />
+            app:layout_constraintStart_toEndOf="@id/iv_day_status"
+            app:layout_constraintEnd_toEndOf="parent" >
+
+                <!-- 이름-->
+                <TextView
+                    android:id="@+id/tv_checklist_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/DashBoardCheckListTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/cl_checklist_info"
+                    android:layout_marginEnd="@dimen/md_10"
+                    tools:text="checklist nameaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_checklist_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_checklist_title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" >
+
+                <!-- 간략설명-->
+                <TextView
+                    android:id="@+id/tv_checklist_desc"
+                    android:layout_width="@dimen/md_0"
+                    android:layout_height="wrap_content"
+                    style="@style/DashBoardCheckListDesc"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_day"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:text="aaaaaaaaaaaaaaaaaaaaaaaaa" />
+
+                <!-- D Day-->
+                <TextView
+                    android:id="@+id/tv_day"
+                    android:layout_width="@dimen/md_0"
+                    android:layout_height="wrap_content"
+                    style="@style/DashBoardCheckListDay"
+                    android:layout_marginEnd="@dimen/md_8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="D Day" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
