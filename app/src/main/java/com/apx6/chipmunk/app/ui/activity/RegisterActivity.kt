@@ -11,6 +11,7 @@ import com.apx6.chipmunk.app.constants.CmdCategoryDialogType
 import com.apx6.chipmunk.app.ext.formedDateToMillis
 import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.getTodaySeparate
+import com.apx6.chipmunk.app.ext.hideKeyboard
 import com.apx6.chipmunk.app.ext.millisToFormedDate
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
@@ -182,34 +183,46 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                 finish()
             }
 
-            aetDate.setOnSingleClickListener {
-                DaysCalendar.datePickerDialog(this@RegisterActivity, calListener).show()
+            aetDate.apply {
+                setOnSingleClickListener {
+                    DaysCalendar.datePickerDialog(this@RegisterActivity, calListener).show()
+                }
+
+                doOnTextChanged { text, _, _, _ ->
+                    msDate.value = text.toString()
+                }
+
+                setOnFocusChangeListener { _, hasFocus ->
+                    hideKeyboard()
+                }
             }
 
-            aetDate.doOnTextChanged { text, _, _, _ ->
-                msDate.value = text.toString()
-            }
+            aetCategory.apply {
+                setOnFocusChangeListener { _, hasFocus ->
+                    hideKeyboard()
+                }
 
-            aetCategory.doOnTextChanged { text, _, _, _ ->
-                msCategory.value = text.toString()
+                doOnTextChanged { text, _, _, _ ->
+                    msCategory.value = text.toString()
+                }
+
+                setOnSingleClickListener {
+                    if (categoryList.isEmpty()) {
+                        showToast(R.string.no_category_add_first, false)
+                    } else {
+                        val categoryListDialog = CategoryListDialog.newInstance(
+                            categoryList,
+                            selectedCategory,
+                            CmdCategoryDialogType.REGISTER,
+                            ::selectCategory
+                        )
+                        supportFragmentManager.beginTransaction().add(categoryListDialog, TAG).commitAllowingStateLoss()
+                    }
+                }
             }
 
             aetChecklistName.doOnTextChanged { text, _, _, _ ->
                 msCheckListName.value = text.toString()
-            }
-
-            aetCategory.setOnSingleClickListener {
-                if (categoryList.isEmpty()) {
-                    showToast(R.string.no_category_add_first, false)
-                } else {
-                    val categoryListDialog = CategoryListDialog.newInstance(
-                        categoryList,
-                        selectedCategory,
-                        CmdCategoryDialogType.REGISTER,
-                        ::selectCategory
-                    )
-                    supportFragmentManager.beginTransaction().add(categoryListDialog, TAG).commitAllowingStateLoss()
-                }
             }
 
             ivAdd.setOnSingleClickListener {

@@ -34,11 +34,12 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/md_16"
-                    android:layout_marginTop="@dimen/md_10"
+                    android:layout_marginTop="@dimen/md_30"
                     style="@style/DashBoardAppBarTitle"
                     android:layout_gravity="center"
                     app:layout_collapseMode="parallax"
-                    app:layout_collapseParallaxMultiplier="0.1" />
+                    app:layout_collapseParallaxMultiplier="0.1"
+                    tools:text="체크리스트가 있습니다." />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
