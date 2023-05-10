@@ -74,7 +74,7 @@ class FcmHelperImpl @Inject constructor(
 
             /* Notification*/
             val taskNotification = NotificationCompat.Builder(context, channelId)
-                .setSmallIcon(R.drawable.logo_app)
+                .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle(context.getString(R.string.notification_title))
                 .setContentText(msg)
                 .setStyle(textStyle)
@@ -87,7 +87,7 @@ class FcmHelperImpl @Inject constructor(
 
             /* Group Notification Builder*/
             val groupTaskNotificationBuilder = NotificationCompat.Builder(context, channelId)
-                .setSmallIcon(R.drawable.logo_app)
+                .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle(context.getString(R.string.notification_title))
                 .setContentText(msg)
                 .setChannelId(channelId)

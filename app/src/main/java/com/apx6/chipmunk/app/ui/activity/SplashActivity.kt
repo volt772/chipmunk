@@ -37,8 +37,8 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
         initView()
         splashScreen.setKeepOnScreenCondition { true }
 
-        test()
-//        observeSplashFlow()
+//        test()
+        observeSplashFlow()
     }
 
     private fun test() {
