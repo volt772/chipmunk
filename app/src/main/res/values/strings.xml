@@ -34,6 +34,11 @@
     <string name="failed_get_checklists">체크리스트를 가져오는데 실패하였습니다.</string>
     <string name="try_again">잠시 후 다시 시도해 주세요.</string>
 
+    <string name="notification_on_setting">설정에서 알림을 켜주세요.</string>
+    <string name="notification_title">종료알림</string>
+    <string name="notification_in_week">곧 종료되는 체크리스트가 %d개 있습니다. 앱에서 확인해주세요.</string>
+    <string name="notification_in_day">내일 끝나는 체크리스트가 %d개 있습니다. 앱에서 확인해주세요.</string>
+
     <string name="caution">주의</string>
     <string name="retry">재시도</string>
     <string name="register_checklist">체크리스트 등록</string>

@@ -9,12 +9,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.statusBar
+import com.apx6.chipmunk.app.fcm.FcmHelper
 import com.apx6.chipmunk.app.ui.vms.SplashViewModel
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivitySplashBinding
+import com.apx6.domain.dto.CmdNotification
 import com.apx6.domain.utils.CmdRemoteConfigCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -22,6 +25,8 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
 
     override val viewModel: SplashViewModel by viewModels()
     override fun getViewBinding(): ActivitySplashBinding = ActivitySplashBinding.inflate(layoutInflater)
+
+    @Inject lateinit var fcmHelper: FcmHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -32,7 +37,12 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
         initView()
         splashScreen.setKeepOnScreenCondition { true }
 
-        observeSplashFlow()
+        test()
+//        observeSplashFlow()
+    }
+
+    private fun test() {
+        fcmHelper.sendNotification(CmdNotification.default())
     }
 
     private fun observeSplashFlow() {

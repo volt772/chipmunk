@@ -9,6 +9,12 @@ object CmdConstants {
         const val DEFAULT_USER_AGENT = "ANDROID/NA"
     }
 
+    object FCM {
+        const val CHANNEL_ID = "channel_chipmunk"
+        const val GROUP_ID = "chipmunk_3646"
+        const val CHIPMUNK = "chipmunk"
+    }
+
     object RemoteConfig {
         const val MAIN_KEY = "up_info"
         const val VERSION = "version"

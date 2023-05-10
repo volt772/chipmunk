@@ -30,10 +30,6 @@ abstract class MapperModule {
 
     @Binds
     @Singleton
-    abstract fun bindNotificationMapper(impl: NotificationMapperImpl): NotificationMapper
-
-    @Binds
-    @Singleton
     abstract fun bindSyncMapper(impl: SyncMapperImpl): SyncMapper
 
     @Binds

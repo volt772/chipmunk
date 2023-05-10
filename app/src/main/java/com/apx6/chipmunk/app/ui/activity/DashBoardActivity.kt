@@ -1,10 +1,14 @@
 package com.apx6.chipmunk.app.ui.activity
 
+import android.Manifest
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -52,6 +56,30 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     private var filteredCategory: CmdCategory = CmdCategory.default()
 
+    private val registerForActivityResult = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val deniedPermissionList = permissions.filter { !it.value }.map { it.key }
+        when {
+            deniedPermissionList.isNotEmpty() -> {
+                val map = deniedPermissionList.groupBy { permission ->
+                    if (shouldShowRequestPermissionRationale(permission)) DENIED else EXPLAINED
+                }
+                /* 단순 거부*/
+                map[DENIED]?.let {
+                }
+
+                /* 완전 거부 (설정에서 수동으로 바꿔줘야함)*/
+                map[EXPLAINED]?.let {
+//                    showToast(R.string.notification_on_setting, false)
+                }
+            }
+            else -> {
+                // 모든 권한이 허가 되었을 때
+            }
+        }
+    }
+
     private val backCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             val intent = Intent(Intent.ACTION_MAIN).apply {
@@ -69,12 +97,19 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
         this.onBackPressedDispatcher.addCallback(this, backCallback)
 
+        checkPermission()
         setSupportActionBar(findViewById(R.id.toolbar))
 
         initView()
         subscribers()
         viewModel.getUser()
 
+    }
+
+    private fun checkPermission() {
+        registerForActivityResult.launch(
+            arrayOf(Manifest.permission.POST_NOTIFICATIONS)
+        )
     }
 
     private fun initView() {
@@ -335,5 +370,8 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     companion object {
         const val TAG = "DashBoardActivity"
         val todayMillis = getTodayMillis()
+
+        const val DENIED = "denied"
+        const val EXPLAINED = "explained"
     }
 }
