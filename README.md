@@ -1,13 +1,48 @@
-![스크린샷 2022-06-22 16 25 43](https://user-images.githubusercontent.com/57861321/174973343-6937836a-7a8f-495a-a809-2a445e71343c.png)
 
-# chipmunk
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+    <img src="https://github.com/volt772/chipmunk/blob/v1/project_thumbnail.png" alt="Logo">
+ 
+  <h3 align="center">아!그거</h3>
 
-. Project : APX6 Chipmunk The Great
+  <p align="center">
+    그거 언제까지 하더라? <br/>그거 언제 바꿔줘야 하더라? <br/>그거 언제까지 내야하지?
+  </p>
+</div>
 
-. MainVersion : 62
 
-. CodeName : Chipmunk
+<!-- ABOUT THE PROJECT -->
+## Images
+<img src="https://user-images.githubusercontent.com/57861321/227073377-115bc8be-ed57-4f94-bdb3-a9492be3dc33.png"><br/>
+<img src="https://user-images.githubusercontent.com/57861321/227073373-3355619c-82f4-423d-9b76-9bd5c2d8e61f.png"><br/>
 
-. Product : N/A - My Check Lists
 
-. Usage : For Client (Android)
+
+## Built With
+<a href="https://developer.android.com/jetpack?hl=ko"><img src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=Android&logoColor=FFFFFF"/></a>
+<a href="https://kotlinlang.org/"><img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=Kotlin&logoColor=FFFFFF"/></a>
+<a href="https://firebase.google.com/?hl=ko"><img src="https://img.shields.io/badge/firebase-FFCA28?style=flat-square&logo=firebase&logoColor=FFFFFF"/></a>
+<a href="https://developer.android.com/jetpack"><img src="https://img.shields.io/badge/jetpackcompose-4285F4?style=flat-square&logo=jetpackcompose&logoColor=FFFFFF"/></a>
+
+
+<!-- CONTACT -->
+## Project Detail
+
+* Project : APX6 Chipmunk The Great
+
+* MainVersion : 62
+
+* CodeName : Chipmunk
+
+* Product : 아!그거 - 내 머리속의 간단 체크리스트
+
+* Usage : Android
+
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Allen Jeong - volt772@naver.com
