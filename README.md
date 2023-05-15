@@ -14,8 +14,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## Images
-<img src="https://user-images.githubusercontent.com/57861321/227073377-115bc8be-ed57-4f94-bdb3-a9492be3dc33.png"><br/>
-<img src="https://user-images.githubusercontent.com/57861321/227073373-3355619c-82f4-423d-9b76-9bd5c2d8e61f.png"><br/>
+<img src="https://github.com/volt772/chipmunk/blob/v1/thumbnails/prj_thumbnail.png"><br/>
 
 
 
@@ -35,7 +34,7 @@
 
 * CodeName : Chipmunk
 
-* Product : 아!그거 - 내 머리속의 간단 체크리스트
+* Product : 아!그거 - 내 간단 체크리스트
 
 * Usage : Android
 
