@@ -6,6 +6,7 @@ import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
 import org.joda.time.LocalDate
 import org.joda.time.Period
+import org.joda.time.format.ISODateTimeFormat.date
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -77,13 +78,25 @@ fun Long?.millisToFormedDate(format : String = BASE_DATE_FORMATE): String {
     return formed
 }
 
+fun getMillis(d: Long): Long {
+    val offset: Int = TimeZone.getDefault().getOffset(d)
+    return (d + offset) / 86400000L * 86400000L - offset
+}
+
 /**
  * Today Millis
  */
 fun getTodayMillis(): Long {
     val d = Date().time
-    val offset: Int = TimeZone.getDefault().getOffset(d)
-    return (d + offset) / 86400000L * 86400000L - offset
+    return getMillis(d)
+}
+
+fun getWeekMillis(): Long {
+    val d = Date()
+    val cal = Calendar.getInstance()
+    cal.setTime(d)
+    cal.add(Calendar.DAY_OF_YEAR, 7)
+    return getMillis(cal.time.time)
 }
 
 /**
@@ -129,6 +142,20 @@ fun convertDateLabel(_date: Long, onlyDay: Boolean = false): String {
     return label
 }
 
+fun getTimeUsingInWorkRequest() : Long {
+    val currentDate = Calendar.getInstance()
+    val dueDate = Calendar.getInstance()
+
+    dueDate.set(Calendar.HOUR_OF_DAY, 10)
+    dueDate.set(Calendar.MINUTE, 20)
+    dueDate.set(Calendar.SECOND, 0)
+
+    if(dueDate.before(currentDate)) {
+        dueDate.add(Calendar.HOUR_OF_DAY, 24)
+    }
+
+    return dueDate.timeInMillis - currentDate.timeInMillis
+}
 
 fun getTodaySeparate(type: String): Int {
     val localDate = LocalDate()

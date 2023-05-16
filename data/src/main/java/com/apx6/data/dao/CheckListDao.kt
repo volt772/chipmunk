@@ -50,6 +50,16 @@ abstract class CheckListDao : BaseDao<CheckList>() {
     )
     abstract fun getCheckListWithCategory(clId: Int): Flow<CmdCheckListWithCategory?>
 
+    @Query(
+        value =
+        """
+        SELECT *
+        FROM ${CheckList.TABLE_NAME}
+        WHERE endDate BETWEEN :todayMillis AND :weekMillis
+        """
+    )
+    abstract fun getCheckListsInWeek(todayMillis: Long, weekMillis: Long): Flow<List<CmdCheckList>>
+
     /* ▼ INSERT ==========================================================================================================================*/
 
     /* ▼ UPDATE ==========================================================================================================================*/

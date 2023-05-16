@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class CheckListRepositoryImpl @Inject constructor(
-    private val refinery: CmdResponseRefinery,
     private val api: KakaoMapApiService,
     private val checkListDao: CheckListDao,
     private val checkListMapper: CheckListMapper
@@ -68,6 +67,10 @@ class CheckListRepositoryImpl @Inject constructor(
         }
 
         return result
+    }
+
+    override suspend fun getCheckListInWeek(todayMillis: Long, weekMillis: Long): Flow<List<CmdCheckList>> {
+        return checkListDao.getCheckListsInWeek(todayMillis, weekMillis)
     }
 
     override suspend fun patchCheckList(checkList: CmdCheckList): Boolean {

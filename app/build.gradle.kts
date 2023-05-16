@@ -103,6 +103,8 @@ dependencies {
     implementation(Android.splashScreen)
     implementation(Android.legacySupport)
     implementation(Android.fragmentKtx)
+    implementation(Android.workRunTime)
+    implementation(Android.workRunTimeKtx)
 
     /* LifeCycle*/
     implementation(Lifecycle.viewModel)
@@ -131,6 +133,8 @@ dependencies {
     /* Hilt*/
     implementation(Hilt.dagger)
     kapt(Hilt.compiler)
+    implementation(Hilt.worker)
+    kapt(Hilt.workerCompiler)
 
     /* Badge Count*/
     implementation(Badge.shortcutBadge)

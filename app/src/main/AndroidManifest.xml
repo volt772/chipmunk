@@ -107,6 +107,12 @@
             android:exported="false"
             android:name=".app.fcm.FcmBroadcastReceiver" />
 
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            tools:node="remove">
+        </provider>
+
 
 
         <!-- ▼ TEST ==================================================================================================================== -->

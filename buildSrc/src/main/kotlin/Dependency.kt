@@ -25,6 +25,8 @@ object Android {
     const val splashScreen = "androidx.core:core-splashscreen:1.0.1"
     const val legacySupport = "androidx.legacy:legacy-support-v4:1.0.0"
     const val fragmentKtx = "androidx.fragment:fragment-ktx:1.5.5"
+    const val workRunTime = "androidx.work:work-runtime:2.8.0"
+    const val workRunTimeKtx = "androidx.work:work-runtime-ktx:2.8.0"
 }
 
 object Coroutines {
@@ -77,6 +79,8 @@ object Joda {
 object Hilt {
     const val dagger = "com.google.dagger:hilt-android:2.45"
     const val compiler = "com.google.dagger:hilt-android-compiler:2.45"
+    const val worker = "androidx.hilt:hilt-work:1.0.0"
+    const val workerCompiler = "androidx.hilt:hilt-compiler:1.0.0"
 }
 
 object Badge {

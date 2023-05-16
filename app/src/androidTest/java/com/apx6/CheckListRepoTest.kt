@@ -1,6 +1,8 @@
 package com.apx6
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.apx6.chipmunk.app.ext.getTodayMillis
+import com.apx6.chipmunk.app.ext.getWeekMillis
 import com.apx6.data.db.CmdDatabase
 import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.dto.CmdCheckList
@@ -11,6 +13,8 @@ import com.apx6.utils.TestCoroutineRule
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.runBlocking
 import org.junit.*
 import org.junit.runner.RunWith
@@ -80,6 +84,27 @@ class CheckListRepoTest {
 
                 checkListRepository.postCheckList(sampleCheckList)
             }
+
+        }
+
+        println("[TEST] probe : ==========================================================================================================================================")
+    }
+
+
+    @Test
+    fun test02_get_checklist_in_week() {
+
+        runBlocking {
+            val todayMillis = getTodayMillis()
+            val weekMillis = getWeekMillis()
+
+            val cl = checkListRepository.getCheckListInWeek(todayMillis, weekMillis)
+
+            cl.collectLatest {
+                println("probe :: test :: today : $todayMillis, week : $weekMillis, checklist : $it")
+            }
+
+            println("probe :: test :: checklist : $cl")
 
         }
 
