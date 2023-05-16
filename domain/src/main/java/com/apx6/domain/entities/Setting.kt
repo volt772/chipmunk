@@ -5,6 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.apx6.domain.constants.CmdSettingType
 import com.apx6.domain.entities.Setting.Companion.TABLE_NAME
 import com.apx6.domain.entities.converter.CmdSettingTypeConverter
 
@@ -20,6 +21,7 @@ import com.apx6.domain.entities.converter.CmdSettingTypeConverter
     ],
     indices = [
         Index(value = ["id"], unique = true),
+        Index(value = ["key"], unique = true),
     ]
 )
 data class Setting(
@@ -29,7 +31,7 @@ data class Setting(
     var uid: Int,
 
     @TypeConverters(CmdSettingTypeConverter::class)
-    var key: String,
+    var key: CmdSettingType,
 
     var value: String,
 
