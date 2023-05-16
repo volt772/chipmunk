@@ -209,18 +209,51 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/md_18"
                             android:text="@string/app_info"
                             android:theme="@style/SettingMenuLabel"
-                            android:paddingHorizontal="@dimen/md_18"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <!-- Box 3 : 사용자 OUT 컨트롤-->
+                <!-- Box 3 : 알림 컨트롤-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_notification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/md_24"
+                    android:background="@drawable/bg_setting"
+                    android:paddingHorizontal="@dimen/md_18"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cl_settings" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/SettingMenuLabel"
+                        android:text="@string/notification_setting"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/sw_notification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/md_56"
+                        style="@style/SwitchSelector"
+                        app:switchMinWidth="@dimen/md_48"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Box 4 : 사용자 OUT 컨트롤-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_user_out"
                     android:layout_width="match_parent"
@@ -229,7 +262,7 @@
                     android:background="@drawable/bg_setting"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cl_settings" >
+                    app:layout_constraintTop_toBottomOf="@id/cl_notification" >
 
                     <!-- Box 3-1 : 로그아웃-->
                     <androidx.constraintlayout.widget.ConstraintLayout

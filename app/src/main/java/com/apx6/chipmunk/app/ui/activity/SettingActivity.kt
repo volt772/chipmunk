@@ -55,7 +55,24 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
             clAppInfo.setOnSingleClickListener {
                 moveToAppInfo()
             }
+
+            clNotification.setOnClickListener {
+                val isChecked = swNotification.isChecked
+//                notificationSet(isChecked)
+//                setPushNotification(isChecked)
+            }
+
+            swNotification.setOnClickListener {
+                val isChecked = swNotification.isChecked
+//                notificationSet(isChecked)
+//                setPushNotification(isChecked)
+            }
         }
+    }
+
+    private fun notificationSet(isAvailable: Boolean) {
+        if (isAvailable != binding.swNotification.isChecked)
+            binding.swNotification.isChecked = isAvailable
     }
 
     private fun moveToCategoryManage() {

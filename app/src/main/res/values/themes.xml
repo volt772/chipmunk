@@ -159,4 +159,10 @@
         <item name="android:textSize">@dimen/md_16</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <!-- SwitchSelector -->
+    <style name="SwitchSelector" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="thumbTint">@color/selector_pin</item>
+        <item name="trackTint">@color/selector_track</item>
+    </style>
 </resources>
