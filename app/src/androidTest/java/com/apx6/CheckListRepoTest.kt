@@ -1,6 +1,7 @@
 package com.apx6
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.apx6.chipmunk.app.ext.getDfFromToday
 import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.getWeekMillis
 import com.apx6.data.db.CmdDatabase
@@ -95,16 +96,22 @@ class CheckListRepoTest {
     fun test02_get_checklist_in_week() {
 
         runBlocking {
-            val todayMillis = getTodayMillis()
-            val weekMillis = getWeekMillis()
+            val tomorrowMillis = getWeekMillis(1)
+            val weekMillis = getWeekMillis(7)
 
-            val cl = checkListRepository.getCheckListInWeek(todayMillis, weekMillis)
+            val cl = checkListRepository.getCheckListInWeek(tomorrowMillis, weekMillis)
 
-            cl.collectLatest {
-                println("probe :: test :: today : $todayMillis, week : $weekMillis, checklist : $it")
+            val dfToday = cl.filter {
+                val df = it.endDate.getDfFromToday()
+                df == 0
             }
 
-            println("probe :: test :: checklist : $cl")
+            val dfFuture = cl.filter {
+                val df = it.endDate.getDfFromToday()
+                df > 0
+            }
+
+            println("probe :: test :: dfToday : ${dfToday.size}, dfFuture : ${dfFuture.size}")
 
         }
 

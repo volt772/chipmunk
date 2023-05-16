@@ -69,8 +69,8 @@ class CheckListRepositoryImpl @Inject constructor(
         return result
     }
 
-    override suspend fun getCheckListInWeek(todayMillis: Long, weekMillis: Long): Flow<List<CmdCheckList>> {
-        return checkListDao.getCheckListsInWeek(todayMillis, weekMillis)
+    override suspend fun getCheckListInWeek(tomorrowMillis: Long, weekMillis: Long): List<CmdCheckList> {
+        return checkListDao.getCheckListsInWeek(tomorrowMillis, weekMillis)
     }
 
     override suspend fun patchCheckList(checkList: CmdCheckList): Boolean {

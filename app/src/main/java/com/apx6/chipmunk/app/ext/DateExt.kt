@@ -91,11 +91,11 @@ fun getTodayMillis(): Long {
     return getMillis(d)
 }
 
-fun getWeekMillis(): Long {
+fun getWeekMillis(day: Int): Long {
     val d = Date()
     val cal = Calendar.getInstance()
     cal.setTime(d)
-    cal.add(Calendar.DAY_OF_YEAR, 7)
+    cal.add(Calendar.DAY_OF_YEAR, day)
     return getMillis(cal.time.time)
 }
 
@@ -146,8 +146,8 @@ fun getTimeUsingInWorkRequest() : Long {
     val currentDate = Calendar.getInstance()
     val dueDate = Calendar.getInstance()
 
-    dueDate.set(Calendar.HOUR_OF_DAY, 10)
-    dueDate.set(Calendar.MINUTE, 20)
+    dueDate.set(Calendar.HOUR_OF_DAY, 17)
+    dueDate.set(Calendar.MINUTE, 0)
     dueDate.set(Calendar.SECOND, 0)
 
     if(dueDate.before(currentDate)) {

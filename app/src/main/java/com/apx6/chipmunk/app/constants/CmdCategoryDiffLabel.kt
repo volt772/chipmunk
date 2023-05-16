@@ -6,9 +6,10 @@ enum class CmdCategoryDiffLabel (
     val color: Int
 ) {
 
-    FUTURE(R.color.material_green_700),
-    ON_DAY(R.color.material_amber_700),
-    PAST(R.color.material_gray_600),
+    IN_WEEK(R.color.label_week),
+    IN_TOMORROW(R.color.label_tomorrow),
+    ON_DAY(R.color.label_today),
+    PAST(R.color.label_past),
     OTHER(0);
 
     companion object {
@@ -16,9 +17,12 @@ enum class CmdCategoryDiffLabel (
             return if (df == 0) {
                 /* ON_DAY*/
                 ON_DAY
-            } else if (df > 0) {
+            } else if (df == 1) {
+                /* IN_TOMORROW*/
+                IN_TOMORROW
+            } else if (df > 1) {
                 /* FUTURE*/
-                FUTURE
+                IN_WEEK
             } else {
                 /* PAST*/
                 PAST

@@ -55,10 +55,10 @@ abstract class CheckListDao : BaseDao<CheckList>() {
         """
         SELECT *
         FROM ${CheckList.TABLE_NAME}
-        WHERE endDate BETWEEN :todayMillis AND :weekMillis
+        WHERE endDate BETWEEN :tomorrowMillis AND :weekMillis
         """
     )
-    abstract fun getCheckListsInWeek(todayMillis: Long, weekMillis: Long): Flow<List<CmdCheckList>>
+    abstract fun getCheckListsInWeek(tomorrowMillis: Long, weekMillis: Long): List<CmdCheckList>
 
     /* ▼ INSERT ==========================================================================================================================*/
 
