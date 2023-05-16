@@ -61,7 +61,28 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Box 0 : 리스트-->
+        <!-- Box 0 : 앱로고-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_info_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/md_18"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/abl_setting" >
+
+            <ImageView
+                android:id="@+id/iv_splash_logo"
+                android:layout_width="@dimen/md_200"
+                android:layout_height="@dimen/md_200"
+                android:src="@drawable/logo_app"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Box 1 : 리스트-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_info"
             android:layout_width="match_parent"
@@ -71,7 +92,7 @@
             android:background="@drawable/bg_setting"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/abl_setting" >
+            app:layout_constraintTop_toBottomOf="@id/cl_info_logo" >
 
             <!-- Box 1 : 라이선스-->
             <androidx.constraintlayout.widget.ConstraintLayout

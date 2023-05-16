@@ -176,7 +176,7 @@
                         android:drawableStart="@drawable/ic_calendar"
                         android:cursorVisible="false"
                         android:inputType="text"
-                        android:hint="@string/date_range"
+                        android:hint="@string/end_date"
                         android:singleLine="true"
                         android:background="@null"
                         android:layout_marginEnd="@dimen/md_10"
