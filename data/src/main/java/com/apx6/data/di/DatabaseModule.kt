@@ -66,4 +66,8 @@ object DatabaseModule {
     @Singleton
     fun provideUserDao(database: CmdDatabase) = database.userDao()
 
+    @Provides
+    @Singleton
+    fun provideSettingDao(database: CmdDatabase) = database.settingDao()
+
 }

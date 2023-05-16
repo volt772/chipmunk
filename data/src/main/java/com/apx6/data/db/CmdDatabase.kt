@@ -17,7 +17,8 @@ import javax.inject.Provider
         Notification::class,
         Sync::class,
         CheckList::class,
-        User::class
+        User::class,
+        Setting::class
     ],
     version = 1,
     exportSchema = false
@@ -31,6 +32,7 @@ abstract class CmdDatabase : RoomDatabase() {
     abstract fun syncDao(): SyncDao
     abstract fun checkListDao(): CheckListDao
     abstract fun userDao(): UserDao
+    abstract fun settingDao(): SettingDao
 
     class Callback @Inject constructor(
         private val database: Provider<CmdDatabase>,

@@ -35,4 +35,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindAttachmentRepository(impl: AttachRepositoryImpl): AttachRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindSettingRepository(impl: SettingRepositoryImpl): SettingRepository
 }
