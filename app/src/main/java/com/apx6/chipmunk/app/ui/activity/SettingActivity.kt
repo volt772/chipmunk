@@ -8,11 +8,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
+import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.statusBar
-import com.apx6.chipmunk.app.ui.vms.SettingViewModel
 import com.apx6.chipmunk.app.ui.base.BaseActivity
+import com.apx6.chipmunk.app.ui.vms.SettingViewModel
 import com.apx6.chipmunk.databinding.ActivitySettingBinding
 import com.apx6.domain.State
+import com.apx6.domain.constants.CmdSettingValue
 import com.apx6.domain.dto.CmdUser
 import dagger.hilt.android.AndroidEntryPoint
 import io.getstream.avatarview.coil.loadImage
@@ -56,16 +58,8 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
                 moveToAppInfo()
             }
 
-            clNotification.setOnClickListener {
-                val isChecked = swNotification.isChecked
-//                notificationSet(isChecked)
-//                setPushNotification(isChecked)
-            }
-
             swNotification.setOnClickListener {
-                val isChecked = swNotification.isChecked
-//                notificationSet(isChecked)
-//                setPushNotification(isChecked)
+                postNotificationSetting()
             }
         }
     }
@@ -73,6 +67,11 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
     private fun notificationSet(isAvailable: Boolean) {
         if (isAvailable != binding.swNotification.isChecked)
             binding.swNotification.isChecked = isAvailable
+    }
+
+    private fun postNotificationSetting() {
+        val isChecked = binding.swNotification.isChecked
+        viewModel.postNotificationSetting(currUser.id, CmdSettingValue.boolToValue(isChecked))
     }
 
     private fun moveToCategoryManage() {
@@ -116,6 +115,9 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
                         setProfile(_user)
                         getCategoryCount(_user.id)
                         currUser = _user
+
+                        /* Load Notification Setting*/
+                        viewModel.fetchNotificationSetting(_user.id)
                     }
                 }
             }
@@ -140,6 +142,23 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
                 viewModel.userDeleted.collectLatest { deleted ->
                     if (deleted) {
                         moveToSplash()
+                    }
+                }
+            }
+
+            launch {
+                viewModel.setting.collectLatest { setting ->
+                    setting?.let { s ->
+                        notificationSet(CmdSettingValue.valueToBool(s.value))
+                    }
+                    println("probe :: setting :: $setting")
+                }
+            }
+
+            launch {
+                viewModel.notiPosted.collectLatest { posted ->
+                    if (!posted) {
+                        showToast(getString(R.string.try_again), false)
                     }
                 }
             }
