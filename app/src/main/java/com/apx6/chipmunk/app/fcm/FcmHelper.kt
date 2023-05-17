@@ -7,12 +7,6 @@ interface FcmHelper {
     val fcmToken: String
 
     fun sendNotification(nt: CmdNotification)
-//
-//    fun sendNotification(
-//        id: Int,
-//        notificationDto: MpdFcmNotificationDto,
-//        response: MpdFcmResponse
-//    )
-//
+
     fun setFcmToken()
 }

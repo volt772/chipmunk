@@ -6,8 +6,6 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -15,10 +13,15 @@ import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.di.IoDispatcher
 import com.apx6.chipmunk.app.ui.activity.DashBoardActivity
 import com.apx6.domain.constants.CmdConstants
+import com.apx6.domain.constants.CmdSettingType
+import com.apx6.domain.constants.CmdSettingValue
 import com.apx6.domain.dto.CmdNotification
+import com.apx6.domain.repository.SettingRepository
+import com.apx6.domain.repository.UserRepository
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.Random
 import javax.inject.Inject
@@ -26,9 +29,9 @@ import javax.inject.Inject
 
 class FcmHelperImpl @Inject constructor(
     private val context: Context,
-//    private val spacesDao: SpacesDao,
-//    private val badgeCountHelper: BadgeCountHelper,
-    @IoDispatcher val ioDispatcher: CoroutineDispatcher
+    @IoDispatcher val ioDispatcher: CoroutineDispatcher,
+    private val userRepository: UserRepository,
+    private val settingRepository: SettingRepository
 ) : FcmHelper {
 
     private var fToken: String = ""
@@ -38,10 +41,31 @@ class FcmHelperImpl @Inject constructor(
             return fToken
         }
 
-    @SuppressLint("MissingPermission")
     override fun sendNotification(
         nt: CmdNotification
     ) {
+
+        CoroutineScope(ioDispatcher).launch {
+            val uid = userRepository.getUserId()
+            uid.collectLatest { _uid ->
+                _uid?.let {
+                    val notificationSetting = settingRepository.fetchSetting(_uid, CmdSettingType.NOTIFICATION)
+
+                    notificationSetting.collectLatest { _notificationSetting ->
+                        _notificationSetting?.let { ns ->
+                            val notificationAvailable = CmdSettingValue.valueToBool(ns.value)
+                            if (notificationAvailable) {
+                                makeNotification(nt)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun makeNotification(nt: CmdNotification) {
 
         val endDay = nt.endDay
         val comingCount = nt.onComingCount
