@@ -1,8 +1,10 @@
 package com.apx6.domain.entities
 
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
-import com.apx6.domain.constants.CmdEntityTags
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import com.apx6.domain.entities.CheckList.Companion.TABLE_NAME
 
 @Entity(
@@ -26,7 +28,6 @@ import com.apx6.domain.entities.CheckList.Companion.TABLE_NAME
 data class CheckList(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = CmdEntityTags.ID)
     val id: Int = 0,
 
     var cid: Int,

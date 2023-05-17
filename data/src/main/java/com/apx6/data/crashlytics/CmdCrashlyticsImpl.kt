@@ -17,11 +17,6 @@ class CmdCrashlyticsImpl @Inject constructor() : CmdCrashlytics {
         } catch (ignorable: Exception) {}
     }
 
-    /**
-     * 도메인 정보 키 설정
-     * @desc { 'domain' : 'mailplug.co.kr' }
-     * + Crashlytics는 최대 64개의 키-값 쌍을 지원합니다. 이 기준에 도달한 후에는 추가 값이 저장되지 않습니다. 각 키-값 쌍의 최대 크기는 1KB입니다.
-     */
     override fun setEmail(emailAddress: String?) {
         try {
             val email = if (emailAddress.isNullOrBlank()) NONE_DOMAIN else emailAddress

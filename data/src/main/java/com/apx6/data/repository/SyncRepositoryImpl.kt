@@ -19,8 +19,7 @@ class SyncRepositoryImpl @Inject constructor(
     override suspend fun sync(sync: CmdSync): Flow<Resource<CmdSync?>> {
         return object: LocalBoundaryRepository<CmdSync?, CmdSync>() {
             override suspend fun postToLocal(obj: CmdSync) {
-//                val entity = convertToEntity(response)
-//                syncDao.insertOrUpdate(entity)
+
             }
 
             override fun fetchFromLocal(): Flow<CmdSync?> {

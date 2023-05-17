@@ -61,11 +61,6 @@ class CategoryListDialog : BaseBottomSheetDialog<DialogCategoryListBinding, List
         }
     }
 
-//    private fun scrollToCenter(position: Int, height: Int) {
-//        val layoutManager = binding.rvCategoryList.layoutManager as LinearLayoutManager
-//        layoutManager.scrollToPositionWithOffset(position, height / 3)
-//    }
-
     companion object {
         fun newInstance(
             categoryList: List<CmdCategory>,

@@ -46,8 +46,6 @@ class CmdRemoteConfigMgrImpl @Inject constructor(
                         "Update NOT Needed : $updated, currentAppVersion : $currentVersion"
                     }
 
-                    println("probe :: version :: fetch : $msg")
-
                     callback.success(updated)
                 } else {
                     msg = "Update FetchAndActivate Failed"

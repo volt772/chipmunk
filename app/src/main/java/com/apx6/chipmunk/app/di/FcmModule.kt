@@ -1,7 +1,5 @@
 package com.apx6.chipmunk.app.di
 
-import com.apx6.chipmunk.app.fcm.BadgeCountHelper
-import com.apx6.chipmunk.app.fcm.BadgeCountHelperImpl
 import com.apx6.chipmunk.app.fcm.FcmHelper
 import com.apx6.chipmunk.app.fcm.FcmHelperImpl
 import dagger.Binds
@@ -21,9 +19,5 @@ abstract class FcmModule {
     @Binds
     @Singleton
     abstract fun bindFcmHelper(impl: FcmHelperImpl): FcmHelper
-
-    @Binds
-    @Singleton
-    abstract fun bindBadgeCountHelper(impl: BadgeCountHelperImpl): BadgeCountHelper
 
 }

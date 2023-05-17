@@ -7,6 +7,4 @@ interface CategoryMapper {
 
     suspend fun categoryToEntity(category: CmdCategory): Category
 
-//    suspend fun entityToUserFlow(user: Flow<UserEntity>): Flow<CmdUser>
-
 }

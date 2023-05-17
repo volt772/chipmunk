@@ -75,10 +75,6 @@
             android:exported="false" />
 
         <activity
-            android:name=".app.ui.picker.RangePickerActivity"
-            android:label="Date Range Picker" />
-
-        <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
@@ -128,7 +124,7 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_notification"
+            android:resource="@drawable/ic_fcm_small"
             />
     </application>
 </manifest>

@@ -7,6 +7,4 @@ interface UserMapper {
 
     suspend fun userToEntity(user: CmdUser): User
 
-//    suspend fun entityToUserFlow(user: Flow<UserEntity>): Flow<CmdUser>
-
 }

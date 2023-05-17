@@ -1,6 +1,5 @@
 package com.apx6.chipmunk.app.fcm
 
-import com.apx6.domain.dto.CmdNotification
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import dagger.hilt.android.AndroidEntryPoint
@@ -9,7 +8,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class FcmService : FirebaseMessagingService() {
 
-//    @Inject lateinit var mpdError: MpdError
     @Inject
     lateinit var fcmHelper: FcmHelper
 

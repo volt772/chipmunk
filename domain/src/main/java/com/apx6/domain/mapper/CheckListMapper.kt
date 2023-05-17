@@ -7,6 +7,4 @@ interface CheckListMapper {
 
     suspend fun checkListToEntity(checkList: CmdCheckList): CheckList
 
-//    suspend fun entityToUserFlow(user: Flow<UserEntity>): Flow<CmdUser>
-
 }

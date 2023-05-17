@@ -10,9 +10,7 @@ import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.getTimeUsingInWorkRequest
 import com.apx6.chipmunk.app.worker.ReminderWorker
 import com.kakao.sdk.common.KakaoSdk
-import com.kakao.sdk.common.util.Utility
 import dagger.hilt.android.HiltAndroidApp
-import java.util.Calendar
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -23,20 +21,12 @@ class ChipmunkApp : Application(), Configuration.Provider {
     @Inject
     lateinit var workerFactory: HiltWorkerFactory
 
-
-//    @Inject lateinit var crashlytics: MpCrashlytics
-
     override fun onCreate() {
         super.onCreate()
 
         appContext = applicationContext
 
         KakaoSdk.init(this, getString(R.string.kakao_app_key))
-
-        /* 플랫폼 등록용*/
-        val keyHash = Utility.getKeyHash(this)
-
-//        crashlytics.collectionEnabled(!BuildConfig.DEBUG)
 
         initWorkManager()
     }
@@ -62,5 +52,4 @@ class ChipmunkApp : Application(), Configuration.Provider {
 
         const val WORK_TAG = "chipmunk_reminder"
     }
-
 }

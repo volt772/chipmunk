@@ -141,9 +141,6 @@ class FcmHelperImpl @Inject constructor(
 
             notificationManager.createNotificationChannel(channel)
 
-            /* Set Badge Count*/
-//            setBadge()
-
             /* Execute Notification*/
             NotificationManagerCompat.from(context).apply {
                 notify(1, taskNotification)
@@ -155,14 +152,6 @@ class FcmHelperImpl @Inject constructor(
             }
         }
     }
-
-
-    /* BadgeCount*/
-//    private fun setBadge() {
-//        badgeCountHelper.badgeCount().run {
-//            ShortcutBadger.applyCount(context, this)
-//        }
-//    }
 
     /**
      * 알림박스 스타일

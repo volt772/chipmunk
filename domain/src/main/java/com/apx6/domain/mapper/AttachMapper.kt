@@ -7,6 +7,4 @@ interface AttachMapper {
 
     suspend fun attachToEntity(attachment: CmdAttachment): Attachment
 
-//    suspend fun entityToUserFlow(user: Flow<UserEntity>): Flow<CmdUser>
-
 }

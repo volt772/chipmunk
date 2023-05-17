@@ -29,6 +29,4 @@ interface CheckListRepository {
 
     suspend fun delCheckList(checkList: CmdCheckList): Boolean
 
-//    suspend fun getLocation(query: String): Flow<Resource<CmdLocation>>
-
 }

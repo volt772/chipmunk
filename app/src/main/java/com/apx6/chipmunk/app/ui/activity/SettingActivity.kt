@@ -151,7 +151,6 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
                     setting?.let { s ->
                         notificationSet(CmdSettingValue.valueToBool(s.value))
                     }
-                    println("probe :: setting :: $setting")
                 }
             }
 
