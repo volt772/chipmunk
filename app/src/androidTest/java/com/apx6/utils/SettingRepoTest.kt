@@ -11,6 +11,7 @@ import com.apx6.domain.repository.SettingRepository
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.runBlocking
 import org.junit.*
 import org.junit.runner.RunWith
@@ -75,6 +76,22 @@ class SettingRepoTest {
 
                 val result = settingRepository.post(setting)
                 println("probe :: setting :: test :: $result")
+            }
+        }
+
+        println("[TEST] probe : ==========================================================================================================================================")
+    }
+
+    @Test
+    fun test02_get_setting() {
+
+        user?.let { u ->
+            runBlocking {
+                val result = settingRepository.getNotification(u.id)
+
+                result.collectLatest {
+                    println("probe :: setting :: test :: $it")
+                }
             }
         }
 
