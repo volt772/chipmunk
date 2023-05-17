@@ -45,6 +45,21 @@ class FcmHelperImpl @Inject constructor(
         nt: CmdNotification
     ) {
 
+        val endDay = nt.endDay
+        val comingCount = nt.onComingCount
+
+        val msg = when (endDay) {
+            7 -> context.getString(R.string.notification_in_week, comingCount)
+            1 -> context.getString(R.string.notification_in_day, comingCount)
+            else -> ""
+        }
+
+        if (msg.isNotBlank()) {
+            checkNotificationIsOn(msg)
+        }
+    }
+
+    private fun checkNotificationIsOn(msg: String) {
         CoroutineScope(ioDispatcher).launch {
             val uid = userRepository.getUserId()
             uid.collectLatest { _uid ->
@@ -55,7 +70,7 @@ class FcmHelperImpl @Inject constructor(
                         _notificationSetting?.let { ns ->
                             val notificationAvailable = CmdSettingValue.valueToBool(ns.value)
                             if (notificationAvailable) {
-                                makeNotification(nt)
+                                makeNotification(msg)
                             }
                         }
                     }
@@ -65,16 +80,7 @@ class FcmHelperImpl @Inject constructor(
     }
 
     @SuppressLint("MissingPermission")
-    private fun makeNotification(nt: CmdNotification) {
-
-        val endDay = nt.endDay
-        val comingCount = nt.onComingCount
-
-        val msg = if (endDay == 7) {
-            context.getString(R.string.notification_in_week, comingCount)
-        } else {
-            context.getString(R.string.notification_in_day, comingCount)
-        }
+    private fun makeNotification(msg: String) {
 
         CoroutineScope(ioDispatcher).launch {
 

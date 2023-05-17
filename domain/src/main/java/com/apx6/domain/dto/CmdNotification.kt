@@ -14,8 +14,8 @@ data class CmdNotification (
     companion object {
         fun default(): CmdNotification {
             return CmdNotification(
-                onComingCount = 2,
-                endDay = 1
+                onComingCount = 0,
+                endDay = 0
             )
         }
     }
