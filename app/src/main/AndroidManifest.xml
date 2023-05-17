@@ -19,8 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Chipmunk"
         android:usesCleartextTraffic="true"
-        android:largeHeap="true"
-        tools:targetApi="31">
+        android:largeHeap="true" >
 
         <activity
             android:name="com.apx6.chipmunk.app.ui.activity.SplashActivity"
