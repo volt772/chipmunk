@@ -3,10 +3,9 @@ package com.apx6.utils
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.apx6.data.db.CmdDatabase
 import com.apx6.domain.constants.CmdSettingType
-import com.apx6.domain.dto.CmdCategory
+import com.apx6.domain.constants.CmdSettingValue
 import com.apx6.domain.dto.CmdSetting
 import com.apx6.domain.dto.CmdUser
-import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.SettingRepository
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -67,14 +66,14 @@ class SettingRepoTest {
                 val setting = CmdSetting(
                     uid = u.id,
                     key = CmdSettingType.NOTIFICATION,
-                    value = "OFF",
-                    ext1 = "",
-                    ext2 = "",
-                    ext3 = "",
+                    value = CmdSettingValue.ON.value,
+//                    ext1 = "",
+//                    ext2 = "",
+//                    ext3 = "",
                     setDate = currMillis
                 )
 
-                val result = settingRepository.post(setting)
+                val result = settingRepository.postSetting(setting)
                 println("probe :: setting :: test :: $result")
             }
         }
@@ -83,11 +82,11 @@ class SettingRepoTest {
     }
 
     @Test
-    fun test02_get_setting() {
+    fun test02_fetch_setting() {
 
         user?.let { u ->
             runBlocking {
-                val result = settingRepository.getNotification(u.id)
+                val result = settingRepository.fetchSetting(u.id, CmdSettingType.NOTIFICATION)
 
                 result.collectLatest {
                     println("probe :: setting :: test :: $it")

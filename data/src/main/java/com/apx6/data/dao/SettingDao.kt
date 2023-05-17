@@ -15,8 +15,25 @@ abstract class SettingDao : BaseDao<Setting>() {
     /* ▼ TRANSACTION =====================================================================================================================*/
 
     /* ▼ SELECT ==========================================================================================================================*/
-    @Query("SELECT * FROM ${Setting.TABLE_NAME} WHERE uid = :uid AND `key` = 'NOTIFICATION'")
-    abstract fun getNotification(uid: Int): Flow<CmdSetting?>
+    @Query(value =
+    """
+    SELECT * 
+    FROM ${Setting.TABLE_NAME} 
+    WHERE uid = :uid 
+    AND `key` = :key
+    """
+    )
+    abstract fun getSetting(uid: Int, key: CmdSettingType): CmdSetting?
+
+    @Query(value =
+    """
+    SELECT * 
+    FROM ${Setting.TABLE_NAME} 
+    WHERE uid = :uid 
+    AND `key` = :key
+    """
+    )
+    abstract fun fetchSetting(uid: Int, key: CmdSettingType): Flow<CmdSetting?>
 
     /* ▼ INSERT ==========================================================================================================================*/
 

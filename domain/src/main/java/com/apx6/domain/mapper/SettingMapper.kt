@@ -5,6 +5,6 @@ import com.apx6.domain.entities.Setting
 
 interface SettingMapper {
 
-    suspend fun settingToEntity(setting: CmdSetting): Setting
+    suspend fun settingToEntity(setting: CmdSetting, sid: Int): Setting
 
 }

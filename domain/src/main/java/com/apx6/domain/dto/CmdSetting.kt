@@ -5,7 +5,7 @@ import com.apx6.domain.constants.CmdSettingType
 
 data class CmdSetting (
 
-    val id: Int = 0,
+    val id: Int? = 0,
 
     val uid: Int = 0,
 

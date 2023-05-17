@@ -9,9 +9,12 @@ class SettingMapperImpl @Inject constructor(
 
 ): SettingMapper {
 
-    override suspend fun settingToEntity(setting: CmdSetting): Setting {
+    override suspend fun settingToEntity(
+        setting: CmdSetting,
+        sid: Int
+    ): Setting {
         return Setting(
-            id = setting.id,
+            id = sid,
             uid = setting.uid,
             key = setting.key,
             value = setting.value,
