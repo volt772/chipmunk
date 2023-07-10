@@ -36,7 +36,7 @@
 
 * Product : 아!그거 - 내 간단 체크리스트
 
-* Usage : Android
+* Usage : Android Remind Study
 
 
 
