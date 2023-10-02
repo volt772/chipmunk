@@ -155,11 +155,6 @@ dependencies {
     implementation(Firebase.crashlytics)
     implementation(Firebase.volley)
 
-    implementation(
-        group = Kakao.Sdk.group,
-        name = Kakao.Sdk.name,
-        version = Kakao.Sdk.version
-    )
     implementation(Kakao.user)
 
     implementation(AvatarView.coil)

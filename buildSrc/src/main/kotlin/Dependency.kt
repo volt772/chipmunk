@@ -106,13 +106,7 @@ object Firebase {
 }
 
 object Kakao {
-    object Sdk {
-        const val group = "com.kakao.sdk"
-        const val name = "usermgmt"
-        const val version = "1.30.0"
-    }
-
-    const val user = "com.kakao.sdk:v2-user:2.10.0"
+    const val user = "com.kakao.sdk:v2-user:2.17.0"
 }
 
 object AvatarView {
