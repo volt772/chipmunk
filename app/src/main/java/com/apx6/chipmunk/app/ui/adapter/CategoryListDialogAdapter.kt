@@ -41,7 +41,6 @@ class CategoryListDialogViewHolder(parent: ViewGroup) : BaseViewHolder<CmdCatego
     parent,
     R.layout.item_list_category
 ) {
-    override fun bind(data: CmdCategory) { }
     fun bind(category: CmdCategory, selected: CmdCategory, listener: CategoryListDialogAdapter.OnItemClickListener?) {
         binding.apply {
             tvCategoryName.text = category.name

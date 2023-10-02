@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/design_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        style="?attr/bottomSheetStyle"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_search_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/md_18" >
+
+            <!-- Top-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_top"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_60"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" >
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="@dimen/md_28"
+                    android:layout_height="@dimen/md_28"
+                    android:src="@drawable/ic_back"
+                    android:background="?selectableItemBackgroundBorderless"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <SearchView
+                    android:id="@+id/sv_docs"
+                    android:layout_width="@dimen/md_0"
+                    android:layout_height="wrap_content"
+                    android:queryHint="@string/search"
+                    android:iconifiedByDefault="false"
+                    android:searchIcon="@null"
+                    android:layout_marginHorizontal="@dimen/md_8"
+                    android:background="@drawable/bg_rect_search_docs"
+                    android:queryBackground="@android:color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_back"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Bot : List-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_bot"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_0"
+                android:layout_marginTop="@dimen/md_20"
+                android:layout_marginBottom="@dimen/md_20"
+                app:layout_constraintTop_toBottomOf="@id/cl_search_top"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_search_bot_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/md_30"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" >
+
+                    <TextView
+                        android:id="@+id/tv_recent_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/HistoryRecentLabel"
+                        android:text="@string/recent_search"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_clear_histories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/clear_histories"
+                        style="@style/HistoryAllClearLabel"
+                        android:background="?selectableItemBackgroundBorderless"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_histories"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/md_0"
+                    android:layout_marginTop="@dimen/md_6"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constrainedHeight="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cl_search_bot_label" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Bot : Empty-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_bot_empty"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/md_0"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/md_20"
+                android:layout_marginBottom="@dimen/md_20"
+                app:layout_constraintTop_toBottomOf="@id/cl_search_top"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" >
+
+                <TextView
+                    android:id="@+id/tv_no_history_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_history"
+                    style="@style/HistoryEmpty"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

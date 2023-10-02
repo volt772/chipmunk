@@ -39,6 +39,4 @@ class CheckListViewHolder(
             selectCheckList.invoke(cl)
         }
     }
-
-    override fun bind(data: CmdCheckList) { }
 }

@@ -36,7 +36,7 @@ class OpenSourceListAdapter @Inject constructor(
         parent: ViewGroup
     ) : BaseViewHolder<CmdOpenSource, ItemOpensourceBinding>(parent, R.layout.item_opensource) {
 
-        override fun bind(os: CmdOpenSource) {
+        fun bind(os: CmdOpenSource) {
             with(binding) {
                 tvLicenseName.text = os.name
                 tvLicenseContent.text = os.description

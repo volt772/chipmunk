@@ -135,4 +135,44 @@
         <item name="android:textColor">@color/gray_h0_4</item>
     </style>
 
+    <!-- Search : History Item -->
+    <style name="HistoryItemKeyword">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/md_16</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <!-- Search : History Reg Date -->
+    <style name="HistoryItemRegDate">
+        <item name="android:textColor">@color/material_gray_500</item>
+        <item name="android:textSize">@dimen/md_14</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <!-- All : Info Message -->
+    <style name="AllInfoMessage">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/md_18</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- Search : No History -->
+    <style name="HistoryEmpty" parent="AllInfoMessage" />
+
+    <!-- Search : History Recent Label -->
+    <style name="HistoryRecentLabel">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/md_16</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Search : History All Clear Label -->
+    <style name="HistoryAllClearLabel">
+        <item name="android:textColor">@color/material_red_700</item>
+        <item name="android:textSize">@dimen/md_16</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

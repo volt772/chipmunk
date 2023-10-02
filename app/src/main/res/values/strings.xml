@@ -69,6 +69,14 @@
     <string name="opensource">오픈라이센스</string>
     <string name="app_version">앱버전</string>
 
+    <string name="search">검색</string>
+    <string name="recent_search">최근 검색</string>
+    <string name="clear_histories">모두 삭제</string>
+    <string name="no_history">최근 검색 내역이 없습니다.</string>
+
+    <string name="list_loading_failed">불러오지 못하였습니다.</string>
+    <string name="list_loading_failed_retry">재시도</string>
+
     <string name="dlg_category_title_filter">필터</string>
     <string name="dlg_category_title_select">카테고리 선택</string>
     <string name="dlg_category_title_default">카테고리</string>
@@ -90,5 +98,6 @@
     <string name="dlg_app_update_new_version">새로운 버전</string>
     <string name="dlg_app_update_description">업데이트 내용</string>
     <string name="dlg_app_update_do_update">업데이트</string>
+
 
 </resources>

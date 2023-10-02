@@ -15,7 +15,5 @@ abstract class BaseViewHolder<D, out B : ViewDataBinding>(parent: ViewGroup, @La
 
     protected val binding: B = DataBindingUtil.bind(itemView)!!
 
-    abstract fun bind(data: D)
-
     open fun recycled() {}
 }

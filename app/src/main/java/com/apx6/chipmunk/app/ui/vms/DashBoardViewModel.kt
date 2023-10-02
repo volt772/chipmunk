@@ -7,6 +7,7 @@ import com.apx6.domain.State
 import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.dto.CmdCheckList
 import com.apx6.domain.dto.CmdCheckListDetail
+import com.apx6.domain.dto.CmdHistory
 import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.CheckListRepository
@@ -48,6 +49,13 @@ class DashBoardViewModel @Inject constructor(
 
     private val _filtered: MutableSharedFlow<CmdCategory> = MutableSharedFlow()
     val filtered: SharedFlow<CmdCategory> = _filtered
+
+    /* Search Keyword*/
+    private val _query: MutableSharedFlow<String> = MutableSharedFlow()
+    val query: SharedFlow<String> = _query
+
+    private val _keywords: MutableStateFlow<State<List<CmdHistory>>> = MutableStateFlow(State.loading())
+    val keywords: StateFlow<State<List<CmdHistory>>> = _keywords
 
     fun setFilteredCategory(category: CmdCategory) {
         viewModelScope.launch {
@@ -98,6 +106,38 @@ class DashBoardViewModel @Inject constructor(
                 .map { resource -> State.fromResource(resource) }
                 .collect { state -> _category.value = state }
         }
+    }
+
+    /**
+     * History List
+     * @desc emit history model -> HistoryModel()
+     */
+    suspend fun getHistory() {
+//        viewModelScope.launch {
+//            historyRepository.getKeywords()
+//                .map { resource ->
+//                    State.fromResource(resource)
+//                }
+//                .collect { state -> _keywords.value = state }
+//        }
+    }
+
+    suspend fun postHistory(keyword: String) {
+//        viewModelScope.launch(ioDispatcher) {
+//            historyRepository.insert(keyword, currMillis)
+//        }
+    }
+
+    suspend fun delHistory(kid: Long) {
+//        viewModelScope.launch(ioDispatcher) {
+//            historyRepository.deleteKeyword(kid)
+//        }
+    }
+
+    suspend fun clearHistory() {
+//        viewModelScope.launch(ioDispatcher) {
+//            historyRepository.clearKeywords()
+//        }
     }
 
 }

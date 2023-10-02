@@ -20,6 +20,7 @@ import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.visibilityExt
+import com.apx6.chipmunk.app.model.HistoryModel
 import com.apx6.chipmunk.app.ui.vms.DashBoardViewModel
 import com.apx6.chipmunk.app.ui.adapter.CheckListAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
@@ -47,6 +48,8 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     private lateinit var menu: Menu
 
     private val checkListAdapter = CheckListAdapter(this::selectCheckList)
+
+    private val historyList: MutableList<HistoryModel> = mutableListOf()  // History Keywords
 
     private var userId: Int = 0
     private var categoryList = listOf<CmdCategory>()
@@ -126,6 +129,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
             fab.setOnSingleClickListener {
                 moveToRegister()
             }
+
 
             appBar.addOnOffsetChangedListener(object : OnOffsetChangedListener {
                 var isShow = false
@@ -235,6 +239,33 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                 }
             }
 
+            launch {
+                viewModel.keywords.collect { state ->
+                    when (state) {
+                        is State.Loading -> historyList.clear()
+                        is State.Success -> {
+                            val tmpList = mutableListOf<HistoryModel>().also { _list ->
+                                state.data.map {
+                                    _list.add(HistoryModel(
+                                        id = it.id,
+                                        keyword = it.keyword,
+                                        regDate = it.regDate
+                                    ))
+                                }
+                            }
+
+                            historyList.apply {
+                                clear()
+                                addAll(tmpList)
+                            }
+                        }
+                        is State.Error -> {
+                            showToast(R.string.list_loading_failed, false)
+                        }
+                    }
+                }
+            }
+
             /* 카테고리 리스트*/
             launch {
                 viewModel.category.collect { state ->
@@ -256,6 +287,41 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                     filteredCategory = category
                 }
             }
+        }
+    }
+
+    /**
+     * Execute Search
+     * @param query Search Keyword
+     * @desc Search & Save Keyword to Preference
+     */
+    private fun doSearch(query: String) {
+        lifecycleScope.launch {
+            query.let { _query ->
+                viewModel.postHistory(query)
+
+                /* Do Search*/
+//                viewModel.queryDocuments(_query)
+            }
+        }
+    }
+
+    /**
+     * Delete History Item
+     */
+    private fun delHistories(kid: Long) {
+        lifecycleScope.launch {
+            viewModel.delHistory(kid)
+        }
+    }
+
+    /**
+     * Clear History Items
+     * @desc Delete key 'history'
+     */
+    private fun clearHistories() {
+        lifecycleScope.launch {
+            viewModel.clearHistory()
         }
     }
 
@@ -329,6 +395,20 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         }
     }
 
+    private fun openSearchDialog() {
+        //                    val categoryListDialog = SearchDialog.newInstance(
+//                        historyList,
+//                        ::doSearch,
+//                        ::delHistories,
+//                        ::clearHistories
+//                    )
+//                    requireActivity()
+//                        .supportFragmentManager
+//                        .beginTransaction()
+//                        .add(categoryListDialog, TAG)
+//                        .commitAllowingStateLoss()
+    }
+
     private fun clearFilter() {
         viewModel.run {
             getCheckLists(userId, todayMillis)
@@ -351,6 +431,11 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         return when (item.itemId) {
             R.id.action_settings -> {
                 moveToSetting()
+                true
+            }
+
+            R.id.action_search -> {
+                openSearchDialog()
                 true
             }
 
