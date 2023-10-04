@@ -69,7 +69,7 @@
     <string name="opensource">오픈라이센스</string>
     <string name="app_version">앱버전</string>
 
-    <string name="search">검색</string>
+    <string name="search">검색 (제목, 메모)</string>
     <string name="recent_search">최근 검색</string>
     <string name="clear_histories">모두 삭제</string>
     <string name="no_history">최근 검색 내역이 없습니다.</string>

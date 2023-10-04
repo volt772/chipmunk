@@ -123,6 +123,13 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <!-- DashBoard : CheckList : Item : SubInfo -->
+    <style name="DashBoardCheckListSubInfo" parent="DashBoardCheckListCommon">
+        <item name="android:textSize">@dimen/md_13</item>
+        <item name="android:textColor">@color/gray_h0_6</item>
+        <item name="android:maxWidth">@dimen/md_130</item>
+    </style>
+
     <!-- DashBoard : CheckList : Item : DDay -->
     <style name="DashBoardCheckListDay" parent="DashBoardCheckListCommon">
         <item name="android:textSize">@dimen/md_14</item>

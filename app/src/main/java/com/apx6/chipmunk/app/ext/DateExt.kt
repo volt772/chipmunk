@@ -131,16 +131,19 @@ fun convertDateLabel(_date: Long, onlyDay: Boolean = false): String {
     val dfDays = _date.getDfFromToday()
     val dDayLabel = if (dfDays != 0) {
         if (dfDays < 0) {
-            "D+%d".format(dfDays * -1)
+//            "D+%d".format(dfDays * -1)
+            "%d일전".format(dfDays * -1)
         } else {
-            "D-%d".format(dfDays)
+//            "D-%d".format(dfDays)
+            "%d일후".format(dfDays)
         }
     } else {
-        "D Day"
+//        "D Day"
+        "오늘"
     }
 
     val label = if (onlyDay) {
-        "(%s)".format(dDayLabel)
+        "%s".format(dDayLabel)
     } else {
         "%s (%s)".format(dateLabel, dDayLabel)
     }

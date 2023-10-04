@@ -6,8 +6,7 @@ enum class CmdCategoryDiffLabel (
     val color: Int
 ) {
 
-    IN_WEEK(R.color.label_week),
-    IN_TOMORROW(R.color.label_tomorrow),
+    READY(R.color.label_ready),
     ON_DAY(R.color.label_today),
     PAST(R.color.label_past),
     OTHER(0);
@@ -17,15 +16,17 @@ enum class CmdCategoryDiffLabel (
             return if (df == 0) {
                 /* ON_DAY*/
                 ON_DAY
-            } else if (df == 1) {
-                /* IN_TOMORROW*/
-                IN_TOMORROW
-            } else if (df > 1) {
-                /* FUTURE*/
-                IN_WEEK
-            } else {
+            }
+//            else if (df == 1) {
+//                /* IN_TOMORROW*/
+//                IN_TOMORROW
+//            }
+            else if (df > 1) {
                 /* PAST*/
                 PAST
+            } else {
+                /* READY*/
+                READY
             }
         }
     }
