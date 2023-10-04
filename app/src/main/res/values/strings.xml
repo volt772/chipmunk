@@ -13,6 +13,13 @@
     <string name="dashboard_checklist_summary_future">곧 끝나는 체크리스트가\n%d개 있어요.</string>
     <string name="dashboard_checklist_summary_else">확인해야 할 체크리스트</string>
 
+    <string name="dashboard_checklist_summary_normal">아!그때 그거!</string>
+    <string name="dashboard_checklist_summary_todo">곧 해야 하는 체크리스트가 \n%d개 있어요.</string>
+    <string name="dashboard_checklist_summary_over_1w">1주일 경과된 체크리스트가 \n%d개 있어요.</string>
+    <string name="dashboard_checklist_summary_over_2w">2주일 경과된 체크리스트가 \n%d개 있어요.</string>
+    <string name="dashboard_checklist_summary_over_3w">3주일 경과된 체크리스트가 \n%d개 있어요.</string>
+    <string name="dashboard_checklist_summary_over_4w">한달 경과된 체크리스트가 \n%d개 있어요.</string>
+
     <!-- 날짜관련-->
     <string name="date_week_abbr_1">일</string>
     <string name="date_week_abbr_2">월</string>

@@ -54,6 +54,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     private var userId: Int = 0
     private var categoryList = listOf<CmdCategory>()
 
+    private var dfPastCount: Int = 0
     private var dfTodayCount: Int = 0
     private var dfFutureCount: Int = 0
 
@@ -341,6 +342,11 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     /* 뷰 : 체크리스트 요약 메세지 (상단)*/
     private fun makeCheckListSummary(cl: List<CmdCheckList>) {
+        val dfPast = cl.filter {
+            val df = it.exeDate.getDfFromToday()
+            df < 0
+        }
+
         val dfToday = cl.filter {
             val df = it.exeDate.getDfFromToday()
             df == 0
@@ -351,6 +357,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
             df > 0
         }
 
+        dfPastCount = dfPast.count()
         dfTodayCount = dfToday.count()
         dfFutureCount = dfFuture.count()
 
@@ -361,13 +368,22 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     private fun makeSummaryTitle() {
         val summaryLabel = if (dfTodayCount > 0) {
             /* 오늘기준*/
-            getString(R.string.dashboard_checklist_summary_today, dfTodayCount)
-        } else if (dfTodayCount == 0 && (dfFutureCount in 1..7)) {
-            /* 미래기준(금방)*/
-            getString(R.string.dashboard_checklist_summary_future, dfFutureCount)
+            getString(R.string.dashboard_checklist_summary_todo, dfTodayCount)
+        } else if (dfPastCount >= 30) {
+            /* 경과(한달)*/
+            getString(R.string.dashboard_checklist_summary_over_4w, dfPastCount)
+        } else if (dfPastCount >= 21) {
+            /* 경과(3주)*/
+            getString(R.string.dashboard_checklist_summary_over_3w, dfPastCount)
+        } else if (dfPastCount >= 14) {
+            /* 경과(2주)*/
+            getString(R.string.dashboard_checklist_summary_over_2w, dfPastCount)
+        } else if (dfPastCount >= 7) {
+            /* 경과(1주)*/
+            getString(R.string.dashboard_checklist_summary_over_1w, dfPastCount)
         } else {
             /* 기타*/
-            getString(R.string.dashboard_checklist_summary_else)
+            getString(R.string.dashboard_checklist_summary_normal)
         }
 
         binding.tvSummaryTitle.text = summaryLabel
