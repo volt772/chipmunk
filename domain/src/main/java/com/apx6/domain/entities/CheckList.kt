@@ -38,9 +38,7 @@ data class CheckList(
 
     var memo: String?= "",
 
-    var startDate: Long,
-
-    var endDate: Long
+    var exeDate: Long
 ) {
     companion object {
         const val TABLE_NAME = "checklist"

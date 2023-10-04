@@ -12,9 +12,7 @@ data class CmdCheckListWithCategory (
 
     val memo: String?= "",
 
-    val startDate: Long,
-
-    val endDate: Long,
+    val exeDate: Long,
 
     val categoryName: String
 

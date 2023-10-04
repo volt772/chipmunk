@@ -6,6 +6,7 @@ import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.constants.CmdCategoryDiffLabel
 import com.apx6.chipmunk.app.ext.convertDateLabel
 import com.apx6.chipmunk.app.ext.getDfFromToday
+import com.apx6.chipmunk.app.ext.millisToFormedDate
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.base.BaseViewHolder
@@ -24,15 +25,15 @@ class CheckListViewHolder(
 
         binding.apply {
             tvChecklistTitle.text = cl.title
-            tvDay.text = convertDateLabel(cl.endDate, true)
+            tvDay.text = convertDateLabel(cl.exeDate, true)
 
-            val dfDays = cl.endDate.getDfFromToday()
+            val dfDays = cl.exeDate.getDfFromToday()
 
             val dayColor = context.getColor(CmdCategoryDiffLabel.getColorByDiffDays(dfDays).color)
 
 //            ivDayStatus.setColorFilter(dayColor)
             tvDay.backgroundTintList = ColorStateList.valueOf(dayColor)
-            tvChecklistStartDate.text = convertDateLabel(cl.startDate, false)
+            tvChecklistExeDate.text = cl.exeDate.millisToFormedDate()
 
             val memoView = cl.memo?.isNotBlank()
             clChecklistMemo.visibilityExt(memoView?: false)

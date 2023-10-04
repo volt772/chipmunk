@@ -22,7 +22,7 @@ class DaysCalendar {
          * @return DatePickerDialog.OnDateSetListener
          */
         fun datePickerListener(
-            selectEndDate : (String) -> Unit
+            selectExeDate : (String) -> Unit
         ) : DatePickerDialog.OnDateSetListener {
             return DatePickerDialog.OnDateSetListener {
                 _, year, monthOfYear, dayOfMonth ->
@@ -39,7 +39,7 @@ class DaysCalendar {
 
                 val dateLabel = searchDate.getDateToAbbr(".")
 
-                selectEndDate(dateLabel)
+                selectExeDate(dateLabel)
             }
         }
 

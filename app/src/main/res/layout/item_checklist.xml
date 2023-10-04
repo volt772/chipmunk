@@ -111,7 +111,7 @@
 
                         <!-- 시작일-->
                         <TextView
-                            android:id="@+id/tv_checklist_start_date"
+                            android:id="@+id/tv_checklist_exe_date"
                             android:layout_width="@dimen/md_0"
                             android:layout_height="wrap_content"
                             style="@style/DashBoardCheckListSubInfo"

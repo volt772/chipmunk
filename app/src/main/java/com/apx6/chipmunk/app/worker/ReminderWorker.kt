@@ -35,12 +35,12 @@ class ReminderWorker @AssistedInject constructor(
             val cl = checkListRepository.getCheckListInWeek(tomorrowMillis, weekMillis)
 
             val dfTomorrow = cl.filter {
-                val df = it.endDate.getDfFromToday()
+                val df = it.exeDate.getDfFromToday()
                 df == 1
             }
 
             val dfWeek = cl.filter {
-                val df = it.endDate.getDfFromToday()
+                val df = it.exeDate.getDfFromToday()
                 df > 1
             }
 

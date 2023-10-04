@@ -21,7 +21,7 @@ enum class CmdCategoryDiffLabel (
 //                /* IN_TOMORROW*/
 //                IN_TOMORROW
 //            }
-            else if (df > 1) {
+            else if (df >= 1) {
                 /* PAST*/
                 PAST
             } else {

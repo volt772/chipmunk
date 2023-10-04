@@ -12,9 +12,7 @@ data class CmdCheckList (
 
     val memo: String?= "",
 
-    val startDate: Long,
-
-    val endDate: Long
+    val exeDate: Long
 
 ) {
 
@@ -26,8 +24,7 @@ data class CmdCheckList (
                 uid = -1,
                 title = "",
                 memo = "",
-                startDate = 0L,
-                endDate = 0L,
+                exeDate = 0L
             )
         }
     }

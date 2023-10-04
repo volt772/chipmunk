@@ -75,8 +75,8 @@ class CheckListDetailDialog : DialogFragment() {
             /* `카테고리`*/
             tvCategory.text = caName
 
-            /* `기한`*/
-            tvDueDate.text = convertDateLabel(cl.endDate)
+            /* `수행일`*/
+            tvDueDate.text = convertDateLabel(cl.exeDate)
 
             /* `메모`*/
             tvMemo.text = cl.memo?.limitAndAbbr(MEMO_LIMIT)

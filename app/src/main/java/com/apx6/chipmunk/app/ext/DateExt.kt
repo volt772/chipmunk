@@ -132,10 +132,10 @@ fun convertDateLabel(_date: Long, onlyDay: Boolean = false): String {
     val dDayLabel = if (dfDays != 0) {
         if (dfDays < 0) {
 //            "D+%d".format(dfDays * -1)
-            "%d일전".format(dfDays * -1)
+            "%d일지남".format(dfDays * -1)
         } else {
 //            "D-%d".format(dfDays)
-            "%d일후".format(dfDays)
+            "%d일전".format(dfDays)
         }
     } else {
 //        "D Day"

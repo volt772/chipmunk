@@ -79,8 +79,7 @@ class CheckListRepoTest {
                     uid = category!!.uid,
                     title = "checkList_$i",
                     memo = "memo_$i",
-                    startDate = currMillis,
-                    endDate = currMillis
+                    exeDate = currMillis,
                 )
 
                 checkListRepository.postCheckList(sampleCheckList)
@@ -102,12 +101,12 @@ class CheckListRepoTest {
             val cl = checkListRepository.getCheckListInWeek(tomorrowMillis, weekMillis)
 
             val dfToday = cl.filter {
-                val df = it.endDate.getDfFromToday()
+                val df = it.exeDate.getDfFromToday()
                 df == 0
             }
 
             val dfFuture = cl.filter {
-                val df = it.endDate.getDfFromToday()
+                val df = it.exeDate.getDfFromToday()
                 df > 0
             }
 

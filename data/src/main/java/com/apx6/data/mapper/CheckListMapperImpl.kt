@@ -18,8 +18,7 @@ class CheckListMapperImpl @Inject constructor(
             uid = checkList.uid,
             title = checkList.title,
             memo = checkList.memo,
-            startDate = checkList.startDate,
-            endDate = checkList.endDate
+            exeDate = checkList.exeDate
         )
     }
 }

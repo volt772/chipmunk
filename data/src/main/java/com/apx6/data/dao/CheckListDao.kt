@@ -15,7 +15,7 @@ abstract class CheckListDao : BaseDao<CheckList>() {
     /* ▼ TRANSACTION =====================================================================================================================*/
 
     /* ▼ SELECT ==========================================================================================================================*/
-    @Query("SELECT * FROM ${CheckList.TABLE_NAME} WHERE uid = :uid ORDER BY endDate DESC")
+    @Query("SELECT * FROM ${CheckList.TABLE_NAME} WHERE uid = :uid ORDER BY exeDate DESC")
     abstract fun getCheckLists(uid: Int): Flow<List<CmdCheckList>>
 
     @Query(
@@ -26,7 +26,7 @@ abstract class CheckListDao : BaseDao<CheckList>() {
         WHERE uid = :uid 
         AND (:cid IS NULL OR cid = :cid)
         AND (:query IS NULL OR (title LIKE :query OR memo LIKE :query))
-        ORDER BY (CASE WHEN endDate = :millis THEN 0 ELSE 1 END), endDate DESC   
+        ORDER BY (CASE WHEN exeDate = :millis THEN 0 ELSE 1 END), exeDate DESC   
         """
     )
     abstract fun getCheckListsFromMillis(uid: Int, millis: Long, cid: Int?= null, query: String?= null): Flow<List<CmdCheckList>>
@@ -56,7 +56,7 @@ abstract class CheckListDao : BaseDao<CheckList>() {
         """
         SELECT *
         FROM ${CheckList.TABLE_NAME}
-        WHERE endDate BETWEEN :tomorrowMillis AND :weekMillis
+        WHERE exeDate BETWEEN :tomorrowMillis AND :weekMillis
         """
     )
     abstract fun getCheckListsInWeek(tomorrowMillis: Long, weekMillis: Long): List<CmdCheckList>

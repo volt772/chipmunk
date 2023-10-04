@@ -47,7 +47,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     private var categoryList = listOf<CmdCategory>()
     private var selectedCategory =  CmdCategory.default()
 
-    private val calListener = DaysCalendar.datePickerListener(selectEndDate = ::selectEndDate)
+    private val calListener = DaysCalendar.datePickerListener(selectExeDate = ::selectExeDate)
 
     private var userId: Int = 0
     private var checkListId: Int?= 0
@@ -167,7 +167,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                 aetChecklistName.setText(cl.title)
 
                 /* 일자*/
-                selectEndDate(cl.endDate.millisToFormedDate())
+                selectExeDate(cl.exeDate.millisToFormedDate())
 
                 /* 메모*/
                 aetMemo.setText(cl.memo)
@@ -232,8 +232,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                     uid = userId,
                     title = aetChecklistName.text.toString(),
                     memo = aetMemo.text.toString(),
-                    startDate = getTodayMillis(),
-                    endDate = aetDate.text.toString().formedDateToMillis()
+                    exeDate = aetDate.text.toString().formedDateToMillis()
                 )
 
                 viewModel.postCheckList(newCheckList)
@@ -253,7 +252,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         viewModel.selectCategory(category)
     }
 
-    private fun selectEndDate(dateLabel: String) {
+    private fun selectExeDate(dateLabel: String) {
         binding.aetDate.setText(dateLabel)
     }
 

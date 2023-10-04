@@ -342,12 +342,12 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     /* 뷰 : 체크리스트 요약 메세지 (상단)*/
     private fun makeCheckListSummary(cl: List<CmdCheckList>) {
         val dfToday = cl.filter {
-            val df = it.endDate.getDfFromToday()
+            val df = it.exeDate.getDfFromToday()
             df == 0
         }
 
         val dfFuture = cl.filter {
-            val df = it.endDate.getDfFromToday()
+            val df = it.exeDate.getDfFromToday()
             df > 0
         }
 

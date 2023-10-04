@@ -132,7 +132,7 @@
 
     <!-- DashBoard : CheckList : Item : DDay -->
     <style name="DashBoardCheckListDay" parent="DashBoardCheckListCommon">
-        <item name="android:textSize">@dimen/md_14</item>
+        <item name="android:textSize">@dimen/md_12</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
