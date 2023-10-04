@@ -25,10 +25,11 @@ abstract class CheckListDao : BaseDao<CheckList>() {
         FROM ${CheckList.TABLE_NAME} 
         WHERE uid = :uid 
         AND (:cid IS NULL OR cid = :cid)
+        AND (:query IS NULL OR (title LIKE :query OR memo LIKE :query))
         ORDER BY (CASE WHEN endDate = :millis THEN 0 ELSE 1 END), endDate DESC   
         """
     )
-    abstract fun getCheckListsFromMillis(uid: Int, millis: Long, cid: Int?= null): Flow<List<CmdCheckList>>
+    abstract fun getCheckListsFromMillis(uid: Int, millis: Long, cid: Int?= null, query: String?= null): Flow<List<CmdCheckList>>
 
     @Query("SELECT * FROM ${CheckList.TABLE_NAME} WHERE id = :id")
     abstract fun getCheckList(id: Int): Flow<CmdCheckList?>

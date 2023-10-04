@@ -11,6 +11,7 @@ import com.apx6.domain.dto.CmdHistory
 import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.repository.CategoryRepository
 import com.apx6.domain.repository.CheckListRepository
+import com.apx6.domain.repository.HistoryRepository
 import com.apx6.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -29,7 +30,8 @@ class DashBoardViewModel @Inject constructor(
     @IoDispatcher val ioDispatcher: CoroutineDispatcher,
     private val userRepository: UserRepository,
     private val checkListRepository: CheckListRepository,
-    private val categoryRepository: CategoryRepository
+    private val categoryRepository: CategoryRepository,
+    private val historyRepository: HistoryRepository
 ) : BaseViewModel() {
 
     private val _user: MutableSharedFlow<CmdUser?> = MutableSharedFlow()
@@ -54,6 +56,7 @@ class DashBoardViewModel @Inject constructor(
     private val _query: MutableSharedFlow<String> = MutableSharedFlow()
     val query: SharedFlow<String> = _query
 
+    /* Search Keyword Histories*/
     private val _keywords: MutableStateFlow<State<List<CmdHistory>>> = MutableStateFlow(State.loading())
     val keywords: StateFlow<State<List<CmdHistory>>> = _keywords
 
@@ -85,9 +88,9 @@ class DashBoardViewModel @Inject constructor(
         }
     }
 
-    fun getCheckLists(uid: Int, millis: Long, cid: Int?= null) {
+    fun getCheckLists(uid: Int, millis: Long, cid: Int?= null, query: String?= null) {
         viewModelScope.launch {
-            checkListRepository.getCheckLists(uid, millis, cid)
+            checkListRepository.getCheckLists(uid, millis, cid, query)
                 .map { resource -> State.fromResource(resource) }
                 .collect { state -> _checkLists.value = state }
         }
@@ -113,31 +116,31 @@ class DashBoardViewModel @Inject constructor(
      * @desc emit history model -> HistoryModel()
      */
     suspend fun getHistory() {
-//        viewModelScope.launch {
-//            historyRepository.getKeywords()
-//                .map { resource ->
-//                    State.fromResource(resource)
-//                }
-//                .collect { state -> _keywords.value = state }
-//        }
+        viewModelScope.launch {
+            historyRepository.getKeywords()
+                .map { resource ->
+                    State.fromResource(resource)
+                }
+                .collect { state -> _keywords.value = state }
+        }
     }
 
-    suspend fun postHistory(keyword: String) {
-//        viewModelScope.launch(ioDispatcher) {
-//            historyRepository.insert(keyword, currMillis)
-//        }
+    suspend fun postHistory(keyword: String, currMillis: Long) {
+        viewModelScope.launch(ioDispatcher) {
+            historyRepository.insert(keyword, currMillis)
+        }
     }
 
     suspend fun delHistory(kid: Long) {
-//        viewModelScope.launch(ioDispatcher) {
-//            historyRepository.deleteKeyword(kid)
-//        }
+        viewModelScope.launch(ioDispatcher) {
+            historyRepository.deleteKeyword(kid)
+        }
     }
 
     suspend fun clearHistory() {
-//        viewModelScope.launch(ioDispatcher) {
-//            historyRepository.clearKeywords()
-//        }
+        viewModelScope.launch(ioDispatcher) {
+            historyRepository.clearKeywords()
+        }
     }
 
 }

@@ -2,9 +2,7 @@ package com.apx6.chipmunk.app.ui.activity
 
 import android.Manifest
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
@@ -15,17 +13,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.constants.CmdCategoryDialogType
+import com.apx6.chipmunk.app.ext.currMillis
 import com.apx6.chipmunk.app.ext.getDfFromToday
 import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.model.HistoryModel
-import com.apx6.chipmunk.app.ui.vms.DashBoardViewModel
 import com.apx6.chipmunk.app.ui.adapter.CheckListAdapter
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.dialog.CategoryListDialog
 import com.apx6.chipmunk.app.ui.dialog.CheckListDetailDialog
+import com.apx6.chipmunk.app.ui.dialog.SearchDialog
+import com.apx6.chipmunk.app.ui.vms.DashBoardViewModel
 import com.apx6.chipmunk.databinding.ActivityDashboardBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdConstants
@@ -105,6 +105,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
         initView()
         subscribers()
+        initDataSet()
         viewModel.getUser()
 
     }
@@ -113,6 +114,14 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         registerForActivityResult.launch(
             arrayOf(Manifest.permission.POST_NOTIFICATIONS)
         )
+    }
+
+    /**
+     * Initialize Data Set
+     */
+    private fun initDataSet() {
+        /* History (Recent Keyword)*/
+        lifecycleScope.launch { viewModel.getHistory() }
     }
 
     private fun initView() {
@@ -188,7 +197,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                     viewModel.user.collect { user ->
                         user?.let { _user ->
                             viewModel.run {
-                                getCheckLists(_user.id, todayMillis)
+                                getCheckLists(uid = _user.id, millis = todayMillis)
                                 getCategories(_user.id)
                             }
                             userId = _user.id
@@ -298,10 +307,10 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     private fun doSearch(query: String) {
         lifecycleScope.launch {
             query.let { _query ->
-                viewModel.postHistory(query)
-
-                /* Do Search*/
-//                viewModel.queryDocuments(_query)
+                viewModel.run {
+                    postHistory(query, currMillis)
+                    getCheckLists(uid = userId, millis = todayMillis, query = query)
+                }
             }
         }
     }
@@ -390,28 +399,28 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     private fun selectCategory(category: CmdCategory) {
         viewModel.run {
-            getCheckLists(userId, todayMillis, category.id)
+            getCheckLists(uid = userId, millis = todayMillis, cid = category.id)
             setFilteredCategory(category)
         }
     }
 
     private fun openSearchDialog() {
-        //                    val categoryListDialog = SearchDialog.newInstance(
-//                        historyList,
-//                        ::doSearch,
-//                        ::delHistories,
-//                        ::clearHistories
-//                    )
-//                    requireActivity()
-//                        .supportFragmentManager
-//                        .beginTransaction()
-//                        .add(categoryListDialog, TAG)
-//                        .commitAllowingStateLoss()
+        val historyDialog = SearchDialog.newInstance(
+            historyList,
+            ::doSearch,
+            ::delHistories,
+            ::clearHistories
+        )
+
+        this.supportFragmentManager
+            .beginTransaction()
+            .add(historyDialog, TAG)
+            .commitAllowingStateLoss()
     }
 
     private fun clearFilter() {
         viewModel.run {
-            getCheckLists(userId, todayMillis)
+            getCheckLists(uid = userId, millis = todayMillis)
             setFilteredCategory(CmdCategory.default())
         }
     }
