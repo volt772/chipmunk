@@ -9,7 +9,6 @@ import com.apx6.domain.mapper.CheckListMapper
 import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.Resource
 import com.apx6.domain.repository.boundary.LocalBoundaryRepository
-import com.apx6.domain.response.CmdResponseRefinery
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

@@ -12,7 +12,9 @@ data class CmdCheckList (
 
     val memo: String?= "",
 
-    val exeDate: Long
+    val exeDate: Long,
+
+    val checkListName: String?= "",
 
 ) {
 

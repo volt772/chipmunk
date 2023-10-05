@@ -39,6 +39,8 @@ class CheckListViewHolder(
             clChecklistMemo.visibilityExt(memoView?: false)
 
             tvChecklistDesc.text = cl.memo
+
+            tvChecklistCategory.text = cl.checkListName
         }
 
         binding.root.setOnSingleClickListener {
