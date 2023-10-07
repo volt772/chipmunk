@@ -1,6 +1,7 @@
 package com.apx6.chipmunk.app.ui.vms
 
 import androidx.lifecycle.viewModelScope
+import com.apx6.chipmunk.app.constants.CmdCheckListQueryMode
 import com.apx6.chipmunk.app.di.IoDispatcher
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.State
@@ -49,8 +50,13 @@ class DashBoardViewModel @Inject constructor(
     private val _category: MutableStateFlow<State<List<CmdCategory>>> = MutableStateFlow(State.loading())
     val category: StateFlow<State<List<CmdCategory>>> = _category
 
+    /* Filter By Category*/
     private val _filtered: MutableSharedFlow<CmdCategory> = MutableSharedFlow()
     val filtered: SharedFlow<CmdCategory> = _filtered
+
+    /* 리스트 쿼리 모드(일반/검색/필터)*/
+    private val _queryMode: MutableSharedFlow<CmdCheckListQueryMode> = MutableSharedFlow()
+    val queryMode: SharedFlow<CmdCheckListQueryMode> = _queryMode
 
     /* Search Keyword*/
     private val _query: MutableSharedFlow<String> = MutableSharedFlow()
@@ -60,9 +66,21 @@ class DashBoardViewModel @Inject constructor(
     private val _keywords: MutableStateFlow<State<List<CmdHistory>>> = MutableStateFlow(State.loading())
     val keywords: StateFlow<State<List<CmdHistory>>> = _keywords
 
+    init {
+        viewModelScope.launch {
+            _queryMode.emit(CmdCheckListQueryMode.NORMAL)
+        }
+    }
+
     fun setFilteredCategory(category: CmdCategory) {
         viewModelScope.launch {
+            val queryMode = if (category == CmdCategory.default()) {
+                CmdCheckListQueryMode.NORMAL
+            } else {
+                CmdCheckListQueryMode.FILTER
+            }
             _filtered.emit(category)
+            _queryMode.emit(queryMode)
         }
     }
 
@@ -90,6 +108,11 @@ class DashBoardViewModel @Inject constructor(
 
     fun getCheckLists(uid: Int, millis: Long, cid: Int?= null, query: String?= null) {
         viewModelScope.launch {
+            query?.let { q ->
+                _query.emit(q)
+                _queryMode.emit(CmdCheckListQueryMode.SEARCH)
+            }?: CmdCheckListQueryMode.NORMAL
+
             checkListRepository.getCheckLists(uid, millis, cid, query)
                 .map { resource -> State.fromResource(resource) }
                 .collect { state -> _checkLists.value = state }

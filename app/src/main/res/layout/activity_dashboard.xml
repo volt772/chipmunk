@@ -39,7 +39,8 @@
                     android:layout_gravity="center"
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="0.1"
-                    tools:text="체크리스트가 있습니다." />
+                    android:text="@string/app_label"
+                    tools:text="@string/app_label" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"

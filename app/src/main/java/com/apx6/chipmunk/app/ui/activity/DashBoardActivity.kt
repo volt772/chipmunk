@@ -13,8 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.constants.CmdCategoryDialogType
+import com.apx6.chipmunk.app.constants.CmdCheckListQueryMode
 import com.apx6.chipmunk.app.ext.currMillis
-import com.apx6.chipmunk.app.ext.getDfFromToday
 import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
@@ -54,9 +54,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     private var userId: Int = 0
     private var categoryList = listOf<CmdCategory>()
 
-    private var dfPastCount: Int = 0
-    private var dfTodayCount: Int = 0
-    private var dfFutureCount: Int = 0
+    private var userQuery: String = ""
 
     private var filteredCategory: CmdCategory = CmdCategory.default()
 
@@ -156,8 +154,6 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                         /* 펴졌을때*/
                         isShow = false
                     }
-
-                    makeSummaryTitle()
                 }
             })
         }
@@ -219,7 +215,6 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                                 val cl = state.data.toMutableList()
                                 showEmptyCheckListView(cl.count())
                                 checkListAdapter.submitList(cl)
-                                makeCheckListSummary(cl)
                             }
                             is State.Error -> {
                                 showToast(R.string.failed_get_checklists, false)
@@ -297,6 +292,19 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                     filteredCategory = category
                 }
             }
+
+            /* 검색어*/
+            launch {
+                viewModel.query.collect { query ->
+                    userQuery = query
+                }
+            }
+
+            launch {
+                viewModel.queryMode.collect { qMode ->
+                    makeSummaryTitle(qMode)
+                }
+            }
         }
     }
 
@@ -341,52 +349,14 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     }
 
     /* 뷰 : 체크리스트 요약 메세지 (상단)*/
-    private fun makeCheckListSummary(cl: List<CmdCheckList>) {
-        val dfPast = cl.filter {
-            val df = it.exeDate.getDfFromToday()
-            df < 0
+    private fun makeSummaryTitle(queryMode: CmdCheckListQueryMode) {
+        val titleLabel = when(queryMode) {
+            CmdCheckListQueryMode.NORMAL -> getString(R.string.top_title_user_normal)
+            CmdCheckListQueryMode.SEARCH -> { getString(R.string.top_title_user_query, userQuery) }
+            CmdCheckListQueryMode.FILTER -> { getString(R.string.top_title_user_filter, filteredCategory.name) }
         }
 
-        val dfToday = cl.filter {
-            val df = it.exeDate.getDfFromToday()
-            df == 0
-        }
-
-        val dfFuture = cl.filter {
-            val df = it.exeDate.getDfFromToday()
-            df > 0
-        }
-
-        dfPastCount = dfPast.count()
-        dfTodayCount = dfToday.count()
-        dfFutureCount = dfFuture.count()
-
-        makeSummaryTitle()
-    }
-
-    /* 뷰 : 체크리스트 요약 메세지 (상단)*/
-    private fun makeSummaryTitle() {
-        val summaryLabel = if (dfTodayCount > 0) {
-            /* 오늘기준*/
-            getString(R.string.dashboard_checklist_summary_todo, dfTodayCount)
-        } else if (dfPastCount >= 30) {
-            /* 경과(한달)*/
-            getString(R.string.dashboard_checklist_summary_over_4w, dfPastCount)
-        } else if (dfPastCount >= 21) {
-            /* 경과(3주)*/
-            getString(R.string.dashboard_checklist_summary_over_3w, dfPastCount)
-        } else if (dfPastCount >= 14) {
-            /* 경과(2주)*/
-            getString(R.string.dashboard_checklist_summary_over_2w, dfPastCount)
-        } else if (dfPastCount >= 7) {
-            /* 경과(1주)*/
-            getString(R.string.dashboard_checklist_summary_over_1w, dfPastCount)
-        } else {
-            /* 기타*/
-            getString(R.string.dashboard_checklist_summary_normal)
-        }
-
-        binding.tvSummaryTitle.text = summaryLabel
+        binding.tvSummaryTitle.text = titleLabel
     }
 
     private fun moveToRegister(clId: Int?= null) {

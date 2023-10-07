@@ -32,6 +32,9 @@
     <string name="dlg_confirm">확인</string>
     <string name="dlg_cancel">취소</string>
 
+    <string name="top_title_user_query">검색 : %s</string>
+    <string name="top_title_user_filter">필터링 : %s</string>
+    <string name="top_title_user_normal">아!그거</string>
 
     <string name="failed_login">로그인을 할 수 없습니다. 잠시후 다시 시도해 주세요.</string>
     <string name="failed_get_user_info">사용자 정보를 가져올 수 없습니다. 잠시후 다시 로그인해주세요.</string>
