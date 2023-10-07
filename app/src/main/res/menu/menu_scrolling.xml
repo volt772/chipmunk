@@ -16,9 +16,9 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_search" />
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_more"
         android:orderInCategory="100"
-        android:title="Settings"
+        android:title="More"
         app:showAsAction="always"
-        android:icon="@drawable/ic_setting" />
+        android:icon="@drawable/ic_more" />
 </menu>

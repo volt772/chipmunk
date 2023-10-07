@@ -10,7 +10,7 @@ import com.apx6.domain.constants.CmdSettingValue
 import com.apx6.domain.dto.CmdSetting
 import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.repository.CheckListRepository
-import com.apx6.domain.repository.SettingRepository
+import com.apx6.domain.repository.MoreRepository
 import com.apx6.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -25,11 +25,11 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class SettingViewModel @Inject constructor(
+class MoreViewModel @Inject constructor(
     @IoDispatcher val ioDispatcher: CoroutineDispatcher,
     private val userRepository: UserRepository,
     private val checkListRepository: CheckListRepository,
-    private val settingRepository: SettingRepository
+    private val moreRepository: MoreRepository
 ) : BaseViewModel() {
 
     init {
@@ -74,7 +74,7 @@ class SettingViewModel @Inject constructor(
 
     fun fetchNotificationSetting(uid: Int) {
         viewModelScope.launch(ioDispatcher) {
-            settingRepository.fetchSetting(uid, CmdSettingType.NOTIFICATION)
+            moreRepository.fetchSetting(uid, CmdSettingType.NOTIFICATION)
                 .collectLatest {
                     _setting.emit(it)
                 }
@@ -90,7 +90,7 @@ class SettingViewModel @Inject constructor(
         )
 
         viewModelScope.launch(ioDispatcher) {
-            val posted = settingRepository.postSetting(cs)
+            val posted = moreRepository.postSetting(cs)
             _notiPosted.emit(posted)
         }
     }

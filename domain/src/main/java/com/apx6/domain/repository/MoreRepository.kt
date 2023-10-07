@@ -4,7 +4,7 @@ import com.apx6.domain.constants.CmdSettingType
 import com.apx6.domain.dto.CmdSetting
 import kotlinx.coroutines.flow.Flow
 
-interface SettingRepository {
+interface MoreRepository {
 
     suspend fun postSetting(setting: CmdSetting): Boolean
 

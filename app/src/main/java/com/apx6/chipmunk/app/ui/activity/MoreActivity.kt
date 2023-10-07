@@ -11,7 +11,7 @@ import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ui.base.BaseActivity
-import com.apx6.chipmunk.app.ui.vms.SettingViewModel
+import com.apx6.chipmunk.app.ui.vms.MoreViewModel
 import com.apx6.chipmunk.databinding.ActivitySettingBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdSettingValue
@@ -23,9 +23,9 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>() {
+class MoreActivity : BaseActivity<MoreViewModel, ActivitySettingBinding>() {
 
-    override val viewModel: SettingViewModel by viewModels()
+    override val viewModel: MoreViewModel by viewModels()
     override fun getViewBinding(): ActivitySettingBinding = ActivitySettingBinding.inflate(layoutInflater)
 
     private var currUser: CmdUser = CmdUser.default()

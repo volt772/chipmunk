@@ -55,7 +55,7 @@
             android:exported="false" />
 
         <activity
-            android:name="com.apx6.chipmunk.app.ui.activity.SettingActivity"
+            android:name="com.apx6.chipmunk.app.ui.activity.MoreActivity"
             android:theme="@style/Theme.Chipmunk.NoActionBar"
             android:exported="false" />
 

@@ -5,14 +5,14 @@ import com.apx6.domain.constants.CmdSettingType
 import com.apx6.domain.dto.CmdSetting
 import com.apx6.domain.entities.Setting
 import com.apx6.domain.mapper.SettingMapper
-import com.apx6.domain.repository.SettingRepository
+import com.apx6.domain.repository.MoreRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class SettingRepositoryImpl @Inject constructor(
+class MoreRepositoryImpl @Inject constructor(
     private val settingDao: SettingDao,
     private val settingMapper: SettingMapper
-): SettingRepository {
+): MoreRepository {
 
     override suspend fun postSetting(setting: CmdSetting): Boolean {
         val sd = settingDao.getSetting(setting.uid, setting.key)

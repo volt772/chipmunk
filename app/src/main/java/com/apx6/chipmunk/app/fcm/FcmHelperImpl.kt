@@ -16,7 +16,7 @@ import com.apx6.domain.constants.CmdConstants
 import com.apx6.domain.constants.CmdSettingType
 import com.apx6.domain.constants.CmdSettingValue
 import com.apx6.domain.dto.CmdNotification
-import com.apx6.domain.repository.SettingRepository
+import com.apx6.domain.repository.MoreRepository
 import com.apx6.domain.repository.UserRepository
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.CoroutineDispatcher
@@ -31,7 +31,7 @@ class FcmHelperImpl @Inject constructor(
     private val context: Context,
     @IoDispatcher val ioDispatcher: CoroutineDispatcher,
     private val userRepository: UserRepository,
-    private val settingRepository: SettingRepository
+    private val moreRepository: MoreRepository
 ) : FcmHelper {
 
     private var fToken: String = ""
@@ -64,7 +64,7 @@ class FcmHelperImpl @Inject constructor(
             val uid = userRepository.getUserId()
             uid.collectLatest { _uid ->
                 _uid?.let {
-                    val notificationSetting = settingRepository.fetchSetting(_uid, CmdSettingType.NOTIFICATION)
+                    val notificationSetting = moreRepository.fetchSetting(_uid, CmdSettingType.NOTIFICATION)
 
                     notificationSetting.collectLatest { _notificationSetting ->
                         _notificationSetting?.let { ns ->

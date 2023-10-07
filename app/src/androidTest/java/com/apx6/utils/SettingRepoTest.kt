@@ -6,7 +6,7 @@ import com.apx6.domain.constants.CmdSettingType
 import com.apx6.domain.constants.CmdSettingValue
 import com.apx6.domain.dto.CmdSetting
 import com.apx6.domain.dto.CmdUser
-import com.apx6.domain.repository.SettingRepository
+import com.apx6.domain.repository.MoreRepository
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -31,7 +31,7 @@ class SettingRepoTest {
     val testCoroutineRule = TestCoroutineRule()
 
     @Inject
-    lateinit var settingRepository: SettingRepository
+    lateinit var moreRepository: MoreRepository
 
     @Inject
     lateinit var cmdDatabase: CmdDatabase
@@ -73,7 +73,7 @@ class SettingRepoTest {
                     setDate = currMillis
                 )
 
-                val result = settingRepository.postSetting(setting)
+                val result = moreRepository.postSetting(setting)
                 println("probe :: setting :: test :: $result")
             }
         }
@@ -86,7 +86,7 @@ class SettingRepoTest {
 
         user?.let { u ->
             runBlocking {
-                val result = settingRepository.fetchSetting(u.id, CmdSettingType.NOTIFICATION)
+                val result = moreRepository.fetchSetting(u.id, CmdSettingType.NOTIFICATION)
 
                 result.collectLatest {
                     println("probe :: setting :: test :: $it")

@@ -38,7 +38,7 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindSettingRepository(impl: SettingRepositoryImpl): SettingRepository
+    abstract fun bindSettingRepository(impl: MoreRepositoryImpl): MoreRepository
 
     @Binds
     @Singleton

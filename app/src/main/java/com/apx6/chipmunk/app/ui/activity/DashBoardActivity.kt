@@ -368,8 +368,8 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         startActivity(intent)
     }
 
-    private fun moveToSetting() {
-        val intent = Intent(this, SettingActivity::class.java).apply {
+    private fun moveToMore() {
+        val intent = Intent(this, MoreActivity::class.java).apply {
         }
         startActivity(intent)
     }
@@ -426,8 +426,8 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         // as you specify a parent activity in AndroidManifest.xml.
 
         return when (item.itemId) {
-            R.id.action_settings -> {
-                moveToSetting()
+            R.id.action_more -> {
+                moveToMore()
                 true
             }
 
