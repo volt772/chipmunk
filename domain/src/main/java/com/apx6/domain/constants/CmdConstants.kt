@@ -35,6 +35,7 @@ object CmdConstants {
         const val SELECTED_START_DAY = "selectedStartDay"
         const val SELECTED_END_DAY = "selectedEndDay"
         const val CHECKLIST_ID = "checkListId"
+        const val REGISTER_MODE = "registerMode"
 
         object Code {
             const val CODE_LOCATION = 10000

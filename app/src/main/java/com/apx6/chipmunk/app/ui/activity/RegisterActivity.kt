@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.constants.CmdCategoryDialogType
+import com.apx6.chipmunk.app.constants.CmdCheckListRegisterMode
 import com.apx6.chipmunk.app.ext.formedDateToMillis
 import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.getTodaySeparate
@@ -47,6 +48,8 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     private var categoryList = listOf<CmdCategory>()
     private var selectedCategory =  CmdCategory.default()
 
+    private lateinit var registerMode: String
+
     private val calListener = DaysCalendar.datePickerListener(selectExeDate = ::selectExeDate)
 
     private var userId: Int = 0
@@ -58,6 +61,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
         with(intent) {
             val clId = getIntExtra(CmdConstants.Intent.CHECKLIST_ID, 0)
+            registerMode = getStringExtra(CmdConstants.Intent.REGISTER_MODE)?: CmdCheckListRegisterMode.NEW.mode
 
             if (clId > 0) {
                 viewModel.getCheckListWithCategory(clId)
@@ -224,6 +228,14 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
             aetChecklistName.doOnTextChanged { text, _, _, _ ->
                 msCheckListName.value = text.toString()
             }
+
+            val registerIcon = if (registerMode == CmdCheckListRegisterMode.NEW.mode) {
+                getDrawable(R.drawable.ic_category_plus)
+            } else {
+                getDrawable(R.drawable.ic_edit)
+            }
+
+            ivAdd.setImageDrawable(registerIcon)
 
             ivAdd.setOnSingleClickListener {
                 val newCheckList =  CmdCheckList(

@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.constants.CmdCategoryDialogType
 import com.apx6.chipmunk.app.constants.CmdCheckListQueryMode
+import com.apx6.chipmunk.app.constants.CmdCheckListRegisterMode
 import com.apx6.chipmunk.app.ext.currMillis
 import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
@@ -161,7 +162,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     /* 액션 : 수정*/
     private fun goToModify(cl: CmdCheckList) {
-        moveToRegister(cl.id)
+        moveToRegister(cl.id, CmdCheckListRegisterMode.MODIFY)
     }
 
     /* 액션 : 삭제*/
@@ -359,9 +360,10 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         binding.tvSummaryTitle.text = titleLabel
     }
 
-    private fun moveToRegister(clId: Int?= null) {
+    private fun moveToRegister(clId: Int?= null, registerMode: CmdCheckListRegisterMode= CmdCheckListRegisterMode.NEW) {
         val intent = Intent(this, RegisterActivity::class.java).apply {
             putExtra(CmdConstants.Intent.CHECKLIST_ID, clId)
+            putExtra(CmdConstants.Intent.REGISTER_MODE, registerMode.mode)
         }
         startActivity(intent)
     }
