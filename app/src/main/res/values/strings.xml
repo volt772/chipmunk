@@ -29,6 +29,11 @@
     <string name="date_week_abbr_6">금</string>
     <string name="date_week_abbr_7">토</string>
 
+    <!-- 날짜 차이(Diff) 관련-->
+    <string name="day_on_day">오늘</string>
+    <string name="day_future">%d일전</string>
+    <string name="day_past">%d일지남</string>
+
     <string name="dlg_confirm">확인</string>
     <string name="dlg_cancel">취소</string>
 

@@ -1,21 +1,24 @@
 package com.apx6.chipmunk.app.ext
 
+import com.apx6.chipmunk.R
 import com.apx6.domain.constants.CmdConstants
 import org.joda.time.DateTime
+import org.joda.time.Days
 import org.joda.time.LocalDate
-import org.joda.time.Period
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+import kotlin.math.abs
 
 
 /**
  * Date External Functions
  */
 
-const val DOC_DATE_FORMAT = "yy.MM.dd"
+const val DOC_DATE_FORMAT_HYPHEN = "yyyy-MM-dd"
+const val DOC_DATE_FORMAT_DOT = "yy.MM.dd"
 const val DOC_TIME_FORMAT = "HH:mm"
 const val DOC_FULL_FORMAT = "yy.MM.dd HH:mm"
 const val DOC_RESP_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
@@ -25,9 +28,6 @@ val currMillis: Long
     get() {
         return System.currentTimeMillis()
     }
-
-
-val BASE_DATE_FORMATE = "yy.MM.dd"
 
 /**
  * Joda DateTime 이 올바른 값인지 검사.
@@ -61,9 +61,9 @@ fun DateTime?.convertDateByType(type: Int): String {
  * Date Convert
  * @desc String to Millis
  */
-fun String?.formedDateToMillis(format : String = BASE_DATE_FORMATE): Long {
+fun String?.formedDateToMillis(format : String = DOC_DATE_FORMAT_DOT): Long {
     val millis = this?.let { formed ->
-        val sdf = SimpleDateFormat("yy.MM.dd")
+        val sdf = SimpleDateFormat(format)
         val date: Date = sdf.parse(formed) as Date
         date.time
     } ?: 0L
@@ -75,7 +75,7 @@ fun String?.formedDateToMillis(format : String = BASE_DATE_FORMATE): Long {
  * Date Convert
  * @desc Millis to String
  */
-fun Long?.millisToFormedDate(format : String = BASE_DATE_FORMATE): String {
+fun Long?.millisToFormedDate(format : String = DOC_DATE_FORMAT_DOT): String {
     val formed = this?.let { millis ->
         val formatter = SimpleDateFormat(format)
         formatter.format(Date(millis))
@@ -106,40 +106,47 @@ fun getWeekMillis(day: Int): Long {
 }
 
 /**
- * D-Day
- * @desc "yy.MM.dd".getDfFromToday()
- * @desc "millis".getDfFromToday()
+ * Diff Days From Today
  */
-fun Any.getDfFromToday(): Int {
+fun Long.getDfFromToday(): Int {
+    /* 오늘*/
     val today = getTodayMillis()
+    val todayFormed = today.millisToFormedDate(DOC_DATE_FORMAT_HYPHEN)
 
-    val period = when (this) {
-        is String -> Period(today, this.formedDateToMillis())
-        is Long -> Period(today, this)
-        else -> Period()
-    }
+    /* 대상*/
+    val target = this
+    val targetFormed = target.millisToFormedDate(DOC_DATE_FORMAT_HYPHEN)
 
-    return period.weeks * 7 + period.days
+    /* 오늘, 대상 -> Parsing*/
+    val dateA = LocalDate.parse(todayFormed)
+    val dateB = LocalDate.parse(targetFormed)
+
+    /* DIFF*/
+    val daysDiff = abs(Days.daysBetween(dateA, dateB).days).toLong()
+
+    /* Before OR After*/
+    return if (daysDiff > 0 && target < today) {
+        daysDiff * -1
+    } else {
+        daysDiff
+    }.toInt()
 }
 
 /**
  * D-Day String Maker
  * @desc "yy.MM.dd (D-NN)"
  */
-fun convertDateLabel(_date: Long, onlyDay: Boolean = false): String {
-    val dateLabel = _date.millisToFormedDate()
-    val dfDays = _date.getDfFromToday()
+fun Long.convertDateLabel(onlyDay: Boolean = false): String {
+    val dateLabel = this.millisToFormedDate()
+    val dfDays = this.getDfFromToday()
     val dDayLabel = if (dfDays != 0) {
         if (dfDays < 0) {
-//            "D+%d".format(dfDays * -1)
-            "%d일지남".format(dfDays * -1)
+            getStringRes(R.string.day_past).format(dfDays * -1)
         } else {
-//            "D-%d".format(dfDays)
-            "%d일전".format(dfDays)
+            getStringRes(R.string.day_future).format(dfDays)
         }
     } else {
-//        "D Day"
-        "오늘"
+        getStringRes(R.string.day_on_day)
     }
 
     val label = if (onlyDay) {
@@ -194,7 +201,7 @@ fun String.getDateToAbbr(divider: String): String {
  * Convert Date Format
  * @desc millis -> yy.MM.dd
  */
-fun Long?.convertDate(format : String = DOC_DATE_FORMAT): String {
+fun Long?.convertDate(format : String = DOC_DATE_FORMAT_DOT): String {
     val formed = this?.let { millis ->
         val formatter = SimpleDateFormat(format)
         formatter.format(Date(millis))

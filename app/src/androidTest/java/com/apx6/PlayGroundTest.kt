@@ -1,6 +1,7 @@
 package com.apx6
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.apx6.chipmunk.app.ext.DOC_DATE_FORMAT_HYPHEN
 import com.apx6.chipmunk.app.ext.formedDateToMillis
 import com.apx6.chipmunk.app.ext.getDfFromToday
 import com.apx6.chipmunk.app.ext.getTodayMillis
@@ -9,12 +10,11 @@ import com.apx6.utils.TestCoroutineRule
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.joda.time.Period
+import org.joda.time.Days
+import org.joda.time.LocalDate
 import org.junit.*
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
-import java.util.Date
-import java.util.TimeZone
 
 
 @RunWith(AndroidJUnit4::class)
@@ -99,13 +99,44 @@ class PlayGroundTest {
 ////        val today = getDateOfToday()
 //        println("probe :: test :: millis : $millis, today : $today, year : $years, month : $months, days : $days, p_weeks : ${period.weeks}, p_days : ${period.days} ")
 
-        val df1 = myDate.getDfFromToday()
-        val df2 = millis.getDfFromToday()
-        println("probe :: test :: df1(string) : $df1, df2(long) : $df2")
+//        val df1 = myDate.getDfFromToday()
+//        val df2 = millis.getDfFromToday()
+//        println("probe :: test :: df1(string) : $df1, df2(long) : $df2")
 
 
 
         println("[TEST] probe : ==========================================================================================================================================")
+    }
+
+    @Test
+    fun test04_date_convert2() {
+        /* 오늘*/
+        val today = getTodayMillis()
+        val todayFormed = today.millisToFormedDate(DOC_DATE_FORMAT_HYPHEN)
+
+        /* 대상*/
+        val target = 1698332400000
+        val targetFormed = target.millisToFormedDate(DOC_DATE_FORMAT_HYPHEN)
+
+        /* 오늘, 대상 -> Parsing*/
+        val dateA = LocalDate.parse(todayFormed)
+        val dateB = LocalDate.parse(targetFormed)
+//
+        /* DIFF*/
+        val daysDiff = Math.abs(Days.daysBetween(dateA, dateB).days).toLong()
+
+        /* Before OR After*/
+        val result = if (daysDiff > 0 && target < today) {
+            daysDiff * -1
+        } else {
+            daysDiff
+        }
+        println("probe :: test :: daysDiff : $daysDiff, result : $result")
+
+//        val millis = 1698332400000
+//        val form = millis.millisToFormedDate(DOC_DATE_FORMAT2)
+//        println("probe :: test :: form : $form")
+
     }
 
 

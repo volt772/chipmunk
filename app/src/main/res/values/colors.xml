@@ -355,8 +355,8 @@
 <!--    <color name="label_week">#03C03C</color>-->
 <!--    <color name="label_past">#1F2528</color>-->
 
-    <color name="label_past">#3950DD</color>
+    <color name="label_future">#3950DD</color>
     <color name="label_today">#FFA000</color>
-    <color name="label_ready">#03C03C</color>
+    <color name="label_past">#03C03C</color>
 
 </resources>

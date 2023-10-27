@@ -24,22 +24,26 @@ class CheckListViewHolder(
     fun bind(cl: CmdCheckList, selectCheckList: (CmdCheckList) -> Unit) {
 
         binding.apply {
+            /* 제목*/
             tvChecklistTitle.text = cl.title
-            tvDay.text = convertDateLabel(cl.exeDate, true)
 
+            /* Diff Days : `%d일전`, `%d일지남`, `오늘`*/
+            tvDay.text = cl.exeDate.convertDateLabel(true)
+
+            /* Diff Days : 백그라운드 작업*/
             val dfDays = cl.exeDate.getDfFromToday()
-
             val dayColor = context.getColor(CmdCategoryDiffLabel.getColorByDiffDays(dfDays).color)
-
-//            ivDayStatus.setColorFilter(dayColor)
             tvDay.backgroundTintList = ColorStateList.valueOf(dayColor)
+
+            /* 수행일 : yy.mm.dd*/
             tvChecklistExeDate.text = cl.exeDate.millisToFormedDate()
 
+            /* 메모요약*/
             val memoView = cl.memo?.isNotBlank()
             clChecklistMemo.visibilityExt(memoView?: false)
-
             tvChecklistDesc.text = cl.memo
 
+            /* 카테고리이름*/
             tvChecklistCategory.text = cl.checkListName
         }
 
