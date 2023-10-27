@@ -46,7 +46,7 @@
                 <!-- 부연설명-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_checklist_sub_info"
-                    android:layout_width="@dimen/md_0"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/md_8"
                     app:layout_constraintTop_toBottomOf="@id/tv_checklist_title"
@@ -75,7 +75,7 @@
                         <!-- 카테고리 이름-->
                         <TextView
                             android:id="@+id/tv_checklist_category"
-                            android:layout_width="@dimen/md_0"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/DashBoardCheckListSubInfo"
                             android:maxLines="1"
@@ -84,7 +84,7 @@
                             app:layout_constraintStart_toEndOf="@id/iv_sub_category"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            tools:text="병원" />
+                            tools:text="카테고리이름카테고리이름카테고리이름카테고리이름 " />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <!-- 정보 : 시작일-->
@@ -149,7 +149,7 @@
                             android:background="@drawable/bg_full_rounded"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:text="D Day" />
+                            tools:text="8888888888일전" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>

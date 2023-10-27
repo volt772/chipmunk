@@ -175,20 +175,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" >
 
-                <!-- 확인-->
-                <TextView
-                    android:id="@+id/tv_confirm"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/md_56"
-                    android:theme="@style/CheckListDetailBotButton"
-                    android:textColor="@color/gray_h212"
-                    android:background="@drawable/bg_top_border"
-                    android:foreground="?selectableItemBackgroundBorderless"
-                    android:text="@string/dlg_checklist_detail_confirm"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tv_modify"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <!-- 수정-->
                 <TextView
                     android:id="@+id/tv_modify"
@@ -199,9 +185,23 @@
                     android:background="@color/material_amber_700"
                     android:textColor="@color/white"
                     android:text="@string/dlg_checklist_detail_modify"
-                    app:layout_constraintStart_toEndOf="@id/tv_confirm"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_confirm"
+                    app:layout_constraintTop_toTopOf="parent"  />
+
+                <!-- 확인-->
+                <TextView
+                    android:id="@+id/tv_confirm"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/md_56"
+                    android:theme="@style/CheckListDetailBotButton"
+                    android:textColor="@color/gray_h212"
+                    android:background="@drawable/bg_top_border"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:text="@string/dlg_checklist_detail_confirm"
+                    app:layout_constraintStart_toEndOf="@id/tv_modify"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
