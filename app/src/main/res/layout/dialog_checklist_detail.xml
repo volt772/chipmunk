@@ -29,18 +29,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_copy"
                     android:background="?selectableItemBackgroundBorderless"
-                    android:layout_marginEnd="@dimen/md_8"
-                    app:layout_constraintEnd_toStartOf="@id/iv_delete"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- Delete Button-->
-                <ImageView
-                    android:id="@+id/iv_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_trash_red"
-                    android:background="?selectableItemBackgroundBorderless"
+                    android:layout_marginStart="@dimen/md_18"
                     android:layout_marginEnd="@dimen/md_18"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"

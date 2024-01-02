@@ -55,6 +55,19 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
+                        android:id="@+id/iv_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_trash"
+                        android:layout_marginEnd="@dimen/md_12"
+                        app:tint="@color/material_red_700"
+                        android:visibility="gone"
+                        android:background="?selectableItemBackgroundBorderless"
+                        app:layout_constraintEnd_toStartOf="@id/iv_add"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
                         android:id="@+id/iv_add"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -29,4 +29,6 @@ interface CheckListRepository {
 
     suspend fun delCheckList(checkList: CmdCheckList): Boolean
 
+    suspend fun delCheckListById(id: Int): Boolean
+
 }

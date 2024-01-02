@@ -21,7 +21,6 @@ import com.apx6.domain.dto.CmdCheckListDetail
 class CheckListDetailDialog : DialogFragment() {
     private var cld: CmdCheckListDetail = CmdCheckListDetail.default()
     private var toModify: (CmdCheckList) -> Unit = {}
-    private var toDelete: (CmdCheckList) -> Unit = {}
     private var toCopy: (CmdCheckList) -> Unit = {}
 
     private lateinit var cl: CmdCheckList
@@ -57,12 +56,6 @@ class CheckListDetailDialog : DialogFragment() {
         with(binding) {
             /* 확인*/
             tvConfirm.setOnSingleClickListener { dismiss() }
-
-            /* 삭제*/
-            ivDelete.setOnSingleClickListener {
-                toDelete(cl)
-                dismiss()
-            }
 
             /* 복사*/
             ivCopy.setOnSingleClickListener {
@@ -115,12 +108,10 @@ class CheckListDetailDialog : DialogFragment() {
         fun newInstance(
             cld: CmdCheckListDetail,
             toModify: (CmdCheckList) -> Unit,
-            toDelete: (CmdCheckList) -> Unit,
             toCopy: (CmdCheckList) -> Unit
         ) = CheckListDetailDialog().apply {
             this.cld = cld
             this.toModify = toModify
-            this.toDelete = toDelete
             this.toCopy = toCopy
         }
     }

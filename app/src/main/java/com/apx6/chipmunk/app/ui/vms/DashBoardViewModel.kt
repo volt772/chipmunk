@@ -120,13 +120,6 @@ class DashBoardViewModel @Inject constructor(
         }
     }
 
-    fun delCheckList(cl: CmdCheckList) {
-        viewModelScope.launch(ioDispatcher) {
-            val deleted = checkListRepository.delCheckList(cl)
-            _checkListDeleted.emit(deleted)
-        }
-    }
-
     fun copyCheckList(cl: CmdCheckList) {
         viewModelScope.launch(ioDispatcher) {
             val newChecklist = cl.copy(id = 0, exeDate = getTodayMillis(), title = "${cl.title}_copy")

@@ -165,11 +165,6 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         moveToRegister(cl.id, CmdCheckListRegisterMode.MODIFY)
     }
 
-    /* 액션 : 삭제*/
-    private fun deleteCheckList(cl: CmdCheckList) {
-        viewModel.delCheckList(cl)
-    }
-
     /* 액션 : 복사*/
     private fun copyCheckList(cl: CmdCheckList) {
         viewModel.copyCheckList(cl)
@@ -186,7 +181,6 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         val dialog = CheckListDetailDialog.newInstance(
             cld = cld,
             toModify = ::goToModify,
-            toDelete = ::deleteCheckList,
             toCopy = ::copyCheckList
         )
 

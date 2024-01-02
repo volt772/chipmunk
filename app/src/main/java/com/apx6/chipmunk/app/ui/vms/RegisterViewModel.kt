@@ -49,6 +49,9 @@ class RegisterViewModel @Inject constructor(
     private val _checkListPosted: MutableSharedFlow<Boolean> = MutableSharedFlow()
     val checkListPosted: SharedFlow<Boolean> = _checkListPosted
 
+    private val _checkListDeleted: MutableSharedFlow<Boolean> = MutableSharedFlow()
+    val checkListDeleted: SharedFlow<Boolean> = _checkListDeleted
+
     private fun getUserId() {
         viewModelScope.launch {
             userRepository.getUserId().collectLatest { _userId.emit(it) }
@@ -81,6 +84,13 @@ class RegisterViewModel @Inject constructor(
         viewModelScope.launch(ioDispatcher) {
             val posted = checkListRepository.postCheckList(checkList)
             _checkListPosted.emit(posted)
+        }
+    }
+
+    fun delCheckListById(id: Int) {
+        viewModelScope.launch(ioDispatcher) {
+            val deleted = checkListRepository.delCheckListById(id)
+            _checkListDeleted.emit(deleted)
         }
     }
 }

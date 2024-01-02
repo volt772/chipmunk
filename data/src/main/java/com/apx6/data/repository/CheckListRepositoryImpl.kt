@@ -84,6 +84,10 @@ class CheckListRepositoryImpl @Inject constructor(
         return checkListDao.delete(entity) > 0
     }
 
+    override suspend fun delCheckListById(id: Int): Boolean {
+        return checkListDao.delCheckListsById(id) > 0
+    }
+
 
     private suspend fun convertToEntity(checkList: CmdCheckList): CheckList {
         return checkListMapper.checkListToEntity(checkList)

@@ -19,6 +19,7 @@ import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.base.BaseActivity
+import com.apx6.chipmunk.app.ui.base.Dialogs
 import com.apx6.chipmunk.app.ui.dialog.CategoryListDialog
 import com.apx6.chipmunk.app.ui.picker.DaysCalendar
 import com.apx6.chipmunk.app.ui.vms.RegisterViewModel
@@ -54,6 +55,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
     private var userId: Int = 0
     private var checkListId: Int?= 0
+    private var checkListName: String?= ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -142,6 +144,25 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                     showPostedCheckList(posted)
                 }
             }
+
+            launch {
+                viewModel.checkListDeleted.collectLatest { deleted ->
+                    showDeletedStatus(deleted)
+                }
+            }
+        }
+    }
+
+    private fun showDeletedStatus(deleted: Boolean) {
+        val msg = getString(
+            if (deleted) R.string.dlg_checklist_delete_success
+            else R.string.dlg_checklist_delete_fail
+        )
+
+        showToast(msg, false)
+
+        if (deleted) {
+            finish()
         }
     }
 
@@ -163,6 +184,8 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
             with(binding) {
                 /* 체크리스트 ID*/
                 checkListId = checkList.id
+
+                checkListName = checkList.title
 
                 /* 카테고리*/
                 selectCategory(CmdCategory(id = cl.cid, name = cl.categoryName, uid = cl.uid))
@@ -249,13 +272,37 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
                 viewModel.postCheckList(newCheckList)
             }
-        }
 
+            ivDelete.visibilityExt(registerMode == CmdCheckListRegisterMode.MODIFY.mode)
+
+            ivDelete.setOnSingleClickListener {
+                deleteCheckList()
+            }
+        }
 
         DaysCalendar.apply {
             todayYear = getTodaySeparate(CmdConstants.Date.YEAR)
             todayMonth = getTodaySeparate(CmdConstants.Date.MONTH)
             todayDay = getTodaySeparate(CmdConstants.Date.DAY)
+        }
+    }
+
+    private fun deleteCheckList() {
+        checkListId?.let { id ->
+            val delMsg = getString(R.string.delete_checklist, checkListName)
+
+            Dialogs.confirm(
+                context = this,
+                btnYes = getString(R.string.dlg_confirm),
+                btnNo = getString(R.string.dlg_cancel),
+                message = delMsg,
+                cancelable = true,
+                positiveListener = { _, _ -> run {
+                    viewModel.delCheckListById(id)
+                }},
+                negativeListener = { _, _ -> },
+                title = getString(R.string.delete)
+            )
         }
     }
 
