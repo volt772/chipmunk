@@ -3,6 +3,7 @@ package com.apx6.chipmunk.app.ui.vms
 import androidx.lifecycle.viewModelScope
 import com.apx6.chipmunk.app.constants.CmdCheckListQueryMode
 import com.apx6.chipmunk.app.di.IoDispatcher
+import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.State
 import com.apx6.domain.dto.CmdCategory
@@ -123,6 +124,14 @@ class DashBoardViewModel @Inject constructor(
         viewModelScope.launch(ioDispatcher) {
             val deleted = checkListRepository.delCheckList(cl)
             _checkListDeleted.emit(deleted)
+        }
+    }
+
+    fun copyCheckList(cl: CmdCheckList) {
+        viewModelScope.launch(ioDispatcher) {
+            val newChecklist = cl.copy(id = 0, exeDate = getTodayMillis(), title = "${cl.title}_copy")
+            println("probe :: copyCheckList : $newChecklist")
+            checkListRepository.postCheckList(newChecklist)
         }
     }
 

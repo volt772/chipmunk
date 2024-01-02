@@ -170,6 +170,12 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         viewModel.delCheckList(cl)
     }
 
+    /* 액션 : 복사*/
+    private fun copyCheckList(cl: CmdCheckList) {
+        viewModel.copyCheckList(cl)
+    }
+
+
     /* 체크리스트 선택*/
     private fun selectCheckList(cl: CmdCheckList) {
         viewModel.getSelectedCategoryName(cl)
@@ -180,7 +186,8 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         val dialog = CheckListDetailDialog.newInstance(
             cld = cld,
             toModify = ::goToModify,
-            toDelete = ::deleteCheckList
+            toDelete = ::deleteCheckList,
+            toCopy = ::copyCheckList
         )
 
         supportFragmentManager.beginTransaction().add(dialog, TAG).commitAllowingStateLoss()
