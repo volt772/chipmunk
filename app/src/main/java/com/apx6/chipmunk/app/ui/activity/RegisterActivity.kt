@@ -119,7 +119,12 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                     when (state) {
                         is State.Loading -> { }
                         is State.Success -> {
-                            categoryList = state.data.toMutableList()
+                            val categories = state.data
+                            categoryList = categories.toMutableList()
+
+                            if (categoryList.size == 1) {
+                                selectCategory(categories.first())
+                            }
                         }
                         is State.Error -> {
                         }
