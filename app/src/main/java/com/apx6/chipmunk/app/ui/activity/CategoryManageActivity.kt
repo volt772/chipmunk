@@ -35,7 +35,7 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
     override val viewModel: CategoryManageViewModel by viewModels()
     override fun getViewBinding(): ActivityCategoryManageBinding = ActivityCategoryManageBinding.inflate(layoutInflater)
 
-    private val categoryManageAdapter by lazy { CMPagingAdapter(this::onCategoryLongPressed) }
+    private val categoryManageAdapter by lazy { CMPagingAdapter(::modifyCategoryName, ::deleteCategory) }
 
     private lateinit var delTargetCategory: CmdCategory
 
@@ -178,10 +178,19 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
         }
     }
 
-    private fun onCategoryLongPressed(category: CmdCategory) {
+    private fun modifyCategoryName(category: CmdCategory) {
+
+    }
+
+    private fun deleteCategory(category: CmdCategory) {
         delTargetCategory = category
         viewModel.getCheckListInCategory(category.uid, category.id)
     }
+
+//    private fun onCategoryLongPressed(category: CmdCategory) {
+//        delTargetCategory = category
+//        viewModel.getCheckListInCategory(category.uid, category.id)
+//    }
 
     private fun switchListView(lv: Boolean) {
         with(binding) {

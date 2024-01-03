@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/md_0"
                 android:overScrollMode="never"
-                android:layout_marginTop="@dimen/md_8"
+                android:paddingTop="@dimen/md_12"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -8,7 +8,8 @@ import com.apx6.domain.dto.CmdCategory
 import javax.inject.Inject
 
 class CMPagingAdapter @Inject constructor(
-    private val onCategoryLongPressed: (CmdCategory) -> Unit
+    private val modifyCategoryName: (CmdCategory) -> Unit,
+    private val deleteCategory: (CmdCategory) -> Unit
 ) : PagingDataAdapter<CmdCategory, CMViewHolder>(
     CMPagingDiffCallBack()
 ) {
@@ -22,7 +23,8 @@ class CMPagingAdapter @Inject constructor(
             ItemCategoryManageBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             ),
-            onCategoryLongPressed
+            modifyCategoryName,
+            deleteCategory
         )
     }
 
