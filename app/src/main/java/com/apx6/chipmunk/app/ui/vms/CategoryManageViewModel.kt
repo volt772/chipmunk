@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.apx6.chipmunk.app.di.IoDispatcher
+import com.apx6.chipmunk.app.ext.toInt
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.dto.CmdCheckList
@@ -35,8 +36,8 @@ class CategoryManageViewModel @Inject constructor(
     private val _userId: MutableSharedFlow<Int?> = MutableSharedFlow()
     val userId: SharedFlow<Int?> = _userId
 
-    private val _addResult: MutableSharedFlow<Int> = MutableSharedFlow()
-    val addResult: SharedFlow<Int> = _addResult
+    private val _actionResult: MutableSharedFlow<Int> = MutableSharedFlow()
+    val actionResult: SharedFlow<Int> = _actionResult
 
     private val _checkList: MutableSharedFlow<List<CmdCheckList>> = MutableSharedFlow()
     val checkList: SharedFlow<List<CmdCheckList>> = _checkList
@@ -64,7 +65,14 @@ class CategoryManageViewModel @Inject constructor(
                 name = name
             ))
 
-            _addResult.emit(result)
+            _actionResult.emit(result)
+        }
+    }
+
+    fun updateCategory(category: CmdCategory) {
+        viewModelScope.launch(ioDispatcher) {
+            val result = categoryRepository.patchCategory(category)
+            _actionResult.emit(result.toInt())
         }
     }
 

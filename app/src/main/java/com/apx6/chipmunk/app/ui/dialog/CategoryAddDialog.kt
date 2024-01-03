@@ -6,10 +6,12 @@ import android.text.TextWatcher
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.constants.CmdCategoryAddDialogType
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
-import com.apx6.chipmunk.app.ui.vms.CategoryManageViewModel
 import com.apx6.chipmunk.app.ui.base.BaseBottomSheetDialog
+import com.apx6.chipmunk.app.ui.vms.CategoryManageViewModel
 import com.apx6.chipmunk.databinding.DialogCategoryAddBinding
+import com.apx6.domain.dto.CmdCategory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -22,13 +24,18 @@ class CategoryAddDialog : BaseBottomSheetDialog<DialogCategoryAddBinding, Unit>(
 ) {
 
     private var uid: Int = 0
-    private lateinit var resultToast: (Int) -> Unit
+    private lateinit var resultToast: (String) -> Unit
+    private lateinit var addType: CmdCategoryAddDialogType
+    private var category: CmdCategory?= null
 
     private val viewModel: CategoryManageViewModel by viewModels()
 
     override fun prepareDialog(param: Unit) {
         binding.apply {
             showKeyBoard(binding.etCategoryAdd)
+            if (addType == CmdCategoryAddDialogType.MODIFY) {
+                etCategoryAdd.setText(category?.name)
+            }
             etCategoryAdd.requestFocus()
             ivCategoryAdd.isEnabled = false
         }
@@ -40,8 +47,22 @@ class CategoryAddDialog : BaseBottomSheetDialog<DialogCategoryAddBinding, Unit>(
     private fun subscribe() {
         lifecycleScope.run {
             launch {
-                viewModel.addResult.collectLatest {result ->
-                    resultToast.invoke(result)
+                viewModel.actionResult.collectLatest { result ->
+                    val msg = if (result > 0) {
+                        if (addType == CmdCategoryAddDialogType.ADD) {
+                            R.string.add_category_success
+                        } else {
+                            R.string.modify_category_success
+                        }
+                    } else {
+                        if (addType == CmdCategoryAddDialogType.ADD) {
+                            R.string.add_category_fail
+                        } else {
+                            R.string.modify_category_fail
+                        }
+                    }
+
+                    resultToast.invoke(getString(msg))
                 }
             }
         }
@@ -52,6 +73,20 @@ class CategoryAddDialog : BaseBottomSheetDialog<DialogCategoryAddBinding, Unit>(
             launch {
                 val name = binding.etCategoryAdd.text
                 viewModel.postCategory(uid, name.toString())
+            }
+        }
+
+        dismiss()
+    }
+
+    private fun modifyCategory() {
+        lifecycleScope.run {
+            launch {
+                category?.let { c ->
+                    val newName = binding.etCategoryAdd.text
+                    val newCategory = c.copy(name = newName.toString())
+                    viewModel.updateCategory(newCategory)
+                }
             }
         }
 
@@ -79,7 +114,11 @@ class CategoryAddDialog : BaseBottomSheetDialog<DialogCategoryAddBinding, Unit>(
 
             /* Card Add */
             ivCategoryAdd.setOnSingleClickListener {
-                addCategory()
+                if (addType == CmdCategoryAddDialogType.ADD) {
+                    addCategory()
+                } else {
+                    modifyCategory()
+                }
             }
         }
     }
@@ -97,9 +136,13 @@ class CategoryAddDialog : BaseBottomSheetDialog<DialogCategoryAddBinding, Unit>(
     companion object {
         fun newInstance(
             uid: Int,
-            resultToast: (Int) -> Unit
+            addType: CmdCategoryAddDialogType,
+            category: CmdCategory?= null,
+            resultToast: (String) -> Unit
         ) = CategoryAddDialog().apply {
             this.uid = uid
+            this.addType = addType
+            this.category = category
             this.resultToast = resultToast
             param = Unit
         }

@@ -11,6 +11,7 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.constants.CmdCategoryAddDialogType
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.statusBar
@@ -38,6 +39,7 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
     private val categoryManageAdapter by lazy { CMPagingAdapter(::modifyCategoryName, ::deleteCategory) }
 
     private lateinit var delTargetCategory: CmdCategory
+    private var uid: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -58,26 +60,28 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
                 /* 종료*/
                 finish()
             }
+
+            ivAdd.setOnSingleClickListener {
+                openCategoryAddDialog(addType = CmdCategoryAddDialogType.ADD)
+            }
         }
 
         initCategoryManageAdapter()
     }
 
-    private fun setCategoryAddDialog(uid: Int) {
-        binding.ivAdd.setOnSingleClickListener {
-            /* 카테고리 추가*/
-            val categoryAddDialog = CategoryAddDialog.newInstance(uid, ::postCategoryResultToast)
-            supportFragmentManager.beginTransaction().add(categoryAddDialog, TAG).commitAllowingStateLoss()
-        }
+    private fun openCategoryAddDialog(addType: CmdCategoryAddDialogType, category: CmdCategory?= null) {
+        /* 카테고리 추가 or 수정*/
+        val categoryAddDialog = CategoryAddDialog.newInstance(
+            uid = uid,
+            addType = addType,
+            category = category,
+            resultToast = ::postCategoryResultToast
+        )
+
+        supportFragmentManager.beginTransaction().add(categoryAddDialog, TAG).commitAllowingStateLoss()
     }
 
-    private fun postCategoryResultToast(result: Int) {
-        val msg = if (result > 0) {
-            getString(R.string.add_category_success)
-        } else {
-            getString(R.string.add_category_fail)
-        }
-
+    private fun postCategoryResultToast(msg: String) {
         binding.rvCategories.smoothScrollToPosition(0)
         showToast(msg, false)
     }
@@ -119,9 +123,9 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
     private fun subscribeFlow() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.userId.collect { uid ->
-                    uid?.let { _uid ->
-                        setCategoryAddDialog(_uid)
+                viewModel.userId.collect { id ->
+                    id?.let { _uid ->
+                        uid = _uid
                         subscribeCategory(_uid)
                     }
                 }
@@ -131,10 +135,8 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
 
     private fun subscribeCategory(uid: Int) {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.fetchCategories(uid).collectLatest { categories ->
-                    categoryManageAdapter.submitData(categories)
-                }
+            viewModel.fetchCategories(uid).collectLatest { categories ->
+                categoryManageAdapter.submitData(categories)
             }
         }
     }
@@ -179,7 +181,7 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
     }
 
     private fun modifyCategoryName(category: CmdCategory) {
-
+        openCategoryAddDialog(addType = CmdCategoryAddDialogType.MODIFY, category = category)
     }
 
     private fun deleteCategory(category: CmdCategory) {

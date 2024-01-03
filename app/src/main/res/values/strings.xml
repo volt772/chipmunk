@@ -77,6 +77,8 @@
     <string name="new_category">새로운 카테고리</string>
     <string name="add_category_success">추가하였습니다.</string>
     <string name="add_category_fail">추가하지 못하였습니다.</string>
+    <string name="modify_category_success">수정되었습니다.</string>
+    <string name="modify_category_fail">변경 실패</string>
     <string name="add_category_delete_with_checklist">체크리스트도 같이 삭제 됩니다. 삭제하시겠습니까?</string>
     <string name="add_category_delete">카테고리를 삭제하시겠습니까?</string>
     <string name="check_list_count_over_2">%s외 %d개</string>
