@@ -1,9 +1,9 @@
 package com.apx6.chipmunk.app.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.apx6.chipmunk.app.ext.openActivity
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.base.BaseActivity
@@ -13,11 +13,10 @@ import com.apx6.domain.dto.CmdAppUpdateValue
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class InfoActivity : BaseActivity<InfoViewModel, ActivityInfoBinding>() {
-
     override val viewModel: InfoViewModel by viewModels()
+
     override fun getViewBinding(): ActivityInfoBinding = ActivityInfoBinding.inflate(layoutInflater)
 
     override fun preLoad() { }
@@ -41,8 +40,7 @@ class InfoActivity : BaseActivity<InfoViewModel, ActivityInfoBinding>() {
     }
 
     private fun moveToOpenSource() {
-        val intent = Intent(this, OpenSourceActivity::class.java)
-        startActivity(intent)
+        openActivity(OpenSourceActivity::class.java)
     }
 
     private fun subscribers() {

@@ -1,6 +1,5 @@
 package com.apx6.chipmunk.app.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
@@ -8,13 +7,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.currMillis
+import com.apx6.chipmunk.app.ext.openActivity
 import com.apx6.chipmunk.app.ext.randomKey
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.fcm.FcmHelper
-import com.apx6.chipmunk.app.ui.vms.LoginViewModel
 import com.apx6.chipmunk.app.ui.base.BaseActivity
+import com.apx6.chipmunk.app.ui.vms.LoginViewModel
 import com.apx6.chipmunk.databinding.ActivityLoginBinding
 import com.apx6.domain.State
 import com.apx6.domain.dto.CmdUser
@@ -26,11 +26,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
-
     override val viewModel: LoginViewModel by viewModels()
+
     override fun getViewBinding(): ActivityLoginBinding = ActivityLoginBinding.inflate(layoutInflater)
 
     @Inject lateinit var fcmHelper: FcmHelper
@@ -74,7 +73,6 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                     loginWithKakaoAccount(this@LoginActivity, callback = loginCallBack)
                 }
             }
-
         }
     }
 
@@ -116,20 +114,19 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                 viewModel.registerUser(
                     CmdUser(
                         account = "${USER_ACCOUNT_PREFIX}_${randomKey()}",
-                        nickName = user.kakaoAccount?.profile?.nickname?: "",
+                        nickName = user.kakaoAccount?.profile?.nickname ?: "",
                         email = user.kakaoAccount?.email,
                         regDate = currMillis,
                         profileThumbnail = user.kakaoAccount?.profile?.thumbnailImageUrl,
-                        fToken = fcmHelper.fcmToken
-                    )
+                        fToken = fcmHelper.fcmToken,
+                    ),
                 )
             }
         }
     }
 
     private fun moveToDashBoard() {
-        val intent = Intent(this, DashBoardActivity::class.java)
-        startActivity(intent)
+        openActivity(DashBoardActivity::class.java)
     }
 
     private fun registerUser() {

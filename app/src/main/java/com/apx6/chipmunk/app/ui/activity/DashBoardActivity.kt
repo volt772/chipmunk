@@ -17,6 +17,7 @@ import com.apx6.chipmunk.app.constants.CmdCheckListQueryMode
 import com.apx6.chipmunk.app.constants.CmdCheckListRegisterMode
 import com.apx6.chipmunk.app.ext.currMillis
 import com.apx6.chipmunk.app.ext.getTodayMillis
+import com.apx6.chipmunk.app.ext.openActivity
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
 import com.apx6.chipmunk.app.ext.visibilityExt
@@ -39,18 +40,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBinding>() {
-
     override val viewModel: DashBoardViewModel by viewModels()
+
     override fun getViewBinding(): ActivityDashboardBinding = ActivityDashboardBinding.inflate(layoutInflater)
 
     private lateinit var menu: Menu
 
     private val checkListAdapter = CheckListAdapter(this::selectCheckList)
 
-    private val historyList: MutableList<HistoryModel> = mutableListOf()  // History Keywords
+    private val historyList: MutableList<HistoryModel> = mutableListOf() // History Keywords
 
     private var userId: Int = 0
     private var categoryList = listOf<CmdCategory>()
@@ -59,40 +59,44 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     private var filteredCategory: CmdCategory = CmdCategory.default()
 
-    private val registerForActivityResult = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { permissions ->
-        val deniedPermissionList = permissions.filter { !it.value }.map { it.key }
-        when {
-            deniedPermissionList.isNotEmpty() -> {
-                val map = deniedPermissionList.groupBy { permission ->
-                    if (shouldShowRequestPermissionRationale(permission)) DENIED else EXPLAINED
-                }
-                /* 단순 거부*/
-                map[DENIED]?.let {
-                }
+    private val registerForActivityResult =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions(),
+        ) { permissions ->
+            val deniedPermissionList = permissions.filter { !it.value }.map { it.key }
+            when {
+                deniedPermissionList.isNotEmpty() -> {
+                    val map =
+                        deniedPermissionList.groupBy { permission ->
+                            if (shouldShowRequestPermissionRationale(permission)) DENIED else EXPLAINED
+                        }
+                    // 단순 거부
+                    map[DENIED]?.let {
+                    }
 
-                /* 완전 거부 (설정에서 수동으로 바꿔줘야함)*/
-                map[EXPLAINED]?.let {
+                    // 완전 거부 (설정에서 수동으로 바꿔줘야함)
+                    map[EXPLAINED]?.let {
 //                    showToast(R.string.notification_on_setting, false)
+                    }
+                }
+                else -> {
+                    // 모든 권한이 허가 되었을 때
                 }
             }
-            else -> {
-                // 모든 권한이 허가 되었을 때
+        }
+
+    private val backCallback =
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val intent =
+                    Intent(Intent.ACTION_MAIN).apply {
+                        addCategory(Intent.CATEGORY_HOME)
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
+
+                startActivity(intent)
             }
         }
-    }
-
-    private val backCallback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            val intent = Intent(Intent.ACTION_MAIN).apply {
-                addCategory(Intent.CATEGORY_HOME)
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            }
-
-            startActivity(intent)
-        }
-    }
 
     override fun preLoad() { }
 
@@ -124,31 +128,35 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                 moveToRegister()
             }
 
+            appBar.addOnOffsetChangedListener(
+                object : OnOffsetChangedListener {
+                    var isShow = false
+                    var scrollRange = -1
 
-            appBar.addOnOffsetChangedListener(object : OnOffsetChangedListener {
-                var isShow = false
-                var scrollRange = -1
-                override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
-                    if (scrollRange == -1) {
-                        scrollRange = appBarLayout.totalScrollRange
-                    }
+                    override fun onOffsetChanged(
+                        appBarLayout: AppBarLayout,
+                        verticalOffset: Int,
+                    ) {
+                        if (scrollRange == -1) {
+                            scrollRange = appBarLayout.totalScrollRange
+                        }
 
-                    if (scrollRange + verticalOffset == 0) {
-                        /* 접혔을때*/
-                        isShow = true
-                    } else if (isShow) {
-                        /* 펴졌을때*/
-                        isShow = false
+                        if (scrollRange + verticalOffset == 0) {
+                            // 접혔을때
+                            isShow = true
+                        } else if (isShow) {
+                            // 펴졌을때
+                            isShow = false
+                        }
                     }
-                }
-            })
+                },
+            )
         }
     }
 
-
     private fun checkPermission() {
         registerForActivityResult.launch(
-            arrayOf(Manifest.permission.POST_NOTIFICATIONS)
+            arrayOf(Manifest.permission.POST_NOTIFICATIONS),
         )
     }
 
@@ -156,42 +164,42 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
      * Initialize Data Set
      */
     private fun initDataSet() {
-        /* History (Recent Keyword)*/
+        // History (Recent Keyword)
         lifecycleScope.launch { viewModel.getHistory() }
     }
 
-    /* 액션 : 수정*/
+    // 액션 : 수정
     private fun goToModify(cl: CmdCheckList) {
         moveToRegister(cl.id, CmdCheckListRegisterMode.MODIFY)
     }
 
-    /* 액션 : 복사*/
+    // 액션 : 복사
     private fun copyCheckList(cl: CmdCheckList) {
         viewModel.copyCheckList(cl)
     }
 
-
-    /* 체크리스트 선택*/
+    // 체크리스트 선택
     private fun selectCheckList(cl: CmdCheckList) {
         viewModel.getSelectedCategoryName(cl)
     }
 
-    /* Dialog ; 체크리스트 상세보기*/
+    // Dialog ; 체크리스트 상세보기
     private fun openDetailDialog(cld: CmdCheckListDetail) {
-        val dialog = CheckListDetailDialog.newInstance(
-            cld = cld,
-            toModify = ::goToModify,
-            toCopy = ::copyCheckList
-        )
+        val dialog =
+            CheckListDetailDialog.newInstance(
+                cld = cld,
+                toModify = ::goToModify,
+                toCopy = ::copyCheckList,
+            )
 
         supportFragmentManager.beginTransaction().add(dialog, TAG).commitAllowingStateLoss()
     }
 
-    /* Subscribers*/
+    // Subscribers
     private fun subscribers() {
         lifecycleScope.run {
             launch {
-                /* 사용자*/
+                // 사용자
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.user.collect { user ->
                         user?.let { _user ->
@@ -208,7 +216,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
             }
 
             launch {
-                /* 체크리스트*/
+                // 체크리스트
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.checkLists.collect { state ->
                         when (state) {
@@ -226,22 +234,25 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                 }
             }
 
-            /* 체크리스트 상세보기*/
+            // 체크리스트 상세보기
             launch {
                 viewModel.selCheckListDetail.collectLatest { details ->
                     openDetailDialog(details)
                 }
             }
 
-            /* 체크리스트 삭제후*/
+            // 체크리스트 삭제후
             launch {
                 viewModel.checkListDeleted.collectLatest { deleted ->
                     showToast(
                         getString(
-                            if (deleted) R.string.dlg_checklist_delete_success
-                            else R.string.dlg_checklist_delete_fail
+                            if (deleted) {
+                                R.string.dlg_checklist_delete_success
+                            } else {
+                                R.string.dlg_checklist_delete_fail
+                            },
                         ),
-                        false
+                        false,
                     )
                 }
             }
@@ -251,15 +262,18 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                     when (state) {
                         is State.Loading -> historyList.clear()
                         is State.Success -> {
-                            val tmpList = mutableListOf<HistoryModel>().also { _list ->
-                                state.data.map {
-                                    _list.add(HistoryModel(
-                                        id = it.id,
-                                        keyword = it.keyword,
-                                        regDate = it.regDate
-                                    ))
+                            val tmpList =
+                                mutableListOf<HistoryModel>().also { _list ->
+                                    state.data.map {
+                                        _list.add(
+                                            HistoryModel(
+                                                id = it.id,
+                                                keyword = it.keyword,
+                                                regDate = it.regDate,
+                                            ),
+                                        )
+                                    }
                                 }
-                            }
 
                             historyList.apply {
                                 clear()
@@ -273,7 +287,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                 }
             }
 
-            /* 카테고리 리스트*/
+            // 카테고리 리스트
             launch {
                 viewModel.category.collect { state ->
                     when (state) {
@@ -288,14 +302,14 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                 }
             }
 
-            /* 필터링*/
+            // 필터링
             launch {
                 viewModel.filtered.collect { category ->
                     filteredCategory = category
                 }
             }
 
-            /* 검색어*/
+            // 검색어
             launch {
                 viewModel.query.collect { query ->
                     userQuery = query
@@ -345,44 +359,50 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         }
     }
 
-    /* 뷰 : 체크리스트 없음*/
+    // 뷰 : 체크리스트 없음
     private fun showEmptyCheckListView(count: Int) {
         binding.clNoChecklist.visibilityExt(count <= 0)
     }
 
-    /* 뷰 : 체크리스트 요약 메세지 (상단)*/
+    // 뷰 : 체크리스트 요약 메세지 (상단)
     private fun makeSummaryTitle(queryMode: CmdCheckListQueryMode) {
-        val titleLabel = when(queryMode) {
-            CmdCheckListQueryMode.NORMAL -> getString(R.string.top_title_user_normal)
-            CmdCheckListQueryMode.SEARCH -> { getString(R.string.top_title_user_query, userQuery) }
-            CmdCheckListQueryMode.FILTER -> { getString(R.string.top_title_user_filter, filteredCategory.name) }
-        }
+        val titleLabel =
+            when (queryMode) {
+                CmdCheckListQueryMode.NORMAL -> getString(R.string.top_title_user_normal)
+                CmdCheckListQueryMode.SEARCH -> {
+                    getString(R.string.top_title_user_query, userQuery)
+                }
+                CmdCheckListQueryMode.FILTER -> {
+                    getString(R.string.top_title_user_filter, filteredCategory.name)
+                }
+            }
 
         binding.tvSummaryTitle.text = titleLabel
     }
 
-    private fun moveToRegister(clId: Int?= null, registerMode: CmdCheckListRegisterMode= CmdCheckListRegisterMode.NEW) {
-        val intent = Intent(this, RegisterActivity::class.java).apply {
-            putExtra(CmdConstants.Intent.CHECKLIST_ID, clId)
-            putExtra(CmdConstants.Intent.REGISTER_MODE, registerMode.mode)
+    private fun moveToRegister(
+        clId: Int? = null,
+        registerMode: CmdCheckListRegisterMode = CmdCheckListRegisterMode.NEW,
+    ) {
+        openActivity(RegisterActivity::class.java) {
+            putInt(CmdConstants.Intent.CHECKLIST_ID, clId ?: 0)
+            putString(CmdConstants.Intent.REGISTER_MODE, registerMode.mode)
         }
-        startActivity(intent)
     }
 
     private fun moveToMore() {
-        val intent = Intent(this, MoreActivity::class.java).apply {
-        }
-        startActivity(intent)
+        openActivity(MoreActivity::class.java)
     }
 
     private fun doFilter() {
-        val categoryListDialog = CategoryListDialog.newInstance(
-            categoryList,
-            filteredCategory,
-            CmdCategoryDialogType.DASHBOARD,
-            ::selectCategory,
-            ::clearFilter
-        )
+        val categoryListDialog =
+            CategoryListDialog.newInstance(
+                categoryList,
+                filteredCategory,
+                CmdCategoryDialogType.DASHBOARD,
+                ::selectCategory,
+                ::clearFilter,
+            )
         supportFragmentManager.beginTransaction().add(categoryListDialog, RegisterActivity.TAG).commitAllowingStateLoss()
     }
 
@@ -394,12 +414,13 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     }
 
     private fun openSearchDialog() {
-        val historyDialog = SearchDialog.newInstance(
-            historyList,
-            ::doSearch,
-            ::delHistories,
-            ::clearHistories
-        )
+        val historyDialog =
+            SearchDialog.newInstance(
+                historyList,
+                ::doSearch,
+                ::delHistories,
+                ::clearHistories,
+            )
 
         this.supportFragmentManager
             .beginTransaction()

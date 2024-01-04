@@ -1,15 +1,14 @@
 package com.apx6.chipmunk.app.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.ext.openActivity
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
-import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.vms.MoreViewModel
 import com.apx6.chipmunk.databinding.ActivitySettingBinding
@@ -21,11 +20,10 @@ import io.getstream.avatarview.coil.loadImage
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class MoreActivity : BaseActivity<MoreViewModel, ActivitySettingBinding>() {
-
     override val viewModel: MoreViewModel by viewModels()
+
     override fun getViewBinding(): ActivitySettingBinding = ActivitySettingBinding.inflate(layoutInflater)
 
     private var currUser: CmdUser = CmdUser.default()
@@ -33,7 +31,6 @@ class MoreActivity : BaseActivity<MoreViewModel, ActivitySettingBinding>() {
     override fun preLoad() { }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
 
         lifecycleScope.launch {
@@ -64,8 +61,9 @@ class MoreActivity : BaseActivity<MoreViewModel, ActivitySettingBinding>() {
     }
 
     private fun notificationSet(isAvailable: Boolean) {
-        if (isAvailable != binding.swNotification.isChecked)
+        if (isAvailable != binding.swNotification.isChecked) {
             binding.swNotification.isChecked = isAvailable
+        }
     }
 
     private fun postNotificationSetting() {
@@ -74,19 +72,17 @@ class MoreActivity : BaseActivity<MoreViewModel, ActivitySettingBinding>() {
     }
 
     private fun moveToCategoryManage() {
-        val intent = Intent(this, CategoryManageActivity::class.java)
-        startActivity(intent)
+        openActivity(CategoryManageActivity::class.java)
     }
 
     private fun moveToAppInfo() {
-        val intent = Intent(this, InfoActivity::class.java)
-        startActivity(intent)
+        openActivity(InfoActivity::class.java)
     }
 
     private fun setProfile(user: CmdUser) {
         binding.apply {
             avProfile.loadImage(
-                data = user.profileThumbnail
+                data = user.profileThumbnail,
             )
 
             tvUserName.text = user.nickName
@@ -115,7 +111,7 @@ class MoreActivity : BaseActivity<MoreViewModel, ActivitySettingBinding>() {
                         getCategoryCount(_user.id)
                         currUser = _user
 
-                        /* Load Notification Setting*/
+                        // Load Notification Setting
                         viewModel.fetchNotificationSetting(_user.id)
                     }
                 }
@@ -127,11 +123,12 @@ class MoreActivity : BaseActivity<MoreViewModel, ActivitySettingBinding>() {
         lifecycleScope.run {
             launch {
                 viewModel.checkListCount.collect { state ->
-                    val count = when (state) {
-                        is State.Loading -> 0
-                        is State.Success -> state.data
-                        is State.Error -> 0
-                    }
+                    val count =
+                        when (state) {
+                            is State.Loading -> 0
+                            is State.Success -> state.data
+                            is State.Error -> 0
+                        }
 
                     setCategoryCount(count)
                 }
@@ -164,7 +161,6 @@ class MoreActivity : BaseActivity<MoreViewModel, ActivitySettingBinding>() {
     }
 
     private fun moveToSplash() {
-        val intent = Intent(this, SplashActivity::class.java)
-        startActivity(intent)
+        openActivity(SplashActivity::class.java)
     }
 }
