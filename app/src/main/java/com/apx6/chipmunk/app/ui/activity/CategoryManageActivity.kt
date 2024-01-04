@@ -41,26 +41,26 @@ class CategoryManageActivity : BaseActivity<CategoryManageViewModel, ActivityCat
     private lateinit var delTargetCategory: CmdCategory
     private var uid: Int = 0
 
+    override fun preLoad() { }
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out)
 
-        initView()
         subscribeFlow()
         subscribeCheckList()
     }
 
-    private fun initView() {
-        this.statusBar(R.color.material_amber_700)
-
+    override fun initView() {
         with(binding) {
+            /* 종료*/
             ivClose.setOnSingleClickListener {
-                /* 종료*/
                 finish()
             }
 
+            /* 추가*/
             ivAdd.setOnSingleClickListener {
                 openCategoryAddDialog(addType = CmdCategoryAddDialogType.ADD)
             }

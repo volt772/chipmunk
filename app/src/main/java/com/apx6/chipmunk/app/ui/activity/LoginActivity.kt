@@ -35,14 +35,15 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
     @Inject lateinit var fcmHelper: FcmHelper
 
+    override fun preLoad() { }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initView()
         subscribers()
     }
 
-    private fun initView() {
+    override fun initView() {
         this.statusBar(R.color.white)
 
         binding.btnKakaoLogin.setOnSingleClickListener {

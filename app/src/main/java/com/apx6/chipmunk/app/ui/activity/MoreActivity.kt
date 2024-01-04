@@ -30,11 +30,12 @@ class MoreActivity : BaseActivity<MoreViewModel, ActivitySettingBinding>() {
 
     private var currUser: CmdUser = CmdUser.default()
 
+    override fun preLoad() { }
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
-        initView()
         lifecycleScope.launch {
             subscribeUser()
         }
@@ -42,9 +43,7 @@ class MoreActivity : BaseActivity<MoreViewModel, ActivitySettingBinding>() {
         subscribers()
     }
 
-    private fun initView() {
-        this.statusBar(R.color.material_amber_700)
-
+    override fun initView() {
         with(binding) {
             ivClose.setOnSingleClickListener {
                 finish()

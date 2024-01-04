@@ -22,12 +22,20 @@ class OpenSourceActivity : BaseActivity<OpenSourceViewModel, ActivityOpensourceB
     override val viewModel: OpenSourceViewModel by viewModels()
     override fun getViewBinding(): ActivityOpensourceBinding = ActivityOpensourceBinding.inflate(layoutInflater)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun preLoad() { }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initView()
         subscribers()
+    }
+
+    override fun initView() {
+        with(binding) {
+            ivClose.setOnSingleClickListener {
+                finish()
+            }
+        }
     }
 
     private fun subscribers() {
@@ -48,13 +56,4 @@ class OpenSourceActivity : BaseActivity<OpenSourceViewModel, ActivityOpensourceB
         }
     }
 
-    private fun initView() {
-        this.statusBar(R.color.material_amber_700)
-
-        with(binding) {
-            ivClose.setOnSingleClickListener {
-                finish()
-            }
-        }
-    }
 }

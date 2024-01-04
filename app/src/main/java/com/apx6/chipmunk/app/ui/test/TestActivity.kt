@@ -41,6 +41,12 @@ class TestActivity : BaseActivity<TestViewModel, ActivityTestBinding>() {
         }
     }
 
+    override fun preLoad() {
+    }
+
+    override fun initView() {
+    }
+
     private fun initKakaoLogin() {
         val ak = getString(R.string.kakao_app_key)
         KakaoSdk.init(this, ak)

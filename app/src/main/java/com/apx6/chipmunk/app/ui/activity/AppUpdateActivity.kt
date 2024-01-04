@@ -17,12 +17,16 @@ class AppUpdateActivity : BaseActivity<AppUpdateViewModel, ActivityAppUpdateBind
     override val viewModel: AppUpdateViewModel by viewModels()
     override fun getViewBinding(): ActivityAppUpdateBinding = ActivityAppUpdateBinding.inflate(layoutInflater)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun preLoad() { }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initView()
         showUpdateDialog()
+    }
+
+     override fun initView() {
+        this.statusBar(R.color.white)
     }
 
     private fun showUpdateDialog() {
@@ -37,9 +41,6 @@ class AppUpdateActivity : BaseActivity<AppUpdateViewModel, ActivityAppUpdateBind
 
     private fun doUpdate() { }
 
-    private fun initView() {
-        this.statusBar(R.color.white)
-    }
 
     companion object {
         const val TAG = "AppUpdateActivity"

@@ -10,13 +10,11 @@ import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.constants.CmdCategoryDialogType
 import com.apx6.chipmunk.app.constants.CmdCheckListRegisterMode
 import com.apx6.chipmunk.app.ext.formedDateToMillis
-import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.getTodaySeparate
 import com.apx6.chipmunk.app.ext.hideKeyboard
 import com.apx6.chipmunk.app.ext.millisToFormedDate
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
-import com.apx6.chipmunk.app.ext.statusBar
 import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.base.Dialogs
@@ -57,10 +55,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     private var checkListId: Int?= 0
     private var checkListName: String?= ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        super.onCreate(savedInstanceState)
-
+    override fun preLoad() {
         with(intent) {
             val clId = getIntExtra(CmdConstants.Intent.CHECKLIST_ID, 0)
             registerMode = getStringExtra(CmdConstants.Intent.REGISTER_MODE)?: CmdCheckListRegisterMode.NEW.mode
@@ -69,11 +64,99 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                 viewModel.getCheckListWithCategory(clId)
             }
         }
+    }
 
-        initView()
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+
         subscribers()
         initValidFlow()
     }
+
+    override fun initView() {
+        with(binding) {
+            ivClose.setOnSingleClickListener {
+                finish()
+            }
+
+            aetDate.apply {
+                setOnSingleClickListener {
+                    DaysCalendar.datePickerDialog(this@RegisterActivity, calListener).show()
+                }
+
+                doOnTextChanged { text, _, _, _ ->
+                    msDate.value = text.toString()
+                }
+
+                setOnFocusChangeListener { _, hasFocus ->
+                    hideKeyboard()
+                }
+            }
+
+            aetCategory.apply {
+                setOnFocusChangeListener { _, hasFocus ->
+                    hideKeyboard()
+                }
+
+                doOnTextChanged { text, _, _, _ ->
+                    msCategory.value = text.toString()
+                }
+
+                setOnSingleClickListener {
+                    if (categoryList.isEmpty()) {
+                        showToast(R.string.no_category_add_first, false)
+                    } else {
+                        val categoryListDialog = CategoryListDialog.newInstance(
+                            categoryList,
+                            selectedCategory,
+                            CmdCategoryDialogType.REGISTER,
+                            ::selectCategory
+                        )
+                        supportFragmentManager.beginTransaction().add(categoryListDialog, TAG).commitAllowingStateLoss()
+                    }
+                }
+            }
+
+            aetChecklistName.doOnTextChanged { text, _, _, _ ->
+                msCheckListName.value = text.toString()
+            }
+
+            val registerIcon = if (registerMode == CmdCheckListRegisterMode.NEW.mode) {
+                getDrawable(R.drawable.ic_category_plus)
+            } else {
+                getDrawable(R.drawable.ic_edit)
+            }
+
+            ivAdd.setImageDrawable(registerIcon)
+
+            ivAdd.setOnSingleClickListener {
+                val newCheckList =  CmdCheckList(
+                    id = checkListId?: 0,
+                    cid = selectedCategory.id,
+                    uid = userId,
+                    title = aetChecklistName.text.toString(),
+                    memo = aetMemo.text.toString(),
+                    exeDate = aetDate.text.toString().formedDateToMillis()
+                )
+
+                viewModel.postCheckList(newCheckList)
+            }
+
+            ivDelete.visibilityExt(registerMode == CmdCheckListRegisterMode.MODIFY.mode)
+
+            ivDelete.setOnSingleClickListener {
+                deleteCheckList()
+            }
+        }
+
+        DaysCalendar.apply {
+            todayYear = getTodaySeparate(CmdConstants.Date.YEAR)
+            todayMonth = getTodaySeparate(CmdConstants.Date.MONTH)
+            todayDay = getTodaySeparate(CmdConstants.Date.DAY)
+        }
+    }
+
 
     private fun initValidFlow() {
         /* Form is Valid*/
@@ -204,91 +287,6 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
                 /* 메모*/
                 aetMemo.setText(cl.memo)
             }
-        }
-    }
-
-    private fun initView() {
-        this.statusBar(R.color.material_amber_700)
-
-        with(binding) {
-            ivClose.setOnSingleClickListener {
-                finish()
-            }
-
-            aetDate.apply {
-                setOnSingleClickListener {
-                    DaysCalendar.datePickerDialog(this@RegisterActivity, calListener).show()
-                }
-
-                doOnTextChanged { text, _, _, _ ->
-                    msDate.value = text.toString()
-                }
-
-                setOnFocusChangeListener { _, hasFocus ->
-                    hideKeyboard()
-                }
-            }
-
-            aetCategory.apply {
-                setOnFocusChangeListener { _, hasFocus ->
-                    hideKeyboard()
-                }
-
-                doOnTextChanged { text, _, _, _ ->
-                    msCategory.value = text.toString()
-                }
-
-                setOnSingleClickListener {
-                    if (categoryList.isEmpty()) {
-                        showToast(R.string.no_category_add_first, false)
-                    } else {
-                        val categoryListDialog = CategoryListDialog.newInstance(
-                            categoryList,
-                            selectedCategory,
-                            CmdCategoryDialogType.REGISTER,
-                            ::selectCategory
-                        )
-                        supportFragmentManager.beginTransaction().add(categoryListDialog, TAG).commitAllowingStateLoss()
-                    }
-                }
-            }
-
-            aetChecklistName.doOnTextChanged { text, _, _, _ ->
-                msCheckListName.value = text.toString()
-            }
-
-            val registerIcon = if (registerMode == CmdCheckListRegisterMode.NEW.mode) {
-                getDrawable(R.drawable.ic_category_plus)
-            } else {
-                getDrawable(R.drawable.ic_edit)
-            }
-
-            ivAdd.setImageDrawable(registerIcon)
-
-            ivAdd.setOnSingleClickListener {
-                val newCheckList =  CmdCheckList(
-                    id = checkListId?: 0,
-                    cid = selectedCategory.id,
-                    uid = userId,
-                    title = aetChecklistName.text.toString(),
-                    memo = aetMemo.text.toString(),
-                    exeDate = aetDate.text.toString().formedDateToMillis()
-                )
-
-                viewModel.postCheckList(newCheckList)
-            }
-
-            ivDelete.visibilityExt(registerMode == CmdCheckListRegisterMode.MODIFY.mode)
-
-            ivDelete.setOnSingleClickListener {
-                deleteCheckList()
-            }
-        }
-
-        DaysCalendar.apply {
-            todayYear = getTodaySeparate(CmdConstants.Date.YEAR)
-            todayMonth = getTodaySeparate(CmdConstants.Date.MONTH)
-            todayDay = getTodaySeparate(CmdConstants.Date.DAY)
         }
     }
 

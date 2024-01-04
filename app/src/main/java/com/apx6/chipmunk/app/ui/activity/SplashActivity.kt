@@ -28,21 +28,18 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
 
     @Inject lateinit var fcmHelper: FcmHelper
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-
+    override fun preLoad() {
         val splashScreen = installSplashScreen()
-
-        super.onCreate(savedInstanceState)
-
-        initView()
         splashScreen.setKeepOnScreenCondition { true }
+    }
 
-//        test()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         observeSplashFlow()
     }
 
-    private fun test() {
-        fcmHelper.sendNotification(CmdNotification.default())
+    override fun initView() {
+        this.statusBar(R.color.white)
     }
 
     private fun observeSplashFlow() {
@@ -90,9 +87,6 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
         viewModel.getUser()
     }
 
-    private fun initView() {
-        this.statusBar(R.color.white)
-    }
 
     private fun moveToLogin() {
         val intent = Intent(this, LoginActivity::class.java)
@@ -113,4 +107,8 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
         const val TAG = "SplashActivity"
         const val SCREEN_MOVE_DELAY = 1000L
     }
+
+//    private fun test() {
+//        fcmHelper.sendNotification(CmdNotification.default())
+//    }
 }

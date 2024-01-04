@@ -94,8 +94,9 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun preLoad() { }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         this.onBackPressedDispatcher.addCallback(this, backCallback)
@@ -103,28 +104,12 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         checkPermission()
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        initView()
         subscribers()
         initDataSet()
         viewModel.getUser()
-
     }
 
-    private fun checkPermission() {
-        registerForActivityResult.launch(
-            arrayOf(Manifest.permission.POST_NOTIFICATIONS)
-        )
-    }
-
-    /**
-     * Initialize Data Set
-     */
-    private fun initDataSet() {
-        /* History (Recent Keyword)*/
-        lifecycleScope.launch { viewModel.getHistory() }
-    }
-
-    private fun initView() {
+    override fun initView() {
         with(binding) {
             inContent.run {
                 rvCheckList.adapter = checkListAdapter
@@ -158,6 +143,21 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                 }
             })
         }
+    }
+
+
+    private fun checkPermission() {
+        registerForActivityResult.launch(
+            arrayOf(Manifest.permission.POST_NOTIFICATIONS)
+        )
+    }
+
+    /**
+     * Initialize Data Set
+     */
+    private fun initDataSet() {
+        /* History (Recent Keyword)*/
+        lifecycleScope.launch { viewModel.getHistory() }
     }
 
     /* 액션 : 수정*/
