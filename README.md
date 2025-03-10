@@ -7,11 +7,3 @@
 * MainVersion : 62
 
 * CodeName : Chipmunk
-
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Allen Jeong - volt772@naver.com
