@@ -42,7 +42,7 @@ fun String.limitAndAbbr(limit: Int): String {
 
 fun randomKey(): String {
 	val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-	return (1..5)
+	return (1..10)
 		.map { (1..charPool.size).shuffled().last() }
 		.map(charPool::get)
 		.joinToString("")

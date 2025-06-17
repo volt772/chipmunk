@@ -80,91 +80,91 @@
                 app:layout_constraintBottom_toBottomOf="parent" >
 
                 <!-- Box 1 : 사용자 프로필-->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_user_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/md_0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" >
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/cl_user_profile"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="@dimen/md_0"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" >-->
 
-                    <!-- Box 1-1 : 사용자 프로필 이미지-->
-                    <io.getstream.avatarview.AvatarView
-                        android:id="@+id/av_profile"
-                        android:layout_width="@dimen/md_75"
-                        android:layout_height="@dimen/md_75"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:avatarViewBorderColor="@color/material_amber_700"
-                        app:avatarViewBorderWidth="3dp"
-                        app:avatarViewErrorPlaceholder="@drawable/ic_profile_default"
-                        app:avatarViewShape="circle" />
+<!--                    &lt;!&ndash; Box 1-1 : 사용자 프로필 이미지&ndash;&gt;-->
+<!--                    <io.getstream.avatarview.AvatarView-->
+<!--                        android:id="@+id/av_profile"-->
+<!--                        android:layout_width="@dimen/md_75"-->
+<!--                        android:layout_height="@dimen/md_75"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:avatarViewBorderColor="@color/material_amber_700"-->
+<!--                        app:avatarViewBorderWidth="3dp"-->
+<!--                        app:avatarViewErrorPlaceholder="@drawable/ic_profile_default"-->
+<!--                        app:avatarViewShape="circle" />-->
 
-                    <!-- Box 1-2 : 사용자 상세정보-->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_user_labels"
-                        android:layout_width="@dimen/md_0"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/md_20"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/av_profile"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent" >
+<!--                    &lt;!&ndash; Box 1-2 : 사용자 상세정보&ndash;&gt;-->
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/cl_user_labels"-->
+<!--                        android:layout_width="@dimen/md_0"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="@dimen/md_20"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toEndOf="@id/av_profile"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent" >-->
 
-                        <!-- Box 1-2-1 : 사용자 이름-->
-                        <TextView
-                            android:id="@+id/tv_user_name"
-                            android:layout_width="@dimen/md_0"
-                            android:layout_height="wrap_content"
-                            android:theme="@style/SettingUserName"
-                            android:text="@string/unknown_membership"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            tools:text="사용자 이름"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
+<!--                        &lt;!&ndash; Box 1-2-1 : 사용자 이름&ndash;&gt;-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_user_name"-->
+<!--                            android:layout_width="@dimen/md_0"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:theme="@style/SettingUserName"-->
+<!--                            android:text="@string/unknown_membership"-->
+<!--                            android:maxLines="1"-->
+<!--                            android:ellipsize="end"-->
+<!--                            tools:text="사용자 이름"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent" />-->
 
-                        <!-- Box 1-2-2 : 사용자 이메일-->
-                        <TextView
-                            android:id="@+id/tv_user_email"
-                            android:layout_width="@dimen/md_0"
-                            android:layout_height="wrap_content"
-                            android:theme="@style/SettingUserEmail"
-                            android:text=""
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            tools:text="volt772@naver.com"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
+<!--                        &lt;!&ndash; Box 1-2-2 : 사용자 이메일&ndash;&gt;-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_user_email"-->
+<!--                            android:layout_width="@dimen/md_0"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:theme="@style/SettingUserEmail"-->
+<!--                            android:text=""-->
+<!--                            android:maxLines="1"-->
+<!--                            android:ellipsize="end"-->
+<!--                            tools:text="volt772@naver.com"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/tv_user_name" />-->
 
-                        <!-- Box 1-2-3 : 내 체크리스트 N개-->
-                        <TextView
-                            android:id="@+id/tv_user_checklist_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            tools:text="내 체크리스트 : 50000개"
-                            android:layout_marginTop="@dimen/md_8"
-                            android:theme="@style/SettingUserChecklistCount"
-                            android:paddingHorizontal="@dimen/md_5"
-                            android:paddingVertical="@dimen/md_3"
-                            android:background="@drawable/bg_full_rounded_amber"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tv_user_email" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                        &lt;!&ndash; Box 1-2-3 : 내 체크리스트 N개&ndash;&gt;-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_user_checklist_count"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            tools:text="내 체크리스트 : 50000개"-->
+<!--                            android:layout_marginTop="@dimen/md_8"-->
+<!--                            android:theme="@style/SettingUserChecklistCount"-->
+<!--                            android:paddingHorizontal="@dimen/md_5"-->
+<!--                            android:paddingVertical="@dimen/md_3"-->
+<!--                            android:background="@drawable/bg_full_rounded_amber"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/tv_user_email" />-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
                 <!-- Box 2 : 설정카테고리-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_settings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/md_32"
+                    android:layout_marginTop="@dimen/md_6"
                     android:background="@drawable/bg_setting"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cl_user_profile" >
+                    app:layout_constraintTop_toTopOf="parent" >
 
                     <!-- Box 2-2 : 카테고리 관리-->
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -188,85 +188,123 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/md_1"
-                            android:background="@drawable/line_shadow"
-                            app:layout_constraintBottom_toBottomOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                        <View-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="@dimen/md_1"-->
+<!--                            android:background="@drawable/line_shadow"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent" />-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-                    <!-- Box 2-3 : 앱정보-->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_app_info"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/md_56"
-                        android:foreground="?selectableItemBackgroundBorderless"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/cl_category_manage" >
+<!--                    &lt;!&ndash; Box 2-3 : 앱정보&ndash;&gt;-->
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/cl_app_info"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="@dimen/md_56"-->
+<!--                        android:foreground="?selectableItemBackgroundBorderless"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/cl_category_manage" >-->
 
-                        <!-- Box 2-3 : `앱정보`레이블-->
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingHorizontal="@dimen/md_18"
-                            android:text="@string/app_info"
-                            android:theme="@style/SettingMenuLabel"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+<!--                        &lt;!&ndash; Box 2-3 : `앱정보`레이블&ndash;&gt;-->
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:paddingHorizontal="@dimen/md_18"-->
+<!--                            android:text="@string/app_info"-->
+<!--                            android:theme="@style/SettingMenuLabel"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintHorizontal_bias="0.0"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!-- Box 3 : 알림 컨트롤-->
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/cl_notification"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/md_24"-->
+<!--                    android:background="@drawable/bg_setting"-->
+<!--                    android:paddingHorizontal="@dimen/md_18"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/cl_settings" >-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:theme="@style/SettingMenuLabel"-->
+<!--                        android:text="@string/notification_setting"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <com.google.android.material.switchmaterial.SwitchMaterial-->
+<!--                        android:id="@+id/sw_notification"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="@dimen/md_56"-->
+<!--                        style="@style/SwitchSelector"-->
+<!--                        app:switchMinWidth="@dimen/md_48"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+                <!-- Box 4 : 사용자 OUT 컨트롤-->
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/cl_user_out"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/md_24"-->
+<!--                    android:background="@drawable/bg_setting"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/cl_settings" >-->
+
+<!--                    &lt;!&ndash; Box 3-1 : 로그아웃&ndash;&gt;-->
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:id="@+id/cl_user_logout"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="@dimen/md_56"-->
+<!--                        android:foreground="?selectableItemBackgroundBorderless"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" >-->
+
+<!--                        &lt;!&ndash; Box 3-1 : `로그아웃`레이블&ndash;&gt;-->
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="@string/membership_logout"-->
+<!--                            android:theme="@style/SettingMenuLabel"-->
+<!--                            android:paddingHorizontal="@dimen/md_18"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent" />-->
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+                <!-- Box 6 : 가져오기-->
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_notification"
+                    android:id="@+id/cl_import_and_export"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/md_24"
                     android:background="@drawable/bg_setting"
-                    android:paddingHorizontal="@dimen/md_18"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cl_settings" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/SettingMenuLabel"
-                        android:text="@string/notification_setting"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:id="@+id/sw_notification"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/md_56"
-                        style="@style/SwitchSelector"
-                        app:switchMinWidth="@dimen/md_48"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <!-- Box 4 : 사용자 OUT 컨트롤-->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_user_out"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/md_24"
-                    android:background="@drawable/bg_setting"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cl_notification" >
-
-                    <!-- Box 3-1 : 로그아웃-->
+                    <!-- Box 2-2 : 가져오기-->
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_user_logout"
+                        android:id="@+id/cl_import"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/md_56"
                         android:foreground="?selectableItemBackgroundBorderless"
@@ -274,11 +312,10 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" >
 
-                        <!-- Box 3-1 : `로그아웃`레이블-->
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/membership_logout"
+                            android:text="가져오기"
                             android:theme="@style/SettingMenuLabel"
                             android:paddingHorizontal="@dimen/md_18"
                             app:layout_constraintTop_toTopOf="parent"
@@ -286,11 +323,63 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" />
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/md_1"
+                            android:background="@drawable/line_shadow"
+                            app:layout_constraintBottom_toBottomOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <!-- Box 2-3 : 내보내기-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_export"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/md_56"
+                        android:foreground="?selectableItemBackgroundBorderless"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/cl_import" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="@dimen/md_18"
+                            android:text="내보내기"
+                            android:theme="@style/SettingMenuLabel"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </ScrollView>
+
+        <!-- 버전-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/md_24"
+            android:layout_marginBottom="@dimen/md_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" >
+
+            <TextView
+                android:id="@+id/tv_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.0.1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

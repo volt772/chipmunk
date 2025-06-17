@@ -1,6 +1,7 @@
 package com.apx6.chipmunk.app.ui.activity
 
 import android.os.Bundle
+import android.provider.Settings.Global.getString
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -45,35 +46,37 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     override fun initView() {
         this.statusBar(R.color.white)
 
-        binding.btnKakaoLogin.setOnSingleClickListener {
-            UserApiClient.instance.apply {
-                if (isKakaoTalkLoginAvailable(this@LoginActivity)) {
-                    loginWithKakaoTalk(this@LoginActivity) { token, error ->
+        saveUserInfo()
 
-                        error?.let {
-                            registerUser()
-                        } ?: run {
-                            /**
-                             * @see
-                             * 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우
-                             * 의도적인 로그인 취소로 보고 카카오계정으로 로그인 시도 없이 로그인 취소로 처리 (예: 뒤로 가기)
-                             */
-                            if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-                                return@loginWithKakaoTalk
-                            }
-
-                            /**
-                             * @see
-                             * 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
-                             */
-                            loginWithKakaoAccount(this@LoginActivity, callback = loginCallBack)
-                        }
-                    }
-                } else {
-                    loginWithKakaoAccount(this@LoginActivity, callback = loginCallBack)
-                }
-            }
-        }
+//        binding.btnKakaoLogin.setOnSingleClickListener {
+//            UserApiClient.instance.apply {
+//                if (isKakaoTalkLoginAvailable(this@LoginActivity)) {
+//                    loginWithKakaoTalk(this@LoginActivity) { token, error ->
+//
+//                        error?.let {
+//                            registerUser()
+//                        } ?: run {
+//                            /**
+//                             * @see
+//                             * 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우
+//                             * 의도적인 로그인 취소로 보고 카카오계정으로 로그인 시도 없이 로그인 취소로 처리 (예: 뒤로 가기)
+//                             */
+//                            if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+//                                return@loginWithKakaoTalk
+//                            }
+//
+//                            /**
+//                             * @see
+//                             * 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
+//                             */
+//                            loginWithKakaoAccount(this@LoginActivity, callback = loginCallBack)
+//                        }
+//                    }
+//                } else {
+//                    loginWithKakaoAccount(this@LoginActivity, callback = loginCallBack)
+//                }
+//            }
+//        }
     }
 
     private fun subscribers() {
@@ -123,6 +126,21 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                 )
             }
         }
+    }
+
+    private fun saveUserInfo() {
+        var userName = randomKey()
+        viewModel.registerUser(
+            CmdUser(
+                account = userName,
+                nickName = "",
+                email = "",
+                regDate = currMillis,
+                profileThumbnail = "",
+                fToken = fcmHelper.fcmToken
+            ),
+        )
+        moveToDashBoard()
     }
 
     private fun moveToDashBoard() {

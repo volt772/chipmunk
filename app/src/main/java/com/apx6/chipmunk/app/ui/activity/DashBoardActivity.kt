@@ -12,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.ChipmunkApp.Companion.adMobKey
 import com.apx6.chipmunk.app.constants.CmdCategoryDialogType
 import com.apx6.chipmunk.app.constants.CmdCheckListQueryMode
 import com.apx6.chipmunk.app.constants.CmdCheckListRegisterMode
@@ -34,6 +35,9 @@ import com.apx6.domain.constants.CmdConstants
 import com.apx6.domain.dto.CmdCategory
 import com.apx6.domain.dto.CmdCheckList
 import com.apx6.domain.dto.CmdCheckListDetail
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -103,9 +107,17 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        MobileAds.initialize(this)
+
+
+        val adView = binding.adView
+//        adView.adUnitId = adMobKey
+//        adView.adUnitId = adMobKey
+        adView.loadAd(AdRequest.Builder().build())
+
         this.onBackPressedDispatcher.addCallback(this, backCallback)
 
-        checkPermission()
+//        checkPermission()
         setSupportActionBar(findViewById(R.id.toolbar))
 
         subscribers()
@@ -154,11 +166,11 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         }
     }
 
-    private fun checkPermission() {
-        registerForActivityResult.launch(
-            arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-        )
-    }
+//    private fun checkPermission() {
+//        registerForActivityResult.launch(
+//            arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+//        )
+//    }
 
     /**
      * Initialize Data Set

@@ -7,11 +7,13 @@ import com.apx6.chipmunk.app.ui.base.BaseViewModel
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdSettingType
 import com.apx6.domain.constants.CmdSettingValue
+import com.apx6.domain.dto.CmdAppUpdateValue
 import com.apx6.domain.dto.CmdSetting
 import com.apx6.domain.dto.CmdUser
 import com.apx6.domain.repository.CheckListRepository
 import com.apx6.domain.repository.MoreRepository
 import com.apx6.domain.repository.UserRepository
+import com.apx6.domain.utils.CmdRemoteConfigMgr
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -27,14 +29,19 @@ import javax.inject.Inject
 @HiltViewModel
 class MoreViewModel @Inject constructor(
     @IoDispatcher val ioDispatcher: CoroutineDispatcher,
+    private val rcManager: CmdRemoteConfigMgr,
     private val userRepository: UserRepository,
     private val checkListRepository: CheckListRepository,
     private val moreRepository: MoreRepository
 ) : BaseViewModel() {
 
     init {
-        getUser()
+//        getUser()
+//        getUpdateValue()
     }
+
+//    private val _uv: MutableSharedFlow<CmdAppUpdateValue> = MutableSharedFlow()
+//    val uv: SharedFlow<CmdAppUpdateValue> = _uv
 
     private val _checkListCount: MutableStateFlow<State<Int>> = MutableStateFlow(State.loading())
     val checkListCount: StateFlow<State<Int>> = _checkListCount
@@ -50,6 +57,13 @@ class MoreViewModel @Inject constructor(
 
     private val _notiPosted: MutableSharedFlow<Boolean> = MutableSharedFlow()
     val notiPosted: SharedFlow<Boolean> = _notiPosted
+
+//    private fun getUpdateValue() {
+//        viewModelScope.launch {
+//            val updateValue = rcManager.versionDetails()
+//            _uv.emit(updateValue)
+//        }
+//    }
 
     private fun getUser() {
         viewModelScope.launch {

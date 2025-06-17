@@ -5,15 +5,18 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.apx6.chipmunk.BuildConfig
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.openActivity
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.showToast
+import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.vms.MoreViewModel
 import com.apx6.chipmunk.databinding.ActivitySettingBinding
 import com.apx6.domain.State
 import com.apx6.domain.constants.CmdSettingValue
+import com.apx6.domain.dto.CmdAppUpdateValue
 import com.apx6.domain.dto.CmdUser
 import dagger.hilt.android.AndroidEntryPoint
 import io.getstream.avatarview.coil.loadImage
@@ -33,9 +36,9 @@ class MoreActivity : BaseActivity<MoreViewModel, ActivitySettingBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycleScope.launch {
-            subscribeUser()
-        }
+//        lifecycleScope.launch {
+//            subscribeUser()
+//        }
 
         subscribers()
     }
@@ -50,117 +53,154 @@ class MoreActivity : BaseActivity<MoreViewModel, ActivitySettingBinding>() {
                 moveToCategoryManage()
             }
 
-            clAppInfo.setOnSingleClickListener {
-                moveToAppInfo()
+            clImport.setOnSingleClickListener {
+                doExportData()
             }
 
-            swNotification.setOnClickListener {
-                postNotificationSetting()
+            clExport.setOnSingleClickListener {
+                doImportData()
             }
+
+
+//            clAppInfo.setOnSingleClickListener {
+//                moveToAppInfo()
+//            }
+//
+//            swNotification.setOnClickListener {
+//                postNotificationSetting()
+//            }
         }
     }
 
-    private fun notificationSet(isAvailable: Boolean) {
-        if (isAvailable != binding.swNotification.isChecked) {
-            binding.swNotification.isChecked = isAvailable
-        }
+    private fun doExportData() {
+
     }
 
-    private fun postNotificationSetting() {
-        val isChecked = binding.swNotification.isChecked
-        viewModel.postNotificationSetting(currUser.id, CmdSettingValue.boolToValue(isChecked))
+    private fun doImportData() {
+
     }
+
+//    private fun notificationSet(isAvailable: Boolean) {
+//        if (isAvailable != binding.swNotification.isChecked) {
+//            binding.swNotification.isChecked = isAvailable
+//        }
+//    }
+
+//    private fun postNotificationSetting() {
+//        val isChecked = binding.swNotification.isChecked
+//        viewModel.postNotificationSetting(currUser.id, CmdSettingValue.boolToValue(isChecked))
+//    }
 
     private fun moveToCategoryManage() {
         openActivity(CategoryManageActivity::class.java)
     }
 
-    private fun moveToAppInfo() {
-        openActivity(InfoActivity::class.java)
-    }
+//    private fun moveToAppInfo() {
+//        openActivity(InfoActivity::class.java)
+//    }
 
-    private fun setProfile(user: CmdUser) {
-        binding.apply {
-            avProfile.loadImage(
-                data = user.profileThumbnail,
-            )
+//    private fun setProfile(user: CmdUser) {
+//        binding.apply {
+//            avProfile.loadImage(
+//                data = user.profileThumbnail,
+//            )
+//
+//            tvUserName.text = user.nickName
+//            tvUserEmail.text = user.email
+//
+//            clUserLogout.setOnSingleClickListener {
+//                viewModel.deleteUser(currUser)
+//            }
+//        }
+//    }
 
-            tvUserName.text = user.nickName
-            tvUserEmail.text = user.email
+//    private fun getCategoryCount(uid: Int) {
+//        viewModel.getCheckListCount(uid)
+//    }
 
-            clUserLogout.setOnSingleClickListener {
-                viewModel.deleteUser(currUser)
-            }
-        }
-    }
+//    private fun setCategoryCount(count: Int) {
+//        binding.tvUserChecklistCount.text = getString(R.string.my_checklist_count, count)
+//    }
 
-    private fun getCategoryCount(uid: Int) {
-        viewModel.getCheckListCount(uid)
-    }
+//    private suspend fun subscribeUser() {
+//        lifecycleScope.run {
+//            launch {
+//                viewModel.uv.collect { _uv -> labelToUpdateInfo(_uv) }
+//            }
+//
+//            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                viewModel.user.collect { user ->
+//                    user?.let { _user ->
+//                        setProfile(_user)
+//                        getCategoryCount(_user.id)
+//                        currUser = _user
+//
+//                         Load Notification Setting
+//                        viewModel.fetchNotificationSetting(_user.id)
+//                    }
+//                }
+//            }
+//        }
+//    }
 
-    private fun setCategoryCount(count: Int) {
-        binding.tvUserChecklistCount.text = getString(R.string.my_checklist_count, count)
-    }
-
-    private suspend fun subscribeUser() {
-        lifecycleScope.run {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.user.collect { user ->
-                    user?.let { _user ->
-                        setProfile(_user)
-                        getCategoryCount(_user.id)
-                        currUser = _user
-
-                        // Load Notification Setting
-                        viewModel.fetchNotificationSetting(_user.id)
-                    }
-                }
-            }
-        }
-    }
+//    private fun labelToUpdateInfo(uv: CmdAppUpdateValue) {
+//        with(binding) {
+//            tvVersion.text = uv.remoteAppVersionName
+//        }
+//    }
 
     private fun subscribers() {
         lifecycleScope.run {
             launch {
-                viewModel.checkListCount.collect { state ->
-                    val count =
-                        when (state) {
-                            is State.Loading -> 0
-                            is State.Success -> state.data
-                            is State.Error -> 0
-                        }
-
-                    setCategoryCount(count)
-                }
+                setVersionName()
+//                viewModel.uv.collect { _uv -> labelToUpdateInfo(_uv) }
             }
 
             launch {
-                viewModel.userDeleted.collectLatest { deleted ->
-                    if (deleted) {
-                        moveToSplash()
-                    }
-                }
+//                viewModel.checkListCount.collect { state ->
+//                    val count =
+//                        when (state) {
+//                            is State.Loading -> 0
+//                            is State.Success -> state.data
+//                            is State.Error -> 0
+//                        }
+//
+////                    setCategoryCount(count)
+//                }
             }
 
-            launch {
-                viewModel.setting.collectLatest { setting ->
-                    setting?.let { s ->
-                        notificationSet(CmdSettingValue.valueToBool(s.value))
-                    }
-                }
-            }
+//            launch {
+//                viewModel.userDeleted.collectLatest { deleted ->
+//                    if (deleted) {
+//                        moveToSplash()
+//                    }
+//                }
+//            }
 
-            launch {
-                viewModel.notiPosted.collectLatest { posted ->
-                    if (!posted) {
-                        showToast(getString(R.string.try_again), false)
-                    }
-                }
-            }
+//            launch {
+//                viewModel.setting.collectLatest { setting ->
+//                    setting?.let { s ->
+//                        notificationSet(CmdSettingValue.valueToBool(s.value))
+//                    }
+//                }
+//            }
+
+//            launch {
+//                viewModel.notiPosted.collectLatest { posted ->
+//                    if (!posted) {
+//                        showToast(getString(R.string.try_again), false)
+//                    }
+//                }
+//            }
         }
     }
 
-    private fun moveToSplash() {
-        openActivity(SplashActivity::class.java)
+//    private fun moveToSplash() {
+//        openActivity(SplashActivity::class.java)
+//    }
+
+    private fun setVersionName() {
+        var versionName = getString(R.string.app_version_template, BuildConfig.VERSION_NAME)
+        binding.tvVersion.text = versionName
     }
 }

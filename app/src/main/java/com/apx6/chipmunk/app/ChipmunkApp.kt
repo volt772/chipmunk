@@ -6,6 +6,7 @@ import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import com.apx6.chipmunk.BuildConfig
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.getTimeUsingInWorkRequest
 import com.apx6.chipmunk.app.worker.ReminderWorker
@@ -29,6 +30,12 @@ class ChipmunkApp : Application(), Configuration.Provider {
         KakaoSdk.init(this, getString(R.string.kakao_app_key))
 
         initWorkManager()
+
+        adMobKey = if (BuildConfig.BUILD_TYPE == "debug") {
+            BuildConfig.ADMOB_DEBUG_KEY
+        } else {
+            BuildConfig.ADMOB_RELEASE_KEY
+        }
     }
 
     private fun initWorkManager() {
@@ -48,6 +55,9 @@ class ChipmunkApp : Application(), Configuration.Provider {
 
     companion object {
         lateinit var appContext: Context
+            private set
+
+        lateinit var adMobKey: String
             private set
 
         const val WORK_TAG = "chipmunk_reminder"

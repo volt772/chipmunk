@@ -119,5 +119,7 @@
     <string name="dlg_app_update_description">업데이트 내용</string>
     <string name="dlg_app_update_do_update">업데이트</string>
 
+    <string name="app_version_template">v%s</string>
+
 
 </resources>

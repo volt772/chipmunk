@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -7,6 +9,11 @@ plugins {
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("org.jlleitschuh.gradle.ktlint")
+}
+
+fun getPropKey(propertyKey: String): String {
+    return gradleLocalProperties(rootDir)
+        .getProperty(propertyKey)
 }
 
 android {
@@ -28,6 +35,9 @@ android {
                 arguments["room.expandProjection"] = "true"
             }
         }
+
+        buildConfigField("String", "ADMOB_DEBUG_KEY", getPropKey("ADMOB_DEBUG_KEY"))
+        buildConfigField("String", "ADMOB_RELEASE_KEY", getPropKey("ADMOB_RELEASE_KEY"))
     }
 
     signingConfigs {
@@ -158,6 +168,9 @@ dependencies {
     implementation(Kakao.user)
 
     implementation(AvatarView.coil)
+
+    implementation("com.google.android.gms:play-services-ads:23.0.0")
+
 
     androidTestImplementation(Test.jUnit)
     androidTestImplementation(Test.workTest)

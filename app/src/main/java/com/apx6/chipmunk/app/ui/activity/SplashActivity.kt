@@ -45,21 +45,24 @@ class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
     private fun coJobs() {
         lifecycleScope.run {
             launch {
-                repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    viewModel.syncVersion(
-                        object : CmdRemoteConfigCallback {
-                            override fun success(newVersionExists: Boolean) {
-                                checkUpdate()
-                            }
-
-                            override fun fail() {
-                                subscribeUser()
-                            }
-                        },
-                    )
-                }
+                subscribeUser()
             }
-
+//            launch {
+//                repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                    viewModel.syncVersion(
+//                        object : CmdRemoteConfigCallback {
+//                            override fun success(newVersionExists: Boolean) {
+//                                checkUpdate()
+//                            }
+//
+//                            override fun fail() {
+//                                subscribeUser()
+//                            }
+//                        },
+//                    )
+//                }
+//            }
+//
             launch {
                 viewModel.user.collect { user ->
                     user?.let {
