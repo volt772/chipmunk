@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -12,6 +11,7 @@
         android:fitsSystemWindows="true"
         tools:context=".app.ui.activity.DashBoardActivity">
 
+        <!-- AppBar는 CoordinatorLayout 바로 아래에 위치 -->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
@@ -34,8 +34,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:paddingHorizontal="@dimen/md_16"
                     android:layout_marginTop="@dimen/md_30"
+                    android:paddingHorizontal="@dimen/md_16"
                     style="@style/DashBoardAppBarTitle"
                     android:layout_gravity="center"
                     app:layout_collapseMode="parallax"
@@ -52,42 +52,57 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include
-            android:id="@+id/in_content"
-            layout="@layout/list_checklists" />
-
-        <!-- No Checklist-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_no_checklist"
+        <!-- 콘텐츠 + 광고 묶음 -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" >
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <!-- Icon-->
-            <ImageView
-                android:id="@+id/iv_no_checklist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_empty_categories"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-            <!-- Desc-->
-            <TextView
-                android:id="@+id/tv_no_checklist"
+                <include
+                    android:id="@+id/in_content"
+                    layout="@layout/list_checklists" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_no_checklist"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/iv_no_checklist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_empty_categories"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_no_checklist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/md_12"
+                        android:text="@string/empty_checklist"
+                        style="@style/EmptyLabel"
+                        app:layout_constraintTop_toBottomOf="@id/iv_no_checklist"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/empty_checklist"
-                android:layout_marginTop="@dimen/md_12"
-                style="@style/EmptyLabel"
-                app:layout_constraintTop_toBottomOf="@id/iv_no_checklist"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                ads:adSize="BANNER"
+                ads:adUnitId="ca-app-pub-3086701116400661/7444734925" />
+        </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -95,20 +110,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/md_16"
             app:layout_anchor="@id/app_bar"
-            android:backgroundTint="@color/white"
             app:layout_anchorGravity="bottom|end"
+            android:backgroundTint="@color/white"
             app:srcCompat="@drawable/ic_add_checklist" />
-
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3086701116400661/7444734925"
-            />
-
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
