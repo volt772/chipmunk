@@ -113,6 +113,8 @@
 
     <string name="dlg_checklist_post_success">추가되었습니다.</string>
     <string name="dlg_checklist_post_fail">추가하지 못하였습니다.</string>
+    <string name="dlg_checklist_post_update_success">수정되었습니다.</string>
+    <string name="dlg_checklist_post_update_fail">수정하지 못하였습니다.</string>
 
     <string name="dlg_app_update_title">새로운 버전이 있습니다.</string>
     <string name="dlg_app_update_new_version">새로운 버전</string>

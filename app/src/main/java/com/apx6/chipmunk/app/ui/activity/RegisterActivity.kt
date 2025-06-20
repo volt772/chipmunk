@@ -125,7 +125,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
             val registerIcon = if (registerMode == CmdCheckListRegisterMode.NEW.mode) {
                 getDrawable(R.drawable.ic_category_plus)
             } else {
-                getDrawable(R.drawable.ic_edit)
+                getDrawable(R.drawable.ic_updated_check)
             }
 
             ivAdd.setImageDrawable(registerIcon)
@@ -256,8 +256,19 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
 
     private fun showPostedCheckList(posted: Boolean) {
         val msg = getString(
-            if (posted) R.string.dlg_checklist_post_success
-            else R.string.dlg_checklist_post_fail
+            if (posted) {
+                if (registerMode == CmdCheckListRegisterMode.NEW.mode) {
+                    R.string.dlg_checklist_post_success
+                } else {
+                    R.string.dlg_checklist_post_update_success
+                }
+            } else {
+                if (registerMode == CmdCheckListRegisterMode.NEW.mode) {
+                    R.string.dlg_checklist_post_fail
+                } else {
+                    R.string.dlg_checklist_post_update_fail
+                }
+            }
         )
 
         showToast(msg, false)

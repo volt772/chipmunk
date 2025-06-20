@@ -24,13 +24,15 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
 
                     <ImageView
                         android:id="@+id/iv_close"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_toolbar_close_white"
+                        android:layout_width="@dimen/md_48"
+                        android:layout_height="@dimen/md_48"
+                        android:padding="@dimen/md_12"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_close"
                         android:background="?selectableItemBackgroundBorderless"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -56,11 +58,11 @@
 
                     <ImageView
                         android:id="@+id/iv_delete"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/md_48"
+                        android:layout_height="@dimen/md_48"
+                        android:padding="@dimen/md_12"
+                        android:scaleType="center"
                         android:src="@drawable/ic_trash"
-                        android:layout_marginEnd="@dimen/md_12"
-                        app:tint="@color/material_red_700"
                         android:visibility="gone"
                         android:background="?selectableItemBackgroundBorderless"
                         app:layout_constraintEnd_toStartOf="@id/iv_add"
@@ -69,10 +71,11 @@
 
                     <ImageView
                         android:id="@+id/iv_add"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/md_48"
+                        android:layout_height="@dimen/md_48"
+                        android:padding="@dimen/md_12"
+                        android:scaleType="center"
                         android:src="@drawable/ic_category_plus"
-                        android:layout_marginEnd="@dimen/md_16"
                         app:tint="@color/white"
                         android:background="?selectableItemBackgroundBorderless"
                         app:layout_constraintEnd_toEndOf="parent"

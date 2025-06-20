@@ -11,7 +11,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_white_corner">
+            android:background="@drawable/dialog_border_background">
 
             <!-- Box1 : Top-->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,12 +25,12 @@
                 <!-- Copy Button-->
                 <ImageView
                     android:id="@+id/iv_copy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/md_48"
+                    android:layout_height="@dimen/md_48"
+                    android:padding="@dimen/md_12"
+                    android:scaleType="center"
                     android:src="@drawable/ic_copy"
                     android:background="?selectableItemBackgroundBorderless"
-                    android:layout_marginStart="@dimen/md_18"
-                    android:layout_marginEnd="@dimen/md_18"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -197,7 +197,7 @@
                     android:layout_height="@dimen/md_56"
                     android:theme="@style/CheckListDetailBotButton"
                     android:textColor="@color/gray_h212"
-                    android:background="@drawable/bg_top_border"
+                    android:background="@color/app_sub_color"
                     android:foreground="?selectableItemBackgroundBorderless"
                     android:text="@string/dlg_checklist_detail_confirm"
                     app:layout_constraintStart_toEndOf="@id/tv_modify"

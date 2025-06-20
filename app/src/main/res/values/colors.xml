@@ -319,6 +319,7 @@
     - Example :: red_h4_op12 ==> #1FF44336
     -->
     <color name="app_main_color">#FFA000</color>
+    <color name="app_sub_color">#FFF8E1</color>
 
     <color name="black_h0">#424242</color>
     <color name="black_h30">#070605</color>

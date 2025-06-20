@@ -76,7 +76,7 @@
                 android:id="@+id/cl_settings_main"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/md_0"
-                android:padding="@dimen/md_18"
+                android:padding="@dimen/md_12"
                 app:layout_constraintBottom_toBottomOf="parent" >
 
                 <!-- Box 1 : 사용자 프로필-->
@@ -160,7 +160,6 @@
                     android:id="@+id/cl_settings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/md_6"
                     android:background="@drawable/bg_setting"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

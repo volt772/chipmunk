@@ -118,7 +118,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         this.onBackPressedDispatcher.addCallback(this, backCallback)
 
 //        checkPermission()
-        setSupportActionBar(findViewById(R.id.toolbar))
+//        setSupportActionBar(findViewById(R.id.toolbar))
 
         subscribers()
         initDataSet()
@@ -133,36 +133,52 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
                     clearFilter()
                     srfRefresh.isRefreshing = false
                 }
+
+                ivFilter.setOnSingleClickListener {
+                    if (categoryList.isEmpty()) {
+                        showToast(R.string.no_category_add_first, false)
+                    } else {
+                        doFilter()
+                    }
+                }
+
+                ivSearch.setOnSingleClickListener {
+                    openSearchDialog()
+                }
+
+                ivMore.setOnSingleClickListener {
+                    moveToCategoryManage()
+                }
             }
 
-            toolbarLayout.title = " "
+//            toolbarLayout.title = " "
             fab.setOnSingleClickListener {
                 moveToRegister()
             }
 
-            appBar.addOnOffsetChangedListener(
-                object : OnOffsetChangedListener {
-                    var isShow = false
-                    var scrollRange = -1
-
-                    override fun onOffsetChanged(
-                        appBarLayout: AppBarLayout,
-                        verticalOffset: Int,
-                    ) {
-                        if (scrollRange == -1) {
-                            scrollRange = appBarLayout.totalScrollRange
-                        }
-
-                        if (scrollRange + verticalOffset == 0) {
-                            // 접혔을때
-                            isShow = true
-                        } else if (isShow) {
-                            // 펴졌을때
-                            isShow = false
-                        }
-                    }
-                },
-            )
+//            appBar.addOnOffsetChangedListener(
+//                object : OnOffsetChangedListener {
+//                    var isShow = false
+//                    var scrollRange = -1
+//
+//                    override fun onOffsetChanged(
+//                        appBarLayout: AppBarLayout,
+//                        verticalOffset: Int,
+//                    ) {
+//                        if (scrollRange == -1) {
+//                            scrollRange = appBarLayout.totalScrollRange
+//                        }
+//
+//                        if (scrollRange + verticalOffset == 0) {
+//                            // 접혔을때
+//                            isShow = true
+//                        } else if (isShow) {
+//                            // 펴졌을때
+//                            isShow = false
+//                        }
+//                    }
+//                },
+//            )
         }
     }
 
@@ -380,14 +396,27 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     private fun makeSummaryTitle(queryMode: CmdCheckListQueryMode) {
         val titleLabel =
             when (queryMode) {
-                CmdCheckListQueryMode.NORMAL -> getString(R.string.top_title_user_normal)
+                CmdCheckListQueryMode.NORMAL -> ""
                 CmdCheckListQueryMode.SEARCH -> {
-                    getString(R.string.top_title_user_query, userQuery)
+                    val maxQueryLength = 12
+                    var queryText = if (userQuery.length > maxQueryLength) {
+                        userQuery.take(maxQueryLength) + "..."
+                    } else {
+                        userQuery
+                    }
+
+                    getString(R.string.top_title_user_query, queryText)
                 }
                 CmdCheckListQueryMode.FILTER -> {
                     getString(R.string.top_title_user_filter, filteredCategory.name)
                 }
             }
+
+        var isAppTitleNameVisible = (queryMode == CmdCheckListQueryMode.NORMAL)
+        with(binding) {
+            tvAppName.visibilityExt(isAppTitleNameVisible)
+            tvSummaryTitle.visibilityExt(!isAppTitleNameVisible)
+        }
 
         binding.tvSummaryTitle.text = titleLabel
     }
@@ -404,6 +433,10 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
 
     private fun moveToMore() {
         openActivity(MoreActivity::class.java)
+    }
+
+    private fun moveToCategoryManage() {
+        openActivity(CategoryManageActivity::class.java)
     }
 
     private fun doFilter() {
@@ -447,41 +480,41 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        this.menu = menu
-        menuInflater.inflate(R.menu.menu_scrolling, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-        return when (item.itemId) {
-            R.id.action_more -> {
-                moveToMore()
-                true
-            }
-
-            R.id.action_search -> {
-                openSearchDialog()
-                true
-            }
-
-            R.id.action_filter -> {
-                if (categoryList.isEmpty()) {
-                    showToast(R.string.no_category_add_first, false)
-                } else {
-                    doFilter()
-                }
-
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        this.menu = menu
+//        menuInflater.inflate(R.menu.menu_scrolling, menu)
+//        return true
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//
+//        return when (item.itemId) {
+//            R.id.action_more -> {
+//                moveToMore()
+//                true
+//            }
+//
+//            R.id.action_search -> {
+//                openSearchDialog()
+//                true
+//            }
+//
+//            R.id.action_filter -> {
+//                if (categoryList.isEmpty()) {
+//                    showToast(R.string.no_category_add_first, false)
+//                } else {
+//                    doFilter()
+//                }
+//
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
 
     companion object {
         const val TAG = "DashBoardActivity"

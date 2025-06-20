@@ -4,115 +4,294 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/co_dashboard_root"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:context=".app.ui.activity.DashBoardActivity">
+        android:layout_height="match_parent" >
 
-        <!-- AppBar는 CoordinatorLayout 바로 아래에 위치 -->
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
+        <!-- Top Toolbar-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_top"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/md_180"
-            android:fitsSystemWindows="true"
-            android:theme="@style/Theme.Chipmunk.AppBarOverlay">
+            android:layout_height="@dimen/md_60"
+            android:background="@color/app_main_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" >
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/toolbar_layout"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            <TextView
+                android:id="@+id/tv_app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/md_16"
+                style="@style/DashBoardAppBarTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:fontFamily="@font/jalnan"
+                android:text="@string/app_label"
+                tools:text="@string/app_label" />
+
+            <TextView
+                android:id="@+id/tv_summary_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/md_16"
+                android:visibility="gone"
+                style="@style/DashBoardAppBarTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="@dimen/md_18"
+                android:fontFamily="@font/notosans_regular"
+                android:text="@string/app_label"
+                tools:text="@string/app_label" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_image_buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/md_0"
+                android:layout_marginEnd="@dimen/md_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" >
+
+                <ImageView
+                    android:id="@+id/iv_filter"
+                    android:layout_width="@dimen/md_48"
+                    android:layout_height="@dimen/md_48"
+                    android:padding="@dimen/md_12"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_filter"
+                    android:background="?selectableItemBackgroundBorderless"
+                    app:layout_constraintEnd_toStartOf="@id/iv_search"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="@dimen/md_48"
+                    android:layout_height="@dimen/md_48"
+                    android:padding="@dimen/md_12"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_search"
+                    android:background="?selectableItemBackgroundBorderless"
+                    app:layout_constraintEnd_toStartOf="@id/iv_more"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_more"
+                    android:layout_width="@dimen/md_48"
+                    android:layout_height="@dimen/md_48"
+                    android:padding="@dimen/md_12"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_category_manage"
+                    android:background="?selectableItemBackgroundBorderless"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Body-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_body"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/md_0"
+            android:padding="@dimen/md_4"
+            app:layout_constraintTop_toBottomOf="@id/cl_top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/cl_bot" >
+
+            <include
+                android:id="@+id/in_content"
+                layout="@layout/list_checklists" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_no_checklist"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:contentScrim="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:toolbarId="@+id/toolbar">
+                android:layout_height="@dimen/md_0"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" >
+
+                <ImageView
+                    android:id="@+id/iv_no_checklist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_empty_categories"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
                 <TextView
-                    android:id="@+id/tv_summary_title"
+                    android:id="@+id/tv_no_checklist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/md_30"
-                    android:paddingHorizontal="@dimen/md_16"
-                    style="@style/DashBoardAppBarTitle"
-                    android:layout_gravity="center"
-                    app:layout_collapseMode="parallax"
-                    app:layout_collapseParallaxMultiplier="0.1"
-                    android:text="@string/app_label"
-                    tools:text="@string/app_label" />
+                    android:layout_marginTop="@dimen/md_12"
+                    android:text="@string/empty_checklist"
+                    style="@style/EmptyLabel"
+                    app:layout_constraintTop_toBottomOf="@id/iv_no_checklist"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/Theme.Chipmunk.PopupOverlay" />
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- 콘텐츠 + 광고 묶음 -->
-        <LinearLayout
+
+        <!-- Bot Ads-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_bot"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <include
-                    android:id="@+id/in_content"
-                    layout="@layout/list_checklists" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_no_checklist"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/iv_no_checklist"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_empty_categories"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tv_no_checklist"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/md_12"
-                        android:text="@string/empty_checklist"
-                        style="@style/EmptyLabel"
-                        app:layout_constraintTop_toBottomOf="@id/iv_no_checklist"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </FrameLayout>
+            android:layout_height="@dimen/md_56"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" >
 
             <com.google.android.gms.ads.AdView
                 android:id="@+id/adView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 ads:adSize="BANNER"
                 ads:adUnitId="ca-app-pub-3086701116400661/7444734925" />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/md_16"
-            app:layout_anchor="@id/app_bar"
-            app:layout_anchorGravity="bottom|end"
+            android:layout_marginEnd="@dimen/md_24"
+            android:layout_marginBottom="@dimen/md_80"
             android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_add_checklist" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+<!--        android:id="@+id/co_dashboard_root"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:fitsSystemWindows="true"-->
+<!--        tools:context=".app.ui.activity.DashBoardActivity">-->
+
+<!--        &lt;!&ndash; AppBar는 CoordinatorLayout 바로 아래에 위치 &ndash;&gt;-->
+<!--        <com.google.android.material.appbar.AppBarLayout-->
+<!--            android:id="@+id/app_bar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/md_180"-->
+<!--            android:fitsSystemWindows="true"-->
+<!--            android:theme="@style/Theme.Chipmunk.AppBarOverlay">-->
+
+<!--            <com.google.android.material.appbar.CollapsingToolbarLayout-->
+<!--                android:id="@+id/toolbar_layout"-->
+<!--                style="@style/Widget.MaterialComponents.Toolbar.Primary"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:fitsSystemWindows="true"-->
+<!--                app:contentScrim="?attr/colorPrimary"-->
+<!--                app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+<!--                app:toolbarId="@+id/toolbar">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_summary_title"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center"-->
+<!--                    android:layout_marginTop="@dimen/md_30"-->
+<!--                    android:paddingHorizontal="@dimen/md_16"-->
+<!--                    style="@style/DashBoardAppBarTitle"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    app:layout_collapseMode="parallax"-->
+<!--                    app:layout_collapseParallaxMultiplier="0.1"-->
+<!--                    android:text="@string/app_label"-->
+<!--                    tools:text="@string/app_label" />-->
+
+<!--                <androidx.appcompat.widget.Toolbar-->
+<!--                    android:id="@+id/toolbar"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="?attr/actionBarSize"-->
+<!--                    app:layout_collapseMode="pin"-->
+<!--                    app:popupTheme="@style/Theme.Chipmunk.PopupOverlay" />-->
+<!--            </com.google.android.material.appbar.CollapsingToolbarLayout>-->
+<!--        </com.google.android.material.appbar.AppBarLayout>-->
+
+<!--        &lt;!&ndash; 콘텐츠 + 광고 묶음 &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical"-->
+<!--            app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+<!--            <FrameLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_weight="1">-->
+
+<!--                <include-->
+<!--                    android:id="@+id/in_content"-->
+<!--                    layout="@layout/list_checklists" />-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/cl_no_checklist"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/iv_no_checklist"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:src="@drawable/ic_empty_categories"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_no_checklist"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/md_12"-->
+<!--                        android:text="@string/empty_checklist"-->
+<!--                        style="@style/EmptyLabel"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/iv_no_checklist"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--            </FrameLayout>-->
+
+<!--            <com.google.android.gms.ads.AdView-->
+<!--                android:id="@+id/adView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                ads:adSize="BANNER"-->
+<!--                ads:adUnitId="ca-app-pub-3086701116400661/7444734925" />-->
+<!--        </LinearLayout>-->
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/fab"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="@dimen/md_16"-->
+<!--            app:layout_anchor="@id/app_bar"-->
+<!--            app:layout_anchorGravity="bottom|end"-->
+<!--            android:backgroundTint="@color/white"-->
+<!--            app:srcCompat="@drawable/ic_add_checklist" />-->
+
+<!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 </layout>

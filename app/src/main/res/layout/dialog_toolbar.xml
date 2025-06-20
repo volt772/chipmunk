@@ -48,10 +48,11 @@
             <!-- 필터해제-->
             <ImageView
                 android:id="@+id/iv_list_filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/md_48"
+                android:layout_height="@dimen/md_48"
+                android:padding="@dimen/md_12"
+                android:scaleType="center"
                 android:src="@drawable/ic_filter_off"
-                android:layout_marginEnd="@dimen/md_24"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
