@@ -3,8 +3,8 @@ object Version {
     const val compileSdkVersion = 34
     const val minSdkVersion = 31
     const val targetSdkVersion = 34
-    const val versionCode = 10000
-    const val versionName = "1.0.0"
+    const val versionCode = 11010
+    const val versionName = "1.1.1"
 }
 
 object Dependencies {

@@ -76,3 +76,6 @@ release/
 /captures
 .DS_Store
 .idea/misc.xml
+.idea
+appads
+release_apx6_*

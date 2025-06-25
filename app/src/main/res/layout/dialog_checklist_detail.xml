@@ -158,6 +158,8 @@
                         android:layout_height="wrap_content"
                         android:theme="@style/CheckListDetailValue"
                         android:layout_marginTop="@dimen/md_8"
+                        android:maxLines="5"
+                        android:ellipsize="end"
                         android:text="-"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

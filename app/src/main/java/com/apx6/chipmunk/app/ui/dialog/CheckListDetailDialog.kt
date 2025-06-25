@@ -7,6 +7,7 @@ import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.apx6.chipmunk.R
@@ -16,6 +17,7 @@ import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.databinding.DialogChecklistDetailBinding
 import com.apx6.chipmunk.app.domain.dto.CmdCheckList
 import com.apx6.chipmunk.app.domain.dto.CmdCheckListDetail
+import kotlin.text.substring
 
 
 class CheckListDetailDialog : DialogFragment() {
@@ -79,7 +81,7 @@ class CheckListDetailDialog : DialogFragment() {
             tvDueDate.text = cl.exeDate.convertDateLabel()
 
             /* `메모`*/
-            tvMemo.text = cl.memo?.limitAndAbbr(MEMO_LIMIT)
+            tvMemo.text = cl.memo
         }
     }
 
