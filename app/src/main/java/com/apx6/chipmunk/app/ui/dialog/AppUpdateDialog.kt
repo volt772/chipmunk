@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.databinding.DialogAppUpdateBinding
-import com.apx6.domain.dto.CmdAppUpdateValue
+import com.apx6.chipmunk.app.domain.dto.CmdAppUpdateValue
 
 
 class AppUpdateDialog : DialogFragment() {

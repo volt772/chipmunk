@@ -1,6 +1,6 @@
 package com.apx6.domain
 
-import com.apx6.domain.repository.Resource
+import com.apx6.chipmunk.app.domain.repository.Resource
 
 sealed class State<T> {
 

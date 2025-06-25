@@ -11,7 +11,7 @@ import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.base.BaseViewHolder
 import com.apx6.chipmunk.databinding.ItemChecklistBinding
-import com.apx6.domain.dto.CmdCheckList
+import com.apx6.chipmunk.app.domain.dto.CmdCheckList
 
 
 class CheckListViewHolder(

@@ -3,11 +3,11 @@ package com.apx6.chipmunk.app.ui.vms
 import androidx.lifecycle.viewModelScope
 import com.apx6.chipmunk.app.fcm.FcmHelper
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
-import com.apx6.domain.dto.CmdAppUpdateValue
-import com.apx6.domain.dto.CmdUser
-import com.apx6.domain.repository.UserRepository
-import com.apx6.domain.utils.CmdRemoteConfigCallback
-import com.apx6.domain.utils.CmdRemoteConfigMgr
+import com.apx6.chipmunk.app.domain.dto.CmdAppUpdateValue
+import com.apx6.chipmunk.app.domain.dto.CmdUser
+import com.apx6.chipmunk.app.domain.repository.UserRepository
+import com.apx6.chipmunk.app.domain.utils.CmdRemoteConfigCallback
+import com.apx6.chipmunk.app.domain.utils.CmdRemoteConfigMgr
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

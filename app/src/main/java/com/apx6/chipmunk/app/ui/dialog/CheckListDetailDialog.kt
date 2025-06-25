@@ -14,8 +14,8 @@ import com.apx6.chipmunk.app.ext.convertDateLabel
 import com.apx6.chipmunk.app.ext.limitAndAbbr
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.databinding.DialogChecklistDetailBinding
-import com.apx6.domain.dto.CmdCheckList
-import com.apx6.domain.dto.CmdCheckListDetail
+import com.apx6.chipmunk.app.domain.dto.CmdCheckList
+import com.apx6.chipmunk.app.domain.dto.CmdCheckListDetail
 
 
 class CheckListDetailDialog : DialogFragment() {

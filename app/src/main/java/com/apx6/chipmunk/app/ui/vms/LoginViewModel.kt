@@ -1,10 +1,10 @@
 package com.apx6.chipmunk.app.ui.vms
 
 import androidx.lifecycle.viewModelScope
+import com.apx6.chipmunk.app.domain.dto.CmdUser
+import com.apx6.chipmunk.app.domain.repository.UserRepository
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
-import com.apx6.domain.State
-import com.apx6.domain.dto.CmdUser
-import com.apx6.domain.repository.UserRepository
+import com.apx6.chipmunk.app.ui.state.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

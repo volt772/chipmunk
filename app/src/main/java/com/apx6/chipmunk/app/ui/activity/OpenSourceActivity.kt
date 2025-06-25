@@ -11,7 +11,7 @@ import com.apx6.chipmunk.app.ui.adapter.OpenSourceListAdapter
 import com.apx6.chipmunk.app.ui.vms.OpenSourceViewModel
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.databinding.ActivityOpensourceBinding
-import com.apx6.domain.dto.CmdOpenSource
+import com.apx6.chipmunk.app.domain.dto.CmdOpenSource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

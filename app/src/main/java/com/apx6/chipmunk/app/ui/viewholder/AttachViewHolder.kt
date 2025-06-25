@@ -3,7 +3,7 @@ package com.apx6.chipmunk.app.ui.viewholder
 import androidx.recyclerview.widget.RecyclerView
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.databinding.ItemAttachBinding
-import com.apx6.domain.dto.CmdAttachment
+import com.apx6.chipmunk.app.domain.dto.CmdAttachment
 
 
 class AttachViewHolder(

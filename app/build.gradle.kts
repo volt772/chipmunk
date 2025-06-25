@@ -77,8 +77,8 @@ android {
         viewBinding = true
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
         val options = this
@@ -95,6 +95,12 @@ android {
 
     buildFeatures {
         dataBinding = true
+    }
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
     }
 }
 
@@ -192,9 +198,11 @@ dependencies {
     kaptAndroidTest(Test.daggerHilt)
 
     /* Dependency*/
-    implementation(project(":domain"))
-    implementation(project(":data"))
+//    implementation(project(":domain"))
+//    implementation(project(":data"))
 
+    /* PreferenceManager*/
+    implementation(PrefManager.ktx)
 }
 
 ktlint {

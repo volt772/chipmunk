@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
+import com.apx6.chipmunk.app.ui.state.State
 import com.apx6.chipmunk.app.constants.CmdCategoryDialogType
 import com.apx6.chipmunk.app.constants.CmdCheckListRegisterMode
 import com.apx6.chipmunk.app.ext.formedDateToMillis
@@ -22,11 +23,10 @@ import com.apx6.chipmunk.app.ui.dialog.CategoryListDialog
 import com.apx6.chipmunk.app.ui.picker.DaysCalendar
 import com.apx6.chipmunk.app.ui.vms.RegisterViewModel
 import com.apx6.chipmunk.databinding.ActivityRegisterBinding
-import com.apx6.domain.State
-import com.apx6.domain.constants.CmdConstants
-import com.apx6.domain.dto.CmdCategory
-import com.apx6.domain.dto.CmdCheckList
-import com.apx6.domain.dto.CmdCheckListWithCategory
+import com.apx6.chipmunk.app.domain.constants.CmdConstants
+import com.apx6.chipmunk.app.domain.dto.CmdCategory
+import com.apx6.chipmunk.app.domain.dto.CmdCheckList
+import com.apx6.chipmunk.app.domain.dto.CmdCheckListWithCategory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest

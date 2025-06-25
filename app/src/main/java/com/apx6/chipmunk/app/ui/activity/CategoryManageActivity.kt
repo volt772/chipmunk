@@ -23,8 +23,8 @@ import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.base.Dialogs
 import com.apx6.chipmunk.app.ui.dialog.CategoryAddDialog
 import com.apx6.chipmunk.databinding.ActivityCategoryManageBinding
-import com.apx6.domain.dto.CmdCategory
-import com.apx6.domain.dto.CmdCheckList
+import com.apx6.chipmunk.app.domain.dto.CmdCategory
+import com.apx6.chipmunk.app.domain.dto.CmdCheckList
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

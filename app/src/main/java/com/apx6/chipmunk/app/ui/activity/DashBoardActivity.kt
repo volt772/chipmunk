@@ -1,10 +1,8 @@
 package com.apx6.chipmunk.app.ui.activity
 
-import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -12,10 +10,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.apx6.chipmunk.R
-import com.apx6.chipmunk.app.ChipmunkApp.Companion.adMobKey
 import com.apx6.chipmunk.app.constants.CmdCategoryDialogType
 import com.apx6.chipmunk.app.constants.CmdCheckListQueryMode
 import com.apx6.chipmunk.app.constants.CmdCheckListRegisterMode
+import com.apx6.chipmunk.app.domain.constants.CmdConstants
+import com.apx6.chipmunk.app.domain.dto.CmdCategory
+import com.apx6.chipmunk.app.domain.dto.CmdCheckList
+import com.apx6.chipmunk.app.domain.dto.CmdCheckListDetail
 import com.apx6.chipmunk.app.ext.currMillis
 import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.openActivity
@@ -30,16 +31,9 @@ import com.apx6.chipmunk.app.ui.dialog.CheckListDetailDialog
 import com.apx6.chipmunk.app.ui.dialog.SearchDialog
 import com.apx6.chipmunk.app.ui.vms.DashBoardViewModel
 import com.apx6.chipmunk.databinding.ActivityDashboardBinding
-import com.apx6.domain.State
-import com.apx6.domain.constants.CmdConstants
-import com.apx6.domain.dto.CmdCategory
-import com.apx6.domain.dto.CmdCheckList
-import com.apx6.domain.dto.CmdCheckListDetail
+import com.apx6.chipmunk.app.ui.state.State
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.MobileAds
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -204,6 +198,7 @@ class DashBoardActivity : BaseActivity<DashBoardViewModel, ActivityDashboardBind
     // 액션 : 복사
     private fun copyCheckList(cl: CmdCheckList) {
         viewModel.copyCheckList(cl)
+        showToast(R.string.complete_copy, false)
     }
 
     // 체크리스트 선택

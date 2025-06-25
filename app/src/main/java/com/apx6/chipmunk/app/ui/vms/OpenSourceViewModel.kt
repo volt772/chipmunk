@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.viewModelScope
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
-import com.apx6.domain.dto.CmdOpenSource
+import com.apx6.chipmunk.app.domain.dto.CmdOpenSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

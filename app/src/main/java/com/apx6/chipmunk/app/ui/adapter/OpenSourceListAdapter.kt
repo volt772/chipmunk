@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apx6.chipmunk.R
 import com.apx6.chipmunk.app.ui.base.BaseViewHolder
 import com.apx6.chipmunk.databinding.ItemOpensourceBinding
-import com.apx6.domain.dto.CmdOpenSource
+import com.apx6.chipmunk.app.domain.dto.CmdOpenSource
 import javax.inject.Inject
 
 /**

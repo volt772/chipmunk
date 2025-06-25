@@ -1,7 +1,7 @@
 package com.apx6.chipmunk.app.ext
 
 import com.apx6.chipmunk.R
-import com.apx6.domain.constants.CmdConstants
+import com.apx6.chipmunk.app.domain.constants.CmdConstants
 import org.joda.time.DateTime
 import org.joda.time.Days
 import org.joda.time.LocalDate

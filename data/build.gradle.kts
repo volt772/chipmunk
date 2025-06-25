@@ -59,6 +59,4 @@ dependencies {
     androidTestImplementation(Test.jUnitKtx)
     androidTestImplementation(Test.rules)
     androidTestImplementation(Test.runner)
-
-    implementation(project(":domain"))
 }

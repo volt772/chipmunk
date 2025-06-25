@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.apx6.chipmunk.app.domain.dto.CmdAttachment
 import com.apx6.chipmunk.app.ui.viewholder.AttachViewHolder
 import com.apx6.chipmunk.databinding.ItemAttachBinding
-import com.apx6.domain.dto.CmdAttachment
-import com.apx6.domain.dto.CmdCategory
 
 
 class AttachAdapter(

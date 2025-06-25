@@ -3,7 +3,7 @@ package com.apx6.chipmunk.app.ui.adapter.category_manage
 import androidx.recyclerview.widget.RecyclerView
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.databinding.ItemCategoryManageBinding
-import com.apx6.domain.dto.CmdCategory
+import com.apx6.chipmunk.app.domain.dto.CmdCategory
 
 class CMViewHolder(
     val binding: ItemCategoryManageBinding,

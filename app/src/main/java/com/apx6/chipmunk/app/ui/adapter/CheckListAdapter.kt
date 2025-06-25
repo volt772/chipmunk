@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.apx6.chipmunk.app.ui.viewholder.CheckListViewHolder
-import com.apx6.domain.dto.CmdCheckList
+import com.apx6.chipmunk.app.domain.dto.CmdCheckList
 
 
 class CheckListAdapter(

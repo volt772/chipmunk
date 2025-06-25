@@ -9,7 +9,7 @@ import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.adapter.CategoryListDialogAdapter
 import com.apx6.chipmunk.app.ui.base.BaseBottomSheetDialog
 import com.apx6.chipmunk.databinding.DialogCategoryListBinding
-import com.apx6.domain.dto.CmdCategory
+import com.apx6.chipmunk.app.domain.dto.CmdCategory
 
 
 class CategoryListDialog : BaseBottomSheetDialog<DialogCategoryListBinding, List<CmdCategory>>(

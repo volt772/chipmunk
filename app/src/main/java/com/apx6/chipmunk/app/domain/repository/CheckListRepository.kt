@@ -1,0 +1,32 @@
+package com.apx6.chipmunk.app.domain.repository
+
+import com.apx6.chipmunk.app.domain.dto.CmdCheckList
+import com.apx6.chipmunk.app.domain.dto.CmdCheckListWithCategory
+import kotlinx.coroutines.flow.Flow
+
+interface CheckListRepository {
+
+    /* Combined*/
+    suspend fun checklists(checkList: CmdCheckList, uid: Int): Flow<Resource<List<CmdCheckList>>>
+
+    suspend fun postCheckList(checkList: CmdCheckList): Boolean
+
+    suspend fun getCheckLists(uid: Int, millis: Long, cid: Int?= null, query: String?= null): Flow<Resource<List<CmdCheckList>>>
+
+    suspend fun getCheckListsInCategory(uid: Int, cid: Int): Flow<List<CmdCheckList>>
+
+    suspend fun getCheckList(id: Int): Flow<CmdCheckList?>
+
+    suspend fun getCheckListWithCategory(id: Int): Flow<CmdCheckListWithCategory?>
+
+    suspend fun getCheckListCount(uid: Int): Flow<Resource<Int>>
+
+    suspend fun getCheckListInWeek(tomorrowMillis: Long, weekMillis: Long): List<CmdCheckList>
+
+    suspend fun patchCheckList(checkList: CmdCheckList): Boolean
+
+    suspend fun delCheckList(checkList: CmdCheckList): Boolean
+
+    suspend fun delCheckListById(id: Int): Boolean
+
+}

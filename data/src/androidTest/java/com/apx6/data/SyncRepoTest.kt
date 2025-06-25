@@ -1,14 +1,14 @@
 package com.apx6.data
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.apx6.data.db.CmdDatabase
-import com.apx6.data.utils.TestCoroutineRule
-import com.apx6.domain.dto.CmdSync
-import com.apx6.domain.dto.CmdUser
-import com.apx6.domain.repository.CategoryRepository
-import com.apx6.domain.repository.SyncRepository
-import com.apx6.domain.repository.CheckListRepository
-import com.apx6.domain.repository.UserRepository
+import com.apx6.chipmunk.app.data.db.CmdDatabase
+import com.apx6.chipmunk.app.data.utils.TestCoroutineRule
+import com.apx6.chipmunk.app.domain.dto.CmdSync
+import com.apx6.chipmunk.app.domain.dto.CmdUser
+import com.apx6.chipmunk.app.domain.repository.CategoryRepository
+import com.apx6.chipmunk.app.domain.repository.SyncRepository
+import com.apx6.chipmunk.app.domain.repository.CheckListRepository
+import com.apx6.chipmunk.app.domain.repository.UserRepository
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi

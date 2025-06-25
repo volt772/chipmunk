@@ -1,8 +1,8 @@
 
 object Version {
-    const val compileSdkVersion = 33
+    const val compileSdkVersion = 34
     const val minSdkVersion = 31
-    const val targetSdkVersion = 33
+    const val targetSdkVersion = 34
     const val versionCode = 10000
     const val versionName = "1.0.0"
 }
@@ -46,23 +46,16 @@ object Configs {
 }
 
 object Room {
-    const val core = "androidx.room:room-runtime:2.5.1"
-    const val rxJava2 = "androidx.room:room-rxjava2:2.5.1"
-    const val ktx = "androidx.room:room-ktx:2.5.1"
-    const val compiler = "androidx.room:room-compiler:2.5.1"
+    const val core = "androidx.room:room-runtime:2.6.1"
+    const val rxJava2 = "androidx.room:room-rxjava2:2.6.1"
+    const val ktx = "androidx.room:room-ktx:2.6.1"
+    const val compiler = "androidx.room:room-compiler:2.6.1"
 }
 
 object Material {
     const val core = "com.google.android.material:material:1.8.0"
 }
 
-object Retrofit {
-    const val core = "com.squareup.retrofit2:retrofit:2.9.0"
-    const val converterGson = "com.squareup.retrofit2:converter-gson:2.9.0"
-    const val adapterRxJava = "com.squareup.retrofit2:adapter-rxjava:2.9.0"
-    const val adapterRxJava2 = "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
-    const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:4.9.0"
-}
 
 object PrefManager {
     const val ktx = "androidx.preference:preference-ktx:1.2.0"
@@ -77,10 +70,10 @@ object Joda {
 }
 
 object Hilt {
-    const val dagger = "com.google.dagger:hilt-android:2.45"
-    const val compiler = "com.google.dagger:hilt-android-compiler:2.45"
-    const val worker = "androidx.hilt:hilt-work:1.0.0"
-    const val workerCompiler = "androidx.hilt:hilt-compiler:1.0.0"
+    const val dagger = "com.google.dagger:hilt-android:2.49"
+    const val compiler = "com.google.dagger:hilt-android-compiler:2.49"
+    const val worker = "androidx.hilt:hilt-work:1.2.0"
+    const val workerCompiler = "androidx.hilt:hilt-compiler:1.2.0"
 }
 
 object Badge {

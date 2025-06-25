@@ -48,6 +48,7 @@
     <string name="failed_to_load_categories">카테고리가 없습니다.\n카테고리를 추가해주세요.</string>
     <string name="failed_get_checklists">체크리스트를 가져오는데 실패하였습니다.</string>
     <string name="try_again">잠시 후 다시 시도해 주세요.</string>
+    <string name="complete_copy">체크리스트가 복사되었습니다.</string>
 
     <string name="notification_on_setting">설정에서 알림을 켜주세요.</string>
     <string name="notification_title">종료알림</string>

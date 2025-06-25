@@ -7,7 +7,7 @@ import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.base.BaseViewHolder
 import com.apx6.chipmunk.databinding.ItemListCategoryBinding
-import com.apx6.domain.dto.CmdCategory
+import com.apx6.chipmunk.app.domain.dto.CmdCategory
 
 
 class CategoryListDialogAdapter(

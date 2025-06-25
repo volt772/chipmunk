@@ -2,7 +2,7 @@ package com.apx6.chipmunk.app.ui.adapter.category_manage
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
-import com.apx6.domain.dto.CmdCategory
+import com.apx6.chipmunk.app.domain.dto.CmdCategory
 
 class CMPagingDiffCallBack : DiffUtil.ItemCallback<CmdCategory>() {
     override fun areItemsTheSame(oldItem: CmdCategory, newItem: CmdCategory): Boolean {

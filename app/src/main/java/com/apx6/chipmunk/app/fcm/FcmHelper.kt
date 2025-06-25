@@ -1,6 +1,6 @@
 package com.apx6.chipmunk.app.fcm
 
-import com.apx6.domain.dto.CmdNotification
+import com.apx6.chipmunk.app.domain.dto.CmdNotification
 
 interface FcmHelper {
 

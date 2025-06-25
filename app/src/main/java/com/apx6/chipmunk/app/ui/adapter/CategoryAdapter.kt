@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.apx6.chipmunk.app.ui.viewholder.CategoryViewHolder
 import com.apx6.chipmunk.databinding.ItemCategoryBinding
-import com.apx6.domain.dto.CmdCategory
+import com.apx6.chipmunk.app.domain.dto.CmdCategory
 
 
 class CategoryAdapter(

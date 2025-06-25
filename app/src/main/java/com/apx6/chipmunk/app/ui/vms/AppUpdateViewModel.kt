@@ -1,8 +1,8 @@
 package com.apx6.chipmunk.app.ui.vms
 
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
-import com.apx6.domain.dto.CmdAppUpdateValue
-import com.apx6.domain.utils.CmdRemoteConfigMgr
+import com.apx6.chipmunk.app.domain.dto.CmdAppUpdateValue
+import com.apx6.chipmunk.app.domain.utils.CmdRemoteConfigMgr
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

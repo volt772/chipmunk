@@ -1,12 +1,12 @@
 package com.apx6.utils
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.apx6.data.db.CmdDatabase
-import com.apx6.domain.constants.CmdSettingType
-import com.apx6.domain.constants.CmdSettingValue
-import com.apx6.domain.dto.CmdSetting
-import com.apx6.domain.dto.CmdUser
-import com.apx6.domain.repository.MoreRepository
+import com.apx6.chipmunk.app.data.db.CmdDatabase
+import com.apx6.chipmunk.app.domain.constants.CmdSettingType
+import com.apx6.chipmunk.app.domain.constants.CmdSettingValue
+import com.apx6.chipmunk.app.domain.dto.CmdSetting
+import com.apx6.chipmunk.app.domain.dto.CmdUser
+import com.apx6.chipmunk.app.domain.repository.MoreRepository
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi

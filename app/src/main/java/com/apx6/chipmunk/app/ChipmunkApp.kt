@@ -27,7 +27,7 @@ class ChipmunkApp : Application(), Configuration.Provider {
 
         appContext = applicationContext
 
-        KakaoSdk.init(this, getString(R.string.kakao_app_key))
+       // KakaoSdk.init(this, getString(R.string.kakao_app_key))
 
         initWorkManager()
 

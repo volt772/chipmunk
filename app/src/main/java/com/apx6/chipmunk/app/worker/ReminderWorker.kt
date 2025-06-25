@@ -9,8 +9,8 @@ import com.apx6.chipmunk.app.ext.getDfFromToday
 import com.apx6.chipmunk.app.ext.getTodayMillis
 import com.apx6.chipmunk.app.ext.getWeekMillis
 import com.apx6.chipmunk.app.fcm.FcmHelper
-import com.apx6.domain.dto.CmdNotification
-import com.apx6.domain.repository.CheckListRepository
+import com.apx6.chipmunk.app.domain.dto.CmdNotification
+import com.apx6.chipmunk.app.domain.repository.CheckListRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineDispatcher

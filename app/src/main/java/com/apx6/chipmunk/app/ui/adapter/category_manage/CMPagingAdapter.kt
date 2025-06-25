@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.apx6.chipmunk.databinding.ItemCategoryManageBinding
-import com.apx6.domain.dto.CmdCategory
+import com.apx6.chipmunk.app.domain.dto.CmdCategory
 import javax.inject.Inject
 
 class CMPagingAdapter @Inject constructor(

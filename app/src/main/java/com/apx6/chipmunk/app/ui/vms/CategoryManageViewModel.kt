@@ -6,11 +6,11 @@ import androidx.paging.cachedIn
 import com.apx6.chipmunk.app.di.IoDispatcher
 import com.apx6.chipmunk.app.ext.toInt
 import com.apx6.chipmunk.app.ui.base.BaseViewModel
-import com.apx6.domain.dto.CmdCategory
-import com.apx6.domain.dto.CmdCheckList
-import com.apx6.domain.repository.CategoryRepository
-import com.apx6.domain.repository.CheckListRepository
-import com.apx6.domain.repository.UserRepository
+import com.apx6.chipmunk.app.domain.dto.CmdCategory
+import com.apx6.chipmunk.app.domain.dto.CmdCheckList
+import com.apx6.chipmunk.app.domain.repository.CategoryRepository
+import com.apx6.chipmunk.app.domain.repository.CheckListRepository
+import com.apx6.chipmunk.app.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

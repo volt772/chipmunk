@@ -1,11 +1,11 @@
 package com.apx6
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.apx6.data.db.CmdDatabase
-import com.apx6.domain.dto.CmdCategory
-import com.apx6.domain.dto.CmdUser
-import com.apx6.domain.repository.CategoryRepository
-import com.apx6.domain.repository.UserRepository
+import com.apx6.chipmunk.app.data.db.CmdDatabase
+import com.apx6.chipmunk.app.domain.dto.CmdCategory
+import com.apx6.chipmunk.app.domain.dto.CmdUser
+import com.apx6.chipmunk.app.domain.repository.CategoryRepository
+import com.apx6.chipmunk.app.domain.repository.UserRepository
 import com.apx6.utils.TestCoroutineRule
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest

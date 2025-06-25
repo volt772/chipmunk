@@ -14,10 +14,9 @@ import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.vms.MoreViewModel
 import com.apx6.chipmunk.databinding.ActivitySettingBinding
-import com.apx6.domain.State
-import com.apx6.domain.constants.CmdSettingValue
-import com.apx6.domain.dto.CmdAppUpdateValue
-import com.apx6.domain.dto.CmdUser
+import com.apx6.chipmunk.app.domain.constants.CmdSettingValue
+import com.apx6.chipmunk.app.domain.dto.CmdAppUpdateValue
+import com.apx6.chipmunk.app.domain.dto.CmdUser
 import dagger.hilt.android.AndroidEntryPoint
 import io.getstream.avatarview.coil.loadImage
 import kotlinx.coroutines.flow.collectLatest

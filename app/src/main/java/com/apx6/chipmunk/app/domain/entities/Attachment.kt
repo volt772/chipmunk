@@ -1,0 +1,40 @@
+package com.apx6.chipmunk.app.domain.entities
+
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.ForeignKey.Companion.CASCADE
+import androidx.room.Index
+import androidx.room.PrimaryKey
+import com.apx6.chipmunk.app.domain.entities.Attachment.Companion.TABLE_NAME
+
+@Entity(
+    tableName = TABLE_NAME,
+    foreignKeys = [
+        ForeignKey(
+            entity = CheckList::class,
+            parentColumns = ["id"],
+            childColumns = ["clId"],
+            onDelete = CASCADE
+        )
+    ],
+    indices = [Index(value = ["id"], unique = true)]
+)
+data class Attachment(
+
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+
+    var clId: Int,
+
+    var name: String,
+
+    var size: Int,
+
+    var contentType: String,
+
+    var createdTime: Long
+) {
+    companion object {
+        const val TABLE_NAME = "attachment"
+    }
+}

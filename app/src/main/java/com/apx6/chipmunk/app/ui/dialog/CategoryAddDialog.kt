@@ -11,7 +11,7 @@ import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ui.base.BaseBottomSheetDialog
 import com.apx6.chipmunk.app.ui.vms.CategoryManageViewModel
 import com.apx6.chipmunk.databinding.DialogCategoryAddBinding
-import com.apx6.domain.dto.CmdCategory
+import com.apx6.chipmunk.app.domain.dto.CmdCategory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

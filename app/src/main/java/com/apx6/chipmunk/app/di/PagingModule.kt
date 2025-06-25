@@ -1,7 +1,7 @@
 package com.apx6.chipmunk.app.di
 
-import com.apx6.data.data_source.category.CategoryRemoteDataSource
-import com.apx6.data.data_source.category.CategoryRemoteDataSourceImpl
+import com.apx6.chipmunk.app.data.category.CategoryRemoteDataSource
+import com.apx6.chipmunk.app.data.category.CategoryRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

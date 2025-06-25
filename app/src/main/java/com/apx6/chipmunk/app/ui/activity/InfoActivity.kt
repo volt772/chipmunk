@@ -3,13 +3,13 @@ package com.apx6.chipmunk.app.ui.activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.apx6.chipmunk.app.domain.dto.CmdAppUpdateValue
 import com.apx6.chipmunk.app.ext.openActivity
 import com.apx6.chipmunk.app.ext.setOnSingleClickListener
 import com.apx6.chipmunk.app.ext.visibilityExt
 import com.apx6.chipmunk.app.ui.base.BaseActivity
 import com.apx6.chipmunk.app.ui.vms.InfoViewModel
 import com.apx6.chipmunk.databinding.ActivityInfoBinding
-import com.apx6.domain.dto.CmdAppUpdateValue
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
